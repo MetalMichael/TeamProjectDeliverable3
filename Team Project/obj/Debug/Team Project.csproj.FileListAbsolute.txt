@@ -1,5 +1,0 @@
-\\hs4.lboro.ac.uk\comf3\visual studio 2010\Projects\Team Project\Team Project\bin\Team Project.dll
-\\hs4.lboro.ac.uk\comf3\visual studio 2010\Projects\Team Project\Team Project\bin\Team Project.pdb
-\\hs4.lboro.ac.uk\comf3\visual studio 2010\Projects\Team Project\Team Project\obj\Debug\Team Project.csprojResolveAssemblyReference.cache
-\\hs4.lboro.ac.uk\comf3\visual studio 2010\Projects\Team Project\Team Project\obj\Debug\Team Project.dll
-\\hs4.lboro.ac.uk\comf3\visual studio 2010\Projects\Team Project\Team Project\obj\Debug\Team Project.pdb

@@ -7,9 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using Team_Project.Models;
+using TimetableSystem.Models;
 
-namespace Team_Project.Controllers
+namespace TimetableSystem.Controllers
 {
 
     [HandleError]
