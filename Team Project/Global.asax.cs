@@ -27,7 +27,7 @@ namespace TimetableSystem
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            ViewEngines.Engines.Add(new RazorViewEngine());
             RegisterRoutes(RouteTable.Routes);
         }
     }
