@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Team_Project")]
+[assembly: AssemblyTitle("TimetableSystem")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Loughborough University")]
-[assembly: AssemblyProduct("Team_Project")]
+[assembly: AssemblyProduct("TimetableSystem")]
 [assembly: AssemblyCopyright("Copyright © Loughborough University 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
