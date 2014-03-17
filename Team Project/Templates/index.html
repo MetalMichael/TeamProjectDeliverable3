@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Request Form | LUTS</title>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/radio-checks.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons.css" />
+		<link rel="stylesheet" type="text/css" href="css/form.css" />
+		
+<!--		<script src="js/modernizr.custom.js"></script>-->
+<!--		  <script src="js/prefixfree.min.js"></script>--><!--This file is causing the facilities checkbox-sliders to not display when checkbox is unchecked-->
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<nav>
+					<ul>
+						<li class="dept">
+							<a href="" id="dept" class="title"><span class="fa fa-desktop"></span><h3>Computer Science</h3></a>
+							<p class="round">Priority Round</p>
+						</li>
+						<div class="e" style="float: right;">
+							<li>
+								<a href="" class="menu">Dashboard</a>
+							</li>
+							<li>
+								<a href="" class="menu active">Request Form</a>
+							</li>
+							<li>
+								<a href="" class="menu">Edit Requests</a>
+							</li>
+							<li>
+								<a href="" class="menu">Edit Saved</a>
+							</li>
+							<li>
+								<a href="" class="menu">Edit Module</a>
+							</li>
+							<li>
+								<a href="" class="menu">Edit Facilities</a>
+							</li>
+							<li>
+								<a href="" class="menu">Room Availability</a>
+							</li>
+							<li>
+								<a href="" class="title logout">Logout</a>
+							</li>
+						</div>
+					</ul>
+				</nav>
+			</header>
+			<ul class="list_grid">
+				<li class="section one">
+					<h2>Booking<span class="checked"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;"></span></h2>
+					<table>
+						<tr class="bottom">
+							<td colspan="2">
+								<input type="checkbox" id="priority" name="priority" autofocus></input>
+								<label for="priority">Priority Booking</label>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td colspan="2">
+								<input type="checkbox" id="adhoc" name="adhoc"></input>
+								<label for="adhoc">Ad-Hoc Booking</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="radio" id="sem1" name="semester"></input>
+								<label for="sem1">Semester 1</label>
+							</td>
+							<td>
+								<input type="radio" id="sem2" name="semester"></input>
+								<label for="sem2">Semester 2</label>
+							</td>
+						</tr>
+					</table>
+				</li>
+				<li class="section two">
+					<h2>Select Module</h2>
+					<input type="text" class="filter" name="priority" placeholder="Filter Module"></input>
+					<table>
+						<tr class="bottom">
+							<td>
+								<select class="select"><option>Select Module Title</option><option>Server Side Programming</option></select>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td>
+								<select class="select"><option>Select Module Code</option></select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select><option>Select A Module to View Preset</option></select>
+							</td>
+						</tr>
+					</table>
+				</li>
+				<li class="section three">
+					<h2>Select Weeks</h2>
+					<table>
+						<tr class="bottom">
+							<td colspan>
+								<input type="checkbox" id="all" name="all"></input>
+								<label for="all">1-15</label>
+							</td>
+							<td>
+								<input type="checkbox" id="default" name="default"></input>
+								<label for="default">1-12</label>
+							</td>
+							<td>
+								<input type="checkbox" id="odd" name="odd"></input>
+								<label for="odd">Odd</label>
+							</td>
+							<td colspan="3">
+								<input type="checkbox" id="even" name="even"></input>
+								<label for="even">Even</label>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td>
+								<input type="checkbox" id="weekone" name="weekone"></input>
+								<label for="weekone">1</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weektwo" name="weektwo"></input>
+								<label for="weektwo">2</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weekthree" name="weekthree"></input>
+								<label for="weekthree">3</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weekfour" name="weekfour"></input>
+								<label for="weekfour">4</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weekfive" name="weekfive"></input>
+								<label for="weekfive">5</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weeksix" name="weeksix"></input>
+								<label for="weeksix">6</label>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td>
+								<input type="checkbox" id="weekone" name="weekone"></input>
+								<label for="weekone">7</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weektwo" name="weektwo"></input>
+								<label for="weektwo">8</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weekthree" name="weekthree"></input>
+								<label for="weekthree">9</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weekfour" name="weekfour"></input>
+								<label for="weekfour">10</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weekfive" name="weekfive"></input>
+								<label for="weekfive">11</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weeksix" name="weeksix"></input>
+								<label for="weeksix">12</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="checkbox" id="weekone" name="weekone"></input>
+								<label for="weekone">13</label>
+							</td>
+							<td>
+								<input type="checkbox" id="weektwo" name="weektwo"></input>
+								<label for="weektwo">14</label>
+							</td>
+							<td colspan="4">
+								<input type="checkbox" id="weekthree" name="weekthree"></input>
+								<label for="weekthree">15</label>
+							</td>
+						</tr>
+					</table>
+				</li>
+				<li class="section four">
+					<h2>Select Time</h2>
+					<table>
+						<tr class="bottom">
+							<td>
+								<input type="radio" id="monday" name="day"></input>
+								<label for="monday">Mon</label>
+							</td>
+							<td>
+								<input type="radio" id="tuesday" name="day"></input>
+								<label for="tuesday">Tue</label>
+							</td>
+							<td>
+								<input type="radio" id="wednesday" name="day"></input>
+								<label for="wednesday">Wed</label>
+							</td>
+							<td>
+								<input type="radio" id="thursday" name="day"></input>
+								<label for="thursday">Thur</label>
+							</td>
+							<td class="fri">
+								<input type="radio" id="friday" name="day"></input>
+								<label for="friday">Fri</label>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td colspan="5">
+								<select><option>Start Time</option></select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<select><option>End Time</option></select>
+							</td>
+						</tr>
+					</table>
+				</li>
+				<li class="section five">
+					<h2>Room</h2>
+					<table>
+						<tr class="bottom">
+							<td>
+								<input type="radio" id="lecture" name="roomtype"></input>
+								<label for="lecture">Lecture</label>
+							</td>
+							<td>
+								<input type="radio" id="itlab" name="roomtype"></input>
+								<label for="itlab">IT Lab</label>
+							</td>
+							<td>
+								<input type="radio" id="seminar" name="roomtype"></input>
+								<label for="seminar">Seminar</label>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td>
+								<input type="checkbox" id="test1" class="facility" />
+								<label class="wrap" for="test1"><span class="ui"></span>Computer Station</label>
+							</td>
+							<td>
+								<input type="checkbox" id="wheel" class="facility" name="pc_stn"></input>
+								<label for="wheel"><span class="ui"></span>Wheelchair Access</label>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td colspan="3">
+								<input type="checkbox" id="pc" class="facility" name="pc_stn"></input>
+								<label for="pc"><span class="ui"></span>Induction Loop</label>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">Dropdowns will appear here</td>
+						</tr>
+					</table>
+					<input type="text" class="filter" name="priority" placeholder="Additional Info"></input>
+				</li>
+				<li class="section six">
+					<h2>Room</h2>
+					<table>
+						<tr class="bottom">
+							<td><label for="park">No. of Students: </label></td>
+							<td colspan="2">
+								<input type="number" min="1" class="" id="no_students" name="" placeholder="No. of Students"></input>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td><label for="park">No. of Rooms: </label></td>
+							<td colspan="2">
+								<select id="no_rooms"><option selected disabled>No. of Rooms</option><option>1 Room</option></select>
+							</td>
+						</tr>
+						<tr class="bottom">
+							<td><label for="park">Select Park: </label></td>
+							<td colspan="2"><select id="park"><option>No Preference</option></select></td>
+						</tr>
+						<tr class="bottom">
+							<td><label for="building">Select Building: </td>
+							<td colspan="2"><select id="building"><option>No Preference</option></select></td>
+						</tr>
+						<tr class="bottom">
+							<td><label for="room">Select Room: </td>
+							<td><select id="room"><option>No Preference</option></select></td>
+							<td>Room Unavailable</td>
+						</tr>
+					</table>
+				</li>
+				<li id="seven" class="section seven">
+					<table>
+						<tr class="bottom">
+							<td>
+								<input type="checkbox" id="save" name="save"></input>
+								<label for="save">Save Request</label>
+							</td>
+							<td>
+								<input type="checkbox" id="similar" name="similar"></input>
+								<label for="similar">Make Similar Request</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button>Reset</button>
+							</td>
+							<td>
+								<button>Submit</button>
+							</td>
+						</tr>
+					</table>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
