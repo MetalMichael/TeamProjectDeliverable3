@@ -1,14 +1,57 @@
 ﻿@model IEnumerable<TimetableSystem.Models.Request>
+
 @{
     ViewBag.Title = "Requests";
 }
-<h3>Your Requests</h3>
+<h3>Total: @Model.Count()</h3>
+<h2>ViewPage1</h2>
 
 <p>
-    Select from @Model.Count() requests:</p>
-<ul>
-    @foreach (var request in Model)
-    {
-        <li>@Html.ActionLink(request.ID.ToString(), "Edit", new { id = request.ID })</li>
-    }
-</ul>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            StudentsRequested
+        </th>
+        <th>
+            SpecialRequest
+        </th>
+        <th>
+            TimeCreated
+        </th>
+        <th>
+            DepartmentUserID
+        </th>
+        <th>
+            ModuleID
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentsRequested)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialRequest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartmentUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModuleID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RequestID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RequestID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RequestID })
+        </td>
+    </tr>
+}
+
+</table>
