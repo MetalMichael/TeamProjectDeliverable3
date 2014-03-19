@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace TimetableSystem.Controllers
 {
+    [Authorize]
     public class AvailabilityController : Controller
     {
         //
