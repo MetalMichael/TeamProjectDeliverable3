@@ -7,6 +7,7 @@ using TimetableSystem.Models;
 
 namespace TimetableSystem.Controllers
 {
+    [Authorize]
     public class ViewController : Controller
     {
         TimetableSystemEntities systemDB = new TimetableSystemEntities();
