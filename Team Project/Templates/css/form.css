@@ -49,7 +49,7 @@ tr.bottom {
 	color: #dbdbdd;
 	padding-left: 20px;
 }
-#no_students {
+#no_students, #min_capacity {
 	width: 100.6%;
 	height: 50px;
 	background: rgba(0,0,0,0.3);
