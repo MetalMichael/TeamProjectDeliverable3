@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Request Form | LUTS</title>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/radio-checks.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons.css" />
+		<link rel="stylesheet" type="text/css" href="css/form.css" />
+		<link rel="stylesheet" type="text/css" href="css/requests.css" />
+		
+<!--		<script src="js/modernizr.custom.js"></script>-->
+<!--		  <script src="js/prefixfree.min.js"></script>--><!--This file is causing the facilities checkbox-sliders to not display when checkbox is unchecked-->
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<nav>
+					<ul>
+						<li class="dept">
+							<a href="" id="dept" class="title"><span class="fa fa-desktop"></span><h3>Computer Science</h3></a>
+							<p class="round">Priority Round</p>
+						</li>
+						<div class="e" style="float: right;">
+							<li>
+								<a href="index.html" class="menu">Request Form</a>
+							</li>
+							<li>
+								<a href="requests.html" class="menu active">Edit Requests</a>
+							</li>
+							<li>
+								<a href="saved.html" class="menu">Edit Saved</a>
+							</li>
+							<li>
+								<a href="" class="menu">Edit Module</a>
+							</li>
+							<li>
+								<a href="availability.html" class="menu">Room Availability</a>
+							</li>
+							<li>
+								<a href="" class="title logout">Logout</a>
+							</li>
+						</div>
+					</ul>
+				</nav>
+			</header>
+			<ul class="list_grid">
+				<li class="section grid">
+					<h2>Preferences</h2>
+					<table>
+						<tr>
+							<td>
+								<select class="select"><option>All Rounds</option><option>Round 1</option></select>
+								<select class="select"><option>All Requests</option><option>Accepted Requests</option></select>
+							</td>
+							<td style="float: right;">
+								<input type="text" class="filter" name="priority" placeholder="Filter"></input>
+							</td>
+						</tr>
+					</table>
+				</li>
+				<li class="section grid">
+					<table class="requests">
+						<thead>
+							<tr>
+								<td class="sticky_head">Module</td>
+								<td class="sticky_head"></td>
+								<td class="sticky_head"></td>
+								<td class="sticky_head"></td>
+								<td class="sticky_head"></td>
+								<td class="sticky_head"></td>
+								<td class="sticky_head"></td>
+								<td class="sticky_head"></td>
+								<td class="sticky_head">Status</td>
+								<td class="no_border sticky_head">Edit</td>
+							</tr>
+						</thead>
+						<tr class="bottom accepted">
+							<td class="">Server Side Programming (COA101)</td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Accepted</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom denied">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Denied</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom changed">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Approved w/ Change</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom pending">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Pending</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom pending">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Pending</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom pending">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Pending</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom pending">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Pending</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom pending">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Pending</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom pending">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Pending</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+						<tr class="bottom pending">
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class=""></td>
+							<td class="">Pending</td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
+						</tr>
+					</table>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace TimetableSystem.Controllers
 {
@@ -13,7 +11,13 @@ namespace TimetableSystem.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Create new Request";
+            ViewData["Message"] = "Welcome to ASP.NET MVC!";
+
+            return View();
+        }
+
+        public ActionResult About()
+        {
             return View();
         }
     }

@@ -14,37 +14,158 @@
 		
 <!--		<script src="js/modernizr.custom.js"></script>-->
 <!--		  <script src="js/prefixfree.min.js"></script>--><!--This file is causing the facilities checkbox-sliders to not display when checkbox is unchecked-->
+		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script>
+			//functionality for checking the weeks
+		$(document).ready(function () {
+    			$("#allWeeks").click(function () {
+      			$(".all_weeks").prop('checked', $(this).prop('checked'));
+			$("#defWeeks").attr('checked', false);
+			$("#evenWeeks").attr('checked', false);
+			$("#oddWeeks").attr('checked', false);
+    			});
+    			$("#defWeeks").click(function () {
+			$(".all_weeks").attr('checked', false);
+      			$(".default_weeks").prop('checked', $(this).prop('checked'));
+			$("#allWeeks").attr('checked', false);
+			$("#evenWeeks").attr('checked', false);
+			$("#oddWeeks").attr('checked', false);
+    			});
+			$("#oddWeeks").click(function () {
+			$(".all_weeks").attr('checked', false);
+      			$(".odd_weeks").prop('checked', $(this).prop('checked'));
+			$("#allWeeks").attr('checked', false);
+			$("#defWeeks").attr('checked', false);
+			$("#evenWeeks").attr('checked', false);
+    			});
+			$("#evenWeeks").click(function () {
+			$(".all_weeks").attr('checked', false);
+      			$(".even_weeks").prop('checked', $(this).prop('checked'));
+			$("#allWeeks").attr('checked', false);
+			$("#defWeeks").attr('checked', false);
+			$("#oddWeeks").attr('checked', false);
+    			});
+		
+		$("#clearWeeks").click(function () {
+		$(".all_weeks").attr('checked', false);
+		$("#allWeeks").attr('checked', false);
+		$("#defWeeks").attr('checked', false);
+		$("#oddWeeks").attr('checked', false);
+		$("#evenWeeks").attr('checked', false);
+		});
+		});
+		
+		//deselect weeks preset checkbox if one week is unchecked
+		function changed_check() {
+			if(allWeeks.checked === true) {
+				document.getElementById('allWeeks').checked = false;
+			}
+			if(defWeeks.checked === true) {
+				document.getElementById('defWeeks').checked = false;
+			}
+			if(oddWeeks.checked === true) {
+				document.getElementById('oddWeeks').checked = false;
+			}
+			if(evenWeeks.checked === true) {
+				document.getElementById('evenWeeks').checked = false;
+			}
+		}
+			
+		</script>
+		<script>
+			$(function() {	
+				//selects the correct semester based on todays date
+				var today = new Date();
+				var sem_start_1 = new Date('09/28/2013');
+				var sem_end_1 = new Date('01/02/2014');
+				var sem_start_2 = new Date('02/02/2014');
+				var sem_end_2 = new Date('06/30/2014');
+				
+				//if you are currently in semester 1, default semester is set to 2, and vice-versa
+				if (today >= sem_start_1 && today <= sem_end_1){
+					
+					//select semester 2, as date is inside semester 1
+					$("input[type='radio'][name='semester'][value='2']").prop('checked', true);
+					
+					//enables correct ad-hoc mode for correct semester, e.g. in semester 1, default semester is 2, so if you click ad-hoc it goes back to semester 1, and clicking semester 2 removes ad-hoc
+					var $checks = $('input[name="adhoc"]').click(function(){
+    					if(this.checked){
+        					$rsdios.prop('checked', false)
+							$("#sem1").prop('checked', true);
+    					}
+					});
+					var $rsdios = $('input[id="sem2"]').click(function(){
+						if(this.checked){
+							$checks.prop('checked', false)
+						}
+					});
+					
+				}
+			
+				if (today >= sem_start_2 && today <= sem_end_2) {
+					
+					//select semester 1, as date is inside semester 2
+					$("input[type='radio'][name='semester'][value='1']").prop('checked', true);
+					
+					//enables correct ad-hoc mode for correct semester, e.g. in semester 2, default semester is 1, so if you click ad-hoc it goes back to semester 2, and clicking semester 1 removes ad-hoc
+					var $checks = $('input[name="adhoc"]').click(function(){
+    					if(this.checked){
+        					$rsdios.prop('checked', false)
+							$("#sem2").prop('checked', true);
+							
+							$(".all_weeks").attr('checked', false);
+							$("#allWeeks").attr('checked', false);
+							$("#defWeeks").attr('checked', false);
+							$("#oddWeeks").attr('checked', false);
+							$("#evenWeeks").attr('checked', false);
+    					}
+					});
+					var $rsdios = $('input[id="sem1"]').click(function(){
+						if(this.checked){
+							$checks.prop('checked', false)
+							
+//							$(".all_weeks").attr('checked', true);
+//							$("#allWeeks").attr('checked', true);
+							$("#defWeeks").attr('checked', true);
+							$(".default_weeks").attr('checked', true);
+						}
+					});
+
+				}
+			});
+		</script>
+		
+		<style>
+			.tick {
+				display: none;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
 			<header>
 				<nav>
+				
 					<ul>
 						<li class="dept">
 							<a href="" id="dept" class="title"><span class="fa fa-desktop"></span><h3>Computer Science</h3></a>
 							<p class="round">Priority Round</p>
 						</li>
-						<div class="e" style="float: right;">
+						<div class="menu">
 							<li>
-								<a href="" class="menu">Dashboard</a>
+								<a href="index.html" class="menu active">Request Form</a>
 							</li>
 							<li>
-								<a href="" class="menu active">Request Form</a>
+								<a href="requests.html" class="menu">Edit Requests</a>
 							</li>
 							<li>
-								<a href="" class="menu">Edit Requests</a>
-							</li>
-							<li>
-								<a href="" class="menu">Edit Saved</a>
+								<a href="saved.html" class="menu">Edit Saved</a>
 							</li>
 							<li>
 								<a href="" class="menu">Edit Module</a>
 							</li>
 							<li>
-								<a href="" class="menu">Edit Facilities</a>
-							</li>
-							<li>
-								<a href="" class="menu">Room Availability</a>
+								<a href="availability.html" class="menu">Room Availability</a>
 							</li>
 							<li>
 								<a href="" class="title logout">Logout</a>
@@ -55,7 +176,10 @@
 			</header>
 			<ul class="list_grid">
 				<li class="section one">
-					<h2>Booking<span class="checked"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;"></span></h2>
+					<h2>Booking
+						<span class="checked tick" id="tick"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;" /></span>
+						<span class="checked" id="cross"><img src="http://mypad.northampton.ac.uk/12402247/files/2014/02/red-wrong-cross-hi-23y1kex.png" width="38px" style="margin-top: -10px;" /></span>
+					</h2>
 					<table>
 						<tr class="bottom">
 							<td colspan="2">
@@ -71,186 +195,223 @@
 						</tr>
 						<tr>
 							<td>
-								<input type="radio" id="sem1" name="semester"></input>
+								<input type="radio" id="sem1" class="semester" name="semester" value="1"></input>
 								<label for="sem1">Semester 1</label>
 							</td>
 							<td>
-								<input type="radio" id="sem2" name="semester"></input>
+								<input type="radio" id="sem2" class="semester" name="semester" value="2"></input>
 								<label for="sem2">Semester 2</label>
 							</td>
 						</tr>
 					</table>
 				</li>
 				<li class="section two">
-					<h2>Select Module</h2>
+					<h2>Select Module
+						<span class="checked tick" id="tick2"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;" /></span>
+						<span class="checked" id="cross2"><img src="http://mypad.northampton.ac.uk/12402247/files/2014/02/red-wrong-cross-hi-23y1kex.png" width="38px" style="margin-top: -10px;" /></span>
+					</h2>
 					<input type="text" class="filter" name="priority" placeholder="Filter Module"></input>
 					<table>
 						<tr class="bottom">
 							<td>
-								<select class="select"><option>Select Module Title</option><option>Server Side Programming</option></select>
+								<select id="module_title" class="select"><option selected disabled>Select Module Title</option><option>Server Side Programming</option></select>
 							</td>
 						</tr>
 						<tr class="bottom">
 							<td>
-								<select class="select"><option>Select Module Code</option></select>
+								<select id="module_code" class="select"><option disabled selected>Select Module Code</option><option>COA101</option></select>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<select><option>Select A Module to View Preset</option></select>
+								<select><option id="presets">Select A Module to View Preset</option></select>
 							</td>
 						</tr>
 					</table>
 				</li>
 				<li class="section three">
-					<h2>Select Weeks</h2>
+					<h2>Select Weeks
+						<span class="checked tick" id="tick3"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;" /></span>
+						<span class="checked" id="cross3"><img src="http://mypad.northampton.ac.uk/12402247/files/2014/02/red-wrong-cross-hi-23y1kex.png" width="38px" style="margin-top: -10px;" /></span>
+					</h2>
 					<table>
 						<tr class="bottom">
-							<td colspan>
-								<input type="checkbox" id="all" name="all"></input>
-								<label for="all">1-15</label>
+							<td>
+								<input type="checkbox" id="allWeeks" class="weeks" name="all" onClick="allWeeks(this)"></input>
+								<label for="allWeeks">1-15</label>
 							</td>
 							<td>
-								<input type="checkbox" id="default" name="default"></input>
-								<label for="default">1-12</label>
+								<input type="checkbox" id="defWeeks" class="weeks" checked name="default" onClick="defaultWeeks(this)"></input>
+								<label for="defWeeks">1-12</label>
 							</td>
 							<td>
-								<input type="checkbox" id="odd" name="odd"></input>
-								<label for="odd">Odd</label>
+								<input type="checkbox" id="oddWeeks" class="weeks" name="odd" onClick="oddWeeks(this)"></input>
+								<label for="oddWeeks">Odd</label>
 							</td>
-							<td colspan="3">
-								<input type="checkbox" id="even" name="even"></input>
-								<label for="even">Even</label>
+							<td>
+								<input type="checkbox" id="evenWeeks" class="weeks" name="even" onClick="evenWeeks(this)"></input>
+								<label for="evenWeeks">Even</label>
+							</td>
+							<td colspan="2">
+								<button id="clearWeeks">Clear</button>
 							</td>
 						</tr>
 						<tr class="bottom">
 							<td>
-								<input type="checkbox" id="weekone" name="weekone"></input>
-								<label for="weekone">1</label>
+								<input type="checkbox" id="1" class="weeks all_weeks default_weeks odd_weeks" checked name="1" onClick="changed_check();"></input>
+								<label for="1">1</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weektwo" name="weektwo"></input>
-								<label for="weektwo">2</label>
+								<input type="checkbox" id="2" class="weeks all_weeks default_weeks even_weeks" checked name="2" onClick="changed_check();"></input>
+								<label for="2">2</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weekthree" name="weekthree"></input>
-								<label for="weekthree">3</label>
+								<input type="checkbox" id="3" class="weeks all_weeks default_weeks odd_weeks" checked name="3" onClick="changed_check();"></input>
+								<label for="3">3</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weekfour" name="weekfour"></input>
-								<label for="weekfour">4</label>
+								<input type="checkbox" id="4" class="weeks all_weeks default_weeks even_weeks" checked name="4" onClick="changed_check();"></input>
+								<label for="4">4</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weekfive" name="weekfive"></input>
-								<label for="weekfive">5</label>
+								<input type="checkbox" id="5" class="weeks all_weeks default_weeks odd_weeks" checked name="5" onClick="changed_check();"></input>
+								<label for="5">5</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weeksix" name="weeksix"></input>
-								<label for="weeksix">6</label>
+								<input type="checkbox" id="6" class="weeks all_weeks default_weeks even_weeks" checked name="6" onClick="changed_check();"></input>
+								<label for="6">6</label>
 							</td>
 						</tr>
 						<tr class="bottom">
 							<td>
-								<input type="checkbox" id="weekone" name="weekone"></input>
-								<label for="weekone">7</label>
+								<input type="checkbox" id="7" class="weeks all_weeks default_weeks odd_weeks" checked name="7" onClick="changed_check();"></input>
+								<label for="7">7</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weektwo" name="weektwo"></input>
-								<label for="weektwo">8</label>
+								<input type="checkbox" id="8" class="weeks all_weeks default_weeks even_weeks" checked name="8" onClick="changed_check();"></input>
+								<label for="8">8</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weekthree" name="weekthree"></input>
-								<label for="weekthree">9</label>
+								<input type="checkbox" id="9" class="weeks all_weeks default_weeks odd_weeks" checked name="9" onClick="changed_check();"></input>
+								<label for="9">9</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weekfour" name="weekfour"></input>
-								<label for="weekfour">10</label>
+								<input type="checkbox" id="10" class="weeks all_weeks default_weeks even_weeks" checked name="10" onClick="changed_check();"></input>
+								<label for="10">10</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weekfive" name="weekfive"></input>
-								<label for="weekfive">11</label>
+								<input type="checkbox" id="11" class="weeks all_weeks default_weeks odd_weeks" checked name="11" onClick="changed_check();"></input>
+								<label for="11">11</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weeksix" name="weeksix"></input>
-								<label for="weeksix">12</label>
+								<input type="checkbox" id="12" class="weeks all_weeks default_weeks even_weeks" checked name="12" onClick="changed_check();"></input>
+								<label for="12">12</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" id="weekone" name="weekone"></input>
-								<label for="weekone">13</label>
+								<input type="checkbox" id="13" class="weeks all_weeks odd_weeks" name="13" onClick="changed_check();"></input>
+								<label for="13">13</label>
 							</td>
 							<td>
-								<input type="checkbox" id="weektwo" name="weektwo"></input>
-								<label for="weektwo">14</label>
+								<input type="checkbox" id="14" class="weeks all_weeks even_weeks" name="14" onClick="changed_check();"></input>
+								<label for="14">14</label>
 							</td>
 							<td colspan="4">
-								<input type="checkbox" id="weekthree" name="weekthree"></input>
-								<label for="weekthree">15</label>
+								<input type="checkbox" id="15" class="weeks all_weeks odd_weeks" name="15" onClick="changed_check();"></input>
+								<label for="15">15</label>
 							</td>
 						</tr>
 					</table>
 				</li>
 				<li class="section four">
-					<h2>Select Time</h2>
+					<h2>Select Time
+						<span class="checked tick" id="tick4"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;" /></span>
+						<span class="checked" id="cross4"><img src="http://mypad.northampton.ac.uk/12402247/files/2014/02/red-wrong-cross-hi-23y1kex.png" width="38px" style="margin-top: -10px;" /></span>
+					</h2>
 					<table>
 						<tr class="bottom">
 							<td>
-								<input type="radio" id="monday" name="day"></input>
+								<input type="radio" id="monday" name="day" class="day"></input>
 								<label for="monday">Mon</label>
 							</td>
 							<td>
-								<input type="radio" id="tuesday" name="day"></input>
+								<input type="radio" id="tuesday" name="day" class="day"></input>
 								<label for="tuesday">Tue</label>
 							</td>
 							<td>
-								<input type="radio" id="wednesday" name="day"></input>
+								<input type="radio" id="wednesday" name="day" class="day"></input>
 								<label for="wednesday">Wed</label>
 							</td>
 							<td>
-								<input type="radio" id="thursday" name="day"></input>
+								<input type="radio" id="thursday" name="day" class="day"></input>
 								<label for="thursday">Thur</label>
 							</td>
 							<td class="fri">
-								<input type="radio" id="friday" name="day"></input>
+								<input type="radio" id="friday" name="day" class="day"></input>
 								<label for="friday">Fri</label>
 							</td>
 						</tr>
 						<tr class="bottom">
 							<td colspan="5">
-								<select><option>Start Time</option></select>
+								<select id="start_time" onchange="document.getElementById('end_time').value = Number(this.options[this.selectedIndex].value);">
+									<option selected disabled>Start Time</option>
+									<option value="1">09:00 (Period 1)</option>
+									<option value="2">10:00 (Period 2)</option>
+									<option value="3">11:00 (Period 3)</option>
+									<option value="4">12:00 (Period 4)</option>
+									<option value="5">13:00 (Period 5)</option>
+									<option value="6">14:00 (Period 6)</option>
+									<option value="7">15:00 (Period 7)</option>
+									<option value="8">16:00 (Period 8)</option>
+									<option value="9">17:00 (Period 9)</option>
+								</select>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="5">
-								<select><option>End Time</option></select>
+								<select id="end_time">
+									<option>End Time</option>
+									<option value="1">09:50 (Period 1)</option>
+									<option value="2">10:50 (Period 2)</option>
+									<option value="3">11:50 (Period 3)</option>
+									<option value="4">12:50 (Period 4)</option>
+									<option value="5">13:50 (Period 5)</option>
+									<option value="6">14:50 (Period 6)</option>
+									<option value="7">15:50 (Period 7)</option>
+									<option value="8">16:50 (Period 8)</option>
+									<option value="9">17:50 (Period 9)</option>
+								</select>
 							</td>
 						</tr>
 					</table>
 				</li>
 				<li class="section five">
-					<h2>Room</h2>
+					<h2>Room
+						<span class="checked tick" id="tick5"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;" /></span>
+						<span class="checked" id="cross5"><img src="http://mypad.northampton.ac.uk/12402247/files/2014/02/red-wrong-cross-hi-23y1kex.png" width="38px" style="margin-top: -10px;" /></span>
+					</h2>
 					<table>
 						<tr class="bottom">
 							<td>
-								<input type="radio" id="lecture" name="roomtype"></input>
+								<input type="radio" id="lecture" class="roomtype" name="roomtype"></input>
 								<label for="lecture">Lecture</label>
 							</td>
 							<td>
-								<input type="radio" id="itlab" name="roomtype"></input>
+								<input type="radio" id="itlab" class="roomtype" name="roomtype"></input>
 								<label for="itlab">IT Lab</label>
 							</td>
 							<td>
-								<input type="radio" id="seminar" name="roomtype"></input>
+								<input type="radio" id="seminar" class="roomtype" name="roomtype"></input>
 								<label for="seminar">Seminar</label>
 							</td>
 						</tr>
 						<tr class="bottom">
 							<td>
-								<input type="checkbox" id="test1" class="facility" />
-								<label class="wrap" for="test1"><span class="ui"></span>Computer Station</label>
+								<input type="checkbox" checked id="test1" class="facility" />
+								<label class="wrap" for="test1"><span class="ui"></span>PC Station</label>
 							</td>
-							<td>
+							<td colspan="2" >
 								<input type="checkbox" id="wheel" class="facility" name="pc_stn"></input>
 								<label for="wheel"><span class="ui"></span>Wheelchair Access</label>
 							</td>
@@ -262,13 +423,16 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="3">Dropdowns will appear here</td>
+							<td colspan="3">Drop-downs of other facilities will appear here</td>
 						</tr>
 					</table>
-					<input type="text" class="filter" name="priority" placeholder="Additional Info"></input>
+					<input type="text" id="additional" class="filter" name="priority" placeholder="Additional Info"></input><!--Can use textarea tag to allow resize of it-->
 				</li>
 				<li class="section six">
-					<h2>Room</h2>
+					<h2>Room
+						<span class="checked tick" id="tick6"><img src="http://www.clker.com/cliparts/9/d/J/p/D/g/check-grey-md.png" width="38px" style="margin-top: -10px;" /></span>
+						<span class="checked" id="cross6"><img src="http://mypad.northampton.ac.uk/12402247/files/2014/02/red-wrong-cross-hi-23y1kex.png" width="38px" style="margin-top: -10px;" /></span>
+					</h2>
 					<table>
 						<tr class="bottom">
 							<td><label for="park">No. of Students: </label></td>
@@ -279,7 +443,15 @@
 						<tr class="bottom">
 							<td><label for="park">No. of Rooms: </label></td>
 							<td colspan="2">
-								<select id="no_rooms"><option selected disabled>No. of Rooms</option><option>1 Room</option></select>
+								<select id="no_rooms">
+									<option selected disabled>No. of Rooms</option>
+									<option>1 Room</option>
+									<option>2 Rooms</option>
+									<option>3 Rooms</option>
+									<option>4 Rooms</option>
+									<option>5 Rooms</option>
+									<option>6 Rooms</option>
+								</select>
 							</td>
 						</tr>
 						<tr class="bottom">
@@ -287,11 +459,11 @@
 							<td colspan="2"><select id="park"><option>No Preference</option></select></td>
 						</tr>
 						<tr class="bottom">
-							<td><label for="building">Select Building: </td>
+							<td><label for="building">Select Building: </label></td>
 							<td colspan="2"><select id="building"><option>No Preference</option></select></td>
 						</tr>
 						<tr class="bottom">
-							<td><label for="room">Select Room: </td>
+							<td><label for="room">Select Room: </label></td>
 							<td><select id="room"><option>No Preference</option></select></td>
 							<td>Room Unavailable</td>
 						</tr>
@@ -321,5 +493,108 @@
 				</li>
 			</ul>
 		</div>
+		<script>
+			//Booking table change cross to tick
+			$('.semester').bind('keyup change',function(){
+    
+				// get elements that are empty.
+				var empty = $('.semester').map(function(index, el) {
+        			return !$(el).val().length ? el : null;
+				}).get();
+    
+				// could also be placed outside of the function
+				var tick = $('#tick');
+				var cross = $('#cross');
+    	
+				// check if there are any empty elements, if there are none, show numbers, else hide number.
+				!empty.length ? tick.show() : tick.hide();
+				!empty.length ? cross.hide() : cross.show();
+			});
+		
+			//Select module table, change cross to tick
+			$('#module_title').bind('keyup change',function(){
+    
+				// get elements that are empty.
+    			var empty = $('#module_title').map(function(index, el) {
+					return !$(el).val().length ? el : null;
+				}).get();
+    
+				// could also be placed outside of the function
+				var tick = $('#tick2');
+				var cross = $('#cross2');
+    
+				// check if there are any empty elements, if there are none, show numbers, else hide number.
+				!empty.length ? tick.show() : tick.hide();
+				!empty.length ? cross.hide() : cross.show();
+			});
+			
+			//Select weeks table, change cross to tick
+			$('.weeks').bind('keyup change',function(){
+    
+				// get elements that are empty.
+    			var empty = $('.weeks').map(function(index, el) {
+					return !$(el).val().length ? el : null;
+				}).get();
+    
+				// could also be placed outside of the function
+				var tick = $('#tick3');
+				var cross = $('#cross3');
+    
+				// check if there are any empty elements, if there are none, show numbers, else hide number.
+				!empty.length ? tick.show() : tick.hide();
+				!empty.length ? cross.hide() : cross.show();
+			});
+			
+			//Select time table, change cross to tick
+			$('.day, #start_time, #end_time').bind('keyup change',function(){
+    
+				// get elements that are empty.
+    			var empty = $('.day, #start_time, #end_time').map(function(index, el) {
+					return !$(el).val().length ? el : null;
+				}).get();
+    
+				// could also be placed outside of the function
+				var tick = $('#tick4');
+				var cross = $('#cross4');
+    
+				// check if there are any empty elements, if there are none, show numbers, else hide number.
+				!empty.length ? tick.show() : tick.hide();
+				!empty.length ? cross.hide() : cross.show();
+			});
+			
+			//Select roomtype table, change cross to tick
+			$('.roomtype').bind('keyup change',function(){
+    
+				// get elements that are empty.
+    			var empty = $('.roomtype').map(function(index, el) {
+					return !$(el).val().length ? el : null;
+				}).get();
+    
+				// could also be placed outside of the function
+				var tick = $('#tick5');
+				var cross = $('#cross5');
+    
+				// check if there are any empty elements, if there are none, show numbers, else hide number.
+				!empty.length ? tick.show() : tick.hide();
+				!empty.length ? cross.hide() : cross.show();
+			});
+			
+			//Select room_info table, change cross to tick
+			$('#no_students, #no_rooms').bind('keyup change',function(){
+    
+				// get elements that are empty.
+    			var empty = $('#no_students, #no_rooms').map(function(index, el) {
+					return !$(el).val().length ? el : null;
+				}).get();
+    
+				// could also be placed outside of the function
+				var tick = $('#tick6');
+				var cross = $('#cross6');
+    
+				// check if there are any empty elements, if there are none, show numbers, else hide number.
+				!empty.length ? tick.show() : tick.hide();
+				!empty.length ? cross.hide() : cross.show();
+			});
+		</script>
 	</body>
 </html>
