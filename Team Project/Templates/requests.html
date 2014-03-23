@@ -11,57 +11,10 @@
 		<link rel="stylesheet" type="text/css" href="css/radio-checks.css" />
 		<link rel="stylesheet" type="text/css" href="css/icons.css" />
 		<link rel="stylesheet" type="text/css" href="css/form.css" />
+		<link rel="stylesheet" type="text/css" href="css/requests.css" />
 		
 <!--		<script src="js/modernizr.custom.js"></script>-->
 <!--		  <script src="js/prefixfree.min.js"></script>--><!--This file is causing the facilities checkbox-sliders to not display when checkbox is unchecked-->
-		<style>
-		.list_grid .grid {
-			width: 98.6%;
-		}
-		.filter {
-			/*padding-left: 10px;
-			margin-right: -100px;
-			position: relative;
-			left: 7px;*/
-			width: 200px;
-		}
-		select.select {
-			width: 300px;
-		}
-		table.requests {
-			text-align: center;
-		}
-		.sticky_head {
-			position: -webkit-sticky;
-			position: -moz-sticky;
-			position: -ms-sticky;
-			position: -o-sticky;
-			top: 55px;
-/*			background: rgba(0,0,0,0.5);*/
-/*			background: #3e4c68;*/
-/*			background: rgba(62,76,104,1);*/
-			background: #212938;
-		}
-		.grid thead {
-			background: rgba(0,0,0,0.5);
-		}
-		.accepted {
-			background: #3BB878;
-		}
-		.pending {
-			background: #f88508;	/*#FBAF5C*/
-		}
-		.denied {
-			background: #F26C4F;
-		}
-		.changed {
-			background: #438CCA;	/*#7EA7D8*/	/*#8493CA*/	/*#438CCA*/	/*#5574B9*/	/*rgba(255,255,255,0.3)*/
-		}
-		button {
-			margin-top: 5px;
-			margin-bottom: 5px;
-		}
-		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -84,9 +37,6 @@
 							</li>
 							<li>
 								<a href="" class="menu">Edit Module</a>
-							</li>
-							<li>
-								<a href="" class="menu">Edit Facilities</a>
 							</li>
 							<li>
 								<a href="availability.html" class="menu">Room Availability</a>
@@ -139,7 +89,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Accepted</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom denied">
 							<td class=""></td>
@@ -151,7 +101,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Denied</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom changed">
 							<td class=""></td>
@@ -163,7 +113,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Approved w/ Change</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom pending">
 							<td class=""></td>
@@ -175,7 +125,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Pending</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom pending">
 							<td class=""></td>
@@ -187,7 +137,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Pending</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom pending">
 							<td class=""></td>
@@ -199,7 +149,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Pending</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom pending">
 							<td class=""></td>
@@ -211,7 +161,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Pending</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom pending">
 							<td class=""></td>
@@ -223,7 +173,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Pending</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom pending">
 							<td class=""></td>
@@ -235,7 +185,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Pending</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 						<tr class="bottom pending">
 							<td class=""></td>
@@ -247,7 +197,7 @@
 							<td class=""></td>
 							<td class=""></td>
 							<td class="">Pending</td>
-							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Reset</button></td>
+							<td class="no_border"><button>Edit</button><br/><button>Delete</button></br><button>Make Similar Request</button></td>
 						</tr>
 					</table>
 				</li>

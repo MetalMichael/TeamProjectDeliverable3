@@ -79,7 +79,7 @@ nav ul a.menu, nav ul a.title, nav ul p.title {
   height: 105%;
   border-bottom: solid 4px #dbdbdd;
 }*/
-nav ul a.menu:before {
+/*nav ul a.menu:before {
 	z-index: -1;
 	top: -104%;
 	left: 0;
@@ -90,7 +90,7 @@ nav ul a.menu:before {
 }
 nav ul a.menu:hover:before {
   top: -13px;
-}
+}*/
 nav ul a.active:before {
 	top: 0px;
 }
@@ -108,8 +108,4 @@ nav ul a.active:before {
 	position: relative;
 	left: -4px;
 	color: white;
-}
-.dept {
-	border-right: 1px solid rgba(0,0,0,0.1);
-	padding-right: 15px;
 }
