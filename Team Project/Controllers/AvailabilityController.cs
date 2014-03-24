@@ -13,6 +13,9 @@ namespace TimetableSystem.Controllers
 
         public ActionResult Index()
         {
+            int[] semester = { 1, 2 };
+            SelectList semesterList = new SelectList(semester);
+            ViewBag.Semester = semesterList;
             string[] park = { "East", "Central", "West" };
             SelectList parkList = new SelectList(park);
             ViewBag.Park = parkList;

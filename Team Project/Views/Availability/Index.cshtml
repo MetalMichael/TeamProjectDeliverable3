@@ -8,13 +8,12 @@
     });
 
     function refreshTable() {
-        var filters = ["Park", "Building", "Room", "Week"];
         var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
         var times = ["9:00-9:50", "10:00-10:50", "11:00-11:50", "12:00-12:50", "13:00-13:50", "14:00-14:50", "15:00-15:50",
                         "16:00-16:50", "17:00-17:50"];
 
-        var tableHTML = "<table><tr><th></th>";
-
+        var tableHTML = "<table><tr><th><p style='text-align: center'>-</p></th>";
+        
         for (var i = 0; i < 9; i++) {
             tableHTML += "<th>" + times[i] + "</th>";
         }
@@ -33,22 +32,21 @@
         tableHTML += "</table>";
         $('#tableDiv').html(tableHTML);
     }
-    
 </script>
 
 <h2>Availability</h2>
 
 @*Park, Building, Room, Week*@
-@{ string[] filters = {"Park", "Building", "Room", "Week"};}
+@{ string[] filters = {"Semester", "Park", "Building", "Room", "Week"};}
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-
+    
     <fieldset>
         <legend>Filters</legend>
 
-        @for (int i = 0; i < 4; i++)
+        @for (int i = 0; i < 5; i++)
         {
             <div class="editor-label">
                 @Html.Label(@filters[i])
@@ -60,7 +58,7 @@
 
     </fieldset>
     <div id="tableDiv">
-        <p>hello im in the div</p>
+        
     </div>
 
 }
