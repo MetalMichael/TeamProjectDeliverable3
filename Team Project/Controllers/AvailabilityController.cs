@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TimetableSystem.Models;
 
 namespace TimetableSystem.Controllers
 {
     public class AvailabilityController : Controller
     {
+        TimetableSystemEntities systemDB = new TimetableSystemEntities();
         //
         // GET: /Availability/
 
