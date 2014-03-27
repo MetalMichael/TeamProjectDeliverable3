@@ -15,5 +15,8 @@ namespace TimetableSystem.Models
         public DbSet<Request> Requests { get; set; }
         public DbSet<Round> Rounds { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Park> Parks { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
     }
 }

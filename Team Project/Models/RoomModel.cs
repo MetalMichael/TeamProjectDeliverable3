@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TimetableSystem.Models
 {
-    public class RoomModel
+    public class Room
     {
         [Key]
         public int RoomID { get; set; }
         public string RoomCode { get; set; }
         public int Capacity { get; set; }
-        [ForeignKey("Building")]
+        //[ForeignKey("Building")]
         public int BuildingID { get; set; }
     }
 }

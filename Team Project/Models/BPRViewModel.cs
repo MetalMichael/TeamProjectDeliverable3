@@ -7,9 +7,9 @@ namespace TimetableSystem.Models
 {
     public class BPRViewModel
     {
-        public ParkModel Park { get ; set; }
-        public BuildingModel Building { get ; set; }
-        public RoomModel Room { get; set; }
+        public Park xPark { get ; set; }
+        public Building xBuilding { get ; set; }
+        public Room xRoom { get; set; }
     }
 }
 
