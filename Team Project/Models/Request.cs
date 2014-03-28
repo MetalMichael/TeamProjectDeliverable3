@@ -2,26 +2,50 @@
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace TimetableSystem.Models
 {
     public class Request
     {
-        /*[Key]
-        public int ID { get; set; }
-        public Module module { get; set; }
-        public bool priority { get; set; }
-@@ -23,6 +25,13 @@ namespace TimetableSystem.Models
-        public string weeks { get; set; }
-        public string features { get; set; }
-        public string rooms { get; set; }
-        public int status { get; set; }*/
         [Key]
+        [ScaffoldColumn(false)]
         public int RequestID { get; set; }
-        public int StudentsRequested { get; set; }
-        public int SpecialRequest { get; set; }
-        public string TimeCreated { get; set; }
+
+        [Required(ErrorMessage = "Total Students is required")]
+        [DisplayName("Total Students")]
+        public int StudentsTotal { get; set; }
+
+        public string SpecialRequest { get; set; }
+
+        [ScaffoldColumn(false)]
         public int DepartmentUserID { get; set; }
+
+        [Required(ErrorMessage = "Module is required")]
+        [DisplayName("Module")]
         public int ModuleID { get; set; }
+
+        public bool Priority { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int Round { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int Semester { get; set; }
+
+        public string Day { get; set; }
+
+        public int StartTime { get; set; }
+
+        public int Length { get; set; }
+
+        public string RoomType { get; set; }
+
+        public string Building { get; set; }
+
+        public string Park { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int Status { get; set; }
     }
 }
