@@ -47,15 +47,51 @@
     <fieldset>
         <legend>Filters</legend>
 
-        @for (int i = 0; i < 5; i++)
+            <div class="editor-label">
+                @Html.Label("Semester")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"], string.Empty)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Park")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], string.Empty)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Building")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], string.Empty)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Room")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], string.Empty)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Week")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Week", (IEnumerable<SelectListItem>)ViewData["Week"])
+            </div>
+
+        
+        @*@for (int i = 0; i < filters.Length; i++)
         {
             <div class="editor-label">
                 @Html.Label(@filters[i])
             </div>
             <div class="editor-field">
-                @Html.DropDownList(@filters[i])
+                @Html.DropDownList("@filters[i]", @filters[i], string.Empty)
             </div>
-        }
+        }*@
 
     </fieldset>
     <div id="tableDiv">

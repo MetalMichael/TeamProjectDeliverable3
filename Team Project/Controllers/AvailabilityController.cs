@@ -13,26 +13,26 @@ namespace TimetableSystem.Controllers
 
         public ActionResult Index()
         {
-
-            var parkList = new List<String>();
             var parkQry = from p in systemDB.Parks
                           orderby p.ParkID
                           select p.ParkName;
-            parkList.AddRange(parkQry);
+            SelectList parkList = new SelectList(parkQry);
             ViewBag.Park = parkList;
 
-            var buildList = new List<String>();
+            //var buildList = new List<String>();
             var buildQry = from b in systemDB.Buildings
                            orderby b.BuildingName
                            select b.BuildingName;
-            buildList.AddRange(buildQry.Distinct());
+            //buildList.AddRange(buildQry.Distinct());
+            SelectList buildList = new SelectList(buildQry);
             ViewBag.Building = buildList;
 
-            var roomList = new List<String>();
+            
             var roomQry = from r in systemDB.Rooms
                           orderby r.RoomCode
                           select r.RoomCode;
-            roomList.AddRange(roomQry.Distinct());
+            //roomList.AddRange(roomQry.Distinct());
+            SelectList roomList = new SelectList(roomQry);
             ViewBag.Room = roomList;
        
             
