@@ -131,7 +131,7 @@
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\BPRViewModel.cs" />
     <Compile Include="Models\Park.cs" />
-    <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Module.cs" />
