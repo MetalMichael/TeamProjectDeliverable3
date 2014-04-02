@@ -45,6 +45,22 @@ namespace TimetableSystem.Controllers
 
             return View();
         }
+        public ActionResult GetBuildings(int parkID)
+        {
+            var buildQry = from b in systemDB.Buildings
+                            where b.ParkID == parkID
+                            orderby b.BuildingName
+                            select b.BuildingName;
+            string temp = "";
+            foreach (string b in buildQry)
+            {
+                temp += b + ';';
+            }
+            temp = temp.Substring(0, temp.Length - 1);
+            string[] buildings = temp.Split(';');
+            
+            return View(buildQry);
+        }
 
     }
 }
