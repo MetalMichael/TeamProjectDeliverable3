@@ -1,26 +1,47 @@
 ﻿@model TimetableSystem.Models.BPRViewModel
 @{
-    ViewBag.Title = "Timetabling System - Availability";
+    ViewBag.Title = "Availability";
 }
 <script type="text/javascript">
     $(document).ready(function () {
         refreshTable();
+        //Set Park field change function
         $('#Park').change(function () {
-            var queryLink = '@Url.Action("GetBuildings")';
-            if ($(this).val() != '') {
-                queryLink += '?parkID=' + $(this).index;
-            }
-            $.get(queryLink, function (data) {
+            var queryLink = '@Url.Action("parkSelected")';
+            $.get(queryLink, { parkName: $(this).val() }, function (data) {
+                var temp = data.split('!');
+                var buildings = temp[0].split(';');
+                var rooms = temp[1].split(';');
                 $b = $('#Building');
-                $op = $('<option></option>');
                 $b.empty();
-                $.each(data, function (value) {
-                    $b.append($op.attr("value", value));
-                });
+                $b.append("<option>No Preference</option>");
+                $r = $('#Room');
+                $r.empty();
+                $r.append("<option>No Preference</option>");
+                for (var i = 0; i < buildings.length; i++) {
+                    $b.append("<option>" + buildings[i] + "</option>");
+                }
+                for (var k = 0; k < rooms.length; k++) {
+                    $r.append("<option>" + rooms[k] + "</option>");
+                }
+            });
+        });
+        //Set Building field change function
+        $('#Building').change(function () {
+            var queryLink = '@Url.Action("buildingSelected")';
+            $.get(queryLink, { buildingName: $(this).val() }, function (data) {
+                var rooms = data.split(';');
+                $r = $('#Room');
+                $r.empty();
+                $r.append("<option>No Preference</option>");
+                for (var k = 0; k < rooms.length; k++) {
+                $r.append("<option>" + rooms[k] + "</option>");
+                }
             });
         });
     });
 
+    //Function to print the table based on current form data
     function refreshTable() {
         var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
         var times = ["9:00-9:50", "10:00-10:50", "11:00-11:50", "12:00-12:50", "13:00-13:50", "14:00-14:50", "15:00-15:50",
@@ -72,21 +93,21 @@
                 @Html.Label("Park")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], string.Empty, new { id = "Park" })
+                @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference", new { id = "Park" })
             </div>
 
             <div class="editor-label">
                 @Html.Label("Building")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], string.Empty)
+                @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference", new { id = "Building" })
             </div>
 
             <div class="editor-label">
                 @Html.Label("Room")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], string.Empty)
+                @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference", new { id = "Room" })
             </div>
 
             <div class="editor-label">

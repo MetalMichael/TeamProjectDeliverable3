@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TimetableSystem.Models;
-using TimetableSystem.Helpers;
 
 namespace TimetableSystem.Controllers
 {
@@ -20,16 +19,21 @@ namespace TimetableSystem.Controllers
             SelectList parkList = new SelectList(parkQry);
             ViewBag.Park = parkList;
 
-            var buildQry = from b in systemDB.Buildings
+            var buildQry = (from b in systemDB.Buildings
                            orderby b.BuildingName
-                           select b.BuildingName;
+                           select b.BuildingName).Distinct();
             SelectList buildList = new SelectList(buildQry);
             ViewBag.Building = buildList;
 
             var roomQry = from r in systemDB.Rooms
                           orderby r.RoomCode
-                          select r.RoomCode;
-            SelectList roomList = new SelectList(roomQry);
+                          select r;
+            List<string> tempList = new List<string>();
+            foreach(Room r in roomQry)
+            {
+                tempList.Add(r.RoomCode + " [" + r.Capacity + "]");
+            }
+            SelectList roomList = new SelectList(tempList);
             ViewBag.Room = roomList;
 
             int[] semester = { 1, 2 };
@@ -45,21 +49,95 @@ namespace TimetableSystem.Controllers
 
             return View();
         }
-        public ActionResult GetBuildings(int parkID)
+        public string parkSelected(string parkName)
         {
-            var buildQry = from b in systemDB.Buildings
-                            where b.ParkID == parkID
-                            orderby b.BuildingName
-                            select b.BuildingName;
-            string temp = "";
-            foreach (string b in buildQry)
+            //Need to catch error here when changing back to '' on park dropdown
+            string buildings = "";
+            string rooms = "";
+            string returnStr = "";
+            if (parkName == "")
             {
-                temp += b + ';';
+                //resetting buildings when "No Preference selected"
+                var buildQry = (from b in systemDB.Buildings
+                                orderby b.BuildingName
+                                select b.BuildingName).Distinct();
+                foreach (string b in buildQry)
+                {
+                    buildings += b + ';';
+                }
+                var roomQry = from r in systemDB.Rooms
+                              select r;
+                foreach (Room r in roomQry)
+                {
+                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                }
             }
-            temp = temp.Substring(0, temp.Length - 1);
-            string[] buildings = temp.Split(';');
+            else
+            {
+                //Getting buildings
+                var parkID = (from p in systemDB.Parks
+                              where p.ParkName == parkName
+                              select p.ParkID).Single();
+                var buildQry = (from b in systemDB.Buildings
+                                where b.ParkID == parkID
+                                orderby b.BuildingName
+                                select b.BuildingName).Distinct();
+                foreach (string b in buildQry)
+                {
+                    buildings += b + ';';
+                }
+
+                //Getting rooms
+                var buildIDs = (from b in systemDB.Buildings
+                                where b.ParkID == parkID
+                                orderby b.BuildingName
+                                select b.BuildingID).Distinct();
+                foreach (int b in buildIDs)
+                {
+                    var roomQry = from r in systemDB.Rooms
+                                  where r.BuildingID == b
+                                  select r;
+                    foreach (Room r in roomQry)
+                    {
+                        rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                    }
+                }
+            }
+            buildings = buildings.Substring(0, buildings.Length - 1);
+            rooms = rooms.Substring(0, rooms.Length - 1);
+            returnStr = buildings + "!" + rooms;
+
+            return returnStr;
+        }
+        public string buildingSelected(string buildingName)
+        {
+            string rooms = "";
             
-            return View(buildQry);
+            if (buildingName == "")
+            {
+                var roomQry = from r in systemDB.Rooms
+                              select r;
+                foreach (Room r in roomQry)
+                {
+                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                }
+            }
+            else
+            {
+                var buildID = (from b in systemDB.Buildings
+                               where b.BuildingName == buildingName
+                               select b.BuildingID).First();
+                var roomQry = from r in systemDB.Rooms
+                              where r.BuildingID == buildID
+                              select r;
+                foreach (Room r in roomQry)
+                {
+                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                }
+            }
+            rooms = rooms.Substring(0, rooms.Length - 1);
+
+            return rooms;
         }
 
     }
