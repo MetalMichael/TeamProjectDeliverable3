@@ -19,6 +19,8 @@ namespace TimetableSystem.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Create new Request";
+
+            ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
             return View();
         }
 
