@@ -11,6 +11,7 @@ using TimetableSystem.Models;
 namespace TimetableSystem.Controllers
 {
     [HandleError]
+    [Authorize]
     public class HomeController : Controller
     {
         private TimetableSystemEntities db = new TimetableSystemEntities();
