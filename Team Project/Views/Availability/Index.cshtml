@@ -51,11 +51,7 @@
         var semester = $('#Semester').val();
         var week = $('#Week').val();
 
-        $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
-            semester: semester, week: week, day: "Monday", period: 1
-        }, function (data) {
-            alert(data);
-        });
+        
 
         //Days and times arrays
         var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -70,12 +66,31 @@
             tableHTML += "<th>" + times[i] + "</th>";
         }
         tableHTML += "</tr>";
+
+
         //Nested for loop to append timetable slots to tableHTML
+        var period, day, result;
         for (var k = 0; k < 5; k++) {
             tableHTML += "<tr><th>" + days[k] + "</th>";
-
+            day = days[k];
             for (var l = 0; l < 9; l++) {
-                tableHTML += "<td class='availability'></td>"
+                period = periods[l];
+
+                $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
+                    semester: semester, week: week, day: day, period: period
+                }, function (data) {
+                    tableHTML += "<td>"+data+"</td>";
+                });
+                /*$.ajax({
+                    url: '@Url.Action("getAvailability")',
+                    async: false,
+                    data: { parkName: park, buildingName: building, roomCode: room,
+                    semester: semester, week: week, day: day, period: period},
+                    success: function (data) {
+                        tableHTML += "<td>bla</td>";
+                    }
+                });*/
+                
             }
             tableHTML += "</tr>"
         }

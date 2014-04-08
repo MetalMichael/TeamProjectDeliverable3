@@ -150,23 +150,32 @@ namespace TimetableSystem.Controllers
         public string getAvailability(string parkName, string buildingName, string roomCode, int semester, int week,
             string day, int period)
         {
-            var max = 0; //max number of rooms
+            int max = 0; //max number of rooms
+            int available = 0; //number of available rooms
             
             if (roomCode != "No" && roomCode != "")
             {
                 var roomID = (from r in systemDB.Rooms
                               where r.RoomCode == roomCode
                               select r.RoomID).Single();
+                available = (from r in systemDB.Requests
+                               where (r.AcceptedRoom == roomID) && (r.Day == day) && (r.StartTime == period)
+                               select r).Count();
                 max = 1;
+                available = max - available;
             }
             else if (buildingName != "No Preference" && buildingName != "")
             {
                 var buildingID = (from b in systemDB.Buildings
                                   where b.BuildingName == buildingName
                                   select b.BuildingID).Single();
+                available = (from r in systemDB.Requests
+                             where (r.Building == buildingID) && (r.Day == day) && (r.StartTime == period)
+                             select r).Count();
                 max = (from r in systemDB.Rooms
                        where r.BuildingID == buildingID
                        select r).Count();
+                available = max - available;
             }
             else if (parkName != "No Preference" && parkName != "")
             {
@@ -176,12 +185,16 @@ namespace TimetableSystem.Controllers
                 var buildings = from b in systemDB.Buildings
                                 where b.ParkID == parkID
                                 select b.BuildingID;
+                available = (from r in systemDB.Requests
+                             where (r.Park == parkID) && (r.Day == day) && (r.StartTime == period)
+                             select r).Count();
                 foreach (int id in buildings)
                 {
                     max += (from r in systemDB.Rooms
                             where r.BuildingID == id
                             select r).Count();
                 }
+                available = max - available;
             }
             else
             {
@@ -199,9 +212,14 @@ namespace TimetableSystem.Controllers
                                 select r).Count();
                     }
                 }
+                available = (from r in systemDB.Requests
+                             where (r.Day == day) && (r.StartTime == period)
+                             select r).Count();
+                available = max - available;
             }
 
-            return max.ToString();
+            string result = available + "/" + max;
+            return result;
         }
 
     }

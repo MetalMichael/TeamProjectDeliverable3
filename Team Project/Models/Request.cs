@@ -41,9 +41,11 @@ namespace TimetableSystem.Models
 
         public string RoomType { get; set; }
 
-        public string Building { get; set; }
+        public int Building { get; set; }
 
-        public string Park { get; set; }
+        public int Park { get; set; }
+
+        public int AcceptedRoom { get; set; }
 
         [ScaffoldColumn(false)]
         public int Status { get; set; }
