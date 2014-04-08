@@ -11,6 +11,7 @@ using TimetableSystem.Models;
 namespace TimetableSystem.Controllers
 {
     [HandleError]
+    [Authorize]
     public class HomeController : Controller
     {
         private TimetableSystemEntities db = new TimetableSystemEntities();
@@ -18,6 +19,8 @@ namespace TimetableSystem.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Create new Request";
+
+            ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
             return View();
         }
 
