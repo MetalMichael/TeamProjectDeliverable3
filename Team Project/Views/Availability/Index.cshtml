@@ -35,7 +35,7 @@
                 $r.empty();
                 $r.append("<option>No Preference</option>");
                 for (var k = 0; k < rooms.length; k++) {
-                $r.append("<option>" + rooms[k] + "</option>");
+                    $r.append("<option>" + rooms[k] + "</option>");
                 }
             });
         });
@@ -43,17 +43,34 @@
 
     //Function to print the table based on current form data
     function refreshTable() {
+        //Form values
+        var park = $('#Park').val();
+        var building = $('#Building').val();
+        var room = $('#Room').val().split(' ')[0];
+        //var room = temp[0];
+        var semester = $('#Semester').val();
+        var week = $('#Week').val();
+
+        $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
+            semester: semester, week: week, day: "Monday", period: 1
+        }, function (data) {
+            alert(data);
+        });
+
+        //Days and times arrays
         var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
         var times = ["9:00-9:50", "10:00-10:50", "11:00-11:50", "12:00-12:50", "13:00-13:50", "14:00-14:50", "15:00-15:50",
                         "16:00-16:50", "17:00-17:50"];
+        var periods = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+        //Initializing tableHTML variable
         var tableHTML = "<table><tr><th><p style='text-align: center'>-</p></th>";
-        
+        //Appending first row
         for (var i = 0; i < 9; i++) {
             tableHTML += "<th>" + times[i] + "</th>";
         }
         tableHTML += "</tr>";
-
+        //Nested for loop to append timetable slots to tableHTML
         for (var k = 0; k < 5; k++) {
             tableHTML += "<tr><th>" + days[k] + "</th>";
 
@@ -62,10 +79,12 @@
             }
             tableHTML += "</tr>"
         }
-
+        //Finish tableHTML and set #tableDIV to contain it.
         tableHTML += "</table>";
         $('#tableDiv').html(tableHTML);
     }
+    
+
 
     
 </script>
@@ -85,7 +104,7 @@
                 @Html.Label("Semester")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"], string.Empty)
+                @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])
                 @Html.ValidationMessage("Semester", "Semester is mandatory")
             </div>
 
@@ -93,21 +112,21 @@
                 @Html.Label("Park")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference", new { id = "Park" })
+                @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference")
             </div>
 
             <div class="editor-label">
                 @Html.Label("Building")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference", new { id = "Building" })
+                @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference")
             </div>
 
             <div class="editor-label">
                 @Html.Label("Room")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference", new { id = "Room" })
+                @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference")
             </div>
 
             <div class="editor-label">
@@ -119,8 +138,14 @@
 
     </fieldset>
 }
-    <div id="tableDiv">
+<div id="subtitleDiv">
+
+</div>
+
+<div id="tableDiv">
         
-    </div>
+</div>
+
+<input type="button" onclick="refreshTable()" value="Click Me!" />
 
    

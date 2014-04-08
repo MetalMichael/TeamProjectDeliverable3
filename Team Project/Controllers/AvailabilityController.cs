@@ -49,6 +49,8 @@ namespace TimetableSystem.Controllers
 
             return View();
         }
+
+        //*************PARK SELECTED METHOD**************
         public string parkSelected(string parkName)
         {
             //Need to catch error here when changing back to '' on park dropdown
@@ -109,6 +111,9 @@ namespace TimetableSystem.Controllers
 
             return returnStr;
         }
+
+
+        //********BUILDING SELECTED METHOD ************
         public string buildingSelected(string buildingName)
         {
             string rooms = "";
@@ -138,6 +143,64 @@ namespace TimetableSystem.Controllers
             rooms = rooms.Substring(0, rooms.Length - 1);
 
             return rooms;
+        }
+
+        //**********GET AVAILABILITY METHOD***********
+        public string getAvailability(string parkName, string buildingName, string roomCode, int semester, int week,
+            string day, int period)
+        {
+            var max = 0; //max number of rooms
+            
+            if (roomCode != "No" && roomCode != "")
+            {
+                var roomID = (from r in systemDB.Rooms
+                              where r.RoomCode == roomCode
+                              select r.RoomID).Single();
+                max = 1;
+            }
+            else if (buildingName != "No Preference" && buildingName != "")
+            {
+                var buildingID = (from b in systemDB.Buildings
+                                  where b.BuildingName == buildingName
+                                  select b.BuildingID).Single();
+                max = (from r in systemDB.Rooms
+                       where r.BuildingID == buildingID
+                       select r).Count();
+            }
+            else if (parkName != "No Preference" && parkName != "")
+            {
+                var parkID = (from p in systemDB.Parks
+                              where p.ParkName == parkName
+                              select p.ParkID).Single();
+                var buildings = from b in systemDB.Buildings
+                                where b.ParkID == parkID
+                                select b.BuildingID;
+                foreach (int id in buildings)
+                {
+                    max += (from r in systemDB.Rooms
+                            where r.BuildingID == id
+                            select r).Count();
+                }
+            }
+            else
+            {
+                var parkIDs = from p in systemDB.Parks
+                              select p.ParkID;
+                foreach (int id in parkIDs)
+                {
+                    var buildIDs = from b in systemDB.Buildings
+                                   where b.ParkID == id
+                                   select b.BuildingID;
+                    foreach (int bid in buildIDs)
+                    {
+                        max += (from r in systemDB.Rooms
+                                where r.BuildingID == bid
+                                select r).Count();
+                    }
+                }
+            }
+
+            return max.ToString();
         }
 
     }
