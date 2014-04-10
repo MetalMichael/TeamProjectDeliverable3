@@ -48,6 +48,6 @@ namespace TimetableSystem.Models
         public int AcceptedRoom { get; set; }
 
         [ScaffoldColumn(false)]
-        public int Status { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -147,35 +147,76 @@ namespace TimetableSystem.Controllers
         }
 
         //**********GET AVAILABILITY METHOD***********
-        public string getAvailability(string parkName, string buildingName, string roomCode, int semester, int week,
-            string day, int period)
+        public string getAvailability(string parkName, string buildingName, string roomCode, int semester, int week)
         {
             int max = 0; //max number of rooms
             int available = 0; //number of available rooms
+            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+            string day, htmlClass;
+            string[] times = {"9:00-9:50", "10:00-10:50", "11:00-11:50", "12:00-12:50", "13:00-13:50", "14:00-14:50", "15:00-15:50",
+                        "16:00-16:50", "17:00-17:50"};
+            int[] periods = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int period;
+
+            string html = "<table><tr><th><p style='text-align: center'>-</p></th>";
+            for (int i = 0; i < 9; i++)
+            {
+                html += "<th>" + times[i] + "</th>";
+            }
+            html += "</tr>";
             
             if (roomCode != "No" && roomCode != "")
             {
+                max = 1;
                 var roomID = (from r in systemDB.Rooms
                               where r.RoomCode == roomCode
                               select r.RoomID).Single();
-                available = (from r in systemDB.Requests
-                               where (r.AcceptedRoom == roomID) && (r.Day == day) && (r.StartTime == period)
-                               select r).Count();
-                max = 1;
-                available = max - available;
+                for (int k = 0; k < 5; k++)
+                {
+                    html += "<tr><th>" + days[k] + "</th>";
+                    day = days[k];
+                    for (int l = 0; l < 9; l++)
+                    {
+                        period = periods[l];
+                        available = (from r in systemDB.Requests
+                                     where (r.AcceptedRoom == roomID) && (r.Day == day) && (r.StartTime == period) 
+                                     && (r.Semester == semester) && (r.Status == "Accepted")
+                                     select r).Count();
+                        available = max - available;
+                        if (available == 0) { htmlClass = "redAv"; }
+                        else if (available < (max / 2)) { htmlClass = "yellowAv"; }
+                        else { htmlClass = "greenAv"; }
+                        html += "<td class='"+htmlClass+"'>" + available + "/" + max + "</td>";
+                    }
+                    html += "</tr>";
+                }
+                html += "</table>";
             }
             else if (buildingName != "No Preference" && buildingName != "")
             {
                 var buildingID = (from b in systemDB.Buildings
                                   where b.BuildingName == buildingName
                                   select b.BuildingID).Single();
-                available = (from r in systemDB.Requests
-                             where (r.Building == buildingID) && (r.Day == day) && (r.StartTime == period)
-                             select r).Count();
                 max = (from r in systemDB.Rooms
                        where r.BuildingID == buildingID
                        select r).Count();
-                available = max - available;
+                for (int k = 0; k < 5; k++)
+                {
+                    html += "<tr><th>" + days[k] + "</th>";
+                    day = days[k];
+                    for (int l = 0; l < 9; l++)
+                    {
+                        period = periods[l];
+                        available = (from r in systemDB.Requests
+                                     where (r.Building == buildingID) && (r.Day == day) && (r.StartTime == period)
+                                     && (r.Semester == semester) && (r.Status == "Accepted")
+                                     select r).Count();
+                        available = max - available;
+                        html += "<td>" + available + "/" + max + "</td>";
+                    }
+                    html += "</tr>";
+                }
+                html += "</table>";
             }
             else if (parkName != "No Preference" && parkName != "")
             {
@@ -185,16 +226,29 @@ namespace TimetableSystem.Controllers
                 var buildings = from b in systemDB.Buildings
                                 where b.ParkID == parkID
                                 select b.BuildingID;
-                available = (from r in systemDB.Requests
-                             where (r.Park == parkID) && (r.Day == day) && (r.StartTime == period)
-                             select r).Count();
                 foreach (int id in buildings)
                 {
                     max += (from r in systemDB.Rooms
                             where r.BuildingID == id
                             select r).Count();
                 }
-                available = max - available;
+                for (int k = 0; k < 5; k++)
+                {
+                    html += "<tr><th>" + days[k] + "</th>";
+                    day = days[k];
+                    for (int l = 0; l < 9; l++)
+                    {
+                        period = periods[l];
+                        available = (from r in systemDB.Requests
+                                     where (r.Park == parkID) && (r.Day == day) && (r.StartTime == period)
+                                     && (r.Semester == semester) && (r.Status == "Accepted")
+                                     select r).Count();
+                        available = max - available;
+                        html += "<td>" + available + "/" + max + "</td>";
+                    }
+                    html += "</tr>";
+                }
+                html += "</table>";
             }
             else
             {
@@ -212,14 +266,26 @@ namespace TimetableSystem.Controllers
                                 select r).Count();
                     }
                 }
-                available = (from r in systemDB.Requests
-                             where (r.Day == day) && (r.StartTime == period)
-                             select r).Count();
-                available = max - available;
+                for (int k = 0; k < 5; k++)
+                {
+                    html += "<tr><th>" + days[k] + "</th>";
+                    day = days[k];
+                    for (int l = 0; l < 9; l++)
+                    {
+                        period = periods[l];
+                        available = (from r in systemDB.Requests
+                                     where (r.Day == day) && (r.StartTime == period)
+                                     && (r.Semester == semester) && (r.Status == "Accepted")
+                                     select r).Count();
+                        available = max - available;
+                        html += "<td>" + available + "/" + max + "</td>";
+                    }
+                    html += "</tr>";
+                }
+                html += "</table>";
             }
 
-            string result = available + "/" + max;
-            return result;
+            return html;
         }
 
     }
