@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace TimetableSystem.Models
 {
@@ -18,5 +19,12 @@ namespace TimetableSystem.Models
         public DbSet<Park> Parks { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<RequestWeek> RequestWeeks { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
+            modelBuilder.Entity<Request>().HasMany(r => r.RequestWeeks).WithOptional(a => a.Request).HasForeignKey(r => r.RequestId);
+        }
     }
 }

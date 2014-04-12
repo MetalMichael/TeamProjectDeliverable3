@@ -10,7 +10,7 @@ namespace TimetableSystem.Models
     {
         [Key]
         [ScaffoldColumn(false)]
-        public int RequestID { get; set; }
+        public int RequestId { get; set; }
 
         [Required(ErrorMessage = "Total Students is required")]
         [DisplayName("Total Students")]
@@ -19,11 +19,11 @@ namespace TimetableSystem.Models
         public string SpecialRequest { get; set; }
 
         [ScaffoldColumn(false)]
-        public int DepartmentUserID { get; set; }
+        public int DepartmentUserId { get; set; }
 
         [Required(ErrorMessage = "Module is required")]
         [DisplayName("Module")]
-        public int ModuleID { get; set; }
+        public int ModuleId { get; set; }
 
         public bool Priority { get; set; }
 
@@ -49,5 +49,7 @@ namespace TimetableSystem.Models
 
         [ScaffoldColumn(false)]
         public string Status { get; set; }
+
+        public virtual ICollection<RequestWeek> RequestWeeks { get; set; }
     }
 }
