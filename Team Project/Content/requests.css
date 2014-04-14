@@ -1,0 +1,46 @@
+		.list_grid .grid {
+			width: 98.6%;
+		}
+		.filter {
+			/*padding-left: 10px;
+			margin-right: -100px;
+			position: relative;
+			left: 7px;*/
+			width: 200px;
+		}
+		select.select {
+			width: 300px;
+		}
+		table.requests {
+			text-align: center;
+		}
+		.sticky_head {
+			position: -webkit-sticky;
+			position: -moz-sticky;
+			position: -ms-sticky;
+			position: -o-sticky;
+			top: 55px;
+/*			background: rgba(0,0,0,0.5);*/
+/*			background: #3e4c68;*/
+/*			background: rgba(62,76,104,1);*/
+			background: #212938;
+		}
+		.grid thead {
+			background: rgba(0,0,0,0.5);
+		}
+		.accepted {
+			background: #3BB878;
+		}
+		.pending {
+			background: #f88508;	/*#FBAF5C*/
+		}
+		.denied {
+			background: #F26C4F;
+		}
+		.changed {
+			background: #438CCA;	/*#7EA7D8*/	/*#8493CA*/	/*#438CCA*/	/*#5574B9*/	/*rgba(255,255,255,0.3)*/
+		}
+		button {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}

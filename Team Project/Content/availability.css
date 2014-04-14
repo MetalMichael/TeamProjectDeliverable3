@@ -1,0 +1,43 @@
+/*		.four {
+			margin-top: 110px;
+			margin-left: -539px;
+		}*/
+		#min_capacity {
+			font-style: italic;
+		}
+		.list_grid .grid {
+			width: 98.6%;
+		}
+		.grid thead, .day {
+			background: rgba(0,0,0,0.5);
+			border-bottom: 2px solid rgba(255,255,255,0.1);
+		}
+		thead td {
+			border-bottom: 2px solid rgba(255,255,255,0.1);
+		}
+		.grid thead td {
+			border-right: 2px solid rgba(255,255,255,0.1);
+		}
+		.availability {
+			text-align: center;
+		}
+		.availability td {
+			border-right: 2px solid rgba(0,0,0,0.2);
+			padding: 25px;
+		}
+		.availability td.available:hover, .availability td.some:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+		.availability .no_border {
+			border-right: none;
+		}
+		.available {
+			background: #3BB878;
+		}
+		.unavailable {
+			background: #F26C4F;
+		}
+		.some {
+			background: #f88508;	/*#FBAF5C*/
+		}
