@@ -50,6 +50,9 @@ namespace TimetableSystem.Models
         [ScaffoldColumn(false)]
         public string Status { get; set; }
 
-        public virtual ICollection<RequestWeek> RequestWeeks { get; set; }
+        public virtual List<RequestWeek> RequestWeeks { get; set; }
+
+        [ScaffoldColumn(false)]
+        public List<int> Weeks { get; set; }
     }
 }

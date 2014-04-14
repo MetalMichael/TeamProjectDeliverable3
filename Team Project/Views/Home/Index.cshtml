@@ -94,6 +94,14 @@
             @Html.ValidationMessageFor(model => model.Park)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Weeks)
+        </div>
+        <div class="editor-field">
+            <fieldset>
+                @Html.Raw(ViewBag.WeekCheckboxes)
+            </fieldset>
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>
