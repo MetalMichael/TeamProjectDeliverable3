@@ -136,7 +136,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AvailabilityHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\BPRViewModel.cs" />
@@ -152,6 +151,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\availability.css" />
+    <Content Include="Content\component.css" />
+    <Content Include="Content\form.css" />
+    <Content Include="Content\icons.css" />
+    <Content Include="Content\radio-checks.css" />
+    <Content Include="Content\requests.css" />
+    <Content Include="Content\saved.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Views\Availability\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />

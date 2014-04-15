@@ -11,7 +11,7 @@ namespace TimetableSystem.Models
         [Key, Column(Order = 0)]
         public int Week { get; set; }
         [Key, Column(Order = 1)]
-        public int? RequestId { get; set; }
+        public int RequestId { get; set; }
 
         public virtual Request Request { get; set; }
 
