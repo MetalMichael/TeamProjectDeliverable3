@@ -19,7 +19,7 @@ namespace TimetableSystem.Models
         public string SpecialRequest { get; set; }
 
         [ScaffoldColumn(false)]
-        public int DepartmentUserId { get; set; }
+        public string Department { get; set; }
 
         [Required(ErrorMessage = "Module is required")]
         [DisplayName("Module")]
@@ -33,6 +33,7 @@ namespace TimetableSystem.Models
         [ScaffoldColumn(false)]
         public int Semester { get; set; }
 
+        [Required(ErrorMessage = "Day is required")]
         public string Day { get; set; }
 
         public int StartTime { get; set; }

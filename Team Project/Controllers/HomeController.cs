@@ -20,14 +20,14 @@ namespace TimetableSystem.Controllers
 
         public ActionResult Index()
         {
-            return CreateForm();
+            return CreateForm(new Request());
         }
 
         [HttpPost]
         public ActionResult Index(Request request)
         {
             List<RequestWeek> weeks = new List<RequestWeek>();
-            if (request.Weeks != null)
+            if (request.Weeks != null && request.Weeks.Count > 0)
             {
                 foreach (var week in request.Weeks)
                 {
@@ -36,20 +36,16 @@ namespace TimetableSystem.Controllers
                 }
             }
             request.RequestWeeks = weeks;
+            request.Department = User.Identity.Name;
 
             if (ModelState.IsValid)
             {
                 db.Requests.Add(request);
                 db.SaveChanges();
-                return View();
-            }
-            else
-            {
-                Response.Write(DisplayObjectInfo(request));
-                Response.End();
+                return CreateForm(new Request());
             }
 
-            return CreateForm();
+            return CreateForm(request);
         }
 
         public static string DisplayObjectInfo(Object o)
@@ -92,7 +88,7 @@ namespace TimetableSystem.Controllers
         }
 
 
-        private ActionResult CreateForm()
+        private ActionResult CreateForm(Request request)
         {
             ViewBag.Title = "Create new Request";
 
@@ -105,7 +101,7 @@ namespace TimetableSystem.Controllers
                 ViewBag.WeekCheckboxes += "<label>" + x + " <input type='checkbox' name='Weeks' value='" + x + "' /></label>";
             }
 
-            return View();
+            return View(request);
         }
 
     }
