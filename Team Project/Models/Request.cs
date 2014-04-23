@@ -16,6 +16,7 @@ namespace TimetableSystem.Models
         [DisplayName("Total Students")]
         public int StudentsTotal { get; set; }
 
+        [DisplayName("Special Requirements")]
         public string SpecialRequest { get; set; }
 
         [ScaffoldColumn(false)]
@@ -25,7 +26,7 @@ namespace TimetableSystem.Models
         [DisplayName("Module")]
         public int ModuleId { get; set; }
 
-        public bool Priority { get; set; }
+        public byte Priority { get; set; }
 
         [ScaffoldColumn(false)]
         public int Round { get; set; }
@@ -46,6 +47,7 @@ namespace TimetableSystem.Models
 
         public int Park { get; set; }
 
+        [ScaffoldColumn(false)]
         public int AcceptedRoom { get; set; }
 
         [ScaffoldColumn(false)]

@@ -9,6 +9,6 @@
 <ul>
     @foreach (var request in Model)
     {
-        <li>@Html.ActionLink(request.ID.ToString(), "Edit", new { id = request.ID })</li>
+        <li>@Html.ActionLink(request.RequestId.ToString(), "Edit", "Home", new { id = request.RequestId }, new { target="_self" })</li>
     }
 </ul>

@@ -18,6 +18,12 @@ namespace TimetableSystem.Controllers
     {
         private TimetableSystemEntities db = new TimetableSystemEntities();
 
+        public ActionResult Edit(int id)
+        {
+            Request request = db.Requests.Find(id);
+            return CreateForm(request);
+        }
+
         public ActionResult Index()
         {
             return CreateForm(new Request());
@@ -93,7 +99,8 @@ namespace TimetableSystem.Controllers
             ViewBag.Title = "Create new Request";
 
             ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
-
+            ViewBag.Buildings = new SelectList(db.Buildings, "BuildingID", "BuildingName");
+            ViewBag.Rooms = new SelectList(db.Rooms, "RoomID", "RoomCode");
 
             ViewBag.WeekCheckboxes = "";
             for (int x = 1; x <= 13; x++)
