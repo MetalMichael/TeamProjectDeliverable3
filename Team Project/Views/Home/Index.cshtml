@@ -12,109 +12,149 @@
     @Html.ValidationSummary(true)
     <fieldset id="s1">
         <h2>Booking</h2>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Priority)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Priority)
-            @Html.ValidationMessageFor(model => model.Priority)
+        <div class="field">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Priority)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Priority)
+                @Html.ValidationMessageFor(model => model.Priority)
+            </div>
         </div>
     </fieldset>
     <fieldset id="s2">
         <h2>Module</h2>
         <div class="editor-field">
-            <input type="text" class="filter" name="priority" placeholder="Filter Module"></input>
-            @Html.DropDownList("Modules", "Select Module Title")
-            @Html.DropDownList("ModuleCodes", "Select Module Code")
-            <select>
-                <option id="presets">Select A Module to View Preset (what does this even do?)</option>
-            </select>
+            <div class="field">
+                <input type="text" class="filter" name="priority" placeholder="Filter Module"></input>
+            </div>
+            <div class="field">
+                @Html.DropDownList("Modules", "Select Module Title")
+            </div>
+            <div class="field">
+                @Html.DropDownList("ModuleCodes", "Select Module Code")
+            </div>
+            <div class="field">
+                <select>
+                    <option id="presets">Select A Module to View Preset (what does this even do?)</option>
+                </select>
+            </div>
         </div>
     </fieldset>
     <fieldset id="s3">
         <h2>Weeks</h2>
-        <button id="allWeeks" class="weeks">1-15</button>
-        <button id="defWeeks" class="weeks">1-12</button>
-        <button id="oddWeeks" class="weeks">Odd</button>
-        <button id="evenWeeks" class="weeks">Even</button>
-        <button id="clearWeeks">Clear</button>
+        <div class="field">
+            <button id="allWeeks" class="weeks">1-15</button>
+            <button id="defWeeks" class="weeks">1-12</button>
+            <button id="oddWeeks" class="weeks">Odd</button>
+            <button id="evenWeeks" class="weeks">Even</button>
+            <button id="clearWeeks">Clear</button>
+        </div>
         <div class="editor-field">
             @Html.Raw(ViewBag.WeekCheckboxes)
         </div>
     </fieldset>
     <fieldset id="s4">
         <h2>Time</h2>
-            @foreach(var day in ViewBag.Days) {
-                @Html.RadioButtonFor(model => model.Day, (String) day)
-                @day
-            }
-            @Html.DropDownList("Times", String.Empty)
-            @Html.DropDownList("Lengths", String.Empty)
+            <div class="field">
+                @foreach (var day in ViewBag.Days)
+                {
+                    @Html.RadioButtonFor(model => model.Day, (String)day)
+                    @day
+                }
+            </div>
+            <div class="field">
+                @Html.DropDownList("Times", String.Empty)
+            </div>
+            <div class="field">
+                @Html.DropDownList("Lengths", String.Empty)
+            </div>
     </fieldset>
     <fieldset id="s5">
         <h2>Room</h2>
-        <input type="radio" id="lecture" class="roomtype" checked name="roomtype"></input>
-        <label for="lecture">Lecture</label>
-        <input type="radio" id="itlab" class="roomtype" name="roomtype"></input>
-        <label for="itlab">IT Lab</label>
-        <input type="radio" id="seminar" class="roomtype" name="roomtype"></input>
-        <label for="seminar">Seminar</label>
-        <input type="radio" id="no_pref" class="roomtype" name="roomtype"></input>
-        <label for="no_pref">No Preference</label>
-        <input type="checkbox" checked id="test1" class="facility" />
-        <label class="wrap" for="test1"><span class="ui"></span>PC Station</label>
-        <input type="checkbox" id="wheel" class="facility" name="pc_stn"></input>
-        <label for="wheel"><span class="ui"></span>Wheelchair Access</label>
-        <input type="checkbox" id="pc" class="facility" name="pc_stn"></input>
-        <label for="pc"><span class="ui"></span>Induction Loop</label>
-        <input type="text" id="additional" class="filter" name="priority" placeholder="Additional Info"></input><!--Can use textarea tag to allow resize of it-->
+        <div class="field">
+            <input type="radio" id="lecture" class="roomtype" checked name="roomtype"></input>
+            <label for="lecture">Lecture</label>
+            <input type="radio" id="itlab" class="roomtype" name="roomtype"></input>
+            <label for="itlab">IT Lab</label>
+            <input type="radio" id="seminar" class="roomtype" name="roomtype"></input>
+            <label for="seminar">Seminar</label>
+            <input type="radio" id="no_pref" class="roomtype" name="roomtype"></input>
+            <label for="no_pref">No Preference</label>
+        </div>
+        <div class="field">
+            <input type="checkbox" checked id="test1" class="facility" />
+            <label class="wrap" for="test1"><span class="ui"></span>PC Station</label>
+            <input type="checkbox" id="wheel" class="facility" name="pc_stn"></input>
+            <label for="wheel"><span class="ui"></span>Wheelchair Access</label>
+        </div>
+        <div class="field">
+            <input type="checkbox" id="pc" class="facility" name="pc_stn"></input>
+            <label for="pc"><span class="ui"></span>Induction Loop</label>
+        </div>
+        <div class="field">
+            <input type="text" id="additional" class="filter" name="priority" placeholder="Additional Info"></input><!--Can use textarea tag to allow resize of it-->
+        </div>
     </fieldset>
     <fieldset id="s6">
         <h2>Room</h2>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StudentsTotal)
+        <div class="field">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.StudentsTotal)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.StudentsTotal)
+                @Html.ValidationMessageFor(model => model.StudentsTotal)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StudentsTotal)
-            @Html.ValidationMessageFor(model => model.StudentsTotal)
+        <div class="field">
+            <label for="park">No. of Rooms: </label>
+            <select id="no_rooms">
+                <option selected disabled>No. of Rooms</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+            </select>
         </div>
-        <label for="park">No. of Rooms: </label>
-        <select id="no_rooms">
-            <option selected disabled>No. of Rooms</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-        </select>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Park)
+        <div class="field">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Park)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Park)
+                @Html.ValidationMessageFor(model => model.Park)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Park)
-            @Html.ValidationMessageFor(model => model.Park)
+        <div class="field">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Building)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Buildings", String.Empty)
+                @Html.ValidationMessageFor(model => model.Building)
+            </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Building)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Buildings", String.Empty)
-            @Html.ValidationMessageFor(model => model.Building)
-        </div>
-
-        <div class="editor-label">
-            <label>Add Room</label>
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Rooms", String.Empty)
+        <div class="field">
+            <div class="editor-label">
+                <label>Add Room</label>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Rooms", String.Empty)
+            </div>
         </div>
     </fieldset>
     <fieldset id="s7">
-        <button>Save Request</button>
-        <input type="checkbox" id="similar" name="similar"></input>
-        <label for="similar">Make Similar Request</label>
-        <button>Reset</button>
-        <button>Submit</button>
+        <div class="field">
+            <button>Save Request</button>
+            <input type="checkbox" id="similar" name="similar"></input>
+            <label for="similar">Make Similar Request</label>
+        </div>
+        <div class="field">
+            <button>Reset</button>
+            <button>Submit</button>
+        </div>
     </fieldset>
 }

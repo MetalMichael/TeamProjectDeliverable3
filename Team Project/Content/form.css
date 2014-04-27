@@ -25,17 +25,32 @@ h2 {
 	padding-top: 15px;
 	padding-left: 10px;
 	height: 50px;
+	color: #fff;
 }
-table {
-	width: 100%;
-	border-collapse: collapse;
+fieldset 
+{
+    width: 31%;
+    float: left;
+    margin: 10px;
+    border: none;
+    background-color: #3e4c68;
+    padding: 0;
 }
-tr, td, select {
-	height: 50px;
-	padding-left: 10px;
+.field
+{
+    height: 50px;
+    padding-left: 10px;
 }
-tr.bottom {
-	border-bottom: 2px solid rgba(0,0,0,0.2);
+.field:not(:last-child) 
+{
+    border-bottom: 2px solid rgba(0,0,0,0.2)
+}
+.editor-field 
+{
+}
+.editor-label 
+{
+    
 }
 .filter{
 	width: 100%;
