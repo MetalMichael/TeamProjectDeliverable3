@@ -79,7 +79,14 @@
         var building = $('#Building').val();
         var room = $('#Room').val().split(' ')[0];
         var semester = $('#Semester').val();
-        var week = $('#Week').val();
+        var week = "";
+        for(var i=1;i<16;i++){
+            var cb = "#Week" + i;
+            if ($(cb).is(':checked')) {
+                week += i + ";";
+            }
+        }
+        week = week.substr(0, week.length - 1);
         var capacity = $('#CapacityAmount').val();
         var roomType = $('#Type').val();
 
@@ -100,9 +107,16 @@
         $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType
         }, function (data) {
-            //alert(data);
-            $('#tableDiv').html(data);
+            alert(data);
+            //$('#tableDiv').html(data);
         });
+    }
+
+    function checkAll() {
+        for(var i=1;i<16;i++){
+            var cb = '#Week' + i;
+            $(cb).prop('checked',true);
+        }
     }
 
     
@@ -148,12 +162,52 @@
                 @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference")
             </div>
 
-            <div class="editor-label">
-                @Html.Label("Week")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("Week", (IEnumerable<SelectListItem>)ViewData["Week"])
-            </div>
+            @Html.Label("Week1")
+            @Html.CheckBox("Week1",true)
+
+            @Html.Label("Week2")
+            @Html.CheckBox("Week2", true)
+
+            @Html.Label("Week3")
+            @Html.CheckBox("Week3", true)
+
+            @Html.Label("Week4")
+            @Html.CheckBox("Week4", true)
+
+            @Html.Label("Week5")
+            @Html.CheckBox("Week5", true)
+
+            @Html.Label("Week6")
+            @Html.CheckBox("Week6", true)
+
+            @Html.Label("Week7")
+            @Html.CheckBox("Week7", true)
+
+            @Html.Label("Week8")
+            @Html.CheckBox("Week8", true)
+
+            @Html.Label("Week9")
+            @Html.CheckBox("Week9", true)
+
+            @Html.Label("Week10")
+            @Html.CheckBox("Week10", true)
+
+            @Html.Label("Week11")
+            @Html.CheckBox("Week11", true)
+
+            @Html.Label("Week12")
+            @Html.CheckBox("Week12", true)
+
+            @Html.Label("Week13")
+            @Html.CheckBox("Week13")
+
+            @Html.Label("Week14")
+            @Html.CheckBox("Week14")
+
+            @Html.Label("Week15")
+            @Html.CheckBox("Week15")
+
+            <input type="button" onclick="checkAll()" value="All" />
 
             @Html.Label("Type")
             @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
