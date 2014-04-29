@@ -78,6 +78,7 @@
         var semester = $('#Semester').val();
         var week = $('#Week').val();
         var capacity = $('#CapacityAmount').val();
+        var roomType = $('#Type').val();
 
         var titleHtml = "<h2>Showing availability for ";
 
@@ -94,7 +95,7 @@
 
         //GET call to "getAvailability" function, which returns corresponding html string to print table
         $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
-            semester: semester, week: week, capacity: capacity
+            semester: semester, week: week, capacity: capacity, roomType: roomType
         }, function (data) {
             $('#tableDiv').html(data);
         });
@@ -150,6 +151,8 @@
                 @Html.DropDownList("Week", (IEnumerable<SelectListItem>)ViewData["Week"])
             </div>
 
+            @Html.Label("Type")
+            @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
 
             <div class="editor-label">
                 @Html.Label("Capacity")

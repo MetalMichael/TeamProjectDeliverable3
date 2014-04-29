@@ -44,9 +44,7 @@ namespace TimetableSystem.Controllers
             SelectList weekList = new SelectList(week);
             ViewBag.Week = weekList;
 
-            var parksQry = from p in systemDB.Parks
-                           select p;
-            ViewBag.Temp = parksQry;
+            ViewBag.Type = new SelectList(new string[] { "Lecture", "Seminar", "Lab" });
 
             return View();
         }
@@ -147,7 +145,8 @@ namespace TimetableSystem.Controllers
         }
 
         //**********GET AVAILABILITY METHOD***********
-        public string getAvailability(string parkName, string buildingName, string roomCode, int semester, int week, int capacity)
+        public string getAvailability(string parkName, string buildingName, string roomCode, int semester, int week, 
+            int capacity, string roomType)
         {
             int max = 0; //max number of rooms
             int available = 0; //number of available rooms
@@ -156,7 +155,20 @@ namespace TimetableSystem.Controllers
             string[] times = {"9:00-9:50", "10:00-10:50", "11:00-11:50", "12:00-12:50", "13:00-13:50", "14:00-14:50", "15:00-15:50",
                         "16:00-16:50", "17:00-17:50"};
             int[] periods = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            int period;
+            int period, roomTypeID;
+
+            if (roomType == "Lab")
+                roomTypeID = 3;
+            else if (roomType == "Seminar")
+                roomTypeID = 2;
+            else if (roomType == "Lecture")
+                roomTypeID = 1;
+            else
+                roomTypeID = 0;
+
+            var roomTypeIDs = from r in systemDB.RoomTypes
+                                where r.RoomTypeID == roomTypeID
+                                select r.RoomID;
 
             string html = "<table><tr><th><p style='text-align: center'>-</p></th>";
             for (int i = 0; i < 9; i++)
@@ -193,7 +205,7 @@ namespace TimetableSystem.Controllers
                         var rooms = from r in systemDB.Requests
                                      where (r.AcceptedRoom == roomID) && (r.Day == day) && (r.StartTime == period) 
                                      && (r.Semester == semester) && (r.Status == "Accepted") 
-                                     && (roomsCapacity.Contains(r.AcceptedRoom))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(roomID))
                                      select r.RequestId;
                         
                         available = (rooms.Intersect(roomsWeeks)).Count();
