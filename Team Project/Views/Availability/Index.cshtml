@@ -50,6 +50,9 @@
         $('#Week').change(function () {
             refreshTable();
         });
+        $('#Type').change(function () {
+            refreshTable();
+        });
         $('#slider-range-max').change(function () {
             refreshTable();
         });
@@ -97,6 +100,7 @@
         $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType
         }, function (data) {
+            //alert(data);
             $('#tableDiv').html(data);
         });
     }

@@ -181,19 +181,30 @@ namespace TimetableSystem.Controllers
                              where (w.Week == week)
                              select w.RequestId;
             
-            
             if (roomCode != "No" && roomCode != "")
             {
-                
+                //finding roomID from roomCode given
                 var roomID = (from r in systemDB.Rooms
                               where r.RoomCode == roomCode
                               select r.RoomID).Single();
-                max = (from r in systemDB.Rooms
-                       where (r.RoomID == roomID) && (r.Capacity >= capacity)
-                       select r).Count();
+                //finding all rooms with large enough capacity.
                 var roomsCapacity = from c in systemDB.Rooms
                                     where (c.Capacity >= capacity)
                                     select c.RoomID;
+
+                if (roomTypeID != 0) //if room type is given, find max rooms inc room type
+                {
+                    max = (from r in systemDB.Rooms
+                           where (r.RoomID == roomID) && (r.Capacity >= capacity) && (roomTypeIDs.Contains(r.RoomID))
+                           select r).Count();
+                }
+                else // if room type not given, find max rooms from room ID and capacity.
+                {
+                    max = (from r in systemDB.Rooms
+                           where (r.RoomID == roomID) && (r.Capacity >= capacity)
+                           select r).Count();
+                }
+                
                 
                 for (int k = 0; k < 5; k++)
                 {
@@ -205,7 +216,7 @@ namespace TimetableSystem.Controllers
                         var rooms = from r in systemDB.Requests
                                      where (r.AcceptedRoom == roomID) && (r.Day == day) && (r.StartTime == period) 
                                      && (r.Semester == semester) && (r.Status == "Accepted") 
-                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(roomID))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
                                      select r.RequestId;
                         
                         available = (rooms.Intersect(roomsWeeks)).Count();
@@ -228,9 +239,18 @@ namespace TimetableSystem.Controllers
                 var roomsCapacity = from c in systemDB.Rooms
                                     where (c.Capacity >= capacity) && (c.BuildingID == buildingID)
                                     select c.RoomID;
-                max = (from r in systemDB.Rooms
-                       where (r.BuildingID == buildingID) && (r.Capacity >= capacity)
-                       select r).Count();
+                if (roomTypeID != 0) //if room type is given, find max rooms inc room type
+                {
+                    max = (from r in systemDB.Rooms
+                           where (r.BuildingID == buildingID) && (r.Capacity >= capacity) && (roomTypeIDs.Contains(r.RoomID))
+                           select r).Count();
+                }
+                else // if room type not given, find max rooms from building ID and capacity.
+                {
+                    max = (from r in systemDB.Rooms
+                           where (r.BuildingID == buildingID) && (r.Capacity >= capacity)
+                           select r).Count();
+                }
                 for (int k = 0; k < 5; k++)
                 {
                     html += "<tr><th>" + days[k] + "</th>";
@@ -241,7 +261,7 @@ namespace TimetableSystem.Controllers
                         var buildings = from r in systemDB.Requests
                                      where (r.Building == buildingID) && (r.Day == day) && (r.StartTime == period)
                                      && (r.Semester == semester) && (r.Status == "Accepted")
-                                     && (roomsCapacity.Contains(r.AcceptedRoom))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
                                      select r.RequestId;
                         var buildingWeeks = from w in systemDB.RequestWeeks
                                          where (w.Week == week)
@@ -270,9 +290,18 @@ namespace TimetableSystem.Controllers
                                     select c.RoomID;
                 foreach (int id in buildings)
                 {
-                    max += (from r in systemDB.Rooms
-                            where (r.BuildingID == id) && (r.Capacity >= capacity)
-                            select r).Count();
+                    if (roomTypeID != 0) //if room type is given, find max rooms inc room type
+                    {
+                        max += (from r in systemDB.Rooms
+                               where (r.BuildingID == id) && (r.Capacity >= capacity) && (roomTypeIDs.Contains(r.RoomID))
+                               select r).Count();
+                    }
+                    else // if room type not given, find max rooms from building ID and capacity.
+                    {
+                        max += (from r in systemDB.Rooms
+                               where (r.BuildingID == id) && (r.Capacity >= capacity)
+                               select r).Count();
+                    }
                 }
                 for (int k = 0; k < 5; k++)
                 {
@@ -284,7 +313,7 @@ namespace TimetableSystem.Controllers
                         var parks = from r in systemDB.Requests
                                      where (r.Park == parkID) && (r.Day == day) && (r.StartTime == period)
                                      && (r.Semester == semester) && (r.Status == "Accepted")
-                                     && (roomsCapacity.Contains(r.AcceptedRoom))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
                                      select r.RequestId;
                         var parksWeeks = from w in systemDB.RequestWeeks
                                             where (w.Week == week)
@@ -314,9 +343,18 @@ namespace TimetableSystem.Controllers
                                    select b.BuildingID;
                     foreach (int bid in buildIDs)
                     {
-                        max += (from r in systemDB.Rooms
-                                where (r.BuildingID == bid) && (r.Capacity >= capacity)
-                                select r).Count();
+                        if (roomTypeID != 0) //if room type is given, find max rooms inc room type
+                        {
+                            max += (from r in systemDB.Rooms
+                                    where (r.BuildingID == bid) && (r.Capacity >= capacity) && (roomTypeIDs.Contains(r.RoomID))
+                                    select r).Count();
+                        }
+                        else // if room type not given, find max rooms from building ID and capacity.
+                        {
+                            max += (from r in systemDB.Rooms
+                                    where (r.BuildingID == bid) && (r.Capacity >= capacity)
+                                    select r).Count();
+                        }
                     }
                 }
                 for (int k = 0; k < 5; k++)
@@ -329,7 +367,7 @@ namespace TimetableSystem.Controllers
                         var allReqs = from r in systemDB.Requests
                                      where (r.Day == day) && (r.StartTime == period)
                                      && (r.Semester == semester) && (r.Status == "Accepted")
-                                     && (roomsCapacity.Contains(r.AcceptedRoom))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
                                      select r.RequestId;
                         var weeks = from w in systemDB.RequestWeeks
                                             where (w.Week == week)
@@ -345,7 +383,7 @@ namespace TimetableSystem.Controllers
                 }
                 html += "</table>";
             }
-
+            //return 0;
             return html;
         }
 
