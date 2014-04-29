@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.tick, .cross {
+	display: none;
+}
+
 :before,
 :after {
   content: '';

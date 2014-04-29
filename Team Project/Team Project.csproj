@@ -153,6 +153,7 @@
   <ItemGroup>
     <Content Include="Content\availability.css" />
     <Content Include="Content\component.css" />
+    <Content Include="Content\font\fontawesome.svg" />
     <Content Include="Content\form.css" />
     <Content Include="Content\icons.css" />
     <Content Include="Content\radio-checks.css" />
@@ -175,9 +176,14 @@
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Index-old.cshtml" />
+    <None Include="Content\font\fontawesome.eot" />
+    <None Include="Content\font\fontawesome.ttf" />
+    <None Include="Content\font\fontawesome.woff" />
+    <None Include="Content\font\readme.md" />
     <None Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Views\View\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
