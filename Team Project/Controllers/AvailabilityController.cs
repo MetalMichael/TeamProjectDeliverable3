@@ -189,14 +189,14 @@ namespace TimetableSystem.Controllers
                              select w.RequestId).Distinct();
             //GETTING A LIST OF REQUESTS IDs THAT ARE INHIBITING THE CURRENT WEEK SELECTION.
             //NOW NEED TO USE THIS TO INTERSECT WITH THE AVAILABLE ROOM LISTS.
-
-            string x = "";
+            /*string x = "";
             foreach (int i in roomsWeeks)
             {
-                x += i + ";";
+                x += i;
+                x += ";";
             }
-            return x;
-            
+            return x;*/
+
             if (roomCode != "No" && roomCode != "")
             {
                 //finding roomID from roomCode given
@@ -221,7 +221,6 @@ namespace TimetableSystem.Controllers
                            select r).Count();
                 }
                 
-                
                 for (int k = 0; k < 5; k++)
                 {
                     html += "<tr><th>" + days[k] + "</th>";
@@ -230,14 +229,18 @@ namespace TimetableSystem.Controllers
                     {
                         period = periods[l];
                         var rooms = from r in systemDB.Requests
-                                     where (r.AcceptedRoom == roomID) && (r.Day == day) && (r.StartTime == period) 
-                                     && (r.Semester == semester) && (r.Status == "Accepted") 
-                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
-                                     select r.RequestId;
-                        
-                        //available = (rooms.Intersect(roomsWeeks)).Count();
+                                    where (r.AcceptedRoom == roomID) && (r.Day == day) && (r.StartTime == period)
+                                    && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
+                                    && (roomsCapacity.Contains(r.AcceptedRoom))
+                                    select r;
+                        if (roomTypeID != 0)
+                        {
+                            rooms = from r in rooms
+                                    where (roomTypeIDs.Contains(r.AcceptedRoom))
+                                    select r;
+                        }
 
-                        available = max - available;
+                        available = max - rooms.Count();
                         if (available == 0) { htmlClass = "redAv"; }
                         else if (available < (max / 2)) { htmlClass = "yellowAv"; }
                         else { htmlClass = "greenAv"; }
@@ -274,13 +277,19 @@ namespace TimetableSystem.Controllers
                     for (int l = 0; l < 9; l++)
                     {
                         period = periods[l];
-                        var buildings = from r in systemDB.Requests
+                        var rooms = from r in systemDB.Requests
                                      where (r.Building == buildingID) && (r.Day == day) && (r.StartTime == period)
-                                     && (r.Semester == semester) && (r.Status == "Accepted")
-                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
-                                     select r.RequestId;
-                        //available = (buildings.Intersect(buildingWeeks)).Count();
-                        available = max - available;
+                                     && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom))
+                                     select r;
+
+                        if (roomTypeID != 0)
+                        {
+                            rooms = from r in rooms
+                                    where (roomTypeIDs.Contains(r.AcceptedRoom))
+                                    select r;
+                        }
+                        available = max - rooms.Count();
                         if (available == 0) { htmlClass = "redAv"; }
                         else if (available < (max / 2)) { htmlClass = "yellowAv"; }
                         else { htmlClass = "greenAv"; }
@@ -323,14 +332,19 @@ namespace TimetableSystem.Controllers
                     for (int l = 0; l < 9; l++)
                     {
                         period = periods[l];
-                        var parks = from r in systemDB.Requests
+                        var rooms = from r in systemDB.Requests
                                      where (r.Park == parkID) && (r.Day == day) && (r.StartTime == period)
-                                     && (r.Semester == semester) && (r.Status == "Accepted")
-                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
-                                     select r.RequestId;
+                                     && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom))
+                                     select r;
 
-                        //available = (parks.Intersect(parksWeeks)).Count();
-                        available = max - available;
+                        if (roomTypeID != 0)
+                        {
+                            rooms = from r in rooms
+                                    where (roomTypeIDs.Contains(r.AcceptedRoom))
+                                    select r;
+                        }
+                        available = max - rooms.Count();
                         if (available == 0) { htmlClass = "redAv"; }
                         else if (available < (max / 2)) { htmlClass = "yellowAv"; }
                         else { htmlClass = "greenAv"; }
@@ -375,16 +389,19 @@ namespace TimetableSystem.Controllers
                     for (int l = 0; l < 9; l++)
                     {
                         period = periods[l];
-                        var allReqs = from r in systemDB.Requests
+                        var rooms = from r in systemDB.Requests
                                      where (r.Day == day) && (r.StartTime == period)
-                                     && (r.Semester == semester) && (r.Status == "Accepted")
-                                     && (roomsCapacity.Contains(r.AcceptedRoom)) && (roomTypeIDs.Contains(r.AcceptedRoom))
-                                     select r.RequestId;
-                        /*var weeks = from w in systemDB.RequestWeeks
-                                            where (w.Week == week)
-                                            select w.RequestId;*/
-                        //available = (allReqs.Intersect(weeks)).Count();
-                        available = max - available;
+                                     && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
+                                     && (roomsCapacity.Contains(r.AcceptedRoom))
+                                     select r;
+
+                        if (roomTypeID != 0)
+                        {
+                            rooms = from r in rooms
+                                    where (roomTypeIDs.Contains(r.AcceptedRoom))
+                                    select r;
+                        }
+                        available = max - rooms.Count();
                         if (available == 0) { htmlClass = "redAv"; }
                         else if (available < (max / 2)) { htmlClass = "yellowAv"; }
                         else { htmlClass = "greenAv"; }
@@ -395,7 +412,7 @@ namespace TimetableSystem.Controllers
                 html += "</table>";
             }
             //return 0;
-            //return html;
+            return html;
         }
 
     }

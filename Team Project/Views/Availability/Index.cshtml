@@ -107,8 +107,8 @@
         $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType
         }, function (data) {
-            alert(data);
-            //$('#tableDiv').html(data);
+            //alert(data);
+            $('#tableDiv').html(data);
         });
     }
 
@@ -131,9 +131,6 @@
 {
     @Html.ValidationSummary(true)
     
-    <fieldset>
-        <legend>Filters</legend>
-
             <div class="editor-label">
                 @Html.Label("Semester")
             </div>
@@ -224,7 +221,6 @@
                 </tr>
             </table>
 
-    </fieldset>
 }
 <div id="subtitleDiv">
 
