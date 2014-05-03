@@ -170,12 +170,12 @@ namespace TimetableSystem.Controllers
                                 where r.RoomTypeID == roomTypeID
                                 select r.RoomID;
 
-            string html = "<table><tr><th><p style='text-align: center'>-</p></th>";
+            string html = "<table class='availability'><thead><tr><th><p style='text-align: center'>-</p></th>";
             for (int i = 0; i < 9; i++)
             {
                 html += "<th>" + times[i] + "</th>";
             }
-            html += "</tr>";
+            html += "</tr></thead>";
 
             string[] temp = week.Split(';');
             List<int> weeks = new List<int>();
@@ -223,7 +223,7 @@ namespace TimetableSystem.Controllers
                 
                 for (int k = 0; k < 5; k++)
                 {
-                    html += "<tr><th>" + days[k] + "</th>";
+                    html += "<tr class='bottom'><th class='day'>" + days[k] + "</th>";
                     day = days[k];
                     for (int l = 0; l < 9; l++)
                     {
@@ -241,10 +241,10 @@ namespace TimetableSystem.Controllers
                         }
 
                         available = max - rooms.Count();
-                        if (available == 0) { htmlClass = "redAv"; }
-                        else if (available < (max / 2)) { htmlClass = "yellowAv"; }
-                        else { htmlClass = "greenAv"; }
-                        html += "<td class='"+htmlClass+"'>" + available + "/" + max + "</td>";
+                        if (available == 0) { htmlClass = "unavailable"; }
+                        else if (available < (max / 2)) { htmlClass = "some"; }
+                        else { htmlClass = "available"; }
+                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -272,7 +272,7 @@ namespace TimetableSystem.Controllers
                 }
                 for (int k = 0; k < 5; k++)
                 {
-                    html += "<tr><th>" + days[k] + "</th>";
+                    html += "<tr class='bottom'><th class='day'>" + days[k] + "</th>";
                     day = days[k];
                     for (int l = 0; l < 9; l++)
                     {
@@ -290,10 +290,10 @@ namespace TimetableSystem.Controllers
                                     select r;
                         }
                         available = max - rooms.Count();
-                        if (available == 0) { htmlClass = "redAv"; }
-                        else if (available < (max / 2)) { htmlClass = "yellowAv"; }
-                        else { htmlClass = "greenAv"; }
-                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + "</td>";
+                        if (available == 0) { htmlClass = "unavailable"; }
+                        else if (available < (max / 2)) { htmlClass = "some"; }
+                        else { htmlClass = "available"; }
+                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -327,7 +327,7 @@ namespace TimetableSystem.Controllers
                 }
                 for (int k = 0; k < 5; k++)
                 {
-                    html += "<tr><th>" + days[k] + "</th>";
+                    html += "<tr class='bottom'><th class='day'>" + days[k] + "</th>";
                     day = days[k];
                     for (int l = 0; l < 9; l++)
                     {
@@ -345,10 +345,10 @@ namespace TimetableSystem.Controllers
                                     select r;
                         }
                         available = max - rooms.Count();
-                        if (available == 0) { htmlClass = "redAv"; }
-                        else if (available < (max / 2)) { htmlClass = "yellowAv"; }
-                        else { htmlClass = "greenAv"; }
-                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + "</td>";
+                        if (available == 0) { htmlClass = "unavailable"; }
+                        else if (available < (max / 2)) { htmlClass = "some"; }
+                        else { htmlClass = "available"; }
+                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -384,7 +384,7 @@ namespace TimetableSystem.Controllers
                 }
                 for (int k = 0; k < 5; k++)
                 {
-                    html += "<tr><th>" + days[k] + "</th>";
+                    html += "<tr class='bottom'><th class='day'>" + days[k] + "</th>";
                     day = days[k];
                     for (int l = 0; l < 9; l++)
                     {
@@ -402,10 +402,10 @@ namespace TimetableSystem.Controllers
                                     select r;
                         }
                         available = max - rooms.Count();
-                        if (available == 0) { htmlClass = "redAv"; }
-                        else if (available < (max / 2)) { htmlClass = "yellowAv"; }
-                        else { htmlClass = "greenAv"; }
-                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + "</td>";
+                        if (available == 0) { htmlClass = "unavailable"; }
+                        else if (available < (max / 2)) { htmlClass = "some"; }
+                        else { htmlClass = "available"; }
+                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }

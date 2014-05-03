@@ -41,3 +41,7 @@
 		.some {
 			background: #f88508;	/*#FBAF5C*/
 		}
+		div#inner_check 
+		{
+		    width: 100%;
+		}
