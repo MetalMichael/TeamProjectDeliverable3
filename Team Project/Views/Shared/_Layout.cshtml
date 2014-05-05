@@ -5,7 +5,7 @@
 	    <title>Timetabling System - @ViewBag.Title</title>
 <<<<<<< HEAD
 <<<<<<< HEAD
-    	//<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    	@*<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
 =======
     	@*<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
 >>>>>>> FETCH_HEAD
@@ -16,6 +16,38 @@
     	<script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")" type="text/javascript"></script>
 	    <script src="@Url.Content("~/Scripts/modernizr-2.6.2.js")" type="text/javascript"></script>
     	<script src="@Url.Content("~/Scripts/jquery-ui-1.9.2.min.js")" type="text/javascript"></script>
+		<script>
+			$(function() {
+				var loc = window.location.href; // returns the full URL
+				if(/.test(loc)) {
+					$('#requests').addClass('active');
+				}
+			});
+			$(function() {
+				var loc = window.location.href; // returns the full URL
+				if(/View/.test(loc)) {
+					$('#requests').addClass('active');
+				}
+			});
+			$(function() {
+				var loc = window.location.href; // returns the full URL
+				if(/Save/.test(loc)) {
+					$('#save').addClass('active');
+				}
+			});
+			$(function() {
+				var loc = window.location.href; // returns the full URL
+				if(/Module/.test(loc)) {
+					$('#modules').addClass('active');
+				}
+			});
+			$(function() {
+				var loc = window.location.href; // returns the full URL
+				if(/Availability/.test(loc)) {
+					$('#availability').addClass('active');
+				}
+			});
+		</script>
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -50,11 +82,11 @@
 							<p class="round"><p>
 						</li>
 						<div class="menu" style="float: right;">
-							<li>@Html.ActionLink("Home", "Index", "Home")</li>
-							<li>@Html.ActionLink("View", "Index", "View")</li>
-							<li>@Html.ActionLink("Save", "Index", "Save")</li>
-							<li>@Html.ActionLink("Module", "Index", "Module")</li>
-							<li>@Html.ActionLink("Availability", "Index", "Availability")</li>
+							<li>@Html.ActionLink("Request Form", "Index", "Home", new { id = requests}, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Requests", "Index", "View", new { id = requests}, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Save", "Index", "Save", new { id = save}, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Modules", "Index", "Module", new { id = modules}, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Room Availability", "Index", "Availability", new { id = availability}, new { @class = "menu" })</li>
 							<li>@Html.ActionLink("Logout", "Index", "Logout")</li>
 						</div>
 					</ul>
