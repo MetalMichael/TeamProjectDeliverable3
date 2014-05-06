@@ -46,6 +46,7 @@ fieldset
 {
     border-bottom: 2px solid rgba(0,0,0,0.2)
 }
+/*editor-label label and editor-field input is messing up the checkboxes for weeks, perhaps add class to all others, and the css-so e.g. editor-label label.label... whilst checkboxes css is causing it to not display*/
 .editor-label label{
 	float: left;
 	width: 50%;
@@ -126,6 +127,12 @@ button {
 	width: 90px;
 	border-radius: 3px;
 	cursor: pointer;
+}
+button#clearWeeks, button#reset {
+	background: rgba(255,0,0,0.6);
+}
+button#submit {
+	background: rgba(0,210,0,0.6);
 }
 #additional {
 /*	resize: vertical;

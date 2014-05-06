@@ -24,7 +24,15 @@
 		<link href="@Url.Content("~/Content/radio-checks.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/icons.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/form.css")" rel="stylesheet" type="text/css" />
+		
+		<script>
+			var currentURL = window.location.pathname.toString();
+			console.log(currentURL);
 
+			if (currentURL = '/team09web/View/') { 
+				$('a#requests').addClass('active')
+			}
+		</script>
 	</head>
 	<body>
 		<div class="container">
@@ -36,12 +44,18 @@
 							<p class="round"><p>
 						</li>
 						<div class="menu" style="float: right;">
-							<li>@Html.ActionLink("Request Form", "Index", "Home", null, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Requests", "Index", "View", null, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Save", "Index", "Save", null, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Modules", "Index", "Module", null, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Room Availability", "Index", "Availability", null, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Logout", "Index", "Logout", null, new { @class = "menu" })</li>
+							@*<li>@Html.ActionLink("Request Form", "Index", "Home", null, new { @class = "menu" })</li>*@
+							<li><a id="form" class="menu" href="@Url.Action("Index", "Home")"><span class="fa fa-menu fa-file-text-o"></span>Request Form</a></li>
+							@*<li>@Html.ActionLink("Requests", "Index", "View", null, new { @class = "menu" })</li>*@
+							<li><a id="requests" class="menu" href="@Url.Action("Index", "View")"><span class="fa fa-menu fa-eye"></span>Requests</a></li>
+							@*<li>@Html.ActionLink("Save", "Index", "Save", null, new { @class = "menu" })</li>*@
+							<li><a id="saved" class="menu" href="@Url.Action("Index", "Save")"><span class="fa fa-menu fa-save"></span>Save</a></li>
+							@*<li>@Html.ActionLink("Modules", "Index", "Module", null, new { @class = "menu" })</li>*@
+							<li><a id="modules" class="menu" href="@Url.Action("Index", "Module")"><span class="fa fa-menu fa-bookmark-o"></span>Modules</a></li>
+							@*<li>@Html.ActionLink("Room Availability", "Index", "Availability", null, new { @class = "menu" })</li>*@
+							<li><a id="availability" class="menu" href="@Url.Action("Index", "Availability")"><span class="fa fa-menu fa-table"></span>Room Availability</a></li>
+							@*<li>@Html.ActionLink("Logout", "Index", "Logout", null, new { @class = "menu" })</li>*@
+							<li><a id="logout" class="menu" href="@Url.Action("Index", "Logout")"><span class="fa fa-menu fa-sign-out"></span>Logout</a></li>
 						</div>
 					</ul>
 				</nav>

@@ -75,6 +75,9 @@ nav ul a.menu, nav ul a.title, nav ul p.title {
   position: relative;
   z-index: 1;
 }
+nav a.menu {
+	padding-left: 30px;
+}
 /*nav ul a.title:before, nav ul p.title:before {
   z-index: -1;
   top: -100%;
