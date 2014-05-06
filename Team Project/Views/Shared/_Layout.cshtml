@@ -3,60 +3,19 @@
 	<head>
     	<meta charset="utf-8" />
 	    <title>Timetabling System - @ViewBag.Title</title>
-<<<<<<< HEAD
-<<<<<<< HEAD
+	
     	@*<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
-=======
+
     	@*<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
->>>>>>> FETCH_HEAD
-=======
+
     	@*<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
->>>>>>> FETCH_HEAD
+
 	    <link href="@Url.Content("~/Content/themes/base/jquery-ui-1.9.2.css")" rel="Stylesheet" type="text/css" />
     	<script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")" type="text/javascript"></script>
 	    <script src="@Url.Content("~/Scripts/modernizr-2.6.2.js")" type="text/javascript"></script>
     	<script src="@Url.Content("~/Scripts/jquery-ui-1.9.2.min.js")" type="text/javascript"></script>
-		<script>
-			$(function() {
-				var loc = window.location.href; // returns the full URL
-				if(/.test(loc)) {
-					$('#requests').addClass('active');
-				}
-			});
-			$(function() {
-				var loc = window.location.href; // returns the full URL
-				if(/View/.test(loc)) {
-					$('#requests').addClass('active');
-				}
-			});
-			$(function() {
-				var loc = window.location.href; // returns the full URL
-				if(/Save/.test(loc)) {
-					$('#save').addClass('active');
-				}
-			});
-			$(function() {
-				var loc = window.location.href; // returns the full URL
-				if(/Module/.test(loc)) {
-					$('#modules').addClass('active');
-				}
-			});
-			$(function() {
-				var loc = window.location.href; // returns the full URL
-				if(/Availability/.test(loc)) {
-					$('#availability').addClass('active');
-				}
-			});
-		</script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> FETCH_HEAD
         
 		<link href="@Url.Content("~/Content/form.css")" rel="stylesheet" type="text/css" />
->>>>>>> FETCH_HEAD
         <link href="@Url.Content("~/Content/requests.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/saved.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/availability.css")" rel="stylesheet" type="text/css" />
@@ -64,13 +23,8 @@
 		<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/radio-checks.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/icons.css")" rel="stylesheet" type="text/css" />
-<<<<<<< HEAD
-<<<<<<< HEAD
 		<link href="@Url.Content("~/Content/form.css")" rel="stylesheet" type="text/css" />
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
+
 	</head>
 	<body>
 		<div class="container">
@@ -82,12 +36,12 @@
 							<p class="round"><p>
 						</li>
 						<div class="menu" style="float: right;">
-							<li>@Html.ActionLink("Request Form", "Index", "Home", new { id = requests}, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Requests", "Index", "View", new { id = requests}, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Save", "Index", "Save", new { id = save}, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Modules", "Index", "Module", new { id = modules}, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Room Availability", "Index", "Availability", new { id = availability}, new { @class = "menu" })</li>
-							<li>@Html.ActionLink("Logout", "Index", "Logout")</li>
+							<li>@Html.ActionLink("Request Form", "Index", "Home", null, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Requests", "Index", "View", null, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Save", "Index", "Save", null, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Modules", "Index", "Module", null, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Room Availability", "Index", "Availability", null, new { @class = "menu" })</li>
+							<li>@Html.ActionLink("Logout", "Index", "Logout", null, new { @class = "menu" })</li>
 						</div>
 					</ul>
 				</nav>

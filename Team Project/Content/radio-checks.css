@@ -115,7 +115,7 @@
 }
 .facility:not(:checked) + label .ui:before {
 	content: "no";
-	color: #3e4c68'
+	color: #3e4c68;
 	left: 32px;
 }
 .facility:checked + label .ui:after {
