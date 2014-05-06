@@ -129,34 +129,28 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-    	<div class="field">
+    
             <div class="editor-label">
                 @Html.Label("Semester")
             </div>
             <div class="editor-field">
                 @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])
             </div>
-		</div>
-		
-		<div class="field">
+
             <div class="editor-label">
                 @Html.Label("Park")
             </div>
             <div class="editor-field">
                 @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference")
             </div>
-		</div>
-		
-		<div class="field">
+
             <div class="editor-label">
                 @Html.Label("Building")
             </div>
             <div class="editor-field">
                 @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference")
             </div>
-		</div>
-		
-		<div class="field">
+
             <div class="editor-label">
                 @Html.Label("Room")
             </div>
@@ -213,9 +207,7 @@
 
             @Html.Label("Type")
             @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
-		</div>
-		
-		<div class="field">
+
             <div class="editor-label">
                 @Html.Label("Capacity")
             </div>
@@ -227,7 +219,6 @@
                     </td>
                 </tr>
             </table>
-		</div>
 
 }
 <div id="subtitleDiv">
