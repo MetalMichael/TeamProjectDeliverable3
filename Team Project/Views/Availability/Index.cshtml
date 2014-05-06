@@ -53,6 +53,9 @@
         $('#Type').change(function () {
             refreshTable();
         });
+        $('button').change(function () {
+            refreshTable();
+        });
         $('#slider-range-max').change(function () {
             refreshTable();
         });
@@ -125,110 +128,7 @@
 
 @*Park, Building, Room, Week*@
 @{ string[] filters = {"Semester", "Park", "Building", "Room", "Week"};}
-@*
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-    
-            <div class="editor-label">
-                @Html.Label("Semester")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])
-            </div>
 
-            <div class="editor-label">
-                @Html.Label("Park")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference")
-            </div>
-
-            <div class="editor-label">
-                @Html.Label("Building")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference")
-            </div>
-
-            <div class="editor-label">
-                @Html.Label("Room")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference")
-            </div>
-
-            @Html.Label("Week1")
-            @Html.CheckBox("Week1",true)
-
-            @Html.Label("Week2")
-            @Html.CheckBox("Week2", true)
-
-            @Html.Label("Week3")
-            @Html.CheckBox("Week3", true)
-
-            @Html.Label("Week4")
-            @Html.CheckBox("Week4", true)
-
-            @Html.Label("Week5")
-            @Html.CheckBox("Week5", true)
-
-            @Html.Label("Week6")
-            @Html.CheckBox("Week6", true)
-
-            @Html.Label("Week7")
-            @Html.CheckBox("Week7", true)
-
-            @Html.Label("Week8")
-            @Html.CheckBox("Week8", true)
-
-            @Html.Label("Week9")
-            @Html.CheckBox("Week9", true)
-
-            @Html.Label("Week10")
-            @Html.CheckBox("Week10", true)
-
-            @Html.Label("Week11")
-            @Html.CheckBox("Week11", true)
-
-            @Html.Label("Week12")
-            @Html.CheckBox("Week12", true)
-
-            @Html.Label("Week13")
-            @Html.CheckBox("Week13")
-
-            @Html.Label("Week14")
-            @Html.CheckBox("Week14")
-
-            @Html.Label("Week15")
-            @Html.CheckBox("Week15")
-
-            <input type="button" onclick="checkAll()" value="All" />
-
-            @Html.Label("Type")
-            @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
-
-            <div class="editor-label">
-                @Html.Label("Capacity")
-            </div>
-            <table>
-                <tr>
-                    <td style="width:300px"><div id="slider-range-max"></div></td>
-                    <td style="width:100px; text-align:center">
-                    <input type="text" id="CapacityAmount" readonly="readonly" style="width:50px" value="100" />
-                    </td>
-                </tr>
-            </table>
-
-}
-<div id="subtitleDiv">
-
-</div>
-
-<div id="tableDiv">
-        
-</div>
-*@
 <div class="container">
 <ul class="list_grid">
 	<li class="section">
@@ -330,72 +230,6 @@
                         @Html.CheckBox("Week15")
                     </div>
                 </td>
-				@*<td>
-					<input type="checkbox" id="weekone" name="weekone"></input>
-					<label for="weekone">1</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weektwo" name="weektwo"></input>
-					<label for="weektwo">2</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weekthree" name="weekthree"></input>
-					<label for="weekthree">3</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weekfour" name="weekfour"></input>
-					<label for="weekfour">4</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weekfive" name="weekfive"></input>
-					<label for="weekfive">5</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weeksix" name="weeksix"></input>
-					<label for="weeksix">6</label>
-				</td>
-			</tr>
-			<tr class="bottom">
-				<td>
-					<input type="checkbox" id="weekone" name="weekone"></input>
-					<label for="weekone">7</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weektwo" name="weektwo"></input>
-					<label for="weektwo">8</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weekthree" name="weekthree"></input>
-					<label for="weekthree">9</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weekfour" name="weekfour"></input>
-					<label for="weekfour">10</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weekfive" name="weekfive"></input>
-					<label for="weekfive">11</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weeksix" name="weeksix"></input>
-					<label for="weeksix">12</label>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="checkbox" id="weekone" name="weekone"></input>
-					<label for="weekone">13</label>
-				</td>
-				<td>
-					<input type="checkbox" id="weektwo" name="weektwo"></input>
-					<label for="weektwo">14</label>
-				</td>
-				<td colspan="4">
-					<input type="checkbox" id="weekthree" name="weekthree"></input>
-					<label for="weekthree">15</label>
-				</td>
-			</tr> 
-            *@
             <tr>
 				<td>@Html.Label("Semester")</td>
 				<td colspan="2">@Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])</td>
