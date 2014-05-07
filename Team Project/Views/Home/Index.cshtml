@@ -73,24 +73,17 @@
     <fieldset id="s5">
         <h2>Room</h2>
         <div class="field">
-            <input type="radio" id="lecture" class="roomtype" checked name="roomtype"></input>
-            <label for="lecture">Lecture</label>
-            <input type="radio" id="itlab" class="roomtype" name="roomtype"></input>
-            <label for="itlab">IT Lab</label>
-            <input type="radio" id="seminar" class="roomtype" name="roomtype"></input>
-            <label for="seminar">Seminar</label>
-            <input type="radio" id="no_pref" class="roomtype" name="roomtype"></input>
-            <label for="no_pref">No Preference</label>
+            @foreach (var type in ViewBag.RoomTypes)
+            {
+                @Html.RadioButtonFor(model => model.RoomType, (String)type)
+                @type
+            }
         </div>
         <div class="field">
-            <input type="checkbox" checked id="test1" class="facility" />
-            <label class="wrap" for="test1"><span class="ui"></span>PC Station</label>
-            <input type="checkbox" id="wheel" class="facility" name="pc_stn"></input>
-            <label for="wheel"><span class="ui"></span>Wheelchair Access</label>
-        </div>
-        <div class="field">
-            <input type="checkbox" id="pc" class="facility" name="pc_stn"></input>
-            <label for="pc"><span class="ui"></span>Induction Loop</label>
+            @Html.EditorFor(model => model.Pc)
+            @Html.LabelFor(model => model.Pc)
+            @Html.EditorFor(model => model.Induction)
+            @Html.LabelFor(model => model.Induction)
         </div>
         <div class="field">
             <input type="text" id="additional" class="filter" name="priority" placeholder="Additional Info"></input><!--Can use textarea tag to allow resize of it-->

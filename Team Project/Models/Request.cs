@@ -26,7 +26,7 @@ namespace TimetableSystem.Models
         [DisplayName("Module")]
         public int ModuleId { get; set; }
 
-        public byte Priority { get; set; }
+        public bool Priority { get; set; }
 
         [ScaffoldColumn(false)]
         public int Round { get; set; }
@@ -57,5 +57,14 @@ namespace TimetableSystem.Models
 
         [ScaffoldColumn(false)]
         public List<int> Weeks { get; set; }
+
+        //Features
+        public bool Pc { get; set; }
+
+        public bool Wheelchair { get; set; }
+
+        public bool Induction { get; set; }
+
+
     }
 }

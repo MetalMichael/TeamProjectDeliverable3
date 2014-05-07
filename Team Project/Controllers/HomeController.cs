@@ -83,6 +83,7 @@ namespace TimetableSystem.Controllers
             ViewBag.Lengths = new SelectList(lengths);
 
             ViewBag.Days = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+            ViewBag.RoomTypes = new[] { "Lecture", "IT Lab", "Seminar", "No Preference" };
 
             ViewBag.WeekCheckboxes = "";
             for (int x = 1; x <= 13; x++)
