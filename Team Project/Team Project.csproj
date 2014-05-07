@@ -143,6 +143,7 @@
     <Compile Include="Models\RequestWeek.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomType.cs" />
+    <Compile Include="Models\Type.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Module.cs" />

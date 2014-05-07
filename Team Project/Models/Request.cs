@@ -37,10 +37,13 @@ namespace TimetableSystem.Models
         [Required(ErrorMessage = "Day is required")]
         public string Day { get; set; }
 
+        [DisplayName("Time")]
         public int StartTime { get; set; }
 
+        [DisplayName("Length")]
         public int Length { get; set; }
 
+        [DisplayName("Room Type")]
         public string RoomType { get; set; }
 
         public int Building { get; set; }
@@ -59,10 +62,23 @@ namespace TimetableSystem.Models
         public List<int> Weeks { get; set; }
 
         //Features
-        public bool Pc { get; set; }
+        [DisplayName("Data Projector")]
+        public bool Projector { get; set; }
 
+        [DisplayName("Second Projector")]
+        public bool Projector2 { get; set; }
+
+        public bool OHP { get; set; }
+
+        public bool Chalkboard { get; set; }
+
+        [DisplayName("Large Board Area")]
+        public bool BoardArea { get; set; }
+
+        [DisplayName("Wheelchair Access")]
         public bool Wheelchair { get; set; }
 
+        [DisplayName("Induction Loop")]
         public bool Induction { get; set; }
 
 
