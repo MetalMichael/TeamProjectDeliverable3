@@ -139,4 +139,6 @@ button#submit {
 #additional {
 /*	resize: vertical;
 	max-height: 200px;*/
+	margin-top: -17px;
+	width: 101.7%;
 }
