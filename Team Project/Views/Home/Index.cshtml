@@ -26,13 +26,16 @@
         <h2>Module</h2>
         <div class="editor-field">
             <div class="field">
-                <input type="text" class="filter" name="priority" placeholder="Filter Module"></input>
+                @Html.Label("Filter Module")
+                <input type="text" class="filter" name="priority"></input>
             </div>
             <div class="field">
-                @Html.DropDownList("Modules", "Select Module Title")
+                @Html.Label("Module Title")
+                @Html.DropDownList("Modules", String.Empty)
             </div>
             <div class="field">
-                @Html.DropDownList("ModuleCodes", "Select Module Code")
+                @Html.Label("Module Code")
+                @Html.DropDownList("ModuleCodes", String.Empty)
             </div>
             <div class="field">
                 <select>
@@ -59,29 +62,47 @@
             <div class="field">
                 @foreach (var day in ViewBag.Days)
                 {
-                    @Html.RadioButtonFor(model => model.Day, (String)day)
-                    @day
+                    if (day == Model.Day)
+                    {
+                        @Html.RadioButtonFor(model => model.Day, (String)day, new { id = "test", Checked = "checked" });
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(model => model.Day, (String)day, new { id = day });
+                    }
+
+                    @Html.Label((String)day)
                 }
             </div>
             <div class="field">
+                @Html.LabelFor(model => model.StartTime)
                 @Html.DropDownList("Times", String.Empty)
             </div>
             <div class="field">
+                @Html.LabelFor(model => model.Length)
                 @Html.DropDownList("Lengths", String.Empty)
             </div>
     </fieldset>
     <fieldset id="s5">
         <h2>Room</h2>
         <div class="field">
-            @foreach (var type in ViewBag.RoomTypes)
-            {
-                @Html.RadioButtonFor(model => model.RoomType, (String)type)
-                @type
-            }
+            @Html.LabelFor(model => model.RoomType)
+            @Html.DropDownList("RoomTypes", "Room Type")
         </div>
         <div class="field">
-            @Html.EditorFor(model => model.Pc)
-            @Html.LabelFor(model => model.Pc)
+            <h3>Features</h3>
+            @Html.EditorFor(model => model.Projector)
+            @Html.LabelFor(model => model.Projector)
+            @Html.EditorFor(model => model.Projector2)
+            @Html.LabelFor(model => model.Projector2)
+            @Html.EditorFor(model => model.OHP)
+            @Html.LabelFor(model => model.OHP)
+            @Html.EditorFor(model => model.Chalkboard)
+            @Html.LabelFor(model => model.Chalkboard)
+            @Html.EditorFor(model => model.BoardArea)
+            @Html.LabelFor(model => model.BoardArea)
+            @Html.EditorFor(model => model.Wheelchair)
+            @Html.LabelFor(model => model.Wheelchair)
             @Html.EditorFor(model => model.Induction)
             @Html.LabelFor(model => model.Induction)
         </div>

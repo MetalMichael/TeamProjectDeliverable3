@@ -272,8 +272,6 @@ namespace TimetableSystem.Controllers
                             xxx += s + ";";
                         }
 
-                        return xxx;
-
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
@@ -349,8 +347,6 @@ namespace TimetableSystem.Controllers
                         {
                             xxx += s + ";";
                         }
-
-                        return xxx;
                         
 
                         available = max - rooms.Count();
@@ -435,8 +431,6 @@ namespace TimetableSystem.Controllers
                             xxx += s + ";";
                         }
 
-                        return xxx;
-
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
@@ -514,19 +508,17 @@ namespace TimetableSystem.Controllers
 
                         var finalRooms = availableRooms.Except(occupiedRooms);
 
-                        string xxx = "";
+                        string passRooms = "";
                         foreach (string s in finalRooms)
                         {
-                            xxx += s + ";";
+                            passRooms += s + ",";
                         }
-
-                        return xxx;
 
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        html += "<td onclick='listRooms(" + passRooms + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
