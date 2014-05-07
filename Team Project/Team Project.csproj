@@ -185,6 +185,7 @@
     <None Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Module\Edit.cshtml" />
     <None Include="Views\View\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
