@@ -35,6 +35,9 @@
 			-moz-osx-font-smoothing:grayscale;
 			margin-left: -25px;
 		}
+		.fa-menu:before {
+			line-height: 0.6;
+		}
 
 		.fa-lg{font-size:1.3333333333333333em;line-height:.75em;vertical-align:-15%}
 		.fa-2x{font-size:2em}

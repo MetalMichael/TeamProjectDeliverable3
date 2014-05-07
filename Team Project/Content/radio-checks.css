@@ -114,12 +114,13 @@
 	left: 5px;
 }
 .facility:not(:checked) + label .ui:before {
-  content: "no";
-  left: 32px;
+	content: "no";
+	color: #3e4c68;
+	left: 32px;
 }
 .facility:checked + label .ui:after {
-  content: "yes";
-/*  color: #39D2B4;*/
+	content: "yes";
+	color: #3e4c68;
 	position: relative;
 	top: -4px;
 }
