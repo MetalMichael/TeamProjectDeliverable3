@@ -4,7 +4,7 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        refreshTable();
+        //refreshTable();
         //Set Park field change function
         $('#Park').change(function () {
             refreshTable();
@@ -110,8 +110,8 @@
         $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType
         }, function (data) {
-            //alert(data);
-            $('#tableDiv').html(data);
+            alert(data);
+            //$('#tableDiv').html(data);
         });
     }
 
@@ -127,7 +127,7 @@
 </script>
 
 @*Park, Building, Room, Week*@
-@{ string[] filters = {"Semester", "Park", "Building", "Room", "Week"};}
+@{ string[] filters = { "Semester", "Park", "Building", "Room", "Week" };}
 
 <div class="container">
 <ul class="list_grid">
@@ -184,50 +184,7 @@
 			<tr class="bottom">
                 <td>
                     <div id="inner_check">
-                        @Html.Label("1")
-                        @Html.CheckBox("Week1",true)
-
-                        @Html.Label("2")
-                        @Html.CheckBox("Week2", true)
-
-                        @Html.Label("3")
-                        @Html.CheckBox("Week3", true)
-
-                        @Html.Label("4")
-                        @Html.CheckBox("Week4", true)
-
-                        @Html.Label("5")
-                        @Html.CheckBox("Week5", true)
-
-                        @Html.Label("6")
-                        @Html.CheckBox("Week6", true)
-
-                        @Html.Label("7")
-                        @Html.CheckBox("Week7", true)
-
-                        @Html.Label("8")
-                        @Html.CheckBox("Week8", true)
-
-                        @Html.Label("9")
-                        @Html.CheckBox("Week9", true)
-
-                        @Html.Label("10")
-                        @Html.CheckBox("Week10", true)
-
-                        @Html.Label("11")
-                        @Html.CheckBox("Week11", true)
-
-                        @Html.Label("12")
-                        @Html.CheckBox("Week12", true)
-
-                        @Html.Label("13")
-                        @Html.CheckBox("Week13")
-
-                        @Html.Label("14")
-                        @Html.CheckBox("Week14")
-
-                        @Html.Label("15")
-                        @Html.CheckBox("Week15")
+                        @Html.Raw(ViewBag.WeekCheckboxes)
                     </div>
                 </td>
             <tr>

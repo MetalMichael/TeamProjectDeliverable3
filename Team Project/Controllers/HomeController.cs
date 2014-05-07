@@ -86,9 +86,16 @@ namespace TimetableSystem.Controllers
             ViewBag.RoomTypes = new[] { "Lecture", "IT Lab", "Seminar", "No Preference" };
 
             ViewBag.WeekCheckboxes = "";
-            for (int x = 1; x <= 13; x++)
+            for (int x = 1; x < 16; x++)
             {
-                ViewBag.WeekCheckboxes += "<label>" + x + " <input type='checkbox' name='Weeks' value='" + x + "' /></label>";
+                if (x <= 12)
+                {
+                    ViewBag.WeekCheckboxes += "<label for='Week" + x + "'>" + x + "</label> <input id='Week" + x + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                }
+                else
+                {
+                    ViewBag.WeekCheckboxes += "<label for='Week" + x + "'>" + x + "</label> <input id='Week" + x + "' type='checkbox' name='Weeks' value='" + x + "' />";
+                }
             }
 
             return View(request);
