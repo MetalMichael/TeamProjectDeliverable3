@@ -4,15 +4,27 @@
     ViewBag.Title = "View Modules";
 }
 
+<script type="text/javascript">
+    function filter() {
+        document.getElementById('moduleCode').value = document.getElementById('codeInput').value;
+        document.getElementById('moduleTitle').value = document.getElementById('titleInput').value;
+    }
+    function clear() {
+        document.getElementById('moduleCode').value = "";
+        document.getElementById('moduleTitle').value = "";
+        filter();
+    }
+</script>
+
 @*<h3>Total: @Model.Count()</h3>*@
 @*<h2>Module Page</h2>*@
 
 <fieldset>
     <h2>Module code</h2>
-
-        <input id="moduleCodeInput" type="text" class="filter" /> 
- 
-        
+    <form id="codeForm" name="codeForm" action="#">
+        <input id="codeInput" name="codeInput" type="text" class="filter" 
+            onchange="filter();" />
+    </form>
 
     @foreach (var item in Model)
     {
@@ -24,7 +36,8 @@
 
 <fieldset>
     <h2>Module title</h2>
-    <input type="text" class="filter" /> 
+
+    <input id="titleInput" name="titleInput" type="text" class="filter" onchange="filter();" /> 
     @foreach (var item in Model)
     {
         <div class="field">
@@ -38,12 +51,14 @@
         @Html.ActionLink("Create New", "Edit", new {}, new { @class = "button1" })
     </div>
     <div class="field" style="border:0;">
-         @using (Html.BeginForm("Index", "Module", new { name = "form1" }, FormMethod.Get))
+         @using (Html.BeginForm("Index", "Module", new { name = "hiddenForm" }, FormMethod.Get))
         {
-            @Html.TextBox("moduleCode")
-            <input type="submit" value="Filter by module code" class="button" style="padding:5px;" />
-            <input type="reset" value="Reset" class="button" style="padding:5px;" />
+            <input type="hidden" id="moduleCode" name="moduleCode" />
+            <input type="hidden" id="moduleTitle" name="moduleTitle" />
+            <input type="submit" value="Filter" class="button" style="padding:5px;" />
+            <input type="submit" value="Reset" class="button" style="padding:5px;" onclick="clear();" />
         }
+       
     </div>
     @foreach (var item in Model)
     {
