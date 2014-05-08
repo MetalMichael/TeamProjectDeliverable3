@@ -91,6 +91,8 @@ namespace TimetableSystem.Controllers
                 ViewBag.WeekCheckboxes += "<label>" + x + " <input type='checkbox' name='Weeks' value='" + x + "' /></label>";
             }
 
+            ViewBag.Department = User.Identity.Name;
+
             return View(request);
         }
 

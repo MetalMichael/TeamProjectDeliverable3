@@ -5,35 +5,53 @@
 }
 
 @*<h3>Total: @Model.Count()</h3>*@
-<h2>Module Page</h2>
-<p>
-    @Html.ActionLink("Create New", "Edit")
-</p>
+@*<h2>Module Page</h2>*@
 
-<table>
-    <tr>
-        <th>
-            ModuleCode
-        </th>
-        <th>
-            ModuleTitle
-        </th>
-    </tr>
+<fieldset>
+    <h2>Module code</h2>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModuleCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModuleTitle)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ModuleID }, new { target = "_self" }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ModuleID }, new { target = "_self" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ModuleID }, new { onclick = "return confirm('Are you sure you wish to delete this module?');" })   
-        </td>
-    </tr>
-}
-</table>
+        <input id="moduleCodeInput" type="text" class="filter" /> 
+ 
+        
+
+    @foreach (var item in Model)
+    {
+        <div class="field">
+            <div class="editor-label">@Html.DisplayFor(modelItem => item.ModuleCode)</div>
+        </div>
+    }
+</fieldset>
+
+<fieldset>
+    <h2>Module title</h2>
+    <input type="text" class="filter" /> 
+    @foreach (var item in Model)
+    {
+        <div class="field">
+            <div class="editor-label">@Html.DisplayFor(modelItem => item.ModuleTitle)</div>
+        </div>
+    }
+</fieldset>
+
+<fieldset class="modulesFieldset">
+    <div class="field" style="border:0;">
+        @Html.ActionLink("Create New", "Edit", new {}, new { @class = "button1" })
+    </div>
+    <div class="field" style="border:0;">
+         @using (Html.BeginForm("Index", "Module", new { name = "form1" }, FormMethod.Get))
+        {
+            @Html.TextBox("moduleCode")
+            <input type="submit" value="Filter by module code" class="button" style="padding:5px;" />
+            <input type="reset" value="Reset" class="button" style="padding:5px;" />
+        }
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="field" style="border:0;">
+            <div class="editor-label">
+                <div class="editor-label">@Html.ActionLink("Edit", "Edit", new { id = item.ModuleID }, new { @class = "button" }) | 
+                  @Html.ActionLink("Delete", "Delete", new { id = item.ModuleID }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" }) </div>
+            </div>
+        </div>
+    }
+</fieldset>

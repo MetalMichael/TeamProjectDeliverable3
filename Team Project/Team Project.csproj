@@ -161,6 +161,7 @@
     <Content Include="Content\requests.css" />
     <Content Include="Content\saved.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\modules.css" />
     <Content Include="Content\themes\base\jquery-ui-1.9.2.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Home\index.js" />
@@ -186,6 +187,7 @@
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
+    <None Include="Views\Module\Delete.cshtml" />
     <None Include="Views\View\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

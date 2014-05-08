@@ -4,10 +4,7 @@
     ViewBag.Title = "Log On";
 }
 
-<h2>Log On</h2>
-<p>
-    Please enter your user name and password. @Html.ActionLink("Register", "Register") if you don't have an account.
-</p>
+<h2>Login page</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
@@ -15,10 +12,9 @@
 @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
 @using (Html.BeginForm()) {
-    <div>
-        <fieldset>
-            <legend>Account Information</legend>
-
+    <fieldset>
+        <h2>Authentication</h2>
+        <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(m => m.UserName)
             </div>
@@ -26,7 +22,8 @@
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
-
+        </div>
+        <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(m => m.Password)
             </div>
@@ -34,15 +31,19 @@
                 @Html.PasswordFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
-
-            <div class="editor-label">
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
+        </div>
+        <div class="field" style="border:0;">
+            <div class="editor-field">
+                <input type="submit" value="Log On" class="button1" style="padding:0;"/>
             </div>
-
-            <p>
-                <input type="submit" value="Log On" />
-            </p>
-        </fieldset>
-    </div>
+        </div>
+        <div class="field" style="border:0;">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe)
+        </div>
+    </fieldset>
+    
+    <p>
+        Please enter your user name and password. @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
 }

@@ -1,0 +1,13 @@
+﻿@model TimetableSystem.Models.Module
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@using (Html.BeginForm("Index","Module"))
+            {
+                <p> Module code: @Html.TextBox("searchString") <br />
+                <input type="submit" value="Filter" /></p>
+            }
