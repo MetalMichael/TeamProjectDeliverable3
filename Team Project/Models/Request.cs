@@ -24,7 +24,10 @@ namespace TimetableSystem.Models
 
         [Required(ErrorMessage = "Module is required")]
         [DisplayName("Module")]
+        [ForeignKey("Module")]
         public int ModuleId { get; set; }
+
+        public virtual Module Module { get; set; }
 
         public bool Priority { get; set; }
 
@@ -60,6 +63,8 @@ namespace TimetableSystem.Models
 
         [ScaffoldColumn(false)]
         public List<int> Weeks { get; set; }
+
+        public virtual List<RequestRoom> Rooms { get; set; }
 
         //Features
         [DisplayName("Data Projector")]

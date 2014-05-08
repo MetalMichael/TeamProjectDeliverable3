@@ -20,12 +20,22 @@
     @foreach (var request in Model)
     {
         <tr>
-            <td>@request.Module</td>
+            <td>@request.Module.ModuleTitle</td>
             <td>@request.Day</td>
             <td>@request.StartTime</td>
             <td>@request.Length</td>
-            <td>@request.Weeks.ToString()</td>
-            <td>@request.Rooms</td>
+            <td>
+                @foreach(int week in @request.Weeks)
+                {
+                    week.ToString();
+                }
+            </td>
+            <td>
+                @foreach (TimetableSystem.Models.RequestRoom room in request.Rooms)
+                {
+                    @room.Room.RoomCode;
+                }
+            </td>
             <td>@request.Status</td>
             <td>@Html.ActionLink("Edit", "Edit", "Home", new { id = request.RequestId }, new { target="_self" })</td>
         </tr>
