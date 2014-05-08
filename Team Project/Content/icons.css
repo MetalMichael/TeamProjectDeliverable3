@@ -525,7 +525,7 @@
 .fa-exclamation-triangle:before {
   content: "\f071";
 }
-.fa-plane:before {
+.fa-plane:before, .fa-TT:before{
   content: "\f072";
 }
 .fa-calendar:before {
@@ -926,7 +926,7 @@
 .fa-angle-down:before {
   content: "\f107";
 }
-.fa-desktop:before {
+.fa-desktop:before , .fa-CO:before {
   content: "\f108";
 }
 .fa-laptop:before {
