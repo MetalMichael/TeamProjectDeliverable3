@@ -414,8 +414,8 @@ namespace TimetableSystem.Controllers
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
                         slot = "slot" + (k+1) + (l+1);
-                        html += "<a href='#' onclick='listRooms(" + slot + ")'><td id='" + slot + "' class='" + htmlClass + " slot'>"
-                            + available + "/" + max + " Rooms Available</td></a>";
+                        html += "<td id='" + slot + "' class='" + htmlClass + "'><p class='slot'>"
+                            + available + "/" + max + " Rooms Available</p></td>";
                     }
                     html += "</tr>";
                 }
