@@ -62,7 +62,7 @@
         ///////////////////////////////////////////////////////////////WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
         $('.slot').click(function () {
-            alert(this.id());
+            alert("");
             /*var queryLink = '@Url.Action("checkSlot")';
             $.ajax(queryLink, { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
@@ -86,6 +86,48 @@
                 }
             });
             $("#CapacityAmount").val($("#slider-range-max").slider("value"));
+        });
+
+        //checkbox functions
+        function clearAll() {
+            for (var i = 1; i < 16; i++) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', false);
+            }
+        }
+        $('#clearAll').click(function () {
+            clearAll();
+        });
+        $('#checkAll').click(function () {
+            for (var i = 1; i < 16; i++) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', true);
+            }
+        });
+        $('#oneToTwelve').click(function () {
+            clearAll();
+            for (var i = 1; i < 13; i++) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', true);
+            }
+        });
+        $('#checkEven').click(function () {
+            clearAll();
+            for (var i = 1; i < 16; i++) {
+                if (i % 2 == 0) {
+                    var cb = '#Week' + i;
+                    $(cb).prop('checked', true);
+                }
+            }
+        });
+        $('#checkOdd').click(function () {
+            clearAll();
+            for (var i = 1; i < 16; i++) {
+                if (i % 2 == 1) {
+                    var cb = '#Week' + i;
+                    $(cb).prop('checked', true);
+                }
+            }
         });
     });
 
@@ -127,14 +169,6 @@
             //alert(data);
             $('#tableDiv').html(data);
         });
-    }
-
-    //checkbox functions
-    function checkAll() {
-        for(var i=1;i<16;i++){
-            var cb = '#Week' + i;
-            $(cb).prop('checked',true);
-        }
     }
 
     //List all available rooms for slot function
@@ -220,11 +254,11 @@
 			<tr class="bottom">
 				<td>
                     <div>
-					    <button>All</button>
-					    <button>1-12</button>
-					    <button>Odd</button>
-					    <button>Even</button>
-					    <button>Clear</button>
+					    <button id="checkAll">All</button>
+					    <button id="oneToTwelve">1-12</button>
+					    <button id="checkOdd">Odd</button>
+					    <button id="checkEven">Even</button>
+					    <button id="clearAll">Clear</button>
                     </div>
 				</td>
 			</tr>
