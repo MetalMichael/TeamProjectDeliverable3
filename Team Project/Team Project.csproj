@@ -140,6 +140,7 @@
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\BPRViewModel.cs" />
     <Compile Include="Models\Park.cs" />
+    <Compile Include="Models\RequestRoom.cs" />
     <Compile Include="Models\RequestWeek.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomType.cs" />

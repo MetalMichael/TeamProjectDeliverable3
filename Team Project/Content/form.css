@@ -51,7 +51,7 @@ fieldset
 	float: left;
 	width: 50%;
 }
-.editor-field input{
+.editor-field input:not([type='checkbox']) {
 	float: right;
 	width: 50%;
 	height: 48px;

@@ -17,27 +17,32 @@
         <th>Status</th>
         <th></th>
     </tr>
-    @foreach (var request in Model)
+    @foreach (var item in Model)
     {
         <tr>
-            <td>@request.Module.ModuleTitle</td>
-            <td>@request.Day</td>
-            <td>@request.StartTime</td>
-            <td>@request.Length</td>
+            <td>@Html.DisplayFor(modelItem => item.Module.ModuleTitle)</td>
+            <td>@item.Day</td>
+            <td>@item.StartTime</td>
+            <td>@item.Length</td>
             <td>
-                @foreach(int week in @request.Weeks)
-                {
-                    week.ToString();
+                @try {
+                    foreach(int week in @item.Weeks)
+                    {
+                        week.ToString();
+                    }
+                } catch(NullReferenceException ex) {
+                    Html.Raw("N/A");
                 }
+
             </td>
             <td>
-                @foreach (TimetableSystem.Models.RequestRoom room in request.Rooms)
+                @foreach (TimetableSystem.Models.RequestRoom room in item.Rooms)
                 {
                     @room.Room.RoomCode;
                 }
             </td>
-            <td>@request.Status</td>
-            <td>@Html.ActionLink("Edit", "Edit", "Home", new { id = request.RequestId }, new { target="_self" })</td>
+            <td>@item.Status</td>
+            <td>@Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target="_self" })</td>
         </tr>
     }
 </table>
