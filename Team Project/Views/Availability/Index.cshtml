@@ -129,6 +129,7 @@
         });
     }
 
+    //checkbox functions
     function checkAll() {
         for(var i=1;i<16;i++){
             var cb = '#Week' + i;
@@ -136,7 +137,8 @@
         }
     }
 
-    function listRooms() {
+    //List all available rooms for slot function
+    function listRooms(slot) {
         //Form values
         var park = $('#Park').val();
         var building = $('#Building').val();
@@ -156,9 +158,14 @@
 
         var queryLink = '@Url.Action("checkSlot")';
         $.get(queryLink, { parkName: park, buildingName: building, roomCode: room,
-            semester: semester, week: week, capacity: capacity, roomType: roomType, slot: "slot11"
+            semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
         }, function (data) {
-            alert(data);
+            //alert(data);
+            var rooms = (data.substr(0, data.length - 1)).split(';');
+            rooms.sort();
+            for (var i = 0; i < rooms.length; i++) {
+                alert(rooms[i]);
+            }
         });
     }
 
