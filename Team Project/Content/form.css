@@ -101,7 +101,7 @@ input[type=number] {
 .section select {
 	width: 100%;
 }
-select {
+form select {
     -moz-appearance: none;
 	-webkit-appearance: none;
 	border: 0;
@@ -118,7 +118,7 @@ select {
 	color: #3e4c68;
 /*	outline: #dbdbdd;*/
 }
-select:focus {
+form select:focus {
 	outline: none;
 }
 button {
