@@ -108,12 +108,14 @@ select {
     text-indent: 0.01px;
     text-overflow: '';
 	border: 0;
-	height: 100%;
+	height: 48px;
+	width: 101.7%;
 /*	padding-left: 10px;*/
-/*	margin-left: -10px;*/
-	background-color: #3e4c68;
-    background: #3e4c68 url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 99% 50%;
-	color: #dbdbdd;
+	margin-left: -10px;
+	margin-top: -21px;
+	background-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.5) url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 99% 50%;
+	color: #3e4c68;
 /*	outline: #dbdbdd;*/
 }
 select:focus {
@@ -124,7 +126,7 @@ button {
 	border: none;
 	padding: 10px;
 	color: #dbdbdd;
-	width: 90px;
+	width: 80px;
 	border-radius: 3px;
 	cursor: pointer;
 }
@@ -137,4 +139,6 @@ button#submit {
 #additional {
 /*	resize: vertical;
 	max-height: 200px;*/
+	margin-top: -17px;
+	width: 101.7%;
 }

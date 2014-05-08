@@ -51,6 +51,15 @@ namespace TimetableSystem.Controllers
                 return CreateForm(new Request());
             }
 
+            var errors = ModelState.Where(a => a.Value.Errors.Count > 0)
+                .Select(b => new { b.Key, b.Value.Errors })
+                .ToArray();
+
+            foreach (var modelStateErrors in errors)
+            {
+                System.Diagnostics.Debug.WriteLine("...Errored When Binding.", modelStateErrors.Key.ToString());
+            }
+
             return CreateForm(request);
         }
 
@@ -62,6 +71,7 @@ namespace TimetableSystem.Controllers
             ViewBag.ModuleCodes = new SelectList(db.Modules, "ModuleCode", "ModuleCode");
             ViewBag.Buildings = new SelectList(db.Buildings, "BuildingID", "BuildingName");
             ViewBag.Rooms = new SelectList(db.Rooms, "RoomID", "RoomCode");
+            ViewBag.RoomTypes = new SelectList(db.Types, "RoomTypeID", "RoomType");
 
             var times = new List<String>();
             for (var x = 9; x <= 17; x++)
@@ -83,12 +93,18 @@ namespace TimetableSystem.Controllers
             ViewBag.Lengths = new SelectList(lengths);
 
             ViewBag.Days = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
-            ViewBag.RoomTypes = new[] { "Lecture", "IT Lab", "Seminar", "No Preference" };
 
             ViewBag.WeekCheckboxes = "";
-            for (int x = 1; x <= 13; x++)
+            for (int x = 1; x < 16; x++)
             {
-                ViewBag.WeekCheckboxes += "<label>" + x + " <input type='checkbox' name='Weeks' value='" + x + "' /></label>";
+                if (x <= 12)
+                {
+                    ViewBag.WeekCheckboxes += "<label for='Week" + x + "'>" + x + "</label> <input id='Week" + x + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                }
+                else
+                {
+                    ViewBag.WeekCheckboxes += "<label for='Week" + x + "'>" + x + "</label> <input id='Week" + x + "' type='checkbox' name='Weeks' value='" + x + "' />";
+                }
             }
 
             ViewBag.Department = User.Identity.Name;

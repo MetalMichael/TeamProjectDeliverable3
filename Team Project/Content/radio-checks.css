@@ -115,14 +115,15 @@
 }
 .facility:not(:checked) + label .ui:before {
 	content: "no";
-	color: #3e4c68;
+	color: rgba(255,255,255,0.5);
 	left: 32px;
+	top: -1px;
 }
 .facility:checked + label .ui:after {
 	content: "yes";
-	color: #3e4c68;
+	color: rgba(255,255,255,0.5);
 	position: relative;
-	top: -4px;
+	top: -5px;
 }
 .facility:focus + label:before {
   border: 1px dashed #777;
