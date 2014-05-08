@@ -164,7 +164,7 @@ namespace TimetableSystem.Controllers
             int max = 0; //max number of rooms
             int available = 0; //number of available rooms
             string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
-            string day, htmlClass;
+            string day, htmlClass, slot;
             string[] times = {"9:00-9:50", "10:00-10:50", "11:00-11:50", "12:00-12:50", "13:00-13:50", "14:00-14:50", "15:00-15:50",
                         "16:00-16:50", "17:00-17:50"};
             int[] periods = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -408,11 +408,14 @@ namespace TimetableSystem.Controllers
                                     select r;
                         }
 
+
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td id='slot"+(k+1)+(l+1)+"' class='" + htmlClass + " slot'>" + available + "/" + max + " Rooms Available</td>";
+                        slot = "slot" + (k+1) + (l+1);
+                        html += "<a href='#' onclick='listRooms(" + slot + ")'><td id='" + slot + "' class='" + htmlClass + " slot'>"
+                            + available + "/" + max + " Rooms Available</td></a>";
                     }
                     html += "</tr>";
                 }
@@ -463,6 +466,13 @@ namespace TimetableSystem.Controllers
             var rooms = from r in systemDB.Rooms
                         where r.Capacity >= capacity
                         select r;
+            //If room type is set, filtering rooms variable for only that room type
+            if (roomTypeID != 0)
+            {
+                rooms = from r in rooms
+                        where (roomTypeIDs.Contains(r.RoomID))
+                        select r;
+            }
             //All reqs with correct sem, period, day and status
             var requests = from r in systemDB.Requests
                            where (r.Semester == semester) && (r.StartTime == period) && (r.Day == day) && (r.Status == "Accepted")
@@ -574,9 +584,27 @@ namespace TimetableSystem.Controllers
             }
             else
             {
+
+                var reqRoomIDs = from r in requests
+                                 select r.AcceptedRoom;
+                var reqRoomCodes = from r in systemDB.Rooms
+                                   where (reqRoomIDs.Contains(r.RoomID))
+                                   select r.RoomCode;
+
+                var roomCodes = from r in rooms
+                                select r.RoomCode;
+
+                List<string> xRooms = roomCodes.ToList();
+                List<string> occupiedRoom = reqRoomCodes.ToList();
+
+                var availableRooms = xRooms.Except(occupiedRoom);
+
+                foreach (string s in availableRooms)
+                {
+                    x += s + ";";
+                }
+
             }
-
-
 
             return x;
         }
