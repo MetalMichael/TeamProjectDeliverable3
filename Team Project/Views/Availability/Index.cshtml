@@ -59,6 +59,20 @@
         $('#slider-range-max').change(function () {
             refreshTable();
         });
+        ///////////////////////////////////////////////////////////////WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+
+        $('.slot').click(function () {
+            alert(this.id());
+            /*var queryLink = '@Url.Action("checkSlot")';
+            $.ajax(queryLink, { parkName: park, buildingName: building, roomCode: room,
+            semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
+            }, function (data) {
+            
+            });*/
+        });
+
+
+
         $(function () {
             $("#slider-range-max").slider({
                 range: "max",
@@ -110,8 +124,8 @@
         $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType
         }, function (data) {
-            alert(data);
-            //$('#tableDiv').html(data);
+            //alert(data);
+            $('#tableDiv').html(data);
         });
     }
 
@@ -123,7 +137,29 @@
     }
 
     function listRooms() {
-        alert("h");
+        //Form values
+        var park = $('#Park').val();
+        var building = $('#Building').val();
+        var room = $('#Room').val().split(' ')[0];
+        var semester = $('#Semester').val();
+        var week = "";
+        for (var i = 1; i < 16; i++) {
+            var cb = "#Week" + i;
+            if ($(cb).is(':checked')) {
+                week += i + ";";
+            }
+        }
+        week = week.substr(0, week.length - 1);
+        var capacity = $('#CapacityAmount').val();
+        var roomType = $('#Type').val();
+
+
+        var queryLink = '@Url.Action("checkSlot")';
+        $.get(queryLink, { parkName: park, buildingName: building, roomCode: room,
+            semester: semester, week: week, capacity: capacity, roomType: roomType, slot: "slot11"
+        }, function (data) {
+            alert(data);
+        });
     }
 
     
@@ -204,6 +240,8 @@
     </li>
 </ul>
 </div>
+
+<button onclick="listRooms()" />
 
 
             

@@ -238,45 +238,18 @@ namespace TimetableSystem.Controllers
                                     && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
                                     && (roomsCapacity.Contains(r.AcceptedRoom))
                                     select r;
-                        var x = from r in rooms
-                                select r.AcceptedRoom;
-                        var xOccupied = from r in systemDB.Rooms
-                                        where (x.Contains(r.RoomID))
-                                        select r.RoomCode;
-                        var xAvailable = from r in systemDB.Rooms
-                                         where r.RoomCode == roomCode
-                                         select r.RoomCode;
                         if (roomTypeID != 0)
                         {
                             rooms = from r in rooms
                                     where (roomTypeIDs.Contains(r.AcceptedRoom))
                                     select r;
-                            var roomTypeCodes = from r in systemDB.Rooms
-                                                where (roomTypeIDs.Contains(r.RoomID))
-                                                select r.RoomCode;
-                            xAvailable = from r in xAvailable
-                                         where (roomTypeCodes.Contains(r))
-                                         select r;
-                        }
-
-                        //Finding list of Available rooms to use in dialog.
-                        
-
-                        List<string> occupiedRooms = new List<string>(xOccupied);
-                        List<string> availableRooms = new List<string>(xAvailable);
-
-                        var finalRooms = availableRooms.Except(occupiedRooms);
-                        string xxx = "";
-                        foreach (string s in finalRooms)
-                        {
-                            xxx += s + ";";
                         }
 
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        html += "<td id='slot" + (k + 1) + (l + 1) + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -314,46 +287,19 @@ namespace TimetableSystem.Controllers
                                      && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
                                      && (roomsCapacity.Contains(r.AcceptedRoom))
                                      select r;
-                        var x = from r in rooms
-                                select r.AcceptedRoom;
-                        var xOccupied = from r in systemDB.Rooms
-                                        where (x.Contains(r.RoomID))
-                                        select r.RoomCode;
-                        var xAvailable = from r in systemDB.Rooms
-                                         where (r.BuildingID == buildingID)
-                                         select r.RoomCode;
 
                         if (roomTypeID != 0)
                         {
                             rooms = from r in rooms
                                     where (roomTypeIDs.Contains(r.AcceptedRoom))
                                     select r;
-                            var roomTypeCodes = from r in systemDB.Rooms
-                                                where (roomTypeIDs.Contains(r.RoomID))
-                                                select r.RoomCode;
-                            xAvailable = from r in xAvailable
-                                         where (roomTypeCodes.Contains(r))
-                                         select r;
                         }
-
-                        //Finding list of Available rooms to use in dialog.
-                        List<string> occupiedRooms = new List<string>(xOccupied);
-                        List<string> availableRooms = new List<string>(xAvailable);
-
-                        var finalRooms = availableRooms.Except(occupiedRooms);
-
-                        string xxx = "";
-                        foreach (string s in finalRooms)
-                        {
-                            xxx += s + ";";
-                        }
-                        
 
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        html += "<td id='slot" + (k + 1) + (l + 1) + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -397,45 +343,18 @@ namespace TimetableSystem.Controllers
                                      && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
                                      && (roomsCapacity.Contains(r.AcceptedRoom))
                                      select r;
-                        var x = from r in rooms
-                                select r.AcceptedRoom;
-                        var xOccupied = from r in systemDB.Rooms
-                                        where (x.Contains(r.RoomID))
-                                        select r.RoomCode;
-                        var xAvailable = from r in systemDB.Rooms
-                                         where (buildings.Contains(r.BuildingID))
-                                         select r.RoomCode;
-
                         if (roomTypeID != 0)
                         {
                             rooms = from r in rooms
                                     where (roomTypeIDs.Contains(r.AcceptedRoom))
                                     select r;
-                            var roomTypeCodes = from r in systemDB.Rooms
-                                                where (roomTypeIDs.Contains(r.RoomID))
-                                                select r.RoomCode;
-                            xAvailable = from r in xAvailable
-                                         where (roomTypeCodes.Contains(r))
-                                         select r;
-                        }
-
-                        //Finding list of Available rooms to use in dialog.
-                        List<string> occupiedRooms = new List<string>(xOccupied);
-                        List<string> availableRooms = new List<string>(xAvailable);
-
-                        var finalRooms = availableRooms.Except(occupiedRooms);
-
-                        string xxx = "";
-                        foreach (string s in finalRooms)
-                        {
-                            xxx += s + ";";
                         }
 
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        html += "<td id='slot" + (k + 1) + (l + 1) + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -481,44 +400,19 @@ namespace TimetableSystem.Controllers
                                      && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
                                      && (roomsCapacity.Contains(r.AcceptedRoom))
                                      select r;
-                        var x = from r in rooms
-                                select r.AcceptedRoom;
-                        var xOccupied = from r in systemDB.Rooms
-                                        where (x.Contains(r.RoomID))
-                                        select r.RoomCode;
-                        var xAvailable = from r in systemDB.Rooms
-                                         select r.RoomCode;
 
                         if (roomTypeID != 0)
                         {
                             rooms = from r in rooms
                                     where (roomTypeIDs.Contains(r.AcceptedRoom))
                                     select r;
-                            var roomTypeCodes = from r in systemDB.Rooms
-                                                where (roomTypeIDs.Contains(r.RoomID))
-                                                select r.RoomCode;
-                            xAvailable = from r in xAvailable
-                                         where (roomTypeCodes.Contains(r))
-                                         select r;
-                        }
-
-                        //Finding list of Available rooms to use in dialog.
-                        List<string> occupiedRooms = new List<string>(xOccupied);
-                        List<string> availableRooms = new List<string>(xAvailable);
-
-                        var finalRooms = availableRooms.Except(occupiedRooms);
-
-                        string passRooms = "";
-                        foreach (string s in finalRooms)
-                        {
-                            passRooms += s + ",";
                         }
 
                         available = max - rooms.Count();
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td onclick='listRooms(" + passRooms + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        html += "<td id='slot"+(k+1)+(l+1)+"' class='" + htmlClass + " slot'>" + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -526,6 +420,165 @@ namespace TimetableSystem.Controllers
             }
             //return 0;
             return html;
+        }
+
+        public string checkSlot(string parkName, string buildingName, string roomCode, int semester, string week,
+            int capacity, string roomType, string slot)
+        {
+            string x = "";
+            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+            int period = Convert.ToInt32(slot.Substring(5, 1));
+            int dayNum = Convert.ToInt32(slot.Substring(4, 1));
+            
+            //return slot;
+            string day = days[dayNum-1];
+            int roomTypeID;
+
+            //setting room type to equivalent ID
+            if (roomType == "Lab")
+                roomTypeID = 3;
+            else if (roomType == "Seminar")
+                roomTypeID = 2;
+            else if (roomType == "Lecture")
+                roomTypeID = 1;
+            else
+                roomTypeID = 0;
+
+            var roomTypeIDs = from r in systemDB.RoomTypes
+                              where r.RoomTypeID == roomTypeID
+                              select r.RoomID;
+
+            //checking for requests in week span 
+            string[] temp = week.Split(';');
+            List<int> weeks = new List<int>();
+            for (int i = 0; i < temp.Length; i++)
+            {
+                weeks.Add(Convert.ToInt32(temp[i]));
+            }
+            var roomsWeeks = (from w in systemDB.RequestWeeks
+                              where (weeks.Contains(w.Week))
+                              select w.RequestId).Distinct();
+
+            //All rooms with enough capacity
+            var rooms = from r in systemDB.Rooms
+                        where r.Capacity >= capacity
+                        select r;
+            //All reqs with correct sem, period, day and status
+            var requests = from r in systemDB.Requests
+                           where (r.Semester == semester) && (r.StartTime == period) && (r.Day == day) && (r.Status == "Accepted")
+                           && (roomsWeeks.Contains(r.RequestId))
+                           select r;
+
+            if (roomCode != "No" && roomCode != "")
+            {
+                var roomID = (from r in systemDB.Rooms
+                              where r.RoomCode == roomCode
+                              select r.RoomID).Single();
+
+                //available rooms with this filter
+                rooms = from r in rooms
+                        where r.RoomCode == roomCode
+                        select r;
+
+                requests = from r in requests
+                           where (r.AcceptedRoom == roomID)
+                           select r;
+                var reqRoomIDs = from r in requests
+                                 select r.AcceptedRoom;
+                var reqRoomCodes = from r in systemDB.Rooms
+                                   where (reqRoomIDs.Contains(r.RoomID))
+                                   select r.RoomCode;
+                var roomCodes = from r in rooms
+                            select r.RoomCode;
+                List<string> xRooms = roomCodes.ToList();
+                List<string> occupiedRoom = reqRoomCodes.ToList();
+
+                var availableRooms = xRooms.Except(occupiedRoom);
+
+                foreach (string s in availableRooms)
+                {
+                    x += s + ";";
+                }
+            }
+            else if (buildingName != "No Preference" && buildingName != "")
+            {
+                var buildingID = (from b in systemDB.Buildings
+                                  where b.BuildingName == buildingName
+                                  select b.BuildingID).Single();
+                var roomIDs = from r in systemDB.Rooms
+                              where r.BuildingID == buildingID
+                              select r.RoomID;
+
+                rooms = from r in rooms
+                        where r.BuildingID == buildingID
+                        select r;
+
+                requests = from r in requests
+                           where (roomIDs.Contains(r.AcceptedRoom))
+                           select r;
+                var reqRoomIDs = from r in requests
+                                 select r.AcceptedRoom;
+                var reqRoomCodes = from r in systemDB.Rooms
+                                   where (reqRoomIDs.Contains(r.RoomID))
+                                   select r.RoomCode;
+
+                var roomCodes = from r in rooms
+                                select r.RoomCode;
+
+                List<string> xRooms = roomCodes.ToList();
+                List<string> occupiedRoom = reqRoomCodes.ToList();
+
+                var availableRooms = xRooms.Except(occupiedRoom);
+
+                foreach (string s in availableRooms)
+                {
+                    x += s + ";";
+                }
+            }
+            else if (parkName != "No Preference" && parkName != "")
+            {
+                var parkID = (from p in systemDB.Parks
+                              where p.ParkName == parkName
+                              select p.ParkID).Single();
+                var buildings = from b in systemDB.Buildings
+                                where b.ParkID == parkID
+                                select b.BuildingID;
+                var roomIDs = from r in systemDB.Rooms
+                              where (buildings.Contains(r.BuildingID))
+                              select r.RoomID;
+
+                rooms = from r in rooms
+                        where (buildings.Contains(r.BuildingID))
+                        select r;
+                requests = from r in requests
+                           where (roomIDs.Contains(r.AcceptedRoom))
+                           select r;
+                var reqRoomIDs = from r in requests
+                                 select r.AcceptedRoom;
+                var reqRoomCodes = from r in systemDB.Rooms
+                                   where (reqRoomIDs.Contains(r.RoomID))
+                                   select r.RoomCode;
+
+                var roomCodes = from r in rooms
+                                select r.RoomCode;
+
+                List<string> xRooms = roomCodes.ToList();
+                List<string> occupiedRoom = reqRoomCodes.ToList();
+
+                var availableRooms = xRooms.Except(occupiedRoom);
+
+                foreach (string s in availableRooms)
+                {
+                    x += s + ";";
+                }
+            }
+            else
+            {
+            }
+
+
+
+            return x;
         }
 
     }
