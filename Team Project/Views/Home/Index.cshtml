@@ -24,24 +24,34 @@
     </fieldset>
     <fieldset id="s2">
         <h2>Module</h2>
-        <div class="editor-field">
-            <div class="field">
+        <div class="field">
+            <div class="editor-label">
                 @Html.Label("Filter Module")
+            </div>
+            <div class="editor-field">
                 <input type="text" class="filter" name="priority"></input>
             </div>
-            <div class="field">
+        </div>
+        <div class="field">
+            <div class="editor-label">
                 @Html.Label("Module Title")
+            </div>
+            <div class="editor-field">
                 @Html.DropDownList("Modules", String.Empty)
             </div>
-            <div class="field">
+        </div>
+        <div class="field">
+            <div class="editor-label">
                 @Html.Label("Module Code")
+            </div>
+            <div class="editor-field">
                 @Html.DropDownList("ModuleCodes", String.Empty)
             </div>
-            <div class="field">
-                <select>
-                    <option id="presets">Select A Module to View Preset (what does this even do?)</option>
-                </select>
-            </div>
+        </div>
+        <div class="field">
+            <select>
+                <option id="presets">Select A Module to View Preset (what does this even do?)</option>
+            </select>
         </div>
     </fieldset>
     <fieldset id="s3">
@@ -75,19 +85,31 @@
                 }
             </div>
             <div class="field">
-                @Html.LabelFor(model => model.StartTime)
-                @Html.DropDownList("Times", String.Empty)
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.StartTime)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Times", String.Empty)
+                </div>
             </div>
             <div class="field">
-                @Html.LabelFor(model => model.Length)
-                @Html.DropDownList("Lengths", String.Empty)
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Length)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Lengths", String.Empty)
+                </div>
             </div>
     </fieldset>
     <fieldset id="s5">
         <h2>Room</h2>
         <div class="field">
-            @Html.LabelFor(model => model.RoomType)
-            @Html.DropDownList("RoomTypes", "Room Type")
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RoomType)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("RoomTypes", "Room Type")
+            </div>
         </div>
         <div class="field">
             <h3>Features</h3>
@@ -122,16 +144,20 @@
             </div>
         </div>
         <div class="field">
-            <label for="park">No. of Rooms: </label>
-            <select id="no_rooms">
-                <option selected disabled>No. of Rooms</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-            </select>
+            <div class="editor-label">
+                <label for="park">No. of Rooms: </label>
+            </div>
+            <div class="editor-field">
+                <select id="no_rooms">
+                    <option selected disabled>No. of Rooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+            </div>
         </div>
         <div class="field">
             <div class="editor-label">

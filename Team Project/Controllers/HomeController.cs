@@ -51,6 +51,8 @@ namespace TimetableSystem.Controllers
                 return CreateForm(new Request());
             }
 
+            System.Diagnostics.Debug.WriteLine("Could not create");
+
             var errors = ModelState.Where(a => a.Value.Errors.Count > 0)
                 .Select(b => new { b.Key, b.Value.Errors })
                 .ToArray();
