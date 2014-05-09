@@ -1,43 +1,76 @@
 $(document).ready(function() {
     rooms.setup();
     
-    $('#TotalStudents').on('mouseUp', function() { rooms.update(); });
-    $('#Park').on('change', function() { rooms.update(); });
-    $('#Building').on('change', function() { rooms.update(); });
+    $('#StudentsTotal').keyup( function() { rooms.update(); });
+    $('#Park').change( function() { rooms.update(); });
+    $('#Building').change( function() { rooms.update(); });
+    $('#no_rooms').change( function() { rooms.changeRoomTotal(); });
 });
 
 
 var rooms = {
-    rooms = null,
-    students = null,
-    park = null,
-    building = null,
+    rooms: null,
+    roomSelect: null,
+    students: null,
+    park: null,
+    building: null,
+    roomTotal: 0,
 
-    setup = function() {
+    setup: function() {
+        this.roomSelect = $('#room1')[0].outerHTML;
+        this.changeRoomTotal();
+    
         var rooms = [];
         $('#Rooms').children().each(function() {
             rooms.push($(this).html().trim());
         });
         rooms.shift();
-        self.rooms = rooms;
+        this.rooms = rooms;
         
-        self.update();
+        this.update();
     },
     
-    update = function () {
-        self.students = $('#StudentsTotal').val();
-        self.park = $('#Park').val();
-        self.building = $('#Building').val();
+    update: function () {
+        this.students = $('#StudentsTotal').val();
+        this.park = $('#Park').val();
+        this.building = $('#Building').val();
         
-        self.filterRooms();
+        this.filterRooms();
     },
     
-    filterRooms = function () {
+    filterRooms: function () {
         $.get('/Home/Rooms',
-            {students,park,building},
+            {students:this.students,park:this.park,building:this.building},
             function (data) {
             
             }
         );
+    },
+    
+    changeRoomTotal: function() {
+        var newTotal = $('#no_rooms').val();
+        console.log('Old: ' + this.roomTotal);
+        console.log('New ' + newTotal);
+        if(newTotal < this.roomTotal) {
+            while(this.roomTotal > newTotal) {
+                this.removeRoom();
+                this.roomTotal--;
+            }
+        } else {
+            while(this.roomTotal < newTotal) {
+                this.addRoom(parseInt(this.roomTotal) +1);
+                this.roomTotal++;
+            }
+        }
+    },
+    
+    removeRoom: function() {
+        $('#room-container .field').last().remove();
+    },
+    
+    addRoom: function(id) {
+        var select = $(this.roomSelect).prop('id', 'room' + id);
+        $('#room-container').append(select);
+        $('#room' + id).show();
     }
 };
