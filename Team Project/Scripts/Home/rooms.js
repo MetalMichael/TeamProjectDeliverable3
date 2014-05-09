@@ -5,6 +5,7 @@ $(document).ready(function () {
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
 
     rooms.changeRoomTotal();
+    rooms.filterRooms();
 });
 
 var rooms = {
@@ -23,7 +24,7 @@ var rooms = {
 
     updateBuildings: function () {
         this.updateInfo();
-        $.get('/Home/Buildings',
+        $.get('Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -43,7 +44,7 @@ var rooms = {
     filterRooms: function () {
         console.log("Filtering Rooms");
         this.updateInfo();
-        $.get('/Home/Rooms',
+        $.get('Home/Rooms',
             { students: this.students, park: this.park, building: this.building },
             function (data) {
                 rooms.roomInfo = data;
