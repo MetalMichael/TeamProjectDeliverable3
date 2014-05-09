@@ -33,13 +33,13 @@
             </div>
         </div>
         <div class="field" style="border:0;">
-            <div class="editor-field">
-                <input type="submit" value="Log On" class="button1" style="padding:0;"/>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.RememberMe)
+                @Html.CheckBoxFor(m => m.RememberMe)
             </div>
-        </div>
-        <div class="field" style="border:0;">
-            @Html.CheckBoxFor(m => m.RememberMe)
-            @Html.LabelFor(m => m.RememberMe)
+            <div class="editor-field">
+                <input type="submit" value="Log On" class="button1" style="padding:0;"/>               
+            </div>
         </div>
     </fieldset>
     
