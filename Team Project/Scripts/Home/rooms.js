@@ -1,10 +1,11 @@
 $(document).ready(function () {
-    $('#StudentsTotal').keyup(function () { rooms.update(); });
-    $('#Park').change(function () { rooms.update(); });
-    $('#Building').change(function () { rooms.update(); });
+    $('#StudentsTotal').keyup(function () { rooms.filterRooms(); });
+    $('#Park').change(function () { rooms.updateBuildings(); });
+    $('#buildings').change(function () { rooms.filterRooms(); });
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
 
-    rooms.update();
+    rooms.changeRoomTotal();
+    rooms.filterRooms();
 });
 
 var rooms = {
@@ -15,17 +16,15 @@ var rooms = {
     building: null,
     roomTotal: 0,
 
-    update: function () {
+    updateInfo: function () {
         this.students = $('#StudentsTotal').val();
         this.park = $('#Park').val();
-        this.building = $('#Building').val();
-
-        this.updateBuildings();
-        this.filterRooms();
+        this.building = $('#buildings').val();
     },
 
     updateBuildings: function () {
-        $.get('/Home/Buildings',
+        this.updateInfo();
+        $.get('Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -39,10 +38,13 @@ var rooms = {
             options += "<option value='" + buildings[x].BuildingID + "'>" + buildings[x].BuildingName + "</option>";
         }
         $('#buildings').html(options);
+        this.filterRooms();
     },
 
     filterRooms: function () {
-        $.get('/Home/Rooms',
+        console.log("Filtering Rooms");
+        this.updateInfo();
+        $.get('Home/Rooms',
             { students: this.students, park: this.park, building: this.building },
             function (data) {
                 rooms.roomInfo = data;
@@ -54,8 +56,6 @@ var rooms = {
 
     changeRoomTotal: function () {
         var newTotal = $('#no_rooms').val();
-        console.log('Old: ' + this.roomTotal);
-        console.log('New ' + newTotal);
         if (newTotal < this.roomTotal) {
             while (this.roomTotal > newTotal) {
                 this.removeRoom();
