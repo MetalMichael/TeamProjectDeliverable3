@@ -25,10 +25,10 @@
 			border-right: 2px solid rgba(0,0,0,0.2);
 			padding: 25px;
 		}
-		.availability td.available:hover, .availability td.some:hover {
+		/*.availability td.available:hover, .availability td.some:hover {
 			cursor: pointer;
 			text-decoration: underline;
-		}
+		}*/
 		.availability .no_border {
 			border-right: none;
 		}
@@ -44,4 +44,7 @@
 		div#inner_check 
 		{
 		    width: 100%;
+		}
+		.weekDiv 
+		{
 		}

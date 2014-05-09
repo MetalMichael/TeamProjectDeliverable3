@@ -47,15 +47,17 @@ namespace TimetableSystem.Controllers
             ViewBag.Type = new SelectList(new string[] { "Lecture", "Seminar", "Lab" });
 
             ViewBag.WeekCheckboxes = "";
+            string weekNo;
             for (int x = 1; x < 16; x++)
             {
+                weekNo = "Week" + x;
                 if (x <= 12)
                 {
-                    ViewBag.WeekCheckboxes += "<label for='Week" + x + "'>" + x + "</label> <input id='Week" + x + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                    ViewBag.WeekCheckboxes += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
                 }
                 else
                 {
-                    ViewBag.WeekCheckboxes += "<label for='Week" + x + "'>" + x + "</label> <input id='Week" + x + "' type='checkbox' name='Weeks' value='" + x + "' />";
+                    ViewBag.WeekCheckboxes += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' />";
                 }
             }
 
@@ -249,7 +251,9 @@ namespace TimetableSystem.Controllers
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td id='slot" + (k + 1) + (l + 1) + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        slot = "slot" + (k + 1) + (l + 1);
+                        html += "<td onclick='listRooms(\"" + slot + "\")' id='" + slot + "' class='" + htmlClass + "'>"
+                            + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -299,7 +303,9 @@ namespace TimetableSystem.Controllers
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td id='slot" + (k + 1) + (l + 1) + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        slot = "slot" + (k + 1) + (l + 1);
+                        html += "<td onclick='listRooms(\"" + slot + "\")' id='" + slot + "' class='" + htmlClass + "'>"
+                            + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -354,7 +360,9 @@ namespace TimetableSystem.Controllers
                         if (available == 0) { htmlClass = "unavailable"; }
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
-                        html += "<td id='slot" + (k + 1) + (l + 1) + "' class='" + htmlClass + "'>" + available + "/" + max + " Rooms Available</td>";
+                        slot = "slot" + (k + 1) + (l + 1);
+                        html += "<td onclick='listRooms(\"" + slot + "\")' id='" + slot + "' class='" + htmlClass + "'>"
+                            + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }
@@ -414,8 +422,8 @@ namespace TimetableSystem.Controllers
                         else if (available < (max / 2)) { htmlClass = "some"; }
                         else { htmlClass = "available"; }
                         slot = "slot" + (k+1) + (l+1);
-                        html += "<td id='" + slot + "' class='" + htmlClass + "'><p class='slot'>"
-                            + available + "/" + max + " Rooms Available</p></td>";
+                        html += "<td onclick='listRooms(\""+slot+"\")' id='" + slot + "' class='" + htmlClass + "'>"
+                            + available + "/" + max + " Rooms Available</td>";
                     }
                     html += "</tr>";
                 }

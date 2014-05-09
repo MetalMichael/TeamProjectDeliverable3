@@ -59,19 +59,6 @@
         $('#slider-range-max').change(function () {
             refreshTable();
         });
-        ///////////////////////////////////////////////////////////////WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-
-        $('.slot').click(function () {
-            alert("");
-            /*var queryLink = '@Url.Action("checkSlot")';
-            $.ajax(queryLink, { parkName: park, buildingName: building, roomCode: room,
-            semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
-            }, function (data) {
-            
-            });*/
-        });
-
-
 
         $(function () {
             $("#slider-range-max").slider({
@@ -194,12 +181,19 @@
         $.get(queryLink, { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
         }, function (data) {
-            //alert(data);
+
             var rooms = (data.substr(0, data.length - 1)).split(';');
             rooms.sort();
-            for (var i = 0; i < rooms.length; i++) {
-                alert(rooms[i]);
-            }
+            /*for (var i = 0; i < rooms.length; i++) {
+            alert(rooms[i]);
+            }*/
+            $(function () {
+                $("#dialog").dialog({
+                    height:100,
+                    weight:100,
+                    modal:true
+                });
+            });
         });
     }
 
@@ -282,7 +276,6 @@
 </ul>
 </div>
 
-<button onclick="listRooms()" />
-
-
-            
+<div id="dialog" title="Export Data">
+<p>blahblahdialog</p>
+</div>
