@@ -72,7 +72,6 @@ namespace TimetableSystem.Controllers
             ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
             ViewBag.ModuleCodes = new SelectList(db.Modules, "ModuleCode", "ModuleCode");
             ViewBag.Buildings = new SelectList(db.Buildings, "BuildingID", "BuildingName");
-            ViewBag.Rooms = new SelectList(db.Rooms, "RoomID", "RoomCode");
             ViewBag.RoomTypes = new SelectList(db.Types, "RoomTypeID", "RoomType");
             ViewBag.Parks = new SelectList(db.Parks, "ParkID", "ParkName");
 
@@ -117,7 +116,7 @@ namespace TimetableSystem.Controllers
 
         public ActionResult Rooms()
         {
-            int Students, ParkId, BuildingId = 0;
+            int Students, ParkId, BuildingId;
             try {
                 Students = Convert.ToInt16(Request.QueryString["students"]);
             } catch (FormatException) {
@@ -136,16 +135,16 @@ namespace TimetableSystem.Controllers
                 BuildingId = 0;
             }
 
-            var rooms = db.Rooms.Where(a => a.BuildingID == BuildingId);
+            var rooms = db.Rooms.Where(a => a.Capacity >= Students);
 
-            if (BuildingId != 0)
+            /*if (BuildingId != 0)
             {
                 rooms = db.Rooms.Where(a => a.BuildingID == BuildingId).Where(a => a.Capacity >= Students);
             }
             else if (ParkId != 0)
             {
                 rooms = db.Rooms.Where(a => a.Building.ParkID == ParkId).Where(a => a.Capacity >= Students);
-            }
+            }*/
 
             return Json(rooms, JsonRequestBehavior.AllowGet);
         }
