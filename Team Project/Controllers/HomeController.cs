@@ -74,6 +74,7 @@ namespace TimetableSystem.Controllers
             ViewBag.Buildings = new SelectList(db.Buildings, "BuildingID", "BuildingName");
             ViewBag.Rooms = new SelectList(db.Rooms, "RoomID", "RoomCode");
             ViewBag.RoomTypes = new SelectList(db.Types, "RoomTypeID", "RoomType");
+            ViewBag.Parks = new SelectList(db.Parks, "ParkID", "ParkName");
 
             var times = new List<String>();
             for (var x = 9; x <= 17; x++)

@@ -283,7 +283,7 @@ namespace TimetableSystem.Controllers
                     {
                         period = periods[l];
                         var rooms = from r in systemDB.Requests
-                                     where (r.Building == buildingID) && (r.Day == day) && (r.StartTime == period)
+                                     where (r.BuildingId == buildingID) && (r.Day == day) && (r.StartTime == period)
                                      && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
                                      && (roomsCapacity.Contains(r.AcceptedRoom))
                                      select r;
@@ -339,7 +339,7 @@ namespace TimetableSystem.Controllers
                     {
                         period = periods[l];
                         var rooms = from r in systemDB.Requests
-                                     where (r.Park == parkID) && (r.Day == day) && (r.StartTime == period)
+                                     where (r.ParkId == parkID) && (r.Day == day) && (r.StartTime == period)
                                      && (r.Semester == semester) && (r.Status == "Accepted") && (roomsWeeks.Contains(r.RequestId))
                                      && (roomsCapacity.Contains(r.AcceptedRoom))
                                      select r;

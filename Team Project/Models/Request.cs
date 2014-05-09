@@ -49,9 +49,11 @@ namespace TimetableSystem.Models
         [DisplayName("Room Type")]
         public string RoomType { get; set; }
 
-        public int Building { get; set; }
+        public int BuildingId { get; set; }
+        public virtual Building Building { get; set; }
 
-        public int Park { get; set; }
+        public int ParkId { get; set; }
+        public virtual Park Park { get; set; }
 
         [ScaffoldColumn(false)]
         public int AcceptedRoom { get; set; }
