@@ -39,6 +39,17 @@ fieldset
     padding: 0;
 }
 
+form input.text-box.single-line
+{
+    padding-left:1em;
+    width:auto;
+    background:#ff0;   
+    min-width: 100%;
+    max-width: 100%;
+    display: inline-block;
+    height: 100%;
+}
+
 .checkbox-label-container
 {
     padding:0.2em;
@@ -137,7 +148,7 @@ fieldset
 	padding-right: 30px;
 /*	outline: #dbdbdd;*/
 	color: #dbdbdd;
-	padding-left: 20px;
+	padding-left:1em;
 	/*margin-left: -10px;*/
 	/*min-width: 506px;*/
 }
@@ -180,6 +191,7 @@ form select {
 	border: 0;
 	height: 100%;
 	width: 100%;
+	padding-left:0.65em;
 /*	padding-left: 10px;*/
 	/*margin-left: -10px;*/
 	background-color: rgba(255,255,255,0.5);
