@@ -27,8 +27,9 @@ namespace TimetableSystem.Models
         {
             modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
             modelBuilder.Entity<Request>().HasMany(r => r.RequestWeeks).WithRequired(a => a.Request).HasForeignKey(r => r.RequestId);
-            modelBuilder.Entity<Request>().HasOptional(r => r.Rooms);
-            modelBuilder.Entity<Request>().HasMany(r => r.Rooms);
+            modelBuilder.Entity<Request>().HasMany(r => r.RequestRooms).WithRequired(a => a.Request).HasForeignKey(r => r.RequestID);
+            //modelBuilder.Entity<Request>().HasOptional(r => r.RequestRooms);
+            //modelBuilder.Entity<Request>().HasMany(r => r.RequestRooms);
         }
     }
 }

@@ -15,13 +15,30 @@ var rooms = {
     building: null,
     roomTotal: 0,
 
-
     update: function () {
         this.students = $('#StudentsTotal').val();
         this.park = $('#Park').val();
         this.building = $('#Building').val();
 
+        this.updateBuildings();
         this.filterRooms();
+    },
+
+    updateBuildings: function () {
+        $.get('/Home/Buildings',
+            { park: this.park },
+            function (data) {
+                rooms.changeBuildings(data);
+            }
+        );
+    },
+
+    changeBuildings: function (buildings) {
+        var options = "<option value='0'></option>";
+        for (var x in buildings) {
+            options += "<option value='" + buildings[x].BuildingID + "'>" + buildings[x].BuildingName + "</option>";
+        }
+        $('#buildings').html(options);
     },
 
     filterRooms: function () {
@@ -76,7 +93,7 @@ var rooms = {
         select += "<label>Select Room</label>";
         select += "</div>";
         select += "<div class='editor-field'>";
-        select += "<select class='room-select'>";
+        select += "<select class='room-select' name='Rooms'>";
         select += this.getOptions();
         select += "</select>";
         select += "</div>";

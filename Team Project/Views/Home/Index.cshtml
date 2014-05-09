@@ -10,7 +10,7 @@
 <script src="@Url.Content("~/Scripts/Home/rooms.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(false)
     <fieldset id="s1">
         <h2>Booking</h2>
         <div class="field">
@@ -88,17 +88,19 @@
             <div class="field">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.StartTime)
+                    @Html.ValidationMessageFor(model => model.StartTime)
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.StartTime, (SelectList)ViewBag.Times, String.Empty)
+                    @Html.DropDownListFor(model => model.StartTime, new SelectList(ViewBag.Times, "Value", "Text"))
                 </div>
             </div>
             <div class="field">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Length)
+                    @Html.ValidationMessageFor(model => model.Length)
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.Length, (SelectList)ViewBag.Lengths, String.Empty)
+                    @Html.DropDownListFor(model => model.Length, (SelectList)ViewBag.Lengths)
                 </div>
             </div>
     </fieldset>
@@ -155,11 +157,11 @@
         </div>
         <div class="field">
             <div class="editor-label">
-                @Html.LabelFor(model => model.Building)
+                @Html.LabelFor(model => model.BuildingId)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.Building, (SelectList)ViewBag.Buildings, String.Empty)
-                @Html.ValidationMessageFor(model => model.Building)
+                @Html.DropDownListFor(model => model.BuildingId, (SelectList)ViewBag.Buildings, String.Empty, new { id = "buildings" })
+                @Html.ValidationMessageFor(model => model.BuildingId)
             </div>
         </div>
         <div class="field">

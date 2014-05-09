@@ -49,6 +49,7 @@ namespace TimetableSystem.Models
         [DisplayName("Room Type")]
         public string RoomType { get; set; }
 
+        [DisplayName("Building")]
         public int BuildingId { get; set; }
         public virtual Building Building { get; set; }
 
@@ -61,12 +62,12 @@ namespace TimetableSystem.Models
         [ScaffoldColumn(false)]
         public string Status { get; set; }
 
-        public virtual List<RequestWeek> RequestWeeks { get; set; }
-
         [ScaffoldColumn(false)]
         public List<int> Weeks { get; set; }
+        public virtual List<RequestWeek> RequestWeeks { get; set; }
 
-        public virtual List<RequestRoom> Rooms { get; set; }
+        public List<string> Rooms { get; set; }
+        public virtual List<RequestRoom> RequestRooms { get; set; }
 
         //Features
         [DisplayName("Data Projector")]
