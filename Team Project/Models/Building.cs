@@ -12,6 +12,7 @@ namespace TimetableSystem.Models
         public string BuildingName { get; set; }
         //[ForeignKey("Park")]
         public int ParkID { get; set; }
+        public virtual Park Park { get; set; }
     }
 }
 

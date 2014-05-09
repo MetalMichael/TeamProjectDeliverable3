@@ -156,9 +156,22 @@
   <ItemGroup>
     <Content Include="Content\availability.css" />
     <Content Include="Content\component.css" />
+    <Content Include="Content\images\back_disabled.png" />
+    <Content Include="Content\images\back_enabled.png" />
+    <Content Include="Content\images\back_enabled_hover.png" />
+    <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\font\fontawesome.svg" />
+    <Content Include="Content\images\forward_disabled.png" />
+    <Content Include="Content\images\forward_enabled.png" />
+    <Content Include="Content\images\forward_enabled_hover.png" />
+    <Content Include="Content\images\sort_asc.png" />
+    <Content Include="Content\images\sort_asc_disabled.png" />
+    <Content Include="Content\images\sort_both.png" />
+    <Content Include="Content\images\sort_desc.png" />
+    <Content Include="Content\images\sort_desc_disabled.png" />
     <Content Include="Content\form.css" />
     <Content Include="Content\icons.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="Content\radio-checks.css" />
     <Content Include="Content\requests.css" />
     <Content Include="Content\saved.css" />
@@ -167,10 +180,13 @@
     <Content Include="Content\themes\base\jquery-ui-1.9.2.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Home\index.js" />
+    <Content Include="Scripts\Home\rooms.js" />
     <Content Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\View\index.js" />
+    <Content Include="Scripts\View\jquery.dataTables.min.js" />
     <Content Include="Views\Availability\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -184,7 +200,6 @@
     <None Include="Content\font\fontawesome.eot" />
     <None Include="Content\font\fontawesome.ttf" />
     <None Include="Content\font\fontawesome.woff" />
-    <None Include="Content\font\readme.md" />
     <None Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

@@ -15,5 +15,10 @@ namespace TimetableSystem.Models
         [Key, Column(Order=2)]
         public int? RoomID { get; set; }
         public virtual Room Room { get; set; }
+
+        public RequestRoom (int roomID) {
+            this.RoomID = roomID;
+        }
+        public RequestRoom() { }
     }
 }

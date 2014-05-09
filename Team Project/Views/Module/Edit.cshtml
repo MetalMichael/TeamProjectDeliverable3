@@ -11,7 +11,7 @@
 @Html.HiddenFor(model => model.Department)
 
 @using (Html.BeginForm("Index", "Module", FormMethod.Post)) {
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(false)
     <fieldset>
         <h2>Module code</h2>
         <div class="field">
