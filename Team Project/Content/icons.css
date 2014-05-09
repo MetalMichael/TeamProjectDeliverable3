@@ -323,10 +323,10 @@
 .fa-tag:before {
   content: "\f02b";
 }
-.fa-tags:before {
+.fa-tags:before, .fa-Materials:before {
   content: "\f02c";
 }
-.fa-book:before {
+.fa-book:before, .fa-English:before {
   content: "\f02d";
 }
 .fa-bookmark:before {
@@ -381,7 +381,7 @@
 .fa-picture-o:before {
   content: "\f03e";
 }
-.fa-pencil:before {
+.fa-pencil:before, .fa-Design:before {
   content: "\f040";
 }
 .fa-map-marker:before {
@@ -509,7 +509,7 @@
 .fa-gift:before {
   content: "\f06b";
 }
-.fa-leaf:before {
+.fa-leaf:before, .fa-Chemical:before {
   content: "\f06c";
 }
 .fa-fire:before {
@@ -525,7 +525,7 @@
 .fa-exclamation-triangle:before {
   content: "\f071";
 }
-.fa-plane:before, .fa-TT:before{
+.fa-plane:before, .fa-Aeronautical:before{
   content: "\f072";
 }
 .fa-calendar:before {
@@ -573,7 +573,7 @@
 .fa-facebook-square:before {
   content: "\f082";
 }
-.fa-camera-retro:before {
+.fa-camera-retro:before, .fa-Arts:before {
   content: "\f083";
 }
 .fa-key:before {
@@ -691,7 +691,7 @@
 .fa-arrow-circle-down:before {
   content: "\f0ab";
 }
-.fa-globe:before {
+.fa-globe:before, .fa-Geography:before {
   content: "\f0ac";
 }
 .fa-wrench:before {
@@ -703,14 +703,14 @@
 .fa-filter:before {
   content: "\f0b0";
 }
-.fa-briefcase:before {
+.fa-briefcase:before, .fa-Business:before {
   content: "\f0b1";
 }
 .fa-arrows-alt:before {
   content: "\f0b2";
 }
 .fa-group:before,
-.fa-users:before {
+.fa-users:before, .fa-Social:before {
   content: "\f0c0";
 }
 .fa-chain:before,
@@ -720,7 +720,7 @@
 .fa-cloud:before {
   content: "\f0c2";
 }
-.fa-flask:before {
+.fa-flask:before, .fa-Chemistry:before {
   content: "\f0c3";
 }
 .fa-cut:before,
@@ -818,7 +818,7 @@
   content: "\f0e2";
 }
 .fa-legal:before,
-.fa-gavel:before {
+.fa-gavel:before, .fa-Politics:before {
   content: "\f0e3";
 }
 .fa-dashboard:before,
@@ -845,7 +845,7 @@
 .fa-clipboard:before {
   content: "\f0ea";
 }
-.fa-lightbulb-o:before {
+.fa-lightbulb-o:before, .fa-Electronic:before {
   content: "\f0eb";
 }
 .fa-exchange:before {
@@ -860,7 +860,7 @@
 .fa-user-md:before {
   content: "\f0f0";
 }
-.fa-stethoscope:before {
+.fa-stethoscope:before, .fa-Sport:before {
   content: "\f0f1";
 }
 .fa-suitcase:before {
@@ -878,7 +878,7 @@
 .fa-file-text-o:before {
   content: "\f0f6";
 }
-.fa-building-o:before {
+.fa-building-o:before, .fa-Civil:before {
   content: "\f0f7";
 }
 .fa-hospital-o:before {
@@ -926,7 +926,7 @@
 .fa-angle-down:before {
   content: "\f107";
 }
-.fa-desktop:before , .fa-CO:before {
+.fa-desktop:before , .fa-Computer:before {
   content: "\f108";
 }
 .fa-laptop:before {
@@ -1054,7 +1054,7 @@
 .fa-fire-extinguisher:before {
   content: "\f134";
 }
-.fa-rocket:before {
+.fa-rocket:before, .fa-Physics:before {
   content: "\f135";
 }
 .fa-maxcdn:before {
@@ -1342,6 +1342,6 @@
 .fa-try:before {
   content: "\f195";
 }
-.fa-plus-square-o:before {
+.fa-plus-square-o:before, .fa-Mathematical:before {
   content: "\f196";
 }
