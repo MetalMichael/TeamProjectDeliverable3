@@ -20,7 +20,9 @@
 	border-left: 2px solid #3e4c68;
 	
 }
-h2 {
+h2 
+{
+    
 	background: rgba(0,0,0,0.5);
 	padding-top: 15px;
 	padding-left: 10px;
@@ -36,22 +38,99 @@ fieldset
     background-color: #3e4c68;
     padding: 0;
 }
+
+.checkbox-label-container
+{
+    padding:0.2em;
+    width:49%;
+    float:left;
+}
+.checkbox-container
+{
+    padding:0.2em;
+    width:49%;
+    float:right;
+}
+
 .field
 {
-    height: 50px;
+    /*height: 50px;*/
+    background-color: #15317E;
+    display: block;
+    height: 4em;
+    /*padding-left: 10px;
+    padding-top: 17px;*/
 }
 .field:not(:last-child) 
 {
     border-bottom: 2px solid rgba(0,0,0,0.2)
 }
+
+.buttons-wrapper
+{
+    width:100%;
+    text-align:justify;
+}
+
+.buttons-wrapper.bar 
+{    
+    padding-left:30%;
+    padding-right:30%;
+    padding-top: 15px;
+    height:100%;
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+}
+
+.buttons-wrapper div
+{
+    display:inline-block;
+}
+
+.buttons-wrapper:after
+{
+    content:"";
+    width:100%;
+    display:inline-block;
+    position:relative;
+}
+
 /*editor-label label and editor-field input is messing up the checkboxes for weeks, perhaps add class to all others, and the css-so e.g. editor-label label.label... whilst checkboxes css is causing it to not display*/
+
+.editor-label 
+{
+    padding:1.5em;
+    min-width: 49%;
+    max-width: 49%;
+    display: inline-block;
+    height: 100%;
+}
+
+.editor-field 
+{
+    padding:0;
+    width:auto;
+    background:#ff0;   
+    float: right;
+    min-width: 50%;
+    max-width: 50%;
+    display: inline-block;
+    height: 100%;
+}
+
+.editor-field-inner
+{
+    float:right;
+    padding:1.5em;
+}
+
 .editor-field input:not([type='checkbox']) {
-	height: 48px;
+	/*height: 48px;*/
 	background-color: rgba(0,0,0,0.3);
 }
 .filter{
 	width: 100%;
-	height: 50px;
+	height: 100%;
 	background-color: rgba(0,0,0,0.3);
 	/*background: url('http://www.tc-gaming.tk/img/search.png') rgba(0,0,0,0.3) no-repeat 100% 50%;
 	background-size: 25px;*/
@@ -59,8 +138,8 @@ fieldset
 /*	outline: #dbdbdd;*/
 	color: #dbdbdd;
 	padding-left: 20px;
-	margin-left: -10px;
-	min-width: 506px;
+	/*margin-left: -10px;*/
+	/*min-width: 506px;*/
 }
 #no_students, #min_capacity {
 	width: 100.6%;
@@ -99,10 +178,10 @@ form select {
     text-indent: 0.01px;
     text-overflow: '';
 	border: 0;
-	height: 48px;
-	width: 101.7%;
+	height: 100%;
+	width: 100%;
 /*	padding-left: 10px;*/
-	margin-left: -10px;
+	/*margin-left: -10px;*/
 	background-color: rgba(255,255,255,0.5);
     /*background: rgba(255,255,255,0.5) url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 99% 50%;*/
 	color: #3e4c68;
@@ -129,21 +208,6 @@ button#submit {
 #additional {
 /*	resize: vertical;
 	max-height: 200px;*/
-	margin-top: -17px;
-	width: 101.7%;
-}
-.editor-label 
-{
-    min-width: 49%;
-    max-width: 49%;
-    display: inline-block;
-    height: 100%;
-}
-.editor-field 
-{
-    float: right;
-    min-width: 50%;
-    max-width: 50%;
-    display: inline-block;
-    height: 100%;
+	/*margin-top: -17px;*/
+	/*width: 101.7%;*/
 }
