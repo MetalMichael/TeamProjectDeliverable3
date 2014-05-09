@@ -187,11 +187,27 @@
             /*for (var i = 0; i < rooms.length; i++) {
             alert(rooms[i]);
             }*/
+            var html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>"
+            html += "<p>Select Room: </p><select id='dialogRooms'>"
+            for (var i = 0; i < rooms.length; i++) {
+                html += "<option>" + rooms[i] + "</option>";
+            }
+            html += "</select>";
+            $("#dialog").html(html);
+
             $(function () {
                 $("#dialog").dialog({
-                    height:100,
-                    weight:100,
-                    modal:true
+                    height: 200,
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Export": function () {
+                            alert("hello");
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
+                    }
                 });
             });
         });
@@ -204,6 +220,7 @@
 @*Park, Building, Room, Week*@
 @{ string[] filters = { "Semester", "Park", "Building", "Room", "Week" };}
 
+@*
 <div class="container">
 <ul class="list_grid">
 	<li class="section">
@@ -275,7 +292,8 @@
     </li>
 </ul>
 </div>
+*@
 
-<div id="dialog" title="Export Data">
-<p>blahblahdialog</p>
+<div hidden="true" id="dialog" title="Export Data">
+    <p>blahblahdialog</p>
 </div>
