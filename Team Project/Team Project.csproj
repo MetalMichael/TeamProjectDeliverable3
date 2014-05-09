@@ -180,6 +180,7 @@
     <Content Include="Content\themes\base\jquery-ui-1.9.2.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Home\index.js" />
+    <Content Include="Scripts\Home\rooms.js" />
     <Content Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

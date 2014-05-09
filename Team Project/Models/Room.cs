@@ -9,9 +9,13 @@ namespace TimetableSystem.Models
     {
         [Key]
         public int RoomID { get; set; }
+        
         public string RoomCode { get; set; }
+        
         public int Capacity { get; set; }
-        //[ForeignKey("Building")]
+        
+        public virtual Building Building { get; set; }
+
         public int BuildingID { get; set; }
     }
 }

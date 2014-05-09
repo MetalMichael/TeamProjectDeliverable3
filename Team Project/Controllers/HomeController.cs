@@ -115,5 +115,40 @@ namespace TimetableSystem.Controllers
             return View(request);
         }
 
+        public ActionResult Rooms()
+        {
+            int Students, ParkId, BuildingId = 0;
+            try {
+                Students = Convert.ToInt16(Request.QueryString["students"]);
+            } catch (FormatException) {
+                Students = 0;
+            }
+
+            try {
+                ParkId = Convert.ToInt16(Request.QueryString["park"]);
+            } catch (FormatException) {
+                ParkId = 0;
+            }
+
+            try {
+                BuildingId = Convert.ToInt16(Request.QueryString["building"]);
+            } catch (FormatException) {
+                BuildingId = 0;
+            }
+
+            var rooms = db.Rooms.Where(a => a.BuildingID == BuildingId);
+
+            if (BuildingId != 0)
+            {
+                rooms = db.Rooms.Where(a => a.BuildingID == BuildingId).Where(a => a.Capacity >= Students);
+            }
+            else if (ParkId != 0)
+            {
+                rooms = db.Rooms.Where(a => a.Building.ParkID == ParkId).Where(a => a.Capacity >= Students);
+            }
+
+            return Json(rooms, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

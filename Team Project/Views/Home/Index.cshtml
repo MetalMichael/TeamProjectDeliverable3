@@ -146,22 +146,6 @@
         </div>
         <div class="field">
             <div class="editor-label">
-                <label for="park">No. of Rooms: </label>
-            </div>
-            <div class="editor-field">
-                <select id="no_rooms">
-                    <option selected disabled>No. of Rooms</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                </select>
-            </div>
-        </div>
-        <div class="field">
-            <div class="editor-label">
                 @Html.LabelFor(model => model.Park)
             </div>
             <div class="editor-field">
@@ -180,10 +164,27 @@
         </div>
         <div class="field">
             <div class="editor-label">
-                <label>Add Room</label>
+                <label for="park">No. of Rooms: </label>
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Rooms", String.Empty)
+                <select id="no_rooms">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+            </div>
+        </div>
+        <div id="room-container">
+            <div class="field" id="room1">
+                <div class="editor-label">
+                    <label>Add Room</label>
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Rooms", String.Empty)
+                </div>
             </div>
         </div>
     </fieldset>
