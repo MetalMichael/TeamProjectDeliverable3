@@ -4,7 +4,6 @@ $(document).ready(function () {
     $('#buildings').change(function () { rooms.filterRooms(); });
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
 
-    rooms.changeRoomTotal();
     rooms.filterRooms();
 });
 
@@ -33,11 +32,7 @@ var rooms = {
     },
 
     changeBuildings: function (buildings) {
-        var options = "<option value='0'></option>";
-        for (var x in buildings) {
-            options += "<option value='" + buildings[x].BuildingID + "'>" + buildings[x].BuildingName + "</option>";
-        }
-        $('#buildings').html(options);
+        $('#buildings').html(buildings);
         this.filterRooms();
     },
 
@@ -93,21 +88,13 @@ var rooms = {
         select += "<label>Select Room</label>";
         select += "</div>";
         select += "<div class='editor-field'>";
-        select += "<select class='room-select' name='Rooms'>";
-        select += this.getOptions();
-        select += "</select>";
+        select += this.roomInfo;
         select += "</div>";
         select += "</div>";
         return select;
     },
 
     getOptions: function () {
-        var options = "<option value='0'></option>";
-        for (var x in this.roomInfo) {
-            options += "<option value='" + this.roomInfo[x].RoomID + "'>";
-            options += this.roomInfo[x].RoomCode + "&nbsp;&nbsp;&nbsp;&nbsp;(Cap:" + this.roomInfo[x].Capacity + ")";
-            options += "</option>";
-        }
-        return options;
+        return $(this.roomInfo).children();
     }
 };

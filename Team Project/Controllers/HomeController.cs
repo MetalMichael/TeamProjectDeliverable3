@@ -164,7 +164,14 @@ namespace TimetableSystem.Controllers
                 rooms = db.Rooms.Where(a => a.Building.ParkID == ParkId).Where(a => a.Capacity >= Students);
             }
 
-            return Json(rooms, JsonRequestBehavior.AllowGet);
+            string select = "<select class='room-select' name='Rooms'><option value='0'></option>";
+            foreach (var room in rooms)
+            {
+                select += "<option value='" + room.RoomID + "'>" + room.RoomCode + "&nbsp;&nbsp;&nbsp;&nbsp;(Cap: " + room.Capacity + ")</option>";
+            }
+            select += "</select>";
+
+            return Content(select);
         }
 
         public ActionResult Buildings()
@@ -187,7 +194,13 @@ namespace TimetableSystem.Controllers
                 buildings = db.Buildings;
             }
 
-            return Json(buildings, JsonRequestBehavior.AllowGet);
+            string options = "<option value='0'></option>";
+            foreach (var building in buildings)
+            {
+                options += "<option value='" + building.BuildingID + "'>" + building.BuildingName + "</option>";
+            }
+
+            return Content(options);
         }
 
     }
