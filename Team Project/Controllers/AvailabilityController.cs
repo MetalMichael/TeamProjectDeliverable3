@@ -46,33 +46,35 @@ namespace TimetableSystem.Controllers
 
             ViewBag.Type = new SelectList(new string[] { "Lecture", "Seminar", "Lab" });
 
-            ViewBag.WeekCheckboxes1 = "";
-            ViewBag.WeekCheckboxes2 = "";
-            ViewBag.WeekCheckboxes3 = "";
+            string week1 = "", week2 = "", week3 = "";
             string weekNo;
             for (int x = 1; x < 6; x++)
             {
                 weekNo = "Week" + x;
-                ViewBag.WeekCheckboxes1 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                week1 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
             }
             for (int x = 6; x < 11; x++)
             {
                 weekNo = "Week" + x;
-                ViewBag.WeekCheckboxes2 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                week2 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
             }
             for (int x = 11; x < 16; x++)
             {
                 weekNo = "Week" + x;
                 if (x < 13)
                 {
-                    ViewBag.WeekCheckboxes3 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                    week3 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
                 }
                 else
                 {
-                    ViewBag.WeekCheckboxes3 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' />";
+                    week3 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' />";
                 }
                 
             }
+
+            ViewBag.WeekCheckboxes1 = week1;
+            ViewBag.WeekCheckboxes2 = week2;
+            ViewBag.WeekCheckboxes3 = week3;
 
             return View();
         }
