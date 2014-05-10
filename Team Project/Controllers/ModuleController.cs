@@ -70,13 +70,13 @@ namespace TimetableSystem.Controllers
                 bool moduleExists = true;  // check if module already exists
                 foreach (var item in systemDB.Modules)
                 {
-                    if (item.ModuleID == module.ModuleID)
+                    if (item.ModuleCode == module.ModuleCode)
                         moduleExists = false;
                 }
 
                 if (moduleExists == false)    
                 {
-                    Module temp = systemDB.Modules.Find(module.ModuleID);    // remove duplicate
+                    Module temp = systemDB.Modules.Find(module.ModuleCode);    // remove duplicate
                     systemDB.Entry(temp).State = System.Data.EntityState.Deleted;     
                 }
                 systemDB.Modules.Add(module);
@@ -152,86 +152,6 @@ namespace TimetableSystem.Controllers
 
             return View(module);
         }
-
-        //
-        // GET: /Module/Create
-
-        //[HttpGet]   // not currently in use
-        //public ActionResult Create()
-        //{
-        //    return CreateForm(new Module());
-        //}
-
-        //
-        // POST: /Module/Create
-
-        //[HttpPost]  // not currently in use
-        //public ActionResult Create(Module module)
-        //{
-        //    try
-        //    {
-        //        systemDB.Modules.Add(module);
-        //        // add the module to the db
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //
-        // GET: /Module/Edit/5
-
-        //public ActionResult Edit()  // edit with no input, i.e. "create"
-        //{
-        //    return CreateForm(new Module());
-        //}
-
-        //
-        // POST: /Module/Edit/5
-
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //
-        // GET: /Module/Delete/5
-
-        //public ActionResult Delete(int id)  // may be unnecessary
-        //{
-        //    return View(systemDB.Modules.Find(id));
-        //}
-
-        //
-        // POST: /Module/Delete/5
 
     }
 }

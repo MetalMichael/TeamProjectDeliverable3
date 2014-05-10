@@ -11,15 +11,15 @@ namespace TimetableSystem.Controllers
     [Authorize]
     public class ViewController : Controller
     {
-        TimetableSystemEntities systemDB = new TimetableSystemEntities();
+        TimetableSystemEntities db = new TimetableSystemEntities();
         //
         // GET: /View/
 
         public ActionResult Index()
         {
             List<Request> requests = new List<Request>();
-            if (systemDB.Requests != null) {
-                requests = systemDB.Requests.ToList();
+            if (db.Requests != null) {
+                requests = db.Requests.ToList();
             }
             return View(requests);
         }

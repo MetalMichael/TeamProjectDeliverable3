@@ -8,8 +8,6 @@ namespace TimetableSystem.Models
     public class Module
     {
         [Key]
-        public int ModuleID { get; set; }
-
         //[Required(ErrorMessage = "Please enter a module code.")]
             // triggers IEnumerable error
         public string ModuleCode { get; set; }

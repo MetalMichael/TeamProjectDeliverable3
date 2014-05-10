@@ -24,8 +24,7 @@ namespace TimetableSystem.Models
 
         [Required(ErrorMessage = "Module is required")]
         [DisplayName("Module")]
-        public string ModuleId { get; set; }
-
+        public string ModuleCode { get; set; }
         public virtual Module Module { get; set; }
 
         public bool Priority { get; set; }
