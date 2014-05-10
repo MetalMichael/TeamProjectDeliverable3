@@ -114,8 +114,8 @@ form input.text-box.single-line
 .editor-label 
 {
     padding:1.5em;
-    min-width: 49%;
-    max-width: 49%;
+    min-width: 24%;
+    max-width: 24%;
     display: inline-block;
     height: 100%;
 }
@@ -126,8 +126,8 @@ form input.text-box.single-line
     width:auto;
     background:#3e4c68;   
     float: right;
-    min-width: 50%;
-    max-width: 50%;
+    min-width: 75%;
+    max-width: 75%;
     display: inline-block;
     height: 100%;
 }

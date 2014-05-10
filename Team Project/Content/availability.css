@@ -26,7 +26,7 @@
 		/*	border-right: 2px solid rgba(0,0,0,0.2);	*/
 			padding: 25px;
 		}
-		.availability td.available:hover, .availability td.some:hover {
+		.availability td.available:hover, .availability td.some:hover, .availability td.unavailable:hover {
 			cursor: pointer;
 			text-decoration: underline;
 		}
@@ -48,4 +48,7 @@
 		}
 		.weekDiv 
 		{
+		}
+		#tableSubtitle {
+			text-align: center;
 		}
