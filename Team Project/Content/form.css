@@ -43,11 +43,12 @@ form input.text-box.single-line
 {
     padding-left:1em;
     width:auto;
-    background:#ff0;   
+    background: rgba(0,0,0,0.3);   
     min-width: 100%;
     max-width: 100%;
     display: inline-block;
     height: 100%;
+	color: #fff;
 }
 
 .checkbox-label-container
@@ -66,9 +67,10 @@ form input.text-box.single-line
 .field
 {
     /*height: 50px;*/
-    background-color: #15317E;
+    background-color: #3e4c68;
     display: block;
     height: 4em;
+	color: #fff;
     /*padding-left: 10px;
     padding-top: 17px;*/
 }
@@ -121,7 +123,7 @@ form input.text-box.single-line
 {
     padding:0;
     width:auto;
-    background:#ff0;   
+    background:#3e4c68;   
     float: right;
     min-width: 50%;
     max-width: 50%;
