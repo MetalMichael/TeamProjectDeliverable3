@@ -187,11 +187,27 @@
             /*for (var i = 0; i < rooms.length; i++) {
             alert(rooms[i]);
             }*/
+            var html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>"
+            html += "<p>Select Room: </p><select id='dialogRooms'>"
+            for (var i = 0; i < rooms.length; i++) {
+                html += "<option>" + rooms[i] + "</option>";
+            }
+            html += "</select>";
+            $("#dialog").html(html);
+
             $(function () {
                 $("#dialog").dialog({
-                    height:100,
-                    weight:100,
-                    modal:true
+                    height: 200,
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Export": function () {
+                            alert("hello");
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
+                    }
                 });
             });
         });
@@ -204,6 +220,47 @@
 @*Park, Building, Room, Week*@
 @{ string[] filters = { "Semester", "Park", "Building", "Room", "Week" };}
 
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(false)
+    <fieldset id="s1">
+        <h2>Room</h2>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Type")
+            </div>
+            <div class="editor-field">
+                <div class="editor-field-inner">
+                    @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Capacity")
+            </div>
+            <div class="editor-field">
+                <div class="editor-field-inner">
+                    <div id="slider-range-max"></div>
+                    <input type="text" id="CapacityAmount" readonly="readonly" style="width:50px" value="100" />
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Park")
+            </div>
+            <div class="editor-field">
+                <div class="editor-field-inner">
+                    @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference")
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+@*
 <div class="container">
 <ul class="list_grid">
 	<li class="section">
@@ -275,7 +332,8 @@
     </li>
 </ul>
 </div>
+*@
 
 <div id="dialog" title="Export Data">
-<p>blahblahdialog</p>
+    <p>blahblahdialog</p>
 </div>

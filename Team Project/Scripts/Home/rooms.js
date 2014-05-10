@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    $('#StudentsTotal').keyup(function () { rooms.update(); });
-    $('#Park').change(function () { rooms.update(); });
-    $('#Building').change(function () { rooms.update(); });
+    $('#StudentsTotal').keyup(function () { rooms.filterRooms(); });
+    $('#Park').change(function () { rooms.updateBuildings(); });
+    $('#buildings').change(function () { rooms.filterRooms(); });
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
 
-    rooms.update();
+    rooms.filterRooms();
 });
 
 var rooms = {
@@ -15,17 +15,15 @@ var rooms = {
     building: null,
     roomTotal: 0,
 
-    update: function () {
+    updateInfo: function () {
         this.students = $('#StudentsTotal').val();
         this.park = $('#Park').val();
-        this.building = $('#Building').val();
-
-        this.updateBuildings();
-        this.filterRooms();
+        this.building = $('#buildings').val();
     },
 
     updateBuildings: function () {
-        $.get('/Home/Buildings',
+        this.updateInfo();
+        $.get('Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -34,15 +32,14 @@ var rooms = {
     },
 
     changeBuildings: function (buildings) {
-        var options = "<option value='0'></option>";
-        for (var x in buildings) {
-            options += "<option value='" + buildings[x].BuildingID + "'>" + buildings[x].BuildingName + "</option>";
-        }
-        $('#buildings').html(options);
+        $('#buildings').html(buildings);
+        this.filterRooms();
     },
 
     filterRooms: function () {
-        $.get('/Home/Rooms',
+        console.log("Filtering Rooms");
+        this.updateInfo();
+        $.get('Home/Rooms',
             { students: this.students, park: this.park, building: this.building },
             function (data) {
                 rooms.roomInfo = data;
@@ -54,8 +51,6 @@ var rooms = {
 
     changeRoomTotal: function () {
         var newTotal = $('#no_rooms').val();
-        console.log('Old: ' + this.roomTotal);
-        console.log('New ' + newTotal);
         if (newTotal < this.roomTotal) {
             while (this.roomTotal > newTotal) {
                 this.removeRoom();
@@ -93,21 +88,13 @@ var rooms = {
         select += "<label>Select Room</label>";
         select += "</div>";
         select += "<div class='editor-field'>";
-        select += "<select class='room-select' name='Rooms'>";
-        select += this.getOptions();
-        select += "</select>";
+        select += this.roomInfo;
         select += "</div>";
         select += "</div>";
         return select;
     },
 
     getOptions: function () {
-        var options = "<option value='0'></option>";
-        for (var x in this.roomInfo) {
-            options += "<option value='" + this.roomInfo[x].RoomID + "'>";
-            options += this.roomInfo[x].RoomCode + "&nbsp;&nbsp;&nbsp;&nbsp;(Cap:" + this.roomInfo[x].Capacity + ")";
-            options += "</option>";
-        }
-        return options;
+        return $(this.roomInfo).children();
     }
 };
