@@ -4,14 +4,24 @@
     ViewBag.Title = "View Modules";
 }
 
+@using (Html.BeginForm("Index", "Module", new { name = "hiddenForm" }, FormMethod.Get))
+{
+            <input type="hidden" id="moduleCode" name="moduleCode" />
+            <input type="hidden" id="moduleTitle" name="moduleTitle" />
+
 <div class="buttons-wrapper bar">
+
     <div>
-        <button>Filter</button>
+        <input type="submit" value="Filter" class="button" style="padding:5px;" />
     </div>
     <div>
-        <button>Reset</button>
+        <input type="submit" value="Reset" class="button" style="padding:5px;" onclick="clear();" />
+    </div>
+    <div>
+        @Html.ActionLink("Create", "Edit", new { }, new { @class = "button" })
     </div>
 </div>
+}
 
 <script type="text/javascript">
     function filter() {
@@ -48,23 +58,36 @@
 
 <fieldset>
     <h2>Module code</h2>
-    <form id="codeForm" name="codeForm" action="#">
-        <input id="codeInput" name="codeInput" type="text" class="filter" 
-            onchange="filter();" />
-    </form>
+    <div class="field">
+        <div class="editor-field" style="min-width:100%; float:left;">
+            <input class="filter" id="codeInput" name="codeInput" type="text" 
+                onchange="filter();"
+            />
+         </div>
+    </div>
 
     @foreach (var item in Model)
     {
         <div class="field">
-            <div class="editor-label">@Html.DisplayFor(modelItem => item.ModuleCode)</div>
+            <div class="editor-label">
+                @Html.DisplayFor(modelItem => item.ModuleCode)
+            </div>
         </div>
     }
+
+
 </fieldset>
 
 <fieldset>
     <h2>Module title</h2>
+    <div class="field">
+        <div class="editor-field" style="min-width:100%;" float:left;">
+            <input id="titleInput" name="titleInput" type="text" class="filter" 
+                onchange="filter();" 
+            /> 
+        </div>
+    </div>
 
-    <input id="titleInput" name="titleInput" type="text" class="filter" onchange="filter();" /> 
     @foreach (var item in Model)
     {
         <div class="field">
@@ -74,26 +97,18 @@
 </fieldset>
 
 <fieldset class="modulesFieldset">
-    <div class="field" style="border:0;">
-        @Html.ActionLink("Create New", "Edit", new {}, new { @class = "button1" })
-    </div>
-    <div class="field" style="border:0;">
-         @using (Html.BeginForm("Index", "Module", new { name = "hiddenForm" }, FormMethod.Get))
-        {
-            <input type="hidden" id="moduleCode" name="moduleCode" />
-            <input type="hidden" id="moduleTitle" name="moduleTitle" />
-            <input type="submit" value="Filter" class="button" style="padding:5px;" />
-            <input type="submit" value="Reset" class="button" style="padding:5px;" onclick="clear();" />
-        }
-       
-    </div>
+    
+    <div class="field" style="background:none; border:0;"></div>
+    <div class="field" style="background:none; border:0;"></div>
     @foreach (var item in Model)
     {
-        <div class="field" style="border:0;">
+        <div class="field" style="border:0; max-width:50%; background-color:inherit;">
             <div class="editor-label">
-                <div class="editor-label">@Html.ActionLink("Edit", "Edit", new { id = item.ModuleID }, new { @class = "button" }) | 
-                  @Html.ActionLink("Delete", "Delete", new { id = item.ModuleID }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" }) </div>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ModuleID }, new { @class = "button" }) 
             </div>
+            <div class="editor-label" style="float:right;">
+                @Html.ActionLink("Delete", "Delete", new { id = item.ModuleID }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" })
+            </div> 
         </div>
     }
 </fieldset>

@@ -28,7 +28,7 @@ namespace TimetableSystem.Controllers
             {
                 foreach (var item in allModules)    // pass only modules belonging to logged in user
                 {
-                    if (item.Department == User.Identity.Name)
+                    if (item.Department.Replace("_", " ") == User.Identity.Name)
                     {
                         modules.Add(item);
                     }
@@ -63,6 +63,8 @@ namespace TimetableSystem.Controllers
                 //return CreateForm(new Module());    // triggers IEnumerable error
             }
 
+            module.Department = module.Department.Replace(" ", "_");
+            
             if (ModelState.IsValid)
             {
                 bool moduleExists = true;  // check if module already exists

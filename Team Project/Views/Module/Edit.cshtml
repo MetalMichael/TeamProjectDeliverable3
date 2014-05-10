@@ -12,6 +12,19 @@
 
 @using (Html.BeginForm("Index", "Module", FormMethod.Post)) {
     @Html.ValidationSummary(false)
+
+            <div class="buttons-wrapper bar">
+            <div>
+                @Html.ActionLink("Back", "Index", new { }, new { @class = "button" })
+            </div>
+            <div>
+                <input type="submit" value="Save" class="button" /> 
+            </div>
+            <div>
+                <input type="reset" value="Reset" class="button" />
+            </div>
+        </div>
+    
     <fieldset>
         <h2>Module code</h2>
         <div class="field">
@@ -19,7 +32,7 @@
                 @Html.LabelFor(model => model.ModuleCode)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(model => model.ModuleCode, new { maxlength = "10" })
+                @Html.EditorFor(model => model.ModuleCode, new { maxlength = "10" })
                 @Html.ValidationMessageFor(model => model.ModuleCode)
             </div>
         </div>
@@ -31,18 +44,12 @@
                 @Html.LabelFor(model => model.ModuleTitle)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(model => model.ModuleTitle, new { maxlength = "255" })
+                @Html.EditorFor(model => model.ModuleTitle, new { maxlength = "255" })
                 @Html.ValidationMessageFor(model => model.ModuleTitle)
             </div>
         </div>
     </fieldset>
     <fieldset class="modulesFieldset">
-        <div class="field" style="border:0;">
-            @Html.ActionLink("Back to List", "Index", new { }, new { @class = "button1" })
-        </div>
-        <div class="field" style="border:0;">
-            <input type="submit" value="Save" class="button" /> 
-            <input type="reset" value="Reset" class="button" />
-        </div>
+
     </fieldset>
 }
