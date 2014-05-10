@@ -1,0 +1,29 @@
+.greatForm > label{
+  position: relative;
+  top: 18px;
+  left: 0px;
+  color: #FFF;
+  font-size: 1.2em;
+  background-color: #E64545;
+  font-family: Lato;
+  padding: .3em .6em;
+  border-radius: 3px;
+  -webkit-transition: background-color .5s, top .1s;
+  transition: background-color .5s, top .1s;
+/*   margin: 10px; */
+}
+
+.greatForm > input[type=checkbox]{
+  background-color: #CC0000;
+  height: 0em;
+  width: 0em;
+  background: none;
+  margin: 10px;
+}
+.greatForm > input[type=checkbox]:checked + label{
+  background-color: #4DA269;
+}
+.greatForm > label:hover{
+/*  top: -3px;*/
+  cursor: pointer;
+}
