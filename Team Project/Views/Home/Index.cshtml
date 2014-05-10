@@ -52,7 +52,7 @@
                 @Html.Label("Module Title")
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.Module, (SelectList)ViewBag.Modules, String.Empty)
+                @Html.DropDownListFor(model => model.ModuleId, (SelectList)ViewBag.Modules, String.Empty)
             </div>
         </div>
         <div class="field">
@@ -227,10 +227,10 @@
         </div>
         <div class="field">
             <div class="editor-label">
-                @Html.LabelFor(model => model.Park)
+                @Html.LabelFor(model => model.ParkId)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.Park, (SelectList)ViewBag.Parks, String.Empty)
+                @Html.DropDownListFor(model => model.Park, (SelectList)ViewBag.Parks, String.Empty, new { id = "Park" })
                 @Html.ValidationMessageFor(model => model.Park)
             </div>
         </div>
