@@ -24,8 +24,7 @@ namespace TimetableSystem.Models
 
         [Required(ErrorMessage = "Module is required")]
         [DisplayName("Module")]
-        [ForeignKey("Module")]
-        public int ModuleId { get; set; }
+        public string ModuleId { get; set; }
 
         public virtual Module Module { get; set; }
 

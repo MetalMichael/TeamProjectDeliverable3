@@ -1,11 +1,11 @@
 //functionality for checking the weeks
 $(document).ready(function () {
-    $('#Module').change(function () {
+    $('#ModuleId').change(function () {
         $('#ModuleCodes').val($(this).val());
     });
 
     $('#ModuleCodes').change(function () {
-        $('#Module').val($(this).val());
+        $('#ModuleId').val($(this).val());
     });
 
     $("#allWeeks").click(function () {
