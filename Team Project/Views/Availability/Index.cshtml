@@ -1,8 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "Availability";
-}
-<script type="text/javascript">
+﻿<script type="text/javascript">
     $(document).ready(function () {
         refreshTable();
         //Set Park field change function
@@ -53,9 +49,6 @@
         $('#Type').change(function () {
             refreshTable();
         });
-        $('button').change(function () {
-            refreshTable();
-        });
         $('#slider-range-max').change(function () {
             refreshTable();
         });
@@ -75,7 +68,7 @@
             $("#CapacityAmount").val($("#slider-range-max").slider("value"));
         });
 
-        //checkbox functions
+        //checkbox button functions
         function clearAll() {
             for (var i = 1; i < 16; i++) {
                 var cb = '#Week' + i;
@@ -90,6 +83,7 @@
                 var cb = '#Week' + i;
                 $(cb).prop('checked', true);
             }
+            refreshTable();
         });
         $('#oneToTwelve').click(function () {
             clearAll();
@@ -97,6 +91,7 @@
                 var cb = '#Week' + i;
                 $(cb).prop('checked', true);
             }
+            refreshTable();
         });
         $('#checkEven').click(function () {
             clearAll();
@@ -106,6 +101,7 @@
                     $(cb).prop('checked', true);
                 }
             }
+            refreshTable();
         });
         $('#checkOdd').click(function () {
             clearAll();
@@ -115,6 +111,11 @@
                     $(cb).prop('checked', true);
                 }
             }
+            refreshTable();
+        });
+        //refresh table on checkbox change
+        $('.weekBox').change(function () {
+            refreshTable();
         });
     });
 
@@ -132,7 +133,12 @@
                 week += i + ";";
             }
         }
-        week = week.substr(0, week.length - 1);
+        if (week == "") {
+            alert("Cannot search for availability with zero weeks checked.");
+            return;
+        } else {
+            week = week.substr(0, week.length - 1);
+        }
         var capacity = $('#CapacityAmount').val();
         var roomType = $('#Type').val();
 
@@ -184,47 +190,67 @@
         $.get(queryLink, { parkName: park, buildingName: building, roomCode: room,
             semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
         }, function (data) {
-
-            var rooms = (data.substr(0, data.length - 1)).split(';');
-            rooms.sort();
-
-            var day = days[parseInt(slot.substr(4, 1))];
-            var time = times[parseInt(slot.substr(5, 1))];
-
-            var html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
-            html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
-            html += "<p>Select Room: </p><select id='dialogRooms'>";
-            for (var i = 0; i < rooms.length; i++) {
-                html += "<option>" + rooms[i] + "</option>";
-            }
-            html += "</select>";
-            $("#dialog").html(html);
-
-            $(function () {
-                $("#dialog").dialog({
-                    resizable: false,
-                    height: 325,
-                    width: 300,
-                    modal: true,
-                    buttons: {
-                        "Export": function () {
-                            alert("hello");
-                        },
-                        Cancel: function () {
-                            $(this).dialog("close");
+            var html;
+            if (data == "") {
+                html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
+                html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
+                html += "<p>There are no rooms available for the current selection of filters.</p></br></br>";
+                $("#dialog").html(html);
+                $(function () {
+                    $("#dialog").dialog({
+                        resizable: false,
+                        height: 325,
+                        width: 300,
+                        modal: true,
+                        buttons: {
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            } else {
+                var rooms = (data.substr(0, data.length - 1)).split(';');
+                rooms.sort();
+
+                var day = days[parseInt(slot.substr(4, 1))];
+                var time = times[parseInt(slot.substr(5, 1))];
+
+                html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
+                html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
+                html += "<p>Select Room: </p><select id='dialogRooms'>";
+                for (var i = 0; i < rooms.length; i++) {
+                    html += "<option>" + rooms[i] + "</option>";
+                }
+                html += "</select>";
+
+                $("#dialog").html(html);
+
+                $(function () {
+                    $("#dialog").dialog({
+                        resizable: false,
+                        height: 325,
+                        width: 300,
+                        modal: true,
+                        buttons: {
+                            "Export": function () {
+                                alert("hello");
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                });
+            }
+
+
         });
     }
 
     
     
 </script>
-
-@*Park, Building, Room, Week*@
-@{ string[] filters = { "Semester", "Park", "Building", "Room", "Week" };}
 
 
 @using (Html.BeginForm()) {
@@ -236,9 +262,7 @@
                 @Html.Label("Type")
             </div>
             <div class="editor-field">
-                <div class="editor-field-inner">
                     @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
-                </div>
             </div>
         </div>
         <div class="field">
@@ -259,9 +283,7 @@
                 @Html.Label("Park")
             </div>
             <div class="editor-field">
-                <div class="editor-field-inner">
                     @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference")
-                </div>
             </div>
         </div>
         <div class="field">
@@ -269,9 +291,7 @@
                 @Html.Label("Building")
             </div>
             <div class="editor-field">
-                <div class="editor-field-inner">
                     @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference")
-                </div>
             </div>
         </div>
         <div class="field">
@@ -279,35 +299,33 @@
                 @Html.Label("Room")
             </div>
             <div class="editor-field">
-                <div class="editor-field-inner">
                     @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference")
-                </div>
             </div>
         </div>
     </fieldset>
     <fieldset id="s2">
         <h2>Weeks / Semester</h2>
-        <div class="buttons-wrapper">
-            <div>
-				<button type=button id="checkAll">All</button>
-				<button type=button id="oneToTwelve">1-12</button>
-				<button type=button id="checkOdd">Odd</button>
-				<button type=button id="checkEven">Even</button>
-				<button type=button id="clearAll">Clear</button>
+        <div class="field">
+            <div class="buttons-wrapper">
+				    <button type=button class="weekButton" id="checkAll">All</button>
+				    <button type=button class="weekButton" id="oneToTwelve">1-12</button>
+				    <button type=button class="weekButton" id="checkOdd">Odd</button>
+				    <button type=button class="weekButton" id="checkEven">Even</button>
+				    <button type=button class="weekButton" id="clearAll">Clear</button>
             </div>
         </div>
         <div class="field">
-            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+            <div class="buttons-wrapper greatform">   <!-- lower whitespace needs removing -->
                 @Html.Raw(ViewBag.WeekCheckboxes1)
             </div>
         </div>
         <div class="field">
-            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+            <div class="buttons-wrapper greatform">   <!-- lower whitespace needs removing -->
                 @Html.Raw(ViewBag.WeekCheckboxes2)
             </div>
         </div>
         <div class="field">
-            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+            <div class="buttons-wrapper greatform">   <!-- lower whitespace needs removing -->
                 @Html.Raw(ViewBag.WeekCheckboxes3)
             </div>
         </div>
@@ -316,9 +334,7 @@
                 @Html.Label("Semester")
             </div>
             <div class="editor-field">
-                <div class="editor-field-inner">
                     @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])
-                </div>
             </div>
         </div>
     </fieldset>

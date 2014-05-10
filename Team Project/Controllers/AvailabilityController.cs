@@ -14,6 +14,8 @@ namespace TimetableSystem.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Title = "Availability";
+
             var parkQry = from p in systemDB.Parks
                           orderby p.ParkID
                           select p.ParkName;
@@ -51,23 +53,23 @@ namespace TimetableSystem.Controllers
             for (int x = 1; x < 6; x++)
             {
                 weekNo = "Week" + x;
-                week1 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                week1 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
             }
             for (int x = 6; x < 11; x++)
             {
                 weekNo = "Week" + x;
-                week2 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                week2 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
             }
             for (int x = 11; x < 16; x++)
             {
                 weekNo = "Week" + x;
                 if (x < 13)
                 {
-                    week3 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked />";
+                    week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
                 }
                 else
                 {
-                    week3 += "<label for='" + weekNo + "'>" + x + "</label> <input id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' />";
+                    week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' /><label for='" + weekNo + "'>" + x + "</label>";
                 }
                 
             }
@@ -204,7 +206,7 @@ namespace TimetableSystem.Controllers
             string html = "<table class='availability'><thead><tr><th><p style='text-align: center'>-</p></th>";
             for (int i = 0; i < 9; i++)
             {
-                html += "<th>" + times[i] + "</th>";
+                html += "<th class='day'>" + times[i] + "</th>";
             }
             html += "</tr></thead>";
 
