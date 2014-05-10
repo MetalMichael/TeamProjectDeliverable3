@@ -82,7 +82,8 @@ form input.text-box.single-line
 .buttons-wrapper
 {
     width:100%;
-    text-align:justify;
+/*	text-align:justify; */
+	text-align: center;
 }
 
 .buttons-wrapper.bar 
@@ -213,7 +214,11 @@ button {
 	border-radius: 3px;
 	cursor: pointer;
 }
-button#clearWeeks, button#reset {
+button:hover {
+	background: #dbdbde;
+	color: #1F2634;
+}
+button#clearWeeks, button#reset, button#clearAll {
 	background: rgba(255,0,0,0.6);
 }
 button#submit {
