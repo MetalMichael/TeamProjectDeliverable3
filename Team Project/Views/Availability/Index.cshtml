@@ -160,6 +160,9 @@
 
     //List all available rooms for slot function
     function listRooms(slot) {
+        //arrays to use on slot value
+        var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        var times = ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
         //Form values
         var park = $('#Park').val();
         var building = $('#Building').val();
@@ -184,11 +187,13 @@
 
             var rooms = (data.substr(0, data.length - 1)).split(';');
             rooms.sort();
-            /*for (var i = 0; i < rooms.length; i++) {
-            alert(rooms[i]);
-            }*/
-            var html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>"
-            html += "<p>Select Room: </p><select id='dialogRooms'>"
+
+            var day = days[parseInt(slot.substr(4, 1))];
+            var time = times[parseInt(slot.substr(5, 1))];
+
+            var html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
+            html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
+            html += "<p>Select Room: </p><select id='dialogRooms'>";
             for (var i = 0; i < rooms.length; i++) {
                 html += "<option>" + rooms[i] + "</option>";
             }
@@ -197,7 +202,8 @@
 
             $(function () {
                 $("#dialog").dialog({
-                    height: 200,
+                    resizable: false,
+                    height: 325,
                     width: 300,
                     modal: true,
                     buttons: {
@@ -240,8 +246,10 @@
                 @Html.Label("Capacity")
             </div>
             <div class="editor-field">
-                <div class="editor-field-inner">
+                <div style="float:left; width:100px;" class="editor-field-inner">
                     <div id="slider-range-max"></div>
+                </div>
+                <div style="float:right;" class="editor-field-inner">
                     <input type="text" id="CapacityAmount" readonly="readonly" style="width:50px" value="100" />
                 </div>
             </div>
@@ -256,84 +264,70 @@
                 </div>
             </div>
         </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Building")
+            </div>
+            <div class="editor-field">
+                <div class="editor-field-inner">
+                    @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference")
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Room")
+            </div>
+            <div class="editor-field">
+                <div class="editor-field-inner">
+                    @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference")
+                </div>
+            </div>
+        </div>
     </fieldset>
-}
-
-
-@*
-<div class="container">
-<ul class="list_grid">
-	<li class="section">
-		<h2>Room</h2>
-		<table>
-			<tr class="bottom">
-				<td>@Html.Label("Type")</td>
-				<td colspan="2">
-                    @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
-				</td>
-			</tr>
-			<tr class="bottom">
-				<td>@Html.Label("Capacity")</td>
-				<td colspan="2">
-					<table>
-                        <tr>
-                            <td style="width:300px"><div id="slider-range-max"></div></td>
-                            <td style="width:100px; text-align:center">
-                            <input type="text" id="CapacityAmount" readonly="readonly" style="width:50px" value="100" />
-                            </td>
-                        </tr>
-                    </table>
-				</td>
-			</tr>
-			<tr class="bottom">
-				<td>@Html.Label("Park")</td>
-				<td colspan="2">@Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference")</td>
-			</tr>
-			<tr class="bottom">
-				<td>@Html.Label("Building")</td>
-				<td>@Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference")</td>
-			</tr>
-			<tr>
-				<td>@Html.Label("Room")</td>
-				<td>@Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference")</td>
-			</tr>
-		</table>
-	</li>
-	<li class="section">
-		<h2>Week / Semester</h2>
-		<table>
-			<tr class="bottom">
-				<td>
-                    <div>
-					    <button id="checkAll">All</button>
-					    <button id="oneToTwelve">1-12</button>
-					    <button id="checkOdd">Odd</button>
-					    <button id="checkEven">Even</button>
-					    <button id="clearAll">Clear</button>
-                    </div>
-				</td>
-			</tr>
-			<tr class="bottom">
-                <td>
-                    <div id="inner_check">
-                        @Html.Raw(ViewBag.WeekCheckboxes)
-                    </div>
-                </td>
-            <tr>
-				<td>@Html.Label("Semester")</td>
-				<td colspan="2">@Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])</td>
-			</tr>
-		</table>
-	</li>
-    <li class="section grid">
+    <fieldset id="s2">
+        <h2>Weeks / Semester</h2>
+        <div class="buttons-wrapper">
+            <div>
+				<button id="checkAll">All</button>
+				<button id="oneToTwelve">1-12</button>
+				<button id="checkOdd">Odd</button>
+				<button id="checkEven">Even</button>
+				<button id="clearAll">Clear</button>
+            </div>
+        </div>
+        <div class="field">
+            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes1)
+            </div>
+        </div>
+        <div class="field">
+            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes2)
+            </div>
+        </div>
+        <div class="field">
+            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes3)
+            </div>
+        </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Semester")
+            </div>
+            <div class="editor-field">
+                <div class="editor-field-inner">
+                    @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset id="s3">
         <div id="tableDiv">
         
         </div>
-    </li>
-</ul>
-</div>
-*@
+    </fieldset>
+}
+<div hidden=true id="dialog" title="Export Data">
 
-<div id="dialog" title="Export Data">
-    <p>blahblahdialog</p>
 </div>
