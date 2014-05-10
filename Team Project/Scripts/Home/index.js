@@ -1,5 +1,13 @@
 //functionality for checking the weeks
 $(document).ready(function () {
+    $('#Module').change(function () {
+        $('#ModuleCodes').val($(this).val());
+    });
+
+    $('#ModuleCodes').change(function () {
+        $('#Module').val($(this).val());
+    });
+
     $("#allWeeks").click(function () {
         $(".all_weeks").prop('checked', $(this).prop('checked'));
         $("#defWeeks").attr('checked', false);
@@ -106,122 +114,122 @@ $(document).ready(function () {
 
     }
 
-	//hides all the rooms apart from room_1
-  	for(q=1; q<=6; q++){
-		$('#room'+[q]).hide();
-	}
-	//displays the correct no of rooms based on no_rooms
-	$("#no_rooms").change(function() {
-		var no_rooms = $("#no_rooms").val();
-						
-		for(j=no_rooms; j<=6; j++){
-			$('#room'+[j]).hide();
-		}
+    //hides all the rooms apart from room_1
+    for (q = 1; q <= 6; q++) {
+        $('#room' + [q]).hide();
+    }
+    //displays the correct no of rooms based on no_rooms
+    $("#no_rooms").change(function () {
+        var no_rooms = $("#no_rooms").val();
 
-        for(i=1; i<=no_rooms; i++){
-        	$('#room'+[i]).show();
+        for (j = no_rooms; j <= 6; j++) {
+            $('#room' + [j]).hide();
+        }
+
+        for (i = 1; i <= no_rooms; i++) {
+            $('#room' + [i]).show();
         }
     });
 
-    $('input[type="radio"].semester').bind('keyup change',function(){
-    
-		// get elements that are empty.
-		var empty = $('input[type="radio"].semester').map(function(index, el) {
-        	return !$(el).val().length ? el : null;
-		}).get();
-    
-		// could also be placed outside of the function
-		var tick = $('#tick');
-		var cross = $('#cross');
-    	
-		// check if there are any empty elements, if there are none, show numbers, else hide number.
-		!empty.length ? tick.show() : tick.hide();
-		!empty.length ? cross.hide() : cross.show();
-	});
-		
-	//Select module table, change cross to tick
-	$('#module_title').bind('keyup change',function(){
-    
-		// get elements that are empty.
-    	var empty = $('#module_title').map(function(index, el) {
-			return !$(el).val().length ? el : null;
-		}).get();
-    
-		// could also be placed outside of the function
-		var tick = $('#tick2');
-		var cross = $('#cross2');
-    
-		// check if there are any empty elements, if there are none, show numbers, else hide number.
-		!empty.length ? tick.show() : tick.hide();
-		!empty.length ? cross.hide() : cross.show();
-	});
-			
-	//Select weeks table, change cross to tick
-	$('.weeks').bind('keyup change',function(){
-        	 
-				
-		// get elements that are empty.
-		var checked = $('.weeks').filter(':checked');
-				
-		// could also be placed outside of the function
-		var tick = $('#tick3');
-		var cross = $('#cross3');
+    $('input[type="radio"].semester').bind('keyup change', function () {
 
-		// check if there are any empty elements, if there are none, show numbers, else hide number.
-		checked.length ? tick.show() : tick.hide();
-		checked.length ? cross.hide() : cross.show();
+        // get elements that are empty.
+        var empty = $('input[type="radio"].semester').map(function (index, el) {
+            return !$(el).val().length ? el : null;
+        }).get();
+
+        // could also be placed outside of the function
+        var tick = $('#tick');
+        var cross = $('#cross');
+
+        // check if there are any empty elements, if there are none, show numbers, else hide number.
+        !empty.length ? tick.show() : tick.hide();
+        !empty.length ? cross.hide() : cross.show();
     });
-			
-	//Select time table, change cross to tick
-	$('.day, #start_time').bind('keyup click',function(){
-    
-		// get elements that are empty.
-    	var empty = $('.day, #start_time').map(function(index, el) {
-			return !$(el).val().length ? el : null;
-		}).get();
-    
-		// could also be placed outside of the function
-		var tick = $('#tick4');
-		var cross = $('#cross4');
-    
-		// check if there are any empty elements, if there are none, show numbers, else hide number.
-		!empty.length ? tick.show() : tick.hide();
-		!empty.length ? cross.hide() : cross.show();
-	});
-			
-	//Select roomtype table, change cross to tick
-	$('.roomtype').bind('keyup change',function(){
-    
-		// get elements that are empty.
-    	var empty = $('.roomtype').map(function(index, el) {
-			return !$(el).val().length ? el : null;
-		}).get();
-    
-		// could also be placed outside of the function
-		var tick = $('#tick5');
-		var cross = $('#cross5');
-    
-		// check if there are any empty elements, if there are none, show numbers, else hide number.
-		!empty.length ? tick.show() : tick.hide();
-		!empty.length ? cross.hide() : cross.show();
-	});
-			
-	//Select room_info table, change cross to tick
-	$('#no_students, #no_rooms').bind('keyup change',function(){
-    
-		// get elements that are empty.
-    	var empty = $('#no_students, #no_rooms').map(function(index, el) {
-			return !$(el).val().length ? el : null;
-		}).get();
-    
-		// could also be placed outside of the function
-		var tick = $('#tick6');
-		var cross = $('#cross6');
-    
-		// check if there are any empty elements, if there are none, show numbers, else hide number.
-		!empty.length ? tick.show() : tick.hide();
-		!empty.length ? cross.hide() : cross.show();
-	});
+
+    //Select module table, change cross to tick
+    $('#module_title').bind('keyup change', function () {
+
+        // get elements that are empty.
+        var empty = $('#module_title').map(function (index, el) {
+            return !$(el).val().length ? el : null;
+        }).get();
+
+        // could also be placed outside of the function
+        var tick = $('#tick2');
+        var cross = $('#cross2');
+
+        // check if there are any empty elements, if there are none, show numbers, else hide number.
+        !empty.length ? tick.show() : tick.hide();
+        !empty.length ? cross.hide() : cross.show();
+    });
+
+    //Select weeks table, change cross to tick
+    $('.weeks').bind('keyup change', function () {
+
+
+        // get elements that are empty.
+        var checked = $('.weeks').filter(':checked');
+
+        // could also be placed outside of the function
+        var tick = $('#tick3');
+        var cross = $('#cross3');
+
+        // check if there are any empty elements, if there are none, show numbers, else hide number.
+        checked.length ? tick.show() : tick.hide();
+        checked.length ? cross.hide() : cross.show();
+    });
+
+    //Select time table, change cross to tick
+    $('.day, #start_time').bind('keyup click', function () {
+
+        // get elements that are empty.
+        var empty = $('.day, #start_time').map(function (index, el) {
+            return !$(el).val().length ? el : null;
+        }).get();
+
+        // could also be placed outside of the function
+        var tick = $('#tick4');
+        var cross = $('#cross4');
+
+        // check if there are any empty elements, if there are none, show numbers, else hide number.
+        !empty.length ? tick.show() : tick.hide();
+        !empty.length ? cross.hide() : cross.show();
+    });
+
+    //Select roomtype table, change cross to tick
+    $('.roomtype').bind('keyup change', function () {
+
+        // get elements that are empty.
+        var empty = $('.roomtype').map(function (index, el) {
+            return !$(el).val().length ? el : null;
+        }).get();
+
+        // could also be placed outside of the function
+        var tick = $('#tick5');
+        var cross = $('#cross5');
+
+        // check if there are any empty elements, if there are none, show numbers, else hide number.
+        !empty.length ? tick.show() : tick.hide();
+        !empty.length ? cross.hide() : cross.show();
+    });
+
+    //Select room_info table, change cross to tick
+    $('#no_students, #no_rooms').bind('keyup change', function () {
+
+        // get elements that are empty.
+        var empty = $('#no_students, #no_rooms').map(function (index, el) {
+            return !$(el).val().length ? el : null;
+        }).get();
+
+        // could also be placed outside of the function
+        var tick = $('#tick6');
+        var cross = $('#cross6');
+
+        // check if there are any empty elements, if there are none, show numbers, else hide number.
+        !empty.length ? tick.show() : tick.hide();
+        !empty.length ? cross.hide() : cross.show();
+    });
 
 });
 
