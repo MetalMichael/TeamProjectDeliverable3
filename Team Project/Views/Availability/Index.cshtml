@@ -198,8 +198,8 @@
                 semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
             }, function (data) {
                 var html;
-                var day = days[parseInt(slot.substr(4, 1))];
-                var time = times[parseInt(slot.substr(5, 1))];
+                var day = days[(parseInt(slot.substr(4, 1))) - 1];
+                var time = times[(parseInt(slot.substr(5, 1))) - 1];
 
                 if (data == "") {
                     html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
@@ -250,6 +250,8 @@
                                             url += "&";
                                         }
                                         url += "Room=" + data;
+                                        url += "&Day=" + day;
+                                        url += "&Time=" + slot.substr(5, 1);
                                         window.location = url;
                                     });
                                 },
