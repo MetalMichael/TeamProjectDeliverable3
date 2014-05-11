@@ -230,3 +230,6 @@ button#submit {
 	/*margin-top: -17px;*/
 	/*width: 101.7%;*/
 }
+div.checkbox-label-container.greatForm {
+	padding: 8px;
+}
