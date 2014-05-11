@@ -264,6 +264,30 @@ button#submit {
 	/*margin-top: -17px;*/
 	/*width: 101.7%;*/
 }
-div.checkbox-label-container.greatForm {
+
+.validation-summary-errors {
+    width: 100%;
+    height: 32px;
+    background-color: #F55;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: -1px;
+}
+
+.success-message 
+{
+    width: 100%;
+    height: 32px;
+    background-color: #5F5;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: -1px;
+}
+.success-message ul li 
+{
+    width: 100%;
+}div.checkbox-label-container.greatForm {
 	padding: 8px;
 }
