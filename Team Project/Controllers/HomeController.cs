@@ -111,9 +111,6 @@ namespace TimetableSystem.Controllers
         private ActionResult CreateForm(Request request)
         {
 
-            // Temp - code to setup the room features checkboxes
-            string projector = "";
-            projector += "<input checked='checked' class='check-box' id='Projector2' name='Projector2' type='checkbox' value='true'> <label for='" + request.Projector + "'>" + request.Projector + "</label>";
             string week1 = "", week2 = "", week3 = "";
             string weekNo;
             for (int x = 1; x < 6; x++)
@@ -142,11 +139,6 @@ namespace TimetableSystem.Controllers
             ViewBag.WeekCheckboxes1 = week1;
             ViewBag.WeekCheckboxes2 = week2;
             ViewBag.WeekCheckboxes3 = week3;
-
-            //string features1 = "<input id='" + "' type='checkbox' value='true'>";
-            ViewBag.Projector = projector;
-
-            ViewBag.Title = "Create new Request";
 
             ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
             ViewBag.ModuleCodes = new SelectList(db.Modules, "ModuleCode", "ModuleCode");

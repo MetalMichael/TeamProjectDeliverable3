@@ -36,9 +36,9 @@
             <td>@item.Length</td>
             <td>
                 @try {
-                    foreach(int week in @item.Weeks)
+                    foreach(int week in item.Weeks)
                     {
-                        week.ToString();
+                        @week.ToString();
                     }
                 } catch(NullReferenceException) {
                     Html.Raw("N/A");
