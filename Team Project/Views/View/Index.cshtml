@@ -6,6 +6,11 @@
 
 <script src="@Url.Content("~/Scripts/View/index.js")" type="text/javascript"></script>
 
+@if (ViewBag.Message != null)
+{
+    @ViewBag.Message
+}
+
 <p>
     Select from @Model.Count() requests:</p>
 <table id="requests-table">
@@ -27,7 +32,7 @@
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Module.ModuleTitle)</td>
             <td>@item.Day</td>
-            <td>@item.StartTime</td>
+            <td>@item.StartTime:00</td>
             <td>@item.Length</td>
             <td>
                 @try {
@@ -35,7 +40,7 @@
                     {
                         week.ToString();
                     }
-                } catch(NullReferenceException ex) {
+                } catch(NullReferenceException) {
                     Html.Raw("N/A");
                 }
 
@@ -43,11 +48,17 @@
             <td>
                 @foreach (TimetableSystem.Models.RequestRoom room in item.RequestRooms)
                 {
-                    @room.Room.RoomCode;
+                    if (room.Room != null)
+                    {
+                        @room.Room.RoomCode;
+                    }
                 }
             </td>
             <td>@item.Status</td>
-            <td>@Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target="_self" })</td>
+            <td>@if(item.Status == "Pending") {
+                    @Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target="_self" })
+                }
+            </td>
         </tr>
     }
     </tbody>

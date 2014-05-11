@@ -12,7 +12,6 @@ using System.Reflection;
 
 namespace TimetableSystem.Controllers
 {
-    [HandleError]
     [Authorize]
     public class HomeController : Controller
     {
@@ -21,6 +20,29 @@ namespace TimetableSystem.Controllers
         public ActionResult Edit(int id)
         {
             Request request = db.Requests.Find(id);
+            
+            ViewBag.SelectedRooms = new List<String>();
+            foreach(TimetableSystem.Models.RequestRoom room in request.RequestRooms)
+            {
+                ViewBag.SelectedRooms.Add(room.RoomID.ToString());
+            }
+
+            return CreateForm(request);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Request request)
+        {
+            request = this.processRequest(request);
+            
+            if (ModelState.IsValid)
+            {
+                db.Entry(request).State = EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.Message = "Edited Successfully";
+                return RedirectToRoute("View");
+            }
+
             return CreateForm(request);
         }
 
@@ -32,6 +54,22 @@ namespace TimetableSystem.Controllers
         [HttpPost]
         public ActionResult Index(Request request)
         {
+
+            request = this.processRequest(request);
+            request.Status = "Pending";
+
+            if (ModelState.IsValid)
+            {
+                db.Requests.Add(request);
+                db.SaveChanges();
+                ViewBag.Message = "Request Created";
+                return CreateForm(new Request());
+            }
+
+            return CreateForm(request);
+        }
+
+        private Request processRequest(Request request) {
             List<RequestWeek> weeks = new List<RequestWeek>();
             if (request.Weeks != null && request.Weeks.Count > 0)
             {
@@ -41,46 +79,30 @@ namespace TimetableSystem.Controllers
                     weeks.Add(rw);
                 }
             }
+            else
+            {
+                ModelState.AddModelError("NoWeeks", "Request cannot be for no weeks");
+            }
             request.RequestWeeks = weeks;
             request.Department = User.Identity.Name;
 
             List<RequestRoom> rooms = new List<RequestRoom>();
             if (request.Rooms != null && request.Rooms.Count > 0)
             {
-                System.Diagnostics.Debug.WriteLine("test");
                 foreach (string room in request.Rooms)
                 {
-                    System.Diagnostics.Debug.WriteLine("Room: " + room);
                     RequestRoom rr = new RequestRoom(Convert.ToInt16(room));
                     rooms.Add(rr);
                 }
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("test2");
-                System.Diagnostics.Debug.WriteLine(request.Rooms);
+                RequestRoom rr = new RequestRoom();
+                rooms.Add(rr);
             }
             request.RequestRooms = rooms;
 
-            if (ModelState.IsValid)
-            {
-                db.Requests.Add(request);
-                db.SaveChanges();
-                return CreateForm(new Request());
-            }
-
-            System.Diagnostics.Debug.WriteLine("Could not create");
-
-            var errors = ModelState.Where(a => a.Value.Errors.Count > 0)
-                .Select(b => new { b.Key, b.Value.Errors })
-                .ToArray();
-
-            foreach (var modelStateErrors in errors)
-            {
-                System.Diagnostics.Debug.WriteLine("...Errored When Binding.", modelStateErrors.Key.ToString());
-            }
-
-            return CreateForm(request);
+            return request;
         }
 
         private ActionResult CreateForm(Request request)
@@ -97,11 +119,12 @@ namespace TimetableSystem.Controllers
             for (var x = 9; x <= 17; x++)
             {
                 string y = x.ToString();
+                int p = x - 8;
                 if (y.Length == 1)
                 {
                     y = "0" + y;
                 }
-                times.Add(new SelectListItem { Text = y + ":00", Value = y });
+                times.Add(new SelectListItem { Text = y + ":00 - Period: " + p, Value = y });
             }
             ViewBag.Times = times;
 

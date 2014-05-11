@@ -4,14 +4,24 @@
     ViewBag.Title = "Edit Request";
 }
 
-<h2>Index</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/Home/index.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Home/rooms.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/weeks.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(false)
+
+    <div class="buttons-wrapper bar">
+        <div>
+            <button>Submit</button>
+        </div>
+        <div>
+            <button>Reset</button>
+        </div>
+    </div>
+    
     <fieldset id="s1">
         <h2>Booking</h2>
         <div class="field">
@@ -19,101 +29,193 @@
                 @Html.LabelFor(model => model.Priority)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.Priority)
-                @Html.ValidationMessageFor(model => model.Priority)
+                <div class="editor-field-inner">
+                    @Html.EditorFor(model => model.Priority)
+                    @Html.ValidationMessageFor(model => model.Priority)
+                </div>
+
             </div>
         </div>
     </fieldset>
     <fieldset id="s2">
         <h2>Module</h2>
-        <div class="editor-field">
-            <div class="field">
+        <div class="field">
+            <div class="editor-label">
                 @Html.Label("Filter Module")
-                <input type="text" class="filter" name="priority"></input>
             </div>
-            <div class="field">
-                @Html.Label("Module Title")
-                @Html.DropDownList("Modules", String.Empty)
-            </div>
-            <div class="field">
-                @Html.Label("Module Code")
-                @Html.DropDownList("ModuleCodes", String.Empty)
-            </div>
-            <div class="field">
-                <select>
-                    <option id="presets">Select A Module to View Preset (what does this even do?)</option>
-                </select>
+            <div class="editor-field">
+                <input type="text" class="filter" name="priority" />
             </div>
         </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Module Title")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.Modules, String.Empty)
+            </div>
+        </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Module Code")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.ModuleCodes, String.Empty)
+            </div>
+        </div>
+        <div class="field">
+            <select>
+                <option id="presets">Select A Module to View Preset (what does this even do?)</option>
+            </select>
+        </div>
     </fieldset>
+    
     <fieldset id="s3">
         <h2>Weeks</h2>
         <div class="field">
-            <button id="allWeeks" class="weeks">1-15</button>
-            <button id="defWeeks" class="weeks">1-12</button>
-            <button id="oddWeeks" class="weeks">Odd</button>
-            <button id="evenWeeks" class="weeks">Even</button>
-            <button id="clearWeeks">Clear</button>
+            <div class="buttons-wrapper">   <!-- whitespace removal needs doing -->
+                <div>
+                    <button id="allWeeks" class="weeks">1-15</button>
+                </div>
+                <div>
+                    <button id="defWeeks" class="weeks">1-12</button>
+                </div>
+                <div>
+                    <button id="oddWeeks" class="weeks">Odd</button>
+                </div>
+                <div>
+                    <button id="evenWeeks" class="weeks">Even</button>
+                </div>
+                <div>
+                    <button id="clearWeeks">Clear</button>
+                </div> 
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.Raw(ViewBag.WeekCheckboxes)
+        <div class="field">
+            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes)
+            </div>
         </div>
     </fieldset>
+    
     <fieldset id="s4">
         <h2>Time</h2>
             <div class="field">
-                @foreach (var day in ViewBag.Days)
-                {
-                    if (day == Model.Day)
+                <div class="buttons-wrapper">   <!-- justification not applying for some reason -->
+                    @foreach (var day in ViewBag.Days)
                     {
-                        @Html.RadioButtonFor(model => model.Day, (String)day, new { id = "test", Checked = "checked" });
-                    }
-                    else
-                    {
-                        @Html.RadioButtonFor(model => model.Day, (String)day, new { id = day });
-                    }
+                        @Html.Raw("<div>")
+                        if (day == Model.Day)
+                        {
+                            @Html.RadioButtonFor(model => model.Day, (String)day, new { id = "test", Checked = "checked" });
+                        }
+                        else
+                        {
+                            @Html.RadioButtonFor(model => model.Day, (String)day, new { id = day });
+                        }
 
-                    @Html.Label((String)day)
-                }
+                        @Html.Label((String)day)
+                        @Html.Raw("</div>")
+                    }
+                </div>
             </div>
             <div class="field">
-                @Html.LabelFor(model => model.StartTime)
-                @Html.DropDownList("Times", String.Empty)
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.StartTime)
+                    @Html.ValidationMessageFor(model => model.StartTime)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.StartTime, new SelectList(ViewBag.Times, "Value", "Text"))
+                </div>
             </div>
             <div class="field">
-                @Html.LabelFor(model => model.Length)
-                @Html.DropDownList("Lengths", String.Empty)
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Length)
+                    @Html.ValidationMessageFor(model => model.Length)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.Length, (SelectList)ViewBag.Lengths)
+                </div>
             </div>
     </fieldset>
+    
     <fieldset id="s5">
         <h2>Room</h2>
         <div class="field">
-            @Html.LabelFor(model => model.RoomType)
-            @Html.DropDownList("RoomTypes", "Room Type")
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RoomType)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.RoomType, (SelectList)ViewBag.RoomTypes, String.Empty)
+            </div>
+        </div>
+        <div class="field" style="height:10em;">
+            <div class="editor-label">
+                <p>Features</p>
+            </div>
+            <div class="editor-field">
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.Projector)                     
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.Projector)
+                </div>
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.Projector2)
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.Projector2)
+                </div>
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.OHP)
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.OHP)
+                </div>
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.Chalkboard)
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.Chalkboard)
+                </div>
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.BoardArea)
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.BoardArea)
+                </div>
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.Wheelchair)
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.Wheelchair)
+                </div>
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.Induction)
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.Induction)
+                </div> 
+                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.Induction)
+                </div>
+                <div class="checkbox-container">
+                    @Html.EditorFor(model => model.Induction)
+                </div> 
+            </div>
         </div>
         <div class="field">
-            <h3>Features</h3>
-            @Html.EditorFor(model => model.Projector)
-            @Html.LabelFor(model => model.Projector)
-            @Html.EditorFor(model => model.Projector2)
-            @Html.LabelFor(model => model.Projector2)
-            @Html.EditorFor(model => model.OHP)
-            @Html.LabelFor(model => model.OHP)
-            @Html.EditorFor(model => model.Chalkboard)
-            @Html.LabelFor(model => model.Chalkboard)
-            @Html.EditorFor(model => model.BoardArea)
-            @Html.LabelFor(model => model.BoardArea)
-            @Html.EditorFor(model => model.Wheelchair)
-            @Html.LabelFor(model => model.Wheelchair)
-            @Html.EditorFor(model => model.Induction)
-            @Html.LabelFor(model => model.Induction)
-        </div>
-        <div class="field">
-            <input type="text" id="additional" class="filter" name="priority" placeholder="Additional Info"></input><!--Can use textarea tag to allow resize of it-->
+            <div class="editor-label">
+                <p>Additonal info</p>
+            </div>
+            <div class="editor-field">
+                <input type="text" id="additional" class="filter" name="priority" value="Enter text here ..." /> <!--Can use textarea tag to allow resize of it-->
+            </div>
         </div>
     </fieldset>
+    
     <fieldset id="s6">
-        <h2>Room</h2>
+        <h2>Room Pt. II</h2>
         <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(model => model.StudentsTotal)
@@ -124,57 +226,61 @@
             </div>
         </div>
         <div class="field">
-            <label for="park">No. of Rooms: </label>
-            <select id="no_rooms">
-                <option selected disabled>No. of Rooms</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-            </select>
-        </div>
-        <div class="field">
             <div class="editor-label">
-                @Html.LabelFor(model => model.Park)
+                @Html.LabelFor(model => model.ParkId)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.Park)
-                @Html.ValidationMessageFor(model => model.Park)
+                @Html.DropDownListFor(model => model.ParkId, (SelectList)ViewBag.Parks, String.Empty, new { id = "Park" })
+                @Html.ValidationMessageFor(model => model.ParkId)
             </div>
         </div>
         <div class="field">
             <div class="editor-label">
-                @Html.LabelFor(model => model.Building)
+                @Html.LabelFor(model => model.BuildingId)
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Buildings", String.Empty)
-                @Html.ValidationMessageFor(model => model.Building)
+                @Html.DropDownListFor(model => model.BuildingId, (SelectList)ViewBag.Buildings, String.Empty, new { id = "buildings" })
+                @Html.ValidationMessageFor(model => model.BuildingId)
             </div>
         </div>
         <div class="field">
             <div class="editor-label">
-                <label>Add Room</label>
+                <label for="park">No. of Rooms: </label>
             </div>
             <div class="editor-field">
-                @Html.DropDownList("Rooms", String.Empty)
+                <select id="no_rooms">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
             </div>
+        </div>
+        <div id="room-container">
+        <script>
+            var selectedRooms = [
+            @foreach (string roomid in ViewBag.SelectedRooms)
+            {
+               @Html.Raw("'" + roomid + "'")
+            }
+            ];
+        </script>
         </div>
     </fieldset>
+    
+    <!--
     <fieldset id="s7">
+    <h2>heading</h2>
         <div class="field">
-            <button>Save Request</button>
+            
+       </div>
+
+       <div class="field">
             <input type="checkbox" id="similar" name="similar"></input>
             <label for="similar">Make Similar Request</label>
-        </div>
-        <div class="field">
-            <button>Reset</button>
-            <button>Submit</button>
-        </div>
-    </fieldset>
-}
+       </div>  
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </fieldset>-->
+}
