@@ -3,7 +3,6 @@
         refreshTable();
         //Set Park field change function
         $('#Park').change(function () {
-            refreshTable();
             var queryLink = '@Url.Action("parkSelected")';
             $.get(queryLink, { parkName: $(this).val() }, function (data) {
                 var temp = data.split('!');
@@ -21,11 +20,11 @@
                 for (var k = 0; k < rooms.length; k++) {
                     $r.append("<option>" + rooms[k] + "</option>");
                 }
+                refreshTable();
             });
         });
         //Set Building field change function
         $('#Building').change(function () {
-            refreshTable();
             var queryLink = '@Url.Action("buildingSelected")';
             $.get(queryLink, { buildingName: $(this).val() }, function (data) {
                 var rooms = data.split(';');
@@ -35,6 +34,7 @@
                 for (var k = 0; k < rooms.length; k++) {
                     $r.append("<option>" + rooms[k] + "</option>");
                 }
+                refreshTable();
             });
         });
         $('#Room').change(function () {
@@ -141,16 +141,20 @@
         }
         var capacity = $('#CapacityAmount').val();
         var roomType = $('#Type').val();
-
-        var titleHtml = "<h2>Showing availability for ";
-
+        var subWeek;
+        var titleHtml = "<h2 id='tableSubtitle'>Showing availability for ";
+        if (week.length > 1) {
+            subWeek = "multiple weeks";
+        } else {
+            subWeek = "week "+week;
+        }
         if (room != "No" && room != "") {
-            titleHtml += "room " + room + " for week " + week + ", semester " + semester;
+            titleHtml += "room " + room + " for " + subWeek + ", semester " + semester;
         } else if (building != "No Preference" && building != "") {
-            titleHtml += "building " + building + " for week " + week + ", semester " + semester;
+            titleHtml += "building " + building + " for " + subWeek + ", semester " + semester;
         } else if (park != "No Preference" && park != "") {
-            titleHtml += park + " park for week " + week + ", semester " + semester;
-        } else { titleHtml += "all parks/buildings/rooms for week " + week + ", semester " + semester; }
+            titleHtml += park + " park for " + subWeek + ", semester " + semester;
+        } else { titleHtml += "all parks/buildings/rooms for " + subWeek + ", semester " + semester; }
 
         titleHtml += "</h2>";
         $('#subtitleDiv').html(titleHtml);
@@ -182,70 +186,84 @@
             }
         }
         week = week.substr(0, week.length - 1);
+        var weekArray = week.split(";");
         var capacity = $('#CapacityAmount').val();
         var roomType = $('#Type').val();
 
-
-        var queryLink = '@Url.Action("checkSlot")';
-        $.get(queryLink, { parkName: park, buildingName: building, roomCode: room,
-            semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
-        }, function (data) {
-            var html;
-            if (data == "") {
-                html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
-                html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
-                html += "<p>There are no rooms available for the current selection of filters.</p></br></br>";
-                $("#dialog").html(html);
-                $(function () {
-                    $("#dialog").dialog({
-                        resizable: false,
-                        height: 325,
-                        width: 300,
-                        modal: true,
-                        buttons: {
-                            Cancel: function () {
-                                $(this).dialog("close");
-                            }
-                        }
-                    });
-                });
-            } else {
-                var rooms = (data.substr(0, data.length - 1)).split(';');
-                rooms.sort();
-
+        if (week == "") {
+            alert("Cannot view available rooms without weeks selected.");
+        } else {
+            var queryLink = '@Url.Action("checkSlot")';
+            $.get(queryLink, { parkName: park, buildingName: building, roomCode: room,
+                semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
+            }, function (data) {
+                var html;
                 var day = days[parseInt(slot.substr(4, 1))];
                 var time = times[parseInt(slot.substr(5, 1))];
 
-                html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
-                html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
-                html += "<p>Select Room: </p><select id='dialogRooms'>";
-                for (var i = 0; i < rooms.length; i++) {
-                    html += "<option>" + rooms[i] + "</option>";
-                }
-                html += "</select>";
-
-                $("#dialog").html(html);
-
-                $(function () {
-                    $("#dialog").dialog({
-                        resizable: false,
-                        height: 325,
-                        width: 300,
-                        modal: true,
-                        buttons: {
-                            "Export": function () {
-                                alert("hello");
-                            },
-                            Cancel: function () {
-                                $(this).dialog("close");
+                if (data == "") {
+                    html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
+                    html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
+                    html += "<p>There are no rooms available for the current selection of filters.</p></br></br>";
+                    $("#dialog").html(html);
+                    $(function () {
+                        $("#dialog").dialog({
+                            resizable: false,
+                            height: 325,
+                            width: 300,
+                            modal: true,
+                            buttons: {
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                }
                             }
-                        }
+                        });
                     });
-                });
-            }
+                } else {
+                    var rooms = (data.substr(0, data.length - 1)).split(';');
+                    rooms.sort();
+
+                    html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
+                    html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
+                    html += "<p>Select Room: </p><select id='dialogRooms'>";
+                    for (var i = 0; i < rooms.length; i++) {
+                        html += "<option>" + rooms[i] + "</option>";
+                    }
+                    html += "</select>";
+
+                    $("#dialog").html(html);
+
+                    $(function () {
+                        $("#dialog").dialog({
+                            resizable: false,
+                            height: 325,
+                            width: 300,
+                            modal: true,
+                            buttons: {
+                                "Export": function () {
+                                    var queryLink = '@Url.Action("getRoomID")';
+                                    var room = $('#dialogRooms').val().split(' ')[0];
+                                    $.get(queryLink, { roomCode: room }, function (data) {
+                                        var url = "Home/Index/?";
+                                        for (var i = 0; i < weekArray.length; i++) {
+                                            url += "Weeks=" + weekArray[i];
+                                            url += "&";
+                                        }
+                                        url += "Room=" + data;
+                                        window.location = url;
+                                    });
+                                },
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        });
+                    });
+                }
 
 
-        });
+            });
+        }
     }
 
     
@@ -270,7 +288,7 @@
                 @Html.Label("Capacity")
             </div>
             <div class="editor-field">
-                <div style="float:left; width:100px;" class="editor-field-inner">
+                <div style="float:left; width:200px;" class="editor-field-inner">
                     <div id="slider-range-max"></div>
                 </div>
                 <div style="float:right;" class="editor-field-inner">
@@ -315,17 +333,17 @@
             </div>
         </div>
         <div class="field">
-            <div class="buttons-wrapper greatform">   <!-- lower whitespace needs removing -->
+            <div class="buttons-wrapper greatForm">   <!-- lower whitespace needs removing -->
                 @Html.Raw(ViewBag.WeekCheckboxes1)
             </div>
         </div>
         <div class="field">
-            <div class="buttons-wrapper greatform">   <!-- lower whitespace needs removing -->
+            <div class="buttons-wrapper greatForm">   <!-- lower whitespace needs removing -->
                 @Html.Raw(ViewBag.WeekCheckboxes2)
             </div>
         </div>
         <div class="field">
-            <div class="buttons-wrapper greatform">   <!-- lower whitespace needs removing -->
+            <div class="buttons-wrapper greatForm">   <!-- lower whitespace needs removing -->
                 @Html.Raw(ViewBag.WeekCheckboxes3)
             </div>
         </div>
@@ -339,6 +357,8 @@
         </div>
     </fieldset>
     <fieldset id="s3">
+        <div id="subtitleDiv">
+        </div>
         <div id="tableDiv">
         
         </div>

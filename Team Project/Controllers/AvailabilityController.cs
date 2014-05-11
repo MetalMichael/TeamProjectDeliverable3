@@ -71,7 +71,6 @@ namespace TimetableSystem.Controllers
                 {
                     week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' /><label for='" + weekNo + "'>" + x + "</label>";
                 }
-                
             }
 
             ViewBag.WeekCheckboxes1 = week1;
@@ -203,7 +202,7 @@ namespace TimetableSystem.Controllers
                                 where r.RoomTypeID == roomTypeID
                                 select r.RoomID;
 
-            string html = "<table class='availability'><thead><tr><th><p style='text-align: center'>-</p></th>";
+            string html = "<table class='availability'><thead><tr><th class='day'><p style='text-align: center'>-</p></th>";
             for (int i = 0; i < 9; i++)
             {
                 html += "<th class='day'>" + times[i] + "</th>";
@@ -632,6 +631,13 @@ namespace TimetableSystem.Controllers
             }
 
             return x;
+        }
+        public int getRoomID(string roomCode)
+        {
+            int room = (from r in systemDB.Rooms
+                       where r.RoomCode == roomCode
+                       select r.RoomID).Single();
+            return room;
         }
 
     }
