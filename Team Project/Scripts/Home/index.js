@@ -8,6 +8,28 @@ $(document).ready(function () {
         $('#ModuleCode').val($(this).val());
     });
 
+    $('#module-filter').keyup(function () {
+        var filter = $('#module-filter').val().toLowerCase();
+        var codes = [];
+
+        $('#ModuleCode').children().each(function () {
+            if ($(this).html().toLowerCase().indexOf(filter) == -1) {
+                $(this).hide();
+            } else {
+                $(this).show();
+                codes.push($(this).val());
+            }
+        });
+
+        $('#ModuleCodes').children().each(function () {
+            if (codes.indexOf($(this).val()) == -1) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+    });
+
     $("#allWeeks").click(function () {
         $(".all_weeks").prop('checked', $(this).prop('checked'));
         $("#defWeeks").attr('checked', false);
@@ -114,23 +136,6 @@ $(document).ready(function () {
 
     }
 
-    //hides all the rooms apart from room_1
-    for (q = 1; q <= 6; q++) {
-        $('#room' + [q]).hide();
-    }
-    //displays the correct no of rooms based on no_rooms
-    $("#no_rooms").change(function () {
-        var no_rooms = $("#no_rooms").val();
-
-        for (j = no_rooms; j <= 6; j++) {
-            $('#room' + [j]).hide();
-        }
-
-        for (i = 1; i <= no_rooms; i++) {
-            $('#room' + [i]).show();
-        }
-    });
-
     $('input[type="radio"].semester').bind('keyup change', function () {
 
         // get elements that are empty.
@@ -232,19 +237,3 @@ $(document).ready(function () {
     });
 
 });
-
-//deselect weeks preset checkbox if one week is unchecked
-function changed_check() {
-    if (allWeeks.checked === true) {
-        document.getElementById('allWeeks').checked = false;
-    }
-    if (defWeeks.checked === true) {
-        document.getElementById('defWeeks').checked = false;
-    }
-    if (oddWeeks.checked === true) {
-        document.getElementById('oddWeeks').checked = false;
-    }
-    if (evenWeeks.checked === true) {
-        document.getElementById('evenWeeks').checked = false;
-    }
-}
