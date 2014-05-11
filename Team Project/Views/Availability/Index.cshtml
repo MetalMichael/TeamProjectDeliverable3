@@ -118,7 +118,6 @@
             refreshTable();
         });
     });
-
     //Function to print the table based on current form data
     function refreshTable() {
         //Form values
@@ -127,7 +126,7 @@
         var room = $('#Room').val().split(' ')[0];
         var semester = $('#Semester').val();
         var week = "";
-        for(var i=1;i<16;i++){
+        for (var i = 1; i < 16; i++) {
             var cb = "#Week" + i;
             if ($(cb).is(':checked')) {
                 week += i + ";";
@@ -146,7 +145,7 @@
         if (week.length > 1) {
             subWeek = "multiple weeks";
         } else {
-            subWeek = "week "+week;
+            subWeek = "week " + week;
         }
         if (room != "No" && room != "") {
             titleHtml += "room " + room + " for " + subWeek + ", semester " + semester;
@@ -268,8 +267,6 @@
         }
     }
 
-    
-    
 </script>
 
 
@@ -327,11 +324,11 @@
         <h2>Weeks / Semester</h2>
         <div class="field">
             <div class="buttons-wrapper">
-				    <button type=button class="weekButton" id="checkAll">All</button>
-				    <button type=button class="weekButton" id="oneToTwelve">1-12</button>
-				    <button type=button class="weekButton" id="checkOdd">Odd</button>
-				    <button type=button class="weekButton" id="checkEven">Even</button>
-				    <button type=button class="weekButton" id="clearAll">Clear</button>
+				    <button type="button" class="weekButton" id="checkAll">All</button>
+				    <button type="button" class="weekButton" id="oneToTwelve">1-12</button>
+				    <button type="button" class="weekButton" id="checkOdd">Odd</button>
+				    <button type="button" class="weekButton" id="checkEven">Even</button>
+				    <button type="button" class="weekButton" id="clearAll">Clear</button>
             </div>
         </div>
         <div class="field">
