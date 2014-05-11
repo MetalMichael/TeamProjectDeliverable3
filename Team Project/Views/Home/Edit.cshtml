@@ -12,7 +12,7 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(false)
-
+    @Html.HiddenFor(model => model.RequestId);
     <div class="buttons-wrapper bar">
         <div>
             <button>Submit</button>

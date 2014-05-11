@@ -37,10 +37,14 @@ namespace TimetableSystem.Controllers
             
             if (ModelState.IsValid)
             {
-                db.Entry(request).State = EntityState.Modified;
+                Request old = db.Requests.Find(request.RequestId);
+                db.Requests.Remove(old);
+                db.SaveChanges();
+                
+                db.Requests.Add(request);
                 db.SaveChanges();
                 ViewBag.Message = "Edited Successfully";
-                return RedirectToRoute("View");
+                return RedirectToAction("Index", "View");
             }
 
             return CreateForm(request);
@@ -54,9 +58,7 @@ namespace TimetableSystem.Controllers
         [HttpPost]
         public ActionResult Index(Request request)
         {
-
             request = this.processRequest(request);
-            request.Status = "Pending";
 
             if (ModelState.IsValid)
             {
@@ -102,6 +104,7 @@ namespace TimetableSystem.Controllers
             }
             request.RequestRooms = rooms;
 
+            request.Status = "Pending";
             return request;
         }
 

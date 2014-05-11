@@ -54,11 +54,8 @@
                     }
                 }
             </td>
-            <td>@item.Status</td>
-            <td>@if(item.Status == "Pending") {
-                    @Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target="_self" })
-                }
-            </td>
+            <td><span class="status">@item.Status</span></td>
+            <td>@Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target = "_self", @class="edit" })</td>
         </tr>
     }
     </tbody>
