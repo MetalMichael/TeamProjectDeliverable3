@@ -183,8 +183,9 @@ namespace TimetableSystem.Controllers
             int available = 0; //number of available rooms
             string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
             string day, htmlClass, slot;
-            string[] times = {"9:00-9:50", "10:00-10:50", "11:00-11:50", "12:00-12:50", "13:00-13:50", "14:00-14:50", "15:00-15:50",
-                        "16:00-16:50", "17:00-17:50"};
+            string[] times = {"9:00-9:50 / Period 1", "10:00-10:50 / Period 2", "11:00-11:50 / Period 3", "12:00-12:50 / Period 4", 
+                                 "13:00-13:50 / Period 5", "14:00-14:50 / Period 6", "15:00-15:50 / Period 7", "16:00-16:50 / Period 8", 
+                                 "17:00-17:50 / Period 9"};
             int[] periods = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             int period, roomTypeID;
             

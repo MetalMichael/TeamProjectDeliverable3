@@ -110,6 +110,42 @@ namespace TimetableSystem.Controllers
 
         private ActionResult CreateForm(Request request)
         {
+
+            // Temp - code to setup the room features checkboxes
+            string projector = "";
+            projector += "<input checked='checked' class='check-box' id='Projector2' name='Projector2' type='checkbox' value='true'> <label for='" + request.Projector + "'>" + request.Projector + "</label>";
+            string week1 = "", week2 = "", week3 = "";
+            string weekNo;
+            for (int x = 1; x < 6; x++)
+            {
+                weekNo = "Week" + x;
+                week1 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
+            }
+            for (int x = 6; x < 11; x++)
+            {
+                weekNo = "Week" + x;
+                week2 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
+            }
+            for (int x = 11; x < 16; x++)
+            {
+                weekNo = "Week" + x;
+                if (x < 13)
+                {
+                    week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
+                }
+                else
+                {
+                    week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' /><label for='" + weekNo + "'>" + x + "</label>";
+                }
+            }
+
+            ViewBag.WeekCheckboxes1 = week1;
+            ViewBag.WeekCheckboxes2 = week2;
+            ViewBag.WeekCheckboxes3 = week3;
+
+            //string features1 = "<input id='" + "' type='checkbox' value='true'>";
+            ViewBag.Projector = projector;
+
             ViewBag.Title = "Create new Request";
 
             ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");

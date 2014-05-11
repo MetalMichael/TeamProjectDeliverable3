@@ -3,12 +3,283 @@
 @{
     ViewBag.Title = "Create Request";
 }
+<script type="text/javascript">
+<script type="text/javascript">
+    $(document).ready(function () {
+        refreshTable();
+        //Set Park field change function
+        $('#Park').change(function () {
+            var queryLink = '@Url.Action("parkSelected")';
+            $.get(queryLink, { parkName: $(this).val() }, function (data) {
+                var temp = data.split('!');
+                var buildings = temp[0].split(';');
+                var rooms = temp[1].split(';');
+                $b = $('#Building');
+                $b.empty();
+                $b.append("<option>No Preference</option>");
+                $r = $('#Room');
+                $r.empty();
+                $r.append("<option>No Preference</option>");
+                for (var i = 0; i < buildings.length; i++) {
+                    $b.append("<option>" + buildings[i] + "</option>");
+                }
+                for (var k = 0; k < rooms.length; k++) {
+                    $r.append("<option>" + rooms[k] + "</option>");
+                }
+                refreshTable();
+            });
+        });
+        //Set Building field change function
+        $('#Building').change(function () {
+            var queryLink = '@Url.Action("buildingSelected")';
+            $.get(queryLink, { buildingName: $(this).val() }, function (data) {
+                var rooms = data.split(';');
+                $r = $('#Room');
+                $r.empty();
+                $r.append("<option>No Preference</option>");
+                for (var k = 0; k < rooms.length; k++) {
+                    $r.append("<option>" + rooms[k] + "</option>");
+                }
+                refreshTable();
+            });
+        });
+        $('#Room').change(function () {
+            refreshTable();
+        });
+        $('#Semester').change(function () {
+            refreshTable();
+        });
+        $('#Week').change(function () {
+            refreshTable();
+        });
+        $('#Type').change(function () {
+            refreshTable();
+        });
+        $('#slider-range-max').change(function () {
+            refreshTable();
+        });
 
+        $(function () {
+            $("#slider-range-max").slider({
+                range: "max",
+                min: 5,
+                max: 300,
+                value: 100,
+                step: 5,
+                change: refreshTable,
+                slide: function (event, ui) {
+                    $("#CapacityAmount").val(ui.value);
+                }
+            });
+            $("#CapacityAmount").val($("#slider-range-max").slider("value"));
+        });
+
+        //checkbox button functions
+        function clearAll() {
+            for (var i = 1; i < 16; i++) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', false);
+            }
+        }
+        $('#clearAll').click(function () {
+            clearAll();
+        });
+        $('#checkAll').click(function () {
+            for (var i = 1; i < 16; i++) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', true);
+            }
+            refreshTable();
+        });
+        $('#oneToTwelve').click(function () {
+            clearAll();
+            for (var i = 1; i < 13; i++) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', true);
+            }
+            refreshTable();
+        });
+        $('#checkEven').click(function () {
+            clearAll();
+            for (var i = 1; i < 16; i++) {
+                if (i % 2 == 0) {
+                    var cb = '#Week' + i;
+                    $(cb).prop('checked', true);
+                }
+            }
+            refreshTable();
+        });
+        $('#checkOdd').click(function () {
+            clearAll();
+            for (var i = 1; i < 16; i++) {
+                if (i % 2 == 1) {
+                    var cb = '#Week' + i;
+                    $(cb).prop('checked', true);
+                }
+            }
+            refreshTable();
+        });
+        //refresh table on checkbox change
+        $('.weekBox').change(function () {
+            refreshTable();
+        });
+    });
+    //Function to print the table based on current form data
+    function refreshTable() {
+        //Form values
+        var park = $('#Park').val();
+        var building = $('#Building').val();
+        var room = $('#Room').val().split(' ')[0];
+        var semester = $('#Semester').val();
+        var week = "";
+        for (var i = 1; i < 16; i++) {
+            var cb = "#Week" + i;
+            if ($(cb).is(':checked')) {
+                week += i + ";";
+            }
+        }
+        if (week == "") {
+            alert("Cannot search for availability with zero weeks checked.");
+            return;
+        } else {
+            week = week.substr(0, week.length - 1);
+        }
+        var capacity = $('#CapacityAmount').val();
+        var roomType = $('#Type').val();
+        var subWeek;
+        var titleHtml = "<h2 id='tableSubtitle'>Showing availability for ";
+        if (week.length > 1) {
+            subWeek = "multiple weeks";
+        } else {
+            subWeek = "week " + week;
+        }
+        if (room != "No" && room != "") {
+            titleHtml += "room " + room + " for " + subWeek + ", semester " + semester;
+        } else if (building != "No Preference" && building != "") {
+            titleHtml += "building " + building + " for " + subWeek + ", semester " + semester;
+        } else if (park != "No Preference" && park != "") {
+            titleHtml += park + " park for " + subWeek + ", semester " + semester;
+        } else { titleHtml += "all parks/buildings/rooms for " + subWeek + ", semester " + semester; }
+
+        titleHtml += "</h2>";
+        $('#subtitleDiv').html(titleHtml);
+
+        //GET call to "getAvailability" function, which returns corresponding html string to print table
+        $.get('@Url.Action("getAvailability")', { parkName: park, buildingName: building, roomCode: room,
+            semester: semester, week: week, capacity: capacity, roomType: roomType
+        }, function (data) {
+            //alert(data);
+            $('#tableDiv').html(data);
+        });
+    }
+
+    //List all available rooms for slot function
+    function listRooms(slot) {
+        //arrays to use on slot value
+        var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        var times = ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+        //Form values
+        var park = $('#Park').val();
+        var building = $('#Building').val();
+        var room = $('#Room').val().split(' ')[0];
+        var semester = $('#Semester').val();
+        var week = "";
+        for (var i = 1; i < 16; i++) {
+            var cb = "#Week" + i;
+            if ($(cb).is(':checked')) {
+                week += i + ";";
+            }
+        }
+        week = week.substr(0, week.length - 1);
+        var weekArray = week.split(";");
+        var capacity = $('#CapacityAmount').val();
+        var roomType = $('#Type').val();
+
+        if (week == "") {
+            alert("Cannot view available rooms without weeks selected.");
+        } else {
+            var queryLink = '@Url.Action("checkSlot")';
+            $.get(queryLink, { parkName: park, buildingName: building, roomCode: room,
+                semester: semester, week: week, capacity: capacity, roomType: roomType, slot: slot
+            }, function (data) {
+                var html;
+                var day = days[(parseInt(slot.substr(4, 1))) - 1];
+                var time = times[(parseInt(slot.substr(5, 1))) - 1];
+
+                if (data == "") {
+                    html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
+                    html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
+                    html += "<p>There are no rooms available for the current selection of filters.</p></br></br>";
+                    $("#dialog").html(html);
+                    $(function () {
+                        $("#dialog").dialog({
+                            resizable: false,
+                            height: 325,
+                            width: 300,
+                            modal: true,
+                            buttons: {
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    var rooms = (data.substr(0, data.length - 1)).split(';');
+                    rooms.sort();
+
+                    html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
+                    html += "<p>Day: " + day + "</p><p>Time: " + time + "</p></br></br>";
+                    html += "<p>Select Room: </p><select id='dialogRooms'>";
+                    for (var i = 0; i < rooms.length; i++) {
+                        html += "<option>" + rooms[i] + "</option>";
+                    }
+                    html += "</select>";
+
+                    $("#dialog").html(html);
+
+                    $(function () {
+                        $("#dialog").dialog({
+                            resizable: false,
+                            height: 325,
+                            width: 300,
+                            modal: true,
+                            buttons: {
+                                "Export": function () {
+                                    var queryLink = '@Url.Action("getRoomID")';
+                                    var room = $('#dialogRooms').val().split(' ')[0];
+                                    $.get(queryLink, { roomCode: room }, function (data) {
+                                        var url = "Home/Index/?";
+                                        for (var i = 0; i < weekArray.length; i++) {
+                                            url += "Weeks=" + weekArray[i];
+                                            url += "&";
+                                        }
+                                        url += "Room=" + data;
+                                        url += "&Day=" + day;
+                                        url += "&Time=" + slot.substr(5, 1);
+                                        window.location = url;
+                                    });
+                                },
+                                Cancel: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        });
+                    });
+                }
+
+
+            });
+        }
+    }
+
+</script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/Home/index.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/Home/rooms.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/weeks.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/checkboxes.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(false)
@@ -32,82 +303,20 @@
     <fieldset id="s1">
         <h2>Booking</h2>
         <div class="field">
-            <div class="editor-label">
+            <div class="editor-label greatForm" style="padding:0 0 0 10px;">
+                @Html.EditorFor(model => model.Priority)
                 @Html.LabelFor(model => model.Priority)
+                @Html.ValidationMessageFor(model => model.Priority)
             </div>
             <div class="editor-field">
                 <div class="editor-field-inner">
-                    @Html.EditorFor(model => model.Priority)
-                    @Html.ValidationMessageFor(model => model.Priority)
+                    
+                    
                 </div>
 
             </div>
         </div>
-    </fieldset>
-    <fieldset id="s2">
-        <h2>Module</h2>
         <div class="field">
-            <div class="editor-label">
-                @Html.Label("Filter Module")
-            </div>
-            <div class="editor-field">
-                <input type="text" class="filter" id="module-filter" />
-            </div>
-        </div>
-        <div class="field">
-            <div class="editor-label">
-                @Html.Label("Module Title")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.Modules, String.Empty)
-            </div>
-        </div>
-        <div class="field">
-            <div class="editor-label">
-                @Html.Label("Module Code")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("ModuleCodes", String.Empty)
-            </div>
-        </div>
-        <div class="field">
-            <select>
-                <option id="presets">Select A Module to View Preset (what does this even do?)</option>
-            </select>
-        </div>
-    </fieldset>
-    
-    <fieldset id="s3">
-        <h2>Weeks</h2>
-        <div class="field">
-            <div class="buttons-wrapper">   <!-- whitespace removal needs doing -->
-                <div>
-                    <button id="allWeeks" class="weeks" type="button">1-15</button>
-                </div>
-                <div>
-                    <button id="defWeeks" class="weeks" type="button">1-12</button>
-                </div>
-                <div>
-                    <button id="oddWeeks" class="weeks" type="button">Odd</button>
-                </div>
-                <div>
-                    <button id="evenWeeks" class="weeks" type="button">Even</button>
-                </div>
-                <div>
-                    <button id="clearWeeks" type="button">Clear</button>
-                </div> 
-            </div>
-        </div>
-        <div class="field">
-            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
-                @Html.Raw(ViewBag.WeekCheckboxes)
-            </div>
-        </div>
-    </fieldset>
-    
-    <fieldset id="s4">
-        <h2>Time</h2>
-            <div class="field">
                 <div class="buttons-wrapper">   <!-- justification not applying for some reason -->
                     @foreach (var day in ViewBag.Days)
                     {
@@ -145,6 +354,93 @@
                 </div>
             </div>
     </fieldset>
+    <fieldset id="s2">
+        <h2>Module</h2>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Filter Module")
+            </div>
+            <div class="editor-field">
+                <input type="text" class="filter" id="module-filter" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Module Title")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.Modules, String.Empty)
+            </div>
+        </div>
+        <div class="field">
+            <div class="editor-label">
+                @Html.Label("Module Code")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ModuleCodes", String.Empty)
+            </div>
+        </div>
+        <div class="field">
+            <select>
+                <option id="presets">Select A Module to View Preset (what does this even do?)</option>
+            </select>
+        </div>
+    </fieldset>
+    
+    <fieldset id="s3">
+    <h2>Weeks / Semester</h2>
+        <div class="field">
+            <div class="buttons-wrapper">
+				    <button type="button" class="weekButton" id="checkAll">All</button>
+				    <button type="button" class="weekButton" id="oneToTwelve">1-12</button>
+				    <button type="button" class="weekButton" id="checkOdd">Odd</button>
+				    <button type="button" class="weekButton" id="checkEven">Even</button>
+				    <button type="button" class="weekButton" id="clearAll">Clear</button>
+            </div>
+        </div>
+        <div class="field">
+            <div class="buttons-wrapper greatForm">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes1)
+            </div>
+        </div>
+        <div class="field">
+            <div class="buttons-wrapper greatForm">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes2)
+            </div>
+        </div>
+        <div class="field">
+            <div class="buttons-wrapper greatForm">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes3)
+            </div>
+        </div>
+    </fieldset>
+
+       @* <h2>Weeks</h2>
+        <div class="field">
+            <div class="buttons-wrapper">   <!-- whitespace removal needs doing -->
+                <div>
+                    <button id="allWeeks" class="weeks" type="button">1-15</button>
+                </div>
+                <div>
+                    <button id="defWeeks" class="weeks" type="button">1-12</button>
+                </div>
+                <div>
+                    <button id="oddWeeks" class="weeks" type="button">Odd</button>
+                </div>
+                <div>
+                    <button id="evenWeeks" class="weeks" type="button">Even</button>
+                </div>
+                <div>
+                    <button id="clearWeeks" type="button">Clear</button>
+                </div> 
+            </div>
+        </div>
+        <div class="field">
+            <div class="buttons-wrapper">   <!-- lower whitespace needs removing -->
+                @Html.Raw(ViewBag.WeekCheckboxes)
+            </div>
+        </div>
+    </fieldset>*@
     
     <fieldset id="s5">
         <h2>Room</h2>
@@ -156,59 +452,40 @@
                 @Html.DropDownListFor(model => model.RoomType, (SelectList)ViewBag.RoomTypes, String.Empty)
             </div>
         </div>
-        <div class="field" style="height:10em;">
+        <div class="field" style="height:14em;">
             <div class="editor-label">
                 <p>Features</p>
             </div>
             <div class="editor-field">
-                <div class="checkbox-label-container">
-                    @Html.LabelFor(model => model.Projector)                     
+                <div class="checkbox-label-container greatForm">
+                    @Html.Raw(ViewBag.Projector)
+@*                     @Html.CheckBoxFor(model => model.Projector)
+                     @Html.LabelFor(model => model.Projector)    *@                 
                 </div>
-                <div class="checkbox-container">
-                    @Html.EditorFor(model => model.Projector)
-                </div>
-                <div class="checkbox-label-container">
+                <div class="checkbox-label-container greatForm">
+                    @Html.EditorFor(model => model.Projector2)
                     @Html.LabelFor(model => model.Projector2)
                 </div>
-                <div class="checkbox-container">
-                    @Html.EditorFor(model => model.Projector2)
-                </div>
-                <div class="checkbox-label-container">
-                    @Html.LabelFor(model => model.OHP)
-                </div>
-                <div class="checkbox-container">
+                <div class="checkbox-label-container greatForm">
                     @Html.EditorFor(model => model.OHP)
-                </div>
-                <div class="checkbox-label-container">
+                    @Html.LabelFor(model => model.OHP)
+                </div>      
+                <div class="checkbox-label-container greatForm">
+                    @Html.EditorFor(model => model.Chalkboard)
                     @Html.LabelFor(model => model.Chalkboard)
                 </div>
-                <div class="checkbox-container">
-                    @Html.EditorFor(model => model.Chalkboard)
-                </div>
-                <div class="checkbox-label-container">
+                <div class="checkbox-label-container greatForm">
+                @Html.EditorFor(model => model.BoardArea)
                     @Html.LabelFor(model => model.BoardArea)
                 </div>
-                <div class="checkbox-container">
-                    @Html.EditorFor(model => model.BoardArea)
-                </div>
-                <div class="checkbox-label-container">
+                <div class="checkbox-label-container greatForm">
+                    @Html.EditorFor(model => model.Wheelchair)
                     @Html.LabelFor(model => model.Wheelchair)
                 </div>
-                <div class="checkbox-container">
-                    @Html.EditorFor(model => model.Wheelchair)
-                </div>
-                <div class="checkbox-label-container">
+                <div class="checkbox-label-container greatForm">
+                    @Html.EditorFor(model => model.Induction)
                     @Html.LabelFor(model => model.Induction)
                 </div>
-                <div class="checkbox-container">
-                    @Html.EditorFor(model => model.Induction)
-                </div> 
-                <div class="checkbox-label-container">
-                    @Html.LabelFor(model => model.Induction)
-                </div>
-                <div class="checkbox-container">
-                    @Html.EditorFor(model => model.Induction)
-                </div> 
             </div>
         </div>
         <div class="field">
