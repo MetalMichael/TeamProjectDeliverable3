@@ -4,7 +4,13 @@ $(document).ready(function () {
     $('#buildings').change(function () { rooms.filterRooms(); });
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
 
-    rooms.filterRooms();
+    if (typeof selectedRooms !== "undefined") {
+        var setup = true;
+        $('#no_rooms').val(selectedRooms.length);
+    } else {
+        var setup = false;
+    }
+    rooms.filterRooms(setup);
 });
 
 var rooms = {
@@ -23,7 +29,7 @@ var rooms = {
 
     updateBuildings: function () {
         this.updateInfo();
-        $.get('Home/Buildings',
+        $.get('/Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -36,20 +42,19 @@ var rooms = {
         this.filterRooms();
     },
 
-    filterRooms: function () {
-        console.log("Filtering Rooms");
+    filterRooms: function (setup) {
         this.updateInfo();
-        $.get('Home/Rooms',
+        $.get('/Home/Rooms',
             { students: this.students, park: this.park, building: this.building },
             function (data) {
                 rooms.roomInfo = data;
                 rooms.changeSelects();
-                rooms.changeRoomTotal();
+                rooms.changeRoomTotal(setup);
             }
         );
     },
 
-    changeRoomTotal: function () {
+    changeRoomTotal: function (setup) {
         var newTotal = $('#no_rooms').val();
         if (newTotal < this.roomTotal) {
             while (this.roomTotal > newTotal) {
@@ -60,6 +65,13 @@ var rooms = {
             while (this.roomTotal < newTotal) {
                 this.addRoom(parseInt(this.roomTotal) + 1);
                 this.roomTotal++;
+            }
+        }
+        if (setup) {
+            var x = 1;
+            for (var r in selectedRooms) {
+                $('#room' + x + " select").val(selectedRooms[r]);
+                x++;
             }
         }
     },

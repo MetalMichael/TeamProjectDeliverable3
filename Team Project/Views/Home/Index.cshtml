@@ -284,6 +284,13 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(false)
 
+    if (ViewBag.Message != null)
+    {
+        <div class="success-message">
+            @ViewBag.Message
+        </div>
+    }
+
     <div class="buttons-wrapper bar">
         <div>
             <button>Submit</button>
@@ -354,7 +361,7 @@
                 @Html.Label("Filter Module")
             </div>
             <div class="editor-field">
-                <input type="text" class="filter" name="priority" />
+                <input type="text" class="filter" id="module-filter" />
             </div>
         </div>
         <div class="field">
@@ -412,19 +419,19 @@
         <div class="field">
             <div class="buttons-wrapper">   <!-- whitespace removal needs doing -->
                 <div>
-                    <button id="allWeeks" class="weeks">1-15</button>
+                    <button id="allWeeks" class="weeks" type="button">1-15</button>
                 </div>
                 <div>
-                    <button id="defWeeks" class="weeks">1-12</button>
+                    <button id="defWeeks" class="weeks" type="button">1-12</button>
                 </div>
                 <div>
-                    <button id="oddWeeks" class="weeks">Odd</button>
+                    <button id="oddWeeks" class="weeks" type="button">Odd</button>
                 </div>
                 <div>
-                    <button id="evenWeeks" class="weeks">Even</button>
+                    <button id="evenWeeks" class="weeks" type="button">Even</button>
                 </div>
                 <div>
-                    <button id="clearWeeks">Clear</button>
+                    <button id="clearWeeks" type="button">Clear</button>
                 </div> 
             </div>
         </div>
