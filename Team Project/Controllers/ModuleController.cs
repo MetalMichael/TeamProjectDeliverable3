@@ -121,7 +121,7 @@ namespace TimetableSystem.Controllers
                 
                 systemDB.Entry(module).State = System.Data.EntityState.Deleted;
                 systemDB.SaveChanges();
-                return Redirect("/Module");  // no delete confirmation yet
+                return Redirect("/team09web/Module");  // no delete confirmation yet
             }
             catch
             {
