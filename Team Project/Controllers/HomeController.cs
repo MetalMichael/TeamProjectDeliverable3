@@ -99,6 +99,16 @@ namespace TimetableSystem.Controllers
             return CreateForm(request);
         }
 
+        public ActionResult Delete(int id)
+        {
+            Request request = db.Requests.Find(id);
+            db.Requests.Remove(request);
+            db.SaveChanges();
+
+            ViewBag.Message = "Request Deleted";
+            return RedirectToAction("Index", "View");
+        }
+
         private Request processRequest(Request request) {
             List<RequestWeek> weeks = new List<RequestWeek>();
             if (request.Weeks != null && request.Weeks.Count > 0)

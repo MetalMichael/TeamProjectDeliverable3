@@ -19,5 +19,6 @@ namespace TimetableSystem.Models
         {
             this.Week = week;
         }
+        public RequestWeek() { }
     }
 }

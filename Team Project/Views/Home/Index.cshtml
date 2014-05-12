@@ -9,7 +9,6 @@
 <script src="@Url.Content("~/Scripts/Home/index.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/Home/rooms.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/weeks.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/checkboxes.js")" type="text/javascript"></script>
 
 @if(ViewBag.SelectedRooms != null) {
     <script type="text/javascript">
@@ -172,7 +171,7 @@
             </div>
             <div class="editor-field" id="room-features">
                 <div class="checkbox-label-container greatForm">
-                     @Html.EditorFor(model => model.Projector)
+                     @Html.CheckBoxFor(model => model.Projector)
                      @Html.LabelFor(model => model.Projector)               
                 </div>
                 <div class="checkbox-label-container greatForm">
