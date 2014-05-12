@@ -11,9 +11,20 @@
 <script src="@Url.Content("~/Scripts/weeks.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/checkboxes.js")" type="text/javascript"></script>
 
+@if(ViewBag.SelectedRooms != null) {
+    <script type="text/javascript">
+        var selectedRooms = [
+    @foreach (string roomid in ViewBag.SelectedRooms)
+    {
+        @Html.Raw("'" + roomid + "'")
+    }
+        ];
+    </script>
+}
+
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(false)
-
+    @Html.HiddenFor(model => model.RequestId);
     if (ViewBag.Message != null)
     {
         <div class="success-message">

@@ -17,6 +17,55 @@ namespace TimetableSystem.Controllers
     {
         private TimetableSystemEntities db = new TimetableSystemEntities();
 
+        public ActionResult Index()
+        {
+            return CreateForm(new Request());
+        }
+
+        [HttpPost]
+        public ActionResult Index(Request request)
+        {
+            request = this.processRequest(request);
+
+            if (ModelState.IsValid)
+            {
+                db.Requests.Add(request);
+                db.SaveChanges();
+                ViewBag.Message = "Request Created";
+                return CreateForm(new Request());
+            }
+
+            return CreateForm(request);
+        }
+
+        public ActionResult Autofill()
+        {
+            Request request = new Request();
+
+            try {
+                string weeks = Request.QueryString["Weeks"];
+                request.Weeks = weeks.Split('|').Select(s => int.Parse(s)).ToList();
+            } catch (Exception) {}
+
+            ViewBag.SelectedRooms = new List<String>();
+            try {
+                string room = Request.QueryString["Room"];
+                ViewBag.SelectedRooms.Add(room);
+            } catch (FormatException) { }
+
+            try {
+                string day = Request.QueryString["Day"];
+                request.Day = day;
+            } catch (FormatException) { }
+
+            try {
+                int start = Convert.ToInt16(Request.QueryString["StartTime"]);
+                request.StartTime = start;
+            } catch (FormatException) { }
+
+            return CreateForm(request);
+        }
+
         public ActionResult Edit(int id)
         {
             Request request = db.Requests.Find(id);
@@ -45,27 +94,6 @@ namespace TimetableSystem.Controllers
                 db.SaveChanges();
                 ViewBag.Message = "Edited Successfully";
                 return RedirectToAction("Index", "View");
-            }
-
-            return CreateForm(request);
-        }
-
-        public ActionResult Index()
-        {
-            return CreateForm(new Request());
-        }
-
-        [HttpPost]
-        public ActionResult Index(Request request)
-        {
-            request = this.processRequest(request);
-
-            if (ModelState.IsValid)
-            {
-                db.Requests.Add(request);
-                db.SaveChanges();
-                ViewBag.Message = "Request Created";
-                return CreateForm(new Request());
             }
 
             return CreateForm(request);
@@ -183,7 +211,7 @@ namespace TimetableSystem.Controllers
 
             ViewBag.Department = User.Identity.Name;
 
-            return View(request);
+            return View("Index", request);
         }
 
         public ActionResult Rooms()

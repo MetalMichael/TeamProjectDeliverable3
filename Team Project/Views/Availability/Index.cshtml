@@ -243,14 +243,11 @@
                                     var queryLink = '@Url.Action("getRoomID")';
                                     var room = $('#dialogRooms').val().split(' ')[0];
                                     $.get(queryLink, { roomCode: room }, function (data) {
-                                        var url = "Home/Index/?";
-                                        for (var i = 0; i < weekArray.length; i++) {
-                                            url += "Weeks=" + weekArray[i];
-                                            url += "&";
-                                        }
-                                        url += "Room=" + data;
+                                        var url = "Home/Autofill";
+                                        url += "?Weeks=" + weekArray.join('|');
+                                        url += "&Room=" + data;
                                         url += "&Day=" + day;
-                                        url += "&Time=" + slot.substr(5, 1);
+                                        url += "&StartTime=" + (parseInt(slot.substr(5, 1)) + 8);
                                         window.location = url;
                                     });
                                 },
