@@ -15,12 +15,13 @@
         <link href="@Url.Content("~/Content/requests.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/saved.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/availability.css")" rel="stylesheet" type="text/css" />
-		<link href="@Url.Content("~/Content/component.css")" rel="stylesheet" type="text/css" />
+		
 		<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
 		@*<link href="@Url.Content("~/Content/radio-checks.css")" rel="stylesheet" type="text/css" />*@
 		<link href="@Url.Content("~/Content/icons.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/modules.css")" rel="Stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/new-checkboxes.css")" rel="Stylesheet" type="text/css" />
+		<link href="@Url.Content("~/Content/component.css")" rel="stylesheet" type="text/css" />
 		
 		<script>
 			var currentURL = window.location.pathname.toString();
@@ -38,7 +39,7 @@
 							<a id="dept" class="title" href="@Url.Action("Index", "Home")"><span class="fa fa-logo fa-@ViewBag.Department"></span><h3>@ViewBag.Department</h3></a>
 							<p class="round"><p>
 						</li>
-						<div class="menu" style="float: right;">
+						<div class="menu">
 							@*<li>@Html.ActionLink("Request Form", "Index", "Home", null, new { @class = "menu" })</li>*@
 							<li><a id="form" class="menu" href="@Url.Action("Index", "Home")"><span class="fa fa-menu fa-file-text-o"></span>Make Request ...</a></li>
 							@*<li>@Html.ActionLink("Requests", "Index", "View", null, new { @class = "menu" })</li>*@
