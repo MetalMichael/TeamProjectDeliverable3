@@ -87,7 +87,5 @@ namespace TimetableSystem.Models
 
         [DisplayName("Induction Loop")]
         public bool Induction { get; set; }
-
-
     }
 }

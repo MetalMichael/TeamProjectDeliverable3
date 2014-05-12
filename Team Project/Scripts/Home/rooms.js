@@ -3,6 +3,8 @@ $(document).ready(function () {
     $('#Park').change(function () { rooms.updateBuildings(); });
     $('#buildings').change(function () { rooms.filterRooms(); });
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
+    $('#room-features input').change(function () { rooms.filterRooms(); });
+    $('#RoomType').change(function () { rooms.filterRooms(); });
 
     if (typeof selectedRooms !== "undefined") {
         var setup = true;
@@ -11,10 +13,25 @@ $(document).ready(function () {
         var setup = false;
     }
     rooms.filterRooms(setup);
+
+    $('#SpecialRequest').prop('placeholder', "Enter text here ...");
+
+    $('#StartTime').change(function () { checkTime(); });
+    $('#Length').change(function () { checkTime(); });
 });
 
+function checkTime() {
+    var start = parseInt($('#StartTime').val());
+    var length = parseInt($('#Length').val());
+
+    if (start + length > 18) {
+        console.log((start + length));
+        alert("Cannot have a request for a time this long. It exceeds the timetable available");
+        $('#Length').val(18 - start);
+    }
+}
+
 var rooms = {
-    rooms: null,
     roomInfo: null,
     students: null,
     park: null,
@@ -29,7 +46,7 @@ var rooms = {
 
     updateBuildings: function () {
         this.updateInfo();
-        $.get('/Home/Buildings',
+        $.get('/team09web/Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -44,12 +61,20 @@ var rooms = {
 
     filterRooms: function (setup) {
         this.updateInfo();
-        $.get('/Home/Rooms',
-            { students: this.students, park: this.park, building: this.building },
+        $('.room-select').addClass('loading');
+        $.get('/team09web/Home/Rooms',
+            {
+                students: this.students,
+                park: this.park,
+                building: this.building,
+                facilities: this.getFacilities().join('|'),
+                roomType: this.getRoomType()
+            },
             function (data) {
                 rooms.roomInfo = data;
                 rooms.changeSelects();
                 rooms.changeRoomTotal(setup);
+                $('.room-select').removeClass('loading');
             }
         );
     },
@@ -108,5 +133,19 @@ var rooms = {
 
     getOptions: function () {
         return $(this.roomInfo).children();
+    },
+
+    getFacilities: function () {
+        var facilities = [];
+        $('#room-features input').each(function () {
+            if ($(this).prop("checked")) {
+                facilities.push($(this).prop("name"));
+            }
+        });
+        return facilities;
+    },
+
+    getRoomType: function () {
+        return $('#RoomType').val();
     }
 };

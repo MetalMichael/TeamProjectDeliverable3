@@ -48,6 +48,7 @@ nav {
   background: #3e4c68;
 /*	float: right;*/
 /*overflow: hidden;*/
+	border-bottom: 2px solid #dbdbde;
 }
 nav ul {
 /*  display: flex;*/
@@ -115,4 +116,15 @@ nav ul a.active:before {
 	position: relative;
 	left: -4px;
 	color: white;
+}
+footer {
+	position: absolute;
+	top: 1000%;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #3e4c68;
+	height: 50px;
+	border-top: 2px solid #dbdbde;
+	color: #dbdbde;
 }

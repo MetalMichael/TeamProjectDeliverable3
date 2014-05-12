@@ -16,6 +16,7 @@
 <table id="requests-table">
     <thead>
         <tr>
+            <td>Module Code</td>
             <td>Module</td>
             <td>Day</td>
             <td>Start Time</td>
@@ -30,35 +31,42 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>@Html.DisplayFor(modelItem => item.Module.ModuleCode)</td>
             <td>@Html.DisplayFor(modelItem => item.Module.ModuleTitle)</td>
             <td>@item.Day</td>
             <td>@item.StartTime:00</td>
             <td>@item.Length</td>
             <td>
-                @try {
-                    foreach(int week in @item.Weeks)
-                    {
-                        week.ToString();
-                    }
-                } catch(NullReferenceException) {
-                    Html.Raw("N/A");
+        @{
+        bool first = true;
+            foreach (TimetableSystem.Models.RequestWeek week in item.RequestWeeks)
+            {
+                if (!first)
+                {
+                    @Html.Raw(", ");
                 }
-
+                else
+                {
+                    first = false;
+                }
+                @week.Week.ToString();
+            }
+        }
             </td>
             <td>
-                @foreach (TimetableSystem.Models.RequestRoom room in item.RequestRooms)
-                {
-                    if (room.Room != null)
-                    {
-                        @room.Room.RoomCode;
-                    }
-                }
+        @foreach (TimetableSystem.Models.RequestRoom room in item.RequestRooms)
+        {
+            if (room.Room != null)
+            {
+                @room.Room.RoomCode;
+            }
+        }
             </td>
-            <td>@item.Status</td>
-            <td>@if(item.Status == "Pending") {
-                    @Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target="_self" })
-                }
-            </td>
+            <td><span class="status">@item.Status</span></td>
+            <td><span class="controls">
+                @Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target = "_self", @class="edit" })
+                @Html.ActionLink("Delete", "Delete", "Home", new { id = item.RequestId }, new { target = "_self", @class="delete" })
+            </span></td>
         </tr>
     }
     </tbody>

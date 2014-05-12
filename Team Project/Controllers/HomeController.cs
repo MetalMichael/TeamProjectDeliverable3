@@ -17,6 +17,55 @@ namespace TimetableSystem.Controllers
     {
         private TimetableSystemEntities db = new TimetableSystemEntities();
 
+        public ActionResult Index()
+        {
+            return CreateForm(new Request());
+        }
+
+        [HttpPost]
+        public ActionResult Index(Request request)
+        {
+            request = this.processRequest(request);
+
+            if (ModelState.IsValid)
+            {
+                db.Requests.Add(request);
+                db.SaveChanges();
+                ViewBag.Message = "Request Created";
+                return CreateForm(new Request());
+            }
+
+            return CreateForm(request);
+        }
+
+        public ActionResult Autofill()
+        {
+            Request request = new Request();
+
+            try {
+                string weeks = Request.QueryString["Weeks"];
+                request.Weeks = weeks.Split('|').Select(s => int.Parse(s)).ToList();
+            } catch (Exception) {}
+
+            ViewBag.SelectedRooms = new List<String>();
+            try {
+                string room = Request.QueryString["Room"];
+                ViewBag.SelectedRooms.Add(room);
+            } catch (FormatException) { }
+
+            try {
+                string day = Request.QueryString["Day"];
+                request.Day = day;
+            } catch (FormatException) { }
+
+            try {
+                int start = Convert.ToInt16(Request.QueryString["StartTime"]);
+                request.StartTime = start;
+            } catch (FormatException) { }
+
+            return CreateForm(request);
+        }
+
         public ActionResult Edit(int id)
         {
             Request request = db.Requests.Find(id);
@@ -37,36 +86,27 @@ namespace TimetableSystem.Controllers
             
             if (ModelState.IsValid)
             {
-                db.Entry(request).State = EntityState.Modified;
+                Request old = db.Requests.Find(request.RequestId);
+                db.Requests.Remove(old);
                 db.SaveChanges();
-                ViewBag.Message = "Edited Successfully";
-                return RedirectToRoute("View");
-            }
-
-            return CreateForm(request);
-        }
-
-        public ActionResult Index()
-        {
-            return CreateForm(new Request());
-        }
-
-        [HttpPost]
-        public ActionResult Index(Request request)
-        {
-
-            request = this.processRequest(request);
-            request.Status = "Pending";
-
-            if (ModelState.IsValid)
-            {
+                
                 db.Requests.Add(request);
                 db.SaveChanges();
-                ViewBag.Message = "Request Created";
-                return CreateForm(new Request());
+                ViewBag.Message = "Edited Successfully";
+                return RedirectToAction("Index", "View");
             }
 
             return CreateForm(request);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Request request = db.Requests.Find(id);
+            db.Requests.Remove(request);
+            db.SaveChanges();
+
+            ViewBag.Message = "Request Deleted";
+            return RedirectToAction("Index", "View");
         }
 
         private Request processRequest(Request request) {
@@ -102,16 +142,13 @@ namespace TimetableSystem.Controllers
             }
             request.RequestRooms = rooms;
 
+            request.Status = "Pending";
             return request;
         }
 
         private ActionResult CreateForm(Request request)
         {
 
-            // Temp - code to setup the room features checkboxes
-            //string projector = "";
-            //projector += "<input checked='checked' class='check-box' id='Projector2' name='Projector2' type='checkbox' value='true'> <label for='" + request.Projector + "'>" + request.Projector + "</label>";
-           
             string week1 = "", week2 = "", week3 = "";
             string weekNo;
 
@@ -143,8 +180,6 @@ namespace TimetableSystem.Controllers
             ViewBag.WeekCheckboxes2 = week2;
             ViewBag.WeekCheckboxes3 = week3;
 
-            ViewBag.Title = "Create new Request";
-
             ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
             ViewBag.ModuleCodes = new SelectList(db.Modules, "ModuleCode", "ModuleCode");
             ViewBag.Buildings = new SelectList(db.Buildings, "BuildingID", "BuildingName");
@@ -160,7 +195,7 @@ namespace TimetableSystem.Controllers
                 {
                     y = "0" + y;
                 }
-                times.Add(new SelectListItem { Text = y + ":00 - Period: " + p, Value = y });
+                times.Add(new SelectListItem { Text = "Period " + p + " : (" + y + ":00 - " + y + ":50)" , Value = y });
             }
             ViewBag.Times = times;
 
@@ -188,11 +223,12 @@ namespace TimetableSystem.Controllers
 
             ViewBag.Department = User.Identity.Name;
 
-            return View(request);
+            return View("Index", request);
         }
 
         public ActionResult Rooms()
         {
+            //GET vars
             int Students, ParkId, BuildingId;
             try {
                 Students = Convert.ToInt16(Request.QueryString["students"]);
@@ -212,21 +248,71 @@ namespace TimetableSystem.Controllers
                 BuildingId = 0;
             }
 
+            String[] facilities = new string[] {};
+            string facilTemp;
+            try {
+                facilTemp = Request.QueryString["facilities"];
+                if (facilTemp != "")
+                {
+                    facilities = facilTemp.Split('|');
+                }
+            } catch (Exception) { }
+
+            int RoomTypeID;
+            try
+            {
+                RoomTypeID = Convert.ToInt16(Request.QueryString["roomType"]);
+            } catch (FormatException) {
+                RoomTypeID = 0;
+            }
+
+
+            //DB Stuff
             var rooms = db.Rooms.Where(a => a.Capacity >= Students);
 
             if (BuildingId != 0)
             {
-                rooms = db.Rooms.Where(a => a.BuildingID == BuildingId).Where(a => a.Capacity >= Students);
+                rooms = rooms.Where(a => a.BuildingID == BuildingId);
             }
-            else if (ParkId != 0)
+            if (ParkId != 0)
             {
-                rooms = db.Rooms.Where(a => a.Building.ParkID == ParkId).Where(a => a.Capacity >= Students);
+                rooms = rooms.Where(a => a.Building.ParkID == ParkId);
+            }
+            if (RoomTypeID != 0)
+            {
+                rooms = rooms.Where(a => a.RoomType.RoomTypeID == RoomTypeID);
             }
 
+            //Output
             string select = "<select class='room-select' name='Rooms'><option value='0'></option>";
-            foreach (var room in rooms)
+            bool featureExists = false;
+            bool fails = false;
+            foreach (Room room in rooms)
             {
-                select += "<option value='" + room.RoomID + "'>" + room.RoomCode + "&nbsp;&nbsp;&nbsp;&nbsp;(Cap: " + room.Capacity + ")</option>";
+                featureExists = false;
+                fails = false;
+                if (facilities.Length > 0)
+                {
+                    foreach(string facility in facilities)
+                    {
+                        foreach(RoomFacility rf in room.RoomFacilities)
+                        {
+                            if (rf.Facility.FacilityName == facility)
+                            {
+                                featureExists = true;
+                            }
+                        }
+                        if (!featureExists)
+                        {
+                            fails = true;
+                            break;
+                        }
+                    }
+                }
+                if (!fails)
+                {
+                    select += "<option value='" + room.RoomID + "'>" + room.RoomCode + "&nbsp;&nbsp;&nbsp;&nbsp;(Cap: " + room.Capacity + ")</option>";
+                }
             }
             select += "</select>";
 
