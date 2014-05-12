@@ -10,45 +10,50 @@
 <script src="@Url.Content("~/Scripts/Home/rooms.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/weeks.js")" type="text/javascript"></script>
 <script type="text/javascript">
-    function clearAll() {
-        for (var i = 1; i < 16; i++) {
-            var cb = '#Week' + i;
-            $(cb).prop('checked', false);
+    $(document).ready(function () {
+        function clearAll() {
+            for (var i = 1; i < 16; i++) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', false);
+            }
         }
-    }
-    $('#clearAll').click(function () {
-        clearAll();
-    });
-    $('#checkAll').click(function () {
-        for (var i = 1; i < 16; i++) {
-            var cb = '#Week' + i;
-            $(cb).prop('checked', true);
-        }
-    });
-    $('#oneToTwelve').click(function () {
-        clearAll();
-        for (var i = 1; i < 13; i++) {
-            var cb = '#Week' + i;
-            $(cb).prop('checked', true);
-        }
-    });
-    $('#checkEven').click(function () {
-        clearAll();
-        for (var i = 1; i < 16; i++) {
-            if (i % 2 == 0) {
+        $('#clearAll').click(function () {
+            clearAll();
+        });
+        $('#checkAll').click(function () {
+            for (var i = 1; i < 16; i++) {
                 var cb = '#Week' + i;
                 $(cb).prop('checked', true);
             }
-        }
-    });
-    $('#checkOdd').click(function () {
-        clearAll();
-        for (var i = 1; i < 16; i++) {
-            if (i % 2 == 1) {
+        });
+        $('#oneToTwelve').click(function () {
+            clearAll();
+            for (var i = 1; i < 13; i++) {
                 var cb = '#Week' + i;
                 $(cb).prop('checked', true);
             }
-        }
+        });
+        $('#checkEven').click(function () {
+            clearAll();
+            for (var i = 1; i < 16; i++) {
+                if (i % 2 == 0) {
+                    var cb = '#Week' + i;
+                    $(cb).prop('checked', true);
+                }
+            }
+        });
+        $('#checkOdd').click(function () {
+            clearAll();
+            for (var i = 1; i < 16; i++) {
+                if (i % 2 == 1) {
+                    var cb = '#Week' + i;
+                    $(cb).prop('checked', true);
+                }
+            }
+        });
+        $(function () {
+            $('select#Semester option:last').attr("selected", "selected");
+        });
     });
 </script>
 
@@ -172,7 +177,8 @@
                 @Html.Label("Semester")
             </div>
             <div class="editor-field">
-                    @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])
+                    @{ int[] semesters = {1,2};}
+                    @Html.DropDownList("Semester", new SelectList(semesters))
             </div>
         </div>
     </fieldset>
@@ -265,7 +271,6 @@
         <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(model => model.StudentsTotal)
-                *
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.StudentsTotal)
@@ -275,7 +280,6 @@
         <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(model => model.ParkId)
-                *
             </div>
             <div class="editor-field">
                 @Html.DropDownListFor(model => model.ParkId, (SelectList)ViewBag.Parks, "< Select a park >", new { id = "Park" })

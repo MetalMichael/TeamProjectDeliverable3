@@ -12,7 +12,6 @@ namespace TimetableSystem.Models
         [ScaffoldColumn(false)]
         public int RequestId { get; set; }
 
-        [Required(ErrorMessage = "Total Students is required")]
         [DisplayName("Total Students")]
         public int StudentsTotal { get; set; }
 

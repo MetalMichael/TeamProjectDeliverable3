@@ -224,7 +224,7 @@ namespace TimetableSystem.Controllers
 
             int[] semester = { 1, 2 };
             SelectList semesterList = new SelectList(semester);
-            ViewBag.Semester = semesterList;
+            ViewBag.Semesters = semesterList;
 
             return View("Index", request);
         }
