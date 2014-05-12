@@ -13,10 +13,13 @@ namespace TimetableSystem.Models
         public string RoomCode { get; set; }
         
         public int Capacity { get; set; }
-        
-        public virtual Building Building { get; set; }
 
         public int BuildingID { get; set; }
+        public virtual Building Building { get; set; }
+
+        public virtual List<RoomFacility> RoomFacilities { get; set; }
+
+        public virtual RoomType RoomType { get; set; }
     }
 }
 

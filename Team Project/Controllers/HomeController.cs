@@ -188,6 +188,7 @@ namespace TimetableSystem.Controllers
 
         public ActionResult Rooms()
         {
+            //GET vars
             int Students, ParkId, BuildingId;
             try {
                 Students = Convert.ToInt16(Request.QueryString["students"]);
@@ -207,21 +208,71 @@ namespace TimetableSystem.Controllers
                 BuildingId = 0;
             }
 
+            String[] facilities = new string[] {};
+            string facilTemp;
+            try {
+                facilTemp = Request.QueryString["facilities"];
+                if (facilTemp != "")
+                {
+                    facilities = facilTemp.Split('|');
+                }
+            } catch (Exception) { }
+
+            int RoomTypeID;
+            try
+            {
+                RoomTypeID = Convert.ToInt16(Request.QueryString["roomType"]);
+            } catch (FormatException) {
+                RoomTypeID = 0;
+            }
+
+
+            //DB Stuff
             var rooms = db.Rooms.Where(a => a.Capacity >= Students);
 
             if (BuildingId != 0)
             {
-                rooms = db.Rooms.Where(a => a.BuildingID == BuildingId).Where(a => a.Capacity >= Students);
+                rooms = rooms.Where(a => a.BuildingID == BuildingId);
             }
-            else if (ParkId != 0)
+            if (ParkId != 0)
             {
-                rooms = db.Rooms.Where(a => a.Building.ParkID == ParkId).Where(a => a.Capacity >= Students);
+                rooms = rooms.Where(a => a.Building.ParkID == ParkId);
+            }
+            if (RoomTypeID != 0)
+            {
+                rooms = rooms.Where(a => a.RoomType.RoomTypeID == RoomTypeID);
             }
 
+            //Output
             string select = "<select class='room-select' name='Rooms'><option value='0'></option>";
-            foreach (var room in rooms)
+            bool featureExists = false;
+            bool fails = false;
+            foreach (Room room in rooms)
             {
-                select += "<option value='" + room.RoomID + "'>" + room.RoomCode + "&nbsp;&nbsp;&nbsp;&nbsp;(Cap: " + room.Capacity + ")</option>";
+                featureExists = false;
+                fails = false;
+                if (facilities.Length > 0)
+                {
+                    foreach(string facility in facilities)
+                    {
+                        foreach(RoomFacility rf in room.RoomFacilities)
+                        {
+                            if (rf.Facility.FacilityName == facility)
+                            {
+                                featureExists = true;
+                            }
+                        }
+                        if (!featureExists)
+                        {
+                            fails = true;
+                            break;
+                        }
+                    }
+                }
+                if (!fails)
+                {
+                    select += "<option value='" + room.RoomID + "'>" + room.RoomCode + "&nbsp;&nbsp;&nbsp;&nbsp;(Cap: " + room.Capacity + ")</option>";
+                }
             }
             select += "</select>";
 

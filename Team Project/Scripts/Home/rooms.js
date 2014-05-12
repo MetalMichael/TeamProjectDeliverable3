@@ -3,6 +3,8 @@ $(document).ready(function () {
     $('#Park').change(function () { rooms.updateBuildings(); });
     $('#buildings').change(function () { rooms.filterRooms(); });
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
+    $('#room-features input').change(function () { rooms.filterRooms(); });
+    $('#RoomType').change(function () { rooms.filterRooms(); });
 
     if (typeof selectedRooms !== "undefined") {
         var setup = true;
@@ -14,7 +16,6 @@ $(document).ready(function () {
 });
 
 var rooms = {
-    rooms: null,
     roomInfo: null,
     students: null,
     park: null,
@@ -45,7 +46,13 @@ var rooms = {
     filterRooms: function (setup) {
         this.updateInfo();
         $.get('/Home/Rooms',
-            { students: this.students, park: this.park, building: this.building },
+            {
+                students: this.students,
+                park: this.park,
+                building: this.building,
+                facilities: this.getFacilities().join('|'),
+                roomType: this.getRoomType()
+            },
             function (data) {
                 rooms.roomInfo = data;
                 rooms.changeSelects();
@@ -108,5 +115,19 @@ var rooms = {
 
     getOptions: function () {
         return $(this.roomInfo).children();
+    },
+
+    getFacilities: function () {
+        var facilities = [];
+        $('#room-features input').each(function () {
+            if ($(this).prop("checked")) {
+                facilities.push($(this).prop("name"));
+            }
+        });
+        return facilities;
+    },
+
+    getRoomType: function () {
+        return $('#RoomType').val();
     }
 };
