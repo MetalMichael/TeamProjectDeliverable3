@@ -8,13 +8,13 @@
 	width: 100%;
 }
 
-.list_grid li {
+.list_grid fieldset {
 	position: relative;
 	float: left;
 	/*overflow: hidden;*/
-/*	width: 33%; *//* Fallback */
-	width: -webkit-calc(100% / 3.2);
-	width: calc(100% / 3.2);
+	width: 32%; /* Fallback */
+	/*width: -webkit-calc(100% / 3.2);
+	width: calc(100% / 3.2);*/
 }
 
 .list_grid li a,
@@ -63,12 +63,12 @@
 /* Example for media query: change number of items per row */
 
 @media screen and (min-width: 1650px){
-	.list_grid li {
-		width: 33%; /* Fallback */
-		width: -webkit-calc(100% / 3.1);
-		width: calc(100% / 3.099);
+	.list_grid fieldset {
+		width: 32%; /* Fallback */
+		/*width: -webkit-calc(100% / 3.1);
+		width: calc(100% / 3.099);*/
 	}
-	.section {
+	fieldset {
 		margin: 9px;
 	}
 	/*.four {
@@ -99,15 +99,18 @@
 	div.menu {
 		float: right;
 	}
+	.list_grid {
+		margin-top: 55px;
+	}
 }
 
 @media screen and (min-width: 1600px) and (max-width: 1650px){
-	.list_grid li {
-		width: 33%; /* Fallback */
-		width: -webkit-calc(100% / 3);
-		width: calc(100% / 3.1);
+	.list_grid fieldset {
+		width: 32%; /* Fallback */
+		/*width: -webkit-calc(100% / 3);
+		width: calc(100% / 3.1);*/
 	}
-	.section {
+	fieldset {
 		margin: 9px;
 	}
 	#seven {
@@ -134,15 +137,21 @@
 	div.menu {
 		float: right;
 	}
+	.list_grid {
+		margin-top: 55px;
+	}
 }
 
 @media screen and (min-width: 1550px) {
-	.list_grid li {
-		width: 33%; /* Fallback */
-		width: -webkit-calc(100% / 3);
-		width: calc(100% / 3.1);
+	* {
+		font-size: 0.99em;
 	}
-	.section {
+	.list_grid fieldset {
+		width: 32.3%; /* Fallback */
+		/*width: -webkit-calc(100% / 3);
+		width: calc(100% / 3.1);*/
+	}
+	fieldset {
 		margin: 8px;
 	}
 	.four {
@@ -167,6 +176,9 @@
 	}
 	div.menu {
 		float: right;
+	}
+	.list_grid {
+		margin-top: 55px;
 	}
 }
 
@@ -195,16 +207,24 @@
 	div.menu {
 		float: right;
 	}
+	.list_grid {
+		margin-top: 55px;
+	}
 }
 
 @media screen and (min-width: 1190px) and (max-width: 1550px) {
-	.list_grid li {
-		width: 32.5%; /* Fallback */
+	.list_grid fieldset {
+		width: 49.1%; /* Fallback */
 		/*width: -webkit-calc(100% / 5);
 		width: calc(100% / 5);*/
+		font-size: 0.71em;
 	}
-	.section {
+	fieldset {
 		margin: 5px;
+	}
+	button {
+		padding: 0.5em;
+		width: 50px;
 	}
 	.four {
 		position: relative;
@@ -234,14 +254,18 @@
 	div.menu {
 		float: right;
 	}
+	.list_grid {
+		margin-top: 55px;
+	}
 }
 @media screen and (min-width: 946px) and (max-width: 1190px){
-	.list_grid li {
-		width: 49%; /* Fallback */
+	.list_grid fieldset {
+		width: 48.9%; /* Fallback */
 		/*width: -webkit-calc(100% / 5);
 		width: calc(100% / 5);*/
+		font-size: 0.8em;
 	}
-	.section {
+	fieldset {
 		margin: 5px;
 	}
 	.three {
@@ -251,6 +275,9 @@
 	.six {
 		position: relative;
 		top: -310px;
+	}
+	.list_grid {
+		margin-top: 55px;
 	}
 	.dept {
 		border-right: 1px solid rgba(0,0,0,0.1);
@@ -274,13 +301,24 @@
 }
 
 @media screen and (min-width: 810px) and (max-width: 945px) {
-	.list_grid li {
-		width: 49%; /* Fallback */
+	.list_grid fieldset {
+		width: 49.2%; /* Fallback */
 /*		width: -webkit-calc(100% / 4);
 		width: calc(100% / 4);
-*/	}
-	.section {
+		*/
+		font-size: 0.64em;
+	}
+	div.field {
+		height: 40px;
+	}
+	button {
+		padding: 5px;
+	}
+	fieldset {
 		margin: 3px;
+	}
+	.list_grid {
+		margin-top: 110px;
 	}
 	.three {
 		position: relative;
@@ -312,12 +350,23 @@
 	}
 }
 @media screen and (min-width: 801px) and (max-width: 809px) {
-	.list_grid li {
+	.list_grid fieldset {
 		width: 100%; /* Fallback */
 /*		width: -webkit-calc(100% / 3);
 		width: calc(100% / 3);*/
 	}
-	.section {
+	.field:last-child, h2, .field, fieldset, select, .field:last-child select:last-child, .field:last-child .editor-field:last-child select:last-child {
+		-webkit-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		border-radius: 0px;
+	}
+	.list_grid {
+		margin-top: 105px;
+	}
+	fieldset {
 		margin: 0;
 	}
 	/*header {
@@ -352,12 +401,23 @@
 	}
 }
 @media screen and (min-width: 750px) and (max-width: 800px) {
-	.list_grid li {
+	.list_grid fieldset {
 		width: 100%; /* Fallback */
 /*		width: -webkit-calc(100% / 3);
 		width: calc(100% / 3);*/
 	}
-	.section {
+	.field:last-child, h2, .field, fieldset, select, .field:last-child select:last-child, .field:last-child .editor-field:last-child select:last-child {
+		-webkit-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		border-radius: 0px;
+	}
+	.list_grid {
+		margin-top: 105px;
+	}
+	fieldset {
 		margin: 0;
 	}
 	/*header {
@@ -390,15 +450,36 @@
 		float: right;
 	}
 }
-
+@media screen and (min-width: 584px) and (max-width: 808px) {
+	.menu {
+		float: none;
+		text-align: center;
+	}
+}
 @media screen and (min-width: 661px) and (max-width: 749px) {
-	.list_grid li {
+	.list_grid {
+		margin-top: 50px;
+	}
+}
+@media screen and (min-width: 661px) and (max-width: 749px) {
+	.list_grid fieldset {
 		width: 100%; /* Fallback */
 /*		width: -webkit-calc(100% / 3);
 		width: calc(100% / 3);*/
 	}
-	.section {
+	fieldset {
 		margin: 0;
+	}
+	.field:last-child, h2, .field, fieldset, select, .field:last-child select:last-child, .field:last-child .editor-field:last-child select:last-child {
+		-webkit-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		border-radius: 0px;
+	}
+	.list_grid {
+		margin-top: 105px;
 	}
 	/*header {
 		display: none;
@@ -418,19 +499,35 @@
 	div.menu {
 		float: auto;
 	}
+	div.menu {
+		float: none;
+		text-align: center;
+	}
 }
 
 @media screen and (max-width: 660px) {
-	.list_grid li {
+	.list_grid fieldset {
 		width: 100%; /* Fallback */
 /*		width: -webkit-calc(100% / 3);
 		width: calc(100% / 3);*/
 	}
-	.section {
+	
+	fieldset {
 		margin: 0;
 	}
 	header {
 		text-align: center;
+	}
+	.field:last-child, h2, .field, fieldset, select, .field:last-child select:last-child, .field:last-child .editor-field:last-child select:last-child {
+		-webkit-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		border-radius: 0px;
+	}
+	.list_grid {
+		margin-top: 105px;
 	}
 	.list_grid {
 		position: relative;
@@ -440,21 +537,40 @@
 		border-bottom: 1px solid rgba(0,0,0,0.1);
 	}
 	div.menu {
+		float: none;
+		text-align: center;
+	}
+	div.menu {
 		float: auto;
 	}
 }
 
 @media screen and (max-width: 400px) {
-	.list_grid li {
+	.list_grid fieldset {
 		width: 100%; /* Fallback */
 /*		width: -webkit-calc(100% / 2);
 		width: calc(100% / 2);*/
 	}
-	.section {
+	fieldset {
 		margin: 0;
+	}
+	.field:last-child, h2, .field, fieldset, select, .field:last-child select:last-child, .field:last-child .editor-field:last-child select:last-child {
+		-webkit-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		border-radius: 0px;
+	}
+	.list_grid {
+		margin-top: 105px;
 	}
 	.dept {
 		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+	div.menu {
+		float: none;
+		text-align: center;
 	}
 	/*header {
 		display: none;
@@ -465,11 +581,26 @@
 	.list_grid li {
 		width: 100%;
 	}
-	.section {
+	fieldset {
 		margin: 0;
+	}
+	.field:last-child, h2, .field, fieldset, select, .field:last-child select:last-child, .field:last-child .editor-field:last-child select:last-child {
+		-webkit-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		border-radius: 0px;
+	}
+	.list_grid {
+		margin-top: 105px;
 	}
 	.dept {
 		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+	div.menu {
+		float: none;
+		text-align: center;
 	}
 	/*header {
 		display: none;

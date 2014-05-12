@@ -37,7 +37,7 @@ h2
 }
 fieldset 
 {
-    width: 31%;
+    width: 32%;
     float: left;
     margin: 10px;
     border: none;
@@ -191,6 +191,9 @@ form input.text-box.single-line
 .editor-field input:not([type='checkbox']) {
 	/*height: 48px;*/
 	background-color: rgba(0,0,0,0.3);
+}
+.logInLabel {
+	width: 30%;
 }
 .filter{
 	width: 100%;
