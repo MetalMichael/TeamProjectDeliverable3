@@ -163,7 +163,7 @@ input:focus::-webkit-input-placeholder {
     position:relative;
 }
 
-/*editor-label label and editor-field input is messing up the checkboxes for weeks, perhaps add class to all others, and the css-so e.g. editor-label label.label... whilst checkboxes css is causing it to not display*/
+/*editor-label label and editor-field input is messing up the checkboxes for weeks, perhaps add class to all others, and the css-so e.g.  label.label... whilst checkboxes css is causing it to not display*/
 
 .editor-label 
 {
@@ -190,6 +190,7 @@ input:focus::-webkit-input-placeholder {
 {
     float:right;
     padding:1.5em;
+    margin-right:30px;
 }
 
 .editor-field input:not([type='checkbox']) {

@@ -48,7 +48,7 @@
 							@*<li>@Html.ActionLink("Save", "Index", "Save", null, new { @class = "menu" })</li>*@
 							@*<li><a id="saved" class="menu" href="@Url.Action("Index", "Save")"><span class="fa fa-menu fa-save"></span>Save</a></li>*@
 							@*<li>@Html.ActionLink("Modules", "Index", "Module", null, new { @class = "menu" })</li>*@
-							<li><a id="modules" class="menu" href="@Url.Action("Index", "Module")"><span class="fa fa-menu fa-bookmark-o"></span>Modules</a></li>
+							<li><a id="modules" class="menu" href="@Url.Action("Index", "Module", new { moduleCode = " ", moduleTitle = "" })"><span class="fa fa-menu fa-bookmark-o"></span>Modules</a></li>
 							@*<li>@Html.ActionLink("Room Availability", "Index", "Availability", null, new { @class = "menu" })</li>*@
 							<li><a id="availability" class="menu" href="@Url.Action("Index", "Availability")"><span class="fa fa-menu fa-table"></span>Room Availability</a></li>
 							@*<li>@Html.ActionLink("Logout", "Index", "Logout", null, new { @class = "menu" })</li>*@

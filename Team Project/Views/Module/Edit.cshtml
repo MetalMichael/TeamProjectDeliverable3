@@ -10,12 +10,12 @@
 @Html.HiddenFor(model => model.ModuleCode)
 @Html.HiddenFor(model => model.Department)
 
-@using (Html.BeginForm("Index", "Module", FormMethod.Post)) {
+@using (Html.BeginForm("Index", "Module", FormMethod.Post))
+{
     @Html.ValidationSummary(false)
-
-            <div class="buttons-wrapper bar">
+        <div class="buttons-wrapper bar">
             <div>
-                @Html.ActionLink("Back", "Index", new { }, new { @class = "button" })
+                @Html.ActionLink("Back", "Index", new { moduleCode = " ", moduleTitle = "" }, new { @class = "button" })
             </div>
             <div>
                 <input type="submit" value="Save" class="button" /> 
@@ -26,7 +26,7 @@
         </div>
     
     <fieldset>
-        <h2>Module code</h2>
+        <h2>Module code & title</h2>
         <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(model => model.ModuleCode)
@@ -35,21 +35,15 @@
                 @Html.EditorFor(model => model.ModuleCode, new { maxlength = "10" })
                 @Html.ValidationMessageFor(model => model.ModuleCode)
             </div>
-        </div>
-    </fieldset>
-    <fieldset>
-        <h2>Module title</h2>
-        <div class="field">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ModuleTitle)
-            </div>
+            <div class="field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ModuleTitle)
+                </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.ModuleTitle, new { maxlength = "255" })
                 @Html.ValidationMessageFor(model => model.ModuleTitle)
             </div>
         </div>
-    </fieldset>
-    <fieldset class="modulesFieldset">
-
+        </div>
     </fieldset>
 }

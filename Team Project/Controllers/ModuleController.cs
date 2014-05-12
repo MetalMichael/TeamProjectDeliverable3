@@ -35,7 +35,7 @@ namespace TimetableSystem.Controllers
                 }
             }
 
-            if (!String.IsNullOrEmpty(moduleCode))
+            if (!String.IsNullOrEmpty(moduleCode))  // search filter
             {
                 var mod = from m in systemDB.Modules 
                 select m; 
