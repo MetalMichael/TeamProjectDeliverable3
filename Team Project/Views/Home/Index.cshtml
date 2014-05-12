@@ -60,7 +60,7 @@
                 <div class="buttons-wrapper">   <!-- justification not applying for some reason -->
                     @foreach (var day in ViewBag.Days)
                     {
-                        @Html.Raw("<div>")
+                        @Html.Raw("<div class='greatForm'>")
                         if (day == Model.Day)
                         {
                             @Html.RadioButtonFor(model => model.Day, (String)day, new { id = "test", Checked = "checked" });
