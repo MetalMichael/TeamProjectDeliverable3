@@ -19,8 +19,6 @@
                 @Html.Label("User Name")
             </div>
             <div class="editor-field">
-                <!--<input class="text-box single-line valid" id="StudentsTotal" name="StudentsTotal" type="text" value="0">-->
-                @*@Html.DropDownList("UserNames", (IEnumerable<SelectListItem>)ViewData["UserNames"], "Select Department") *@
                 @Html.DropDownListFor(m => m.UserName, (IEnumerable<SelectListItem>)ViewBag.UserNames, "Select Department")
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
@@ -40,8 +38,7 @@
                 @Html.CheckBoxFor(m => m.RememberMe)
             </div>
             <div class="editor-field">
-                <button>Log in</button>
-                <!--<input type="submit" value="Log On" class="button1" style="padding:0;"/>-->               
+                <button>Log in</button>          
             </div>
         </div>
     </fieldset>
