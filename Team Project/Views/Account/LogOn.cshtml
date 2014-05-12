@@ -20,7 +20,8 @@
             </div>
             <div class="editor-field">
                 <!--<input class="text-box single-line valid" id="StudentsTotal" name="StudentsTotal" type="text" value="0">-->
-                @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewData["UserNames"], "Select Department")
+                @*@Html.DropDownList("UserNames", (IEnumerable<SelectListItem>)ViewData["UserNames"], "Select Department") *@
+                @Html.DropDownListFor(m => m.UserName, (IEnumerable<SelectListItem>)ViewBag.UserNames)
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
         </div>

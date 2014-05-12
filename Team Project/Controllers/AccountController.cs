@@ -21,7 +21,8 @@ namespace TimetableSystem.Controllers
             var logOns = from r in systemDB.aspnet_Users
                          select r.UserName;
             SelectList userNames = new SelectList(logOns);
-            ViewBag.UserNames = userNames;
+            List<SelectListItem> temp = new List<SelectListItem>(userNames);
+            ViewBag.UserNames = temp;
 
             return View();
         }
@@ -57,9 +58,10 @@ namespace TimetableSystem.Controllers
             }
 
             var logOns = from r in systemDB.aspnet_Users
-                            select r.UserName;
+                         select r.UserName;
             SelectList userNames = new SelectList(logOns);
-            ViewBag.UserNames = userNames;
+            List<SelectListItem> temp = new List<SelectListItem>(userNames);
+            ViewBag.UserNames = temp;
             
 
             // If we got this far, something failed, redisplay form
