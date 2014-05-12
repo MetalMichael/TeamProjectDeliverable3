@@ -46,7 +46,7 @@ var rooms = {
 
     updateBuildings: function () {
         this.updateInfo();
-        $.get('/Home/Buildings',
+        $.get('/team09web/Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -61,7 +61,8 @@ var rooms = {
 
     filterRooms: function (setup) {
         this.updateInfo();
-        $.get('/Home/Rooms',
+        $('.room-select').addClass('loading');
+        $.get('/team09web/Home/Rooms',
             {
                 students: this.students,
                 park: this.park,
@@ -73,6 +74,7 @@ var rooms = {
                 rooms.roomInfo = data;
                 rooms.changeSelects();
                 rooms.changeRoomTotal(setup);
+                $('.room-select').removeClass('loading');
             }
         );
     },
