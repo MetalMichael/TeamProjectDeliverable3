@@ -23,6 +23,7 @@
             <td>Length</td>
             <td>Weeks</td>
             <td>Rooms</td>
+            <td>AcceptedRooms</td>
             <td>Status</td>
             <td></td>
         </tr>
@@ -53,7 +54,7 @@
             }
         }
             </td>
-            <td>
+            <td class="rooms">
         @foreach (TimetableSystem.Models.RequestRoom room in item.RequestRooms)
         {
             if (room.Room != null)
@@ -62,10 +63,26 @@
             }
         }
             </td>
+            <td class="acceptedRooms">
+        @if (item.AcceptedRooms.ToArray().Length > 0)
+        {
+            foreach (TimetableSystem.Models.AcceptedRoom room in item.AcceptedRooms)
+            {
+                if (room.Room != null)
+                {
+                    @room.Room.RoomCode;
+                }
+            }
+        }
+        else
+        {
+            @Html.Raw("N/A");
+        }
+            </td>
             <td><span class="status">@item.Status</span></td>
             <td><span class="controls">
-                @Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target = "_self", @class="edit" })
-                @Html.ActionLink("Delete", "Delete", "Home", new { id = item.RequestId }, new { target = "_self", @class="delete" })
+                @Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target = "_self", @class = "edit" })
+                @Html.ActionLink("Delete", "Delete", "Home", new { id = item.RequestId }, new { target = "_self", @class = "delete" })
             </span></td>
         </tr>
     }

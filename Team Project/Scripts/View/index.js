@@ -1,8 +1,20 @@
 $(document).ready(function () {
     $('tr').each(function () {
         var status = $(this).find('.status').html()
-        if (typeof status == "string" && status.indexOf("Pending") == -1) {
-            $(this).find('.controls').hide();
+        if (typeof status == "string") {
+            if (status.indexOf("Pending") > -1) {
+
+            } else if (status.indexOf("Accepted") > -1) {
+                $(this).find('.controls').hide();
+                if ($(this).find('.rooms').html() !== $(this).find('.acceptedRooms').html()) {
+                    $(this).css('background-color', 'orange');
+                } else {
+                    $(this).css('background-color', 'green');
+                }
+            } else {
+                $(this).find('.controls').hide();
+                $(this).css('background-color', 'red');
+            }
         }
     });
 

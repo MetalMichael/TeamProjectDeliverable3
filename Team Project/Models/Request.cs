@@ -56,9 +56,6 @@ namespace TimetableSystem.Models
         public virtual Park Park { get; set; }
 
         [ScaffoldColumn(false)]
-        public int AcceptedRoom { get; set; }
-
-        [ScaffoldColumn(false)]
         public string Status { get; set; }
 
         [ScaffoldColumn(false)]
@@ -67,6 +64,9 @@ namespace TimetableSystem.Models
 
         public List<string> Rooms { get; set; }
         public virtual List<RequestRoom> RequestRooms { get; set; }
+
+        public int AcceptedRoom { get; set; }
+        public virtual List<AcceptedRoom> AcceptedRooms { get; set; }
 
         //Features
         [DisplayName("Data Projector")]
