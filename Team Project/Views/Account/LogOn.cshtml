@@ -19,7 +19,6 @@
                 @Html.LabelFor(m => m.UserName)
             </div>
             <div class="editor-field">
-                <!--<input class="text-box single-line valid" id="StudentsTotal" name="StudentsTotal" type="text" value="0">-->
                 @Html.EditorFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
@@ -33,6 +32,17 @@
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
         </div>
+        <!-- code for departments dropdown box?
+        <div class="field">
+            <div class="editor-label">
+                @* @Html.LabelFor( ) *@
+            </div>
+            <div class="editor-field">
+                @* @Html.DropDownListFor( ) *@
+                @* @Html.ValidationMessageFor( ) *@
+            </div>
+        </div>
+        -->
         <div class="field" style="border:0;">
             <div class="editor-label">
                 @Html.LabelFor(m => m.RememberMe)

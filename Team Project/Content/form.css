@@ -58,6 +58,10 @@ form input.text-box.single-line
     display: inline-block;
     height: 100%;
 	color: #fff;
+	
+}
+input:focus::-webkit-input-placeholder {
+    opacity: 0;
 }
 
 .checkbox-label-container
@@ -192,7 +196,7 @@ form input.text-box.single-line
 	/*height: 48px;*/
 	background-color: rgba(0,0,0,0.3);
 }
-.filter{
+input {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,0.3);

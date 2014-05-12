@@ -17,6 +17,15 @@ namespace TimetableSystem.Controllers
 
         public ActionResult LogOn()
         {
+            // code to add dropdown box of departments?
+            //Module module = new Module();
+            //List<String> departmentsList = new List<String>();
+            //foreach (var item in module)
+            //{
+            //    departmentsList.Add(item.Department);
+            //}
+            //ViewBag.DepartmentsList = departmentsList;
+
             return View();
         }
 
