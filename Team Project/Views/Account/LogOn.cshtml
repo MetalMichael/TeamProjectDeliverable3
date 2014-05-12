@@ -19,7 +19,8 @@
                 @Html.LabelFor(m => m.UserName)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.UserName)
+                <!--<input class="text-box single-line valid" id="StudentsTotal" name="StudentsTotal" type="text" value="0">-->
+                @Html.EditorFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
         </div>
@@ -28,7 +29,7 @@
                 @Html.LabelFor(m => m.Password)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(m => m.Password)
+                @Html.EditorFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
         </div>
@@ -38,12 +39,13 @@
                 @Html.CheckBoxFor(m => m.RememberMe)
             </div>
             <div class="editor-field">
-                <input type="submit" value="Log On" class="button1" style="padding:0;"/>               
+                <button>Log in</button>
+                <!--<input type="submit" value="Log On" class="button1" style="padding:0;"/>-->               
             </div>
         </div>
     </fieldset>
     
     <p>
-        Please enter your user name and password. @Html.ActionLink("Register", "Register") if you don't have an account.
+        Please enter your user name and password. &#x25BC; @Html.ActionLink("Register", "Register") if you don't have an account.
     </p>
 }
