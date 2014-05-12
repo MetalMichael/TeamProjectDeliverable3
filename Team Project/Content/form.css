@@ -192,6 +192,9 @@ form input.text-box.single-line
 	/*height: 48px;*/
 	background-color: rgba(0,0,0,0.3);
 }
+.logInLabel {
+	width: 30%;
+}
 .filter{
 	width: 100%;
 	height: 100%;
