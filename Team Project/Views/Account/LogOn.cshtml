@@ -18,7 +18,7 @@
             <div class="editor-label logInLabel">
                 @Html.Label("User Name")
             </div>
-            <div class="editor-field">
+            <div class="editor-field logInField">
                 @Html.DropDownListFor(m => m.UserName, (IEnumerable<SelectListItem>)ViewBag.UserNames, "Select Department")
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
@@ -27,7 +27,7 @@
             <div class="editor-label logInLabel">
                 @Html.LabelFor(m => m.Password)
             </div>
-            <div class="editor-field">
+            <div class="editor-field logInField">
                 @Html.EditorFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </div>

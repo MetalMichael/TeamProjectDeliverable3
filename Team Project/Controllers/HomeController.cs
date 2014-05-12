@@ -222,6 +222,10 @@ namespace TimetableSystem.Controllers
 
             ViewBag.Department = User.Identity.Name;
 
+            int[] semester = { 1, 2 };
+            SelectList semesterList = new SelectList(semester);
+            ViewBag.Semester = semesterList;
+
             return View("Index", request);
         }
 

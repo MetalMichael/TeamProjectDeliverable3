@@ -168,9 +168,12 @@
             </div>
         </div>
         <div class="field">
-            <select>
-                <option id="presets">Select A Module to View Preset (what does this even do?)</option>
-            </select>
+            <div class="editor-label">
+                @Html.Label("Semester")
+            </div>
+            <div class="editor-field">
+                    @Html.DropDownList("Semester", (IEnumerable<SelectListItem>)ViewData["Semester"])
+            </div>
         </div>
     </fieldset>
     
