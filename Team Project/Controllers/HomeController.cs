@@ -155,7 +155,7 @@ namespace TimetableSystem.Controllers
                 {
                     y = "0" + y;
                 }
-                times.Add(new SelectListItem { Text = y + ":00 - Period: " + p, Value = y });
+                times.Add(new SelectListItem { Text = "Period " + p + " : (" + y + ":00 - " + y + ":50)" , Value = y });
             }
             ViewBag.Times = times;
 

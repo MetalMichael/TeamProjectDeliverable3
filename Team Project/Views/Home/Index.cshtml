@@ -161,7 +161,7 @@
             </div>
             <div class="editor-field" id="room-features">
                 <div class="checkbox-label-container greatForm">
-                     @Html.CheckBoxFor(model => model.Projector)
+                     @Html.EditorFor(model => model.Projector)
                      @Html.LabelFor(model => model.Projector)               
                 </div>
                 <div class="checkbox-label-container greatForm">
@@ -177,7 +177,7 @@
                     @Html.LabelFor(model => model.Chalkboard)
                 </div>
                 <div class="checkbox-label-container greatForm">
-                @Html.EditorFor(model => model.BoardArea)
+                    @Html.EditorFor(model => model.BoardArea)
                     @Html.LabelFor(model => model.BoardArea)
                 </div>
                 <div class="checkbox-label-container greatForm">
@@ -192,10 +192,10 @@
         </div>
         <div class="field">
             <div class="editor-label">
-                <p>Additonal info</p>
+                @Html.LabelFor(model => model.SpecialRequest)
             </div>
             <div class="editor-field">
-                <input type="text" id="additional" class="filter" name="priority" value="Enter text here ..." /> <!--Can use textarea tag to allow resize of it-->
+                @Html.EditorFor(model => model.SpecialRequest)
             </div>
         </div>
     </fieldset>
