@@ -78,6 +78,7 @@ namespace TimetableSystem.Controllers
             ViewBag.WeekCheckboxes2 = week2;
             ViewBag.WeekCheckboxes3 = week3;
 
+            ViewBag.Department = User.Identity.Name;
             return View();
         }
 

@@ -34,7 +34,7 @@ namespace TimetableSystem.Controllers
                     }
                 }
             }
-
+            ViewBag.Department = User.Identity.Name;
             if (!String.IsNullOrEmpty(moduleCode))
             {
                 var mod = from m in systemDB.Modules 
@@ -43,8 +43,7 @@ namespace TimetableSystem.Controllers
                 if (!String.IsNullOrEmpty(moduleCode)) 
                 { 
                     mod = mod.Where(s => s.ModuleCode.Contains(moduleCode)); 
-                } 
- 
+                }
                 return View(mod); 
             }
 
@@ -106,6 +105,7 @@ namespace TimetableSystem.Controllers
             }
             catch
             {
+                ViewBag.Department = User.Identity.Name;
                 return View();
             }
         
@@ -150,6 +150,7 @@ namespace TimetableSystem.Controllers
             ViewBag.ModuleCode = moduleCode;
             ViewBag.ModuleTitle = moduleTitle;
 
+            ViewBag.Department = User.Identity.Name;
             return View(module);
         }
 
