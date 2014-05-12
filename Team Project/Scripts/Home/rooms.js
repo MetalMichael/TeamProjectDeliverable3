@@ -27,9 +27,8 @@ function checkTime() {
     if (start + length > 18) {
         console.log((start + length));
         alert("Cannot have a request for a time this long. It exceeds the timetable available");
+        $('#Length').val(18 - start);
     }
-
-    $('#Length').val(18 - start);
 }
 
 var rooms = {
