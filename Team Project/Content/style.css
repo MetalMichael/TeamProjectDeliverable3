@@ -48,6 +48,7 @@ nav {
   background: #3e4c68;
 /*	float: right;*/
 /*overflow: hidden;*/
+	border-bottom: 2px solid #dbdbde;
 }
 nav ul {
 /*  display: flex;*/
