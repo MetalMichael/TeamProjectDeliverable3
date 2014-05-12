@@ -151,6 +151,7 @@ namespace TimetableSystem.Controllers
 
             string week1 = "", week2 = "", week3 = "";
             string weekNo;
+
             for (int x = 1; x < 6; x++)
             {
                 weekNo = "Week" + x;
@@ -173,6 +174,7 @@ namespace TimetableSystem.Controllers
                     week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' /><label for='" + weekNo + "'>" + x + "</label>";
                 }
             }
+            //ViewBag.Projector = projector;
 
             ViewBag.WeekCheckboxes1 = week1;
             ViewBag.WeekCheckboxes2 = week2;

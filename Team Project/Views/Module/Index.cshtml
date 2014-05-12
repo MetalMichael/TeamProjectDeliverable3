@@ -81,7 +81,7 @@
 <fieldset>
     <h2>Module title</h2>
     <div class="field">
-        <div class="editor-field" style="min-width:100%;" float:left;">
+        <div class="editor-field" style="min-width:100%; float:left;">
             <input id="titleInput" name="titleInput" type="text" class="filter" 
                 onchange="filter();" 
             /> 
@@ -104,10 +104,10 @@
     {
         <div class="field" style="border:0; max-width:50%; background-color:inherit;">
             <div class="editor-label">
-                @Html.ActionLink("Edit", "Edit", new { id = item.ModuleCode }, new { @class = "button" }) 
+                @Html.ActionLink("Edit", "Edit", new { code = item.ModuleCode }, new { @class = "button" }) 
             </div>
             <div class="editor-label" style="float:right;">
-                @Html.ActionLink("Delete", "Delete", new { id = item.ModuleCode }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" })
+                @Html.ActionLink("Delete", "Delete", new { code = item.ModuleCode }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" })
             </div> 
         </div>
     }

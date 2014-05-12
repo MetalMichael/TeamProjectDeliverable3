@@ -109,7 +109,7 @@
                 @Html.Label("Module Title")
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.Modules, String.Empty)
+                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.Modules, "This is a downwards triangle: &#x25BC;")
             </div>
         </div>
         <div class="field">

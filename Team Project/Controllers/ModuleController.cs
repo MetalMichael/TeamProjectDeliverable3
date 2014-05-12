@@ -93,15 +93,15 @@ namespace TimetableSystem.Controllers
         //}
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string code)
         {
-            if (id == null)    // means "create new" was clicked
+            if (code == "")    // means "create new" was clicked
             {
                 return CreateForm(new Module());
             }
             try
             {
-                Module module = systemDB.Modules.Find(id);
+                Module module = systemDB.Modules.Find(code);
                 return CreateForm(module);
             }
             catch
@@ -112,16 +112,16 @@ namespace TimetableSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string code)
         {
             try
             {
-                Module module = systemDB.Modules.Find(id);
+                Module module = systemDB.Modules.Find(code);
                 //systemDB.Modules.Remove(module);
                 
                 systemDB.Entry(module).State = System.Data.EntityState.Deleted;
                 systemDB.SaveChanges();
-                return Redirect("/Module");  // no delete confirmation yet
+                return Redirect("/team09web/Module");  // no delete confirmation yet
             }
             catch
             {
