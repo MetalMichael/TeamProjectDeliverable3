@@ -214,7 +214,7 @@ form input.text-box.single-line
 	color: #dbdbdd;
 	padding-left: 10px;
 }
-input[type=text], input[type=textarea] {
+input[type=text], input[type=textarea], input[type=password] {
   -webkit-transition: all 0.50s ease-in-out;
   -moz-transition: all 0.50s ease-in-out;
   -ms-transition: all 0.50s ease-in-out;

@@ -13,14 +13,14 @@
 /*   margin: 10px; */
 }
 
-.greatForm > input[type=checkbox]{
+.greatForm > input[type=checkbox], .greatForm > input[type=radio]{
   background-color: #CC0000;
   height: 0em;
   width: 0em;
   background: none;
   margin: 10px;
 }
-.greatForm > input[type=checkbox]:checked + label{
+.greatForm > input[type=checkbox]:checked + label, .greatForm > input[type=radio]:checked + label{
   background-color: #4DA269;
 }
 .greatForm > label:hover{
