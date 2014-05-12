@@ -1,6 +1,7 @@
 //functionality for checking the weeks
 $(document).ready(function () {
     $('#room-features input[type="hidden"').remove();
+    $($('#Priority').siblings()[0]).remove();
 
     $('#ModuleCode').change(function () {
         $('#ModuleCodes').val($(this).val());
@@ -33,7 +34,48 @@ $(document).ready(function () {
         });
     });
 
+    function clearAll() {
+        for (var i = 1; i < 16; i++) {
+            var cb = '#Week' + i;
+            $(cb).prop('checked', false);
+        }
+    }
+    $('#clearAll').click(function () {
+        clearAll();
+    });
+    $('#checkAll').click(function () {
+        for (var i = 1; i < 16; i++) {
+            var cb = '#Week' + i;
+            $(cb).prop('checked', true);
+        }
+    });
+    $('#oneToTwelve').click(function () {
+        clearAll();
+        for (var i = 1; i < 13; i++) {
+            var cb = '#Week' + i;
+            $(cb).prop('checked', true);
+        }
+    });
+    $('#checkEven').click(function () {
+        clearAll();
+        for (var i = 1; i < 16; i++) {
+            if (i % 2 == 0) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', true);
+            }
+        }
+    });
+    $('#checkOdd').click(function () {
+        clearAll();
+        for (var i = 1; i < 16; i++) {
+            if (i % 2 == 1) {
+                var cb = '#Week' + i;
+                $(cb).prop('checked', true);
+            }
+        }
+    });
 
+    /*
     //selects the correct semester based on todays date
     var today = new Date();
     var sem_start_1 = new Date('09/28/2013');
@@ -195,5 +237,5 @@ $(document).ready(function () {
         !empty.length ? tick.show() : tick.hide();
         !empty.length ? cross.hide() : cross.show();
     });
-
+    */
 });

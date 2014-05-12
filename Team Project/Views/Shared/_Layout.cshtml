@@ -15,12 +15,13 @@
         <link href="@Url.Content("~/Content/requests.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/saved.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/availability.css")" rel="stylesheet" type="text/css" />
-		<link href="@Url.Content("~/Content/component.css")" rel="stylesheet" type="text/css" />
+		
 		<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
 		@*<link href="@Url.Content("~/Content/radio-checks.css")" rel="stylesheet" type="text/css" />*@
 		<link href="@Url.Content("~/Content/icons.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/modules.css")" rel="Stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/new-checkboxes.css")" rel="Stylesheet" type="text/css" />
+		<link href="@Url.Content("~/Content/component.css")" rel="stylesheet" type="text/css" />
 		
 		<script>
 			var currentURL = window.location.pathname.toString();
@@ -38,6 +39,7 @@
 							<a id="dept" class="title" href="@Url.Action("Index", "Home")"><span class="fa fa-logo fa-@ViewBag.Department"></span><h3>@ViewBag.Department</h3></a>
 							<p class="round"><p>
 						</li>
+
                         @if (!(ViewBag.Title == "Log On") && !(ViewBag.Title=="Register"))  
                         {   @* hide navigation bar while not logged in *@
 						<div class="menu" style="float: right;">
