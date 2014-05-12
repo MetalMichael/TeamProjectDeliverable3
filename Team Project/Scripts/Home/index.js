@@ -7,7 +7,7 @@ $(document).ready(function () {
     $('#ModuleCodes').change(function () {
         $('#ModuleCode').val($(this).val());
     });
-    $('#ModuleCodes').val($(this).val());
+    $('#ModuleCodes').val($('#ModuleCode').val());
 
     $('#module-filter').keyup(function () {
         var filter = $('#module-filter').val().toLowerCase();
