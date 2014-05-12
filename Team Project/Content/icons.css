@@ -580,7 +580,7 @@
   content: "\f084";
 }
 .fa-gears:before,
-.fa-cogs:before {
+.fa-cogs:before, .fa-Mechanical:before {
   content: "\f085";
 }
 .fa-comments:before {
