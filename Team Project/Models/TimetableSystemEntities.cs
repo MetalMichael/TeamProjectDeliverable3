@@ -22,6 +22,7 @@ namespace TimetableSystem.Models
         public DbSet<RequestWeek> RequestWeeks { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Type> Types { get; set; }
+        public DbSet<aspnet_Users> aspnet_Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

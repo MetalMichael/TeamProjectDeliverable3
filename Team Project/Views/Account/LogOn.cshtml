@@ -2,30 +2,30 @@
 
 @{
     ViewBag.Title = "Log On";
+    Layout = "~/Views/Shared/_blank.cshtml";
 }
-
-<h2>Login page</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     <fieldset>
         <h2>Authentication</h2>
         <div class="field">
-            <div class="editor-label">
-                @Html.LabelFor(m => m.UserName)
+            <div class="editor-label logInLabel">
+                @Html.Label("User Name")
             </div>
             <div class="editor-field">
                 <!--<input class="text-box single-line valid" id="StudentsTotal" name="StudentsTotal" type="text" value="0">-->
-                @Html.EditorFor(m => m.UserName)
+                @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewData["UserNames"], "Select Department")
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
         </div>
         <div class="field">
-            <div class="editor-label">
+            <div class="editor-label logInLabel">
                 @Html.LabelFor(m => m.Password)
             </div>
             <div class="editor-field">
@@ -44,8 +44,4 @@
             </div>
         </div>
     </fieldset>
-    
-    <p>
-        Please enter your user name and password. &#x25BC; @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
 }

@@ -17,6 +17,12 @@ namespace TimetableSystem.Controllers
 
         public ActionResult LogOn()
         {
+            TimetableSystemEntities systemDB = new TimetableSystemEntities();
+            var logOns = from r in systemDB.aspnet_Users
+                         select r.UserName;
+            SelectList userNames = new SelectList(logOns);
+            ViewBag.UserNames = userNames;
+
             return View();
         }
 
@@ -26,6 +32,9 @@ namespace TimetableSystem.Controllers
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
+
+            TimetableSystemEntities systemDB = new TimetableSystemEntities();
+
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
@@ -46,6 +55,12 @@ namespace TimetableSystem.Controllers
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 }
             }
+
+            var logOns = from r in systemDB.aspnet_Users
+                            select r.UserName;
+            SelectList userNames = new SelectList(logOns);
+            ViewBag.UserNames = userNames;
+            
 
             // If we got this far, something failed, redisplay form
             return View(model);

@@ -21,6 +21,9 @@ namespace TimetableSystem.Controllers
             if (db.Requests != null) {
                 requests = db.Requests.ToList();
             }
+
+            ViewBag.Department = User.Identity.Name;
+
             return View(requests);
         }
 

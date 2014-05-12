@@ -140,6 +140,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\BPRViewModel.cs" />
+    <Compile Include="Models\aspnet_Users.cs" />
     <Compile Include="Models\Facility.cs" />
     <Compile Include="Models\Park.cs" />
     <Compile Include="Models\RequestRoom.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
     <None Include="Views\Module\Delete.cshtml" />
+    <Content Include="Views\Shared\_blank.cshtml" />
     <None Include="Views\View\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

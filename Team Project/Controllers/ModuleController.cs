@@ -48,6 +48,8 @@ namespace TimetableSystem.Controllers
                 return View(mod); 
             }
 
+            ViewBag.Department = User.Identity.Name;
+
             return View(modules);
 
         }
@@ -149,6 +151,7 @@ namespace TimetableSystem.Controllers
 
             ViewBag.ModuleCode = moduleCode;
             ViewBag.ModuleTitle = moduleTitle;
+            ViewBag.Department = User.Identity.Name;
 
             return View(module);
         }
