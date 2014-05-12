@@ -120,6 +120,7 @@
             <div class="field">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.StartTime)
+                    *
                     @Html.ValidationMessageFor(model => model.StartTime)
                 </div>
                 <div class="editor-field">
@@ -130,6 +131,7 @@
             <div class="field">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Length)
+                    *
                     @Html.ValidationMessageFor(model => model.Length)
                 </div>
                 <div class="editor-field">
@@ -144,23 +146,25 @@
                 @Html.Label("Filter Module")
             </div>
             <div class="editor-field">
-                <input type="text" class="filter" id="module-filter" />
+                <input class="text-box single-line" type="text" id="module-filter" value placeholder="Filter by module..." />
             </div>
         </div>
         <div class="field">
             <div class="editor-label">
                 @Html.Label("Module Title")
+                *
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.Modules, "This is a downwards triangle: &#x25BC;")
+                @Html.DropDownListFor(model => model.ModuleCode, (SelectList)ViewBag.Modules, "< Select a module by title >")
             </div>
         </div>
         <div class="field">
             <div class="editor-label">
                 @Html.Label("Module Code")
+                *
             </div>
             <div class="editor-field">
-                @Html.DropDownList("ModuleCodes", String.Empty)
+                @Html.DropDownList("ModuleCodes", "< Select a module by code >")
             </div>
         </div>
         <div class="field">
@@ -205,7 +209,7 @@
                 @Html.LabelFor(model => model.RoomType)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.RoomType, (SelectList)ViewBag.RoomTypes, String.Empty)
+                @Html.DropDownListFor(model => model.RoomType, (SelectList)ViewBag.RoomTypes, "< Select a room type >")
             </div>
         </div>
         <div class="field" style="height:14em;">
@@ -258,6 +262,7 @@
         <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(model => model.StudentsTotal)
+                *
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.StudentsTotal)
@@ -267,9 +272,10 @@
         <div class="field">
             <div class="editor-label">
                 @Html.LabelFor(model => model.ParkId)
+                *
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.ParkId, (SelectList)ViewBag.Parks, String.Empty, new { id = "Park" })
+                @Html.DropDownListFor(model => model.ParkId, (SelectList)ViewBag.Parks, "< Select a park >", new { id = "Park" })
                 @Html.ValidationMessageFor(model => model.ParkId)
             </div>
         </div>
@@ -278,7 +284,7 @@
                 @Html.LabelFor(model => model.BuildingId)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.BuildingId, (SelectList)ViewBag.Buildings, String.Empty, new { id = "buildings" })
+                @Html.DropDownListFor(model => model.BuildingId, (SelectList)ViewBag.Buildings, "< Select a building >", new { id = "buildings" })
                 @Html.ValidationMessageFor(model => model.BuildingId)
             </div>
         </div>

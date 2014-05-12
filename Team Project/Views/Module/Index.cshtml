@@ -6,19 +6,17 @@
 
 @using (Html.BeginForm("Index", "Module", new { name = "hiddenForm" }, FormMethod.Get))
 {
-            <input type="hidden" id="moduleCode" name="moduleCode" />
-            <input type="hidden" id="moduleTitle" name="moduleTitle" />
-
+<input type="hidden" id="moduleCode" name="moduleCode" />
+<input type="hidden" id="moduleTitle" name="moduleTitle" />
 <div class="buttons-wrapper bar">
-
     <div>
-        <input type="submit" value="Filter" class="button" style="padding:5px;" />
+        <input type="submit" value="Activate filter" class="button" style="padding:5px;" />
     </div>
-    <div>
+@*    <div>
         <input type="submit" value="Reset" class="button" style="padding:5px;" onclick="clear();" />
-    </div>
+    </div>*@
     <div>
-        @Html.ActionLink("Create", "Edit", new { }, new { @class = "button" })
+        @Html.ActionLink("Create new module", "Edit", new { }, new { @class = "button" })
     </div>
 </div>
 }
@@ -39,8 +37,20 @@
 @*<h2>Module Page</h2>*@
 
 <!-- the new table -->
-@*<fieldset>
+<fieldset style="width:800px;">
     <h2>Module code & title</h2>
+    <div class="field" style="background-color:rgba(0,0,0,0.3);">
+        <div class="editor-field" style="min-width:24%; max-width:24%; float:left;">
+            <input class="filter" id="codeInput" name="codeInput" type="text" value placeholder="< Filter code >"
+                onchange="filter();"
+            />
+         </div>
+        <div class="editor-field" style="min-width:75%; max-width:75%; float:right;">
+            <input id="titleInput" name="titleInput" type="text" class="filter" value placeholder="< Filter title >"
+                onchange="filter();" 
+            /> 
+        </div>
+    </div>
     @foreach (var item in Model)
     {
         <div class="field">
@@ -51,64 +61,11 @@
                 <div class="editor-field-inner" style="float:left;">
                     @Html.DisplayFor(modelItem => item.ModuleTitle)
                 </div>
+                <div class="editor-field-inner" style="float:right;">
+                    @Html.ActionLink("Edit", "Edit", new { code = item.ModuleCode }, new { @class = "button" }) 
+                    @Html.ActionLink("Delete", "Delete", new { code = item.ModuleCode }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" })
+                </div>
             </div>
-        </div>
-    }
-</fieldset>*@
-
-<fieldset>
-    <h2>Module code</h2>
-    <div class="field">
-        <div class="editor-field" style="min-width:100%; float:left;">
-            <input class="filter" id="codeInput" name="codeInput" type="text" 
-                onchange="filter();"
-            />
-         </div>
-    </div>
-
-    @foreach (var item in Model)
-    {
-        <div class="field">
-            <div class="editor-label">
-                @Html.DisplayFor(modelItem => item.ModuleCode)
-            </div>
-        </div>
-    }
-
-
-</fieldset>
-
-<fieldset>
-    <h2>Module title</h2>
-    <div class="field">
-        <div class="editor-field" style="min-width:100%; float:left;">
-            <input id="titleInput" name="titleInput" type="text" class="filter" 
-                onchange="filter();" 
-            /> 
-        </div>
-    </div>
-
-    @foreach (var item in Model)
-    {
-        <div class="field">
-            <div class="editor-label">@Html.DisplayFor(modelItem => item.ModuleTitle)</div>
-        </div>
-    }
-</fieldset>
-
-<fieldset class="modulesFieldset">
-    
-    <div class="field" style="background:none; border:0;"></div>
-    <div class="field" style="background:none; border:0;"></div>
-    @foreach (var item in Model)
-    {
-        <div class="field" style="border:0; max-width:50%; background-color:inherit;">
-            <div class="editor-label">
-                @Html.ActionLink("Edit", "Edit", new { code = item.ModuleCode }, new { @class = "button" }) 
-            </div>
-            <div class="editor-label" style="float:right;">
-                @Html.ActionLink("Delete", "Delete", new { code = item.ModuleCode }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" })
-            </div> 
         </div>
     }
 </fieldset>

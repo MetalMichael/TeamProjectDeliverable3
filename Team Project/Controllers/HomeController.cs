@@ -148,7 +148,6 @@ namespace TimetableSystem.Controllers
 
         private ActionResult CreateForm(Request request)
         {
-
             string week1 = "", week2 = "", week3 = "";
             string weekNo;
 

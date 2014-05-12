@@ -34,8 +34,8 @@ namespace TimetableSystem.Controllers
                     }
                 }
             }
-            ViewBag.Department = User.Identity.Name;
-            if (!String.IsNullOrEmpty(moduleCode))
+
+            if (!String.IsNullOrEmpty(moduleCode))  // search filter
             {
                 var mod = from m in systemDB.Modules 
                 select m; 

@@ -14,7 +14,7 @@ $(document).ready(function () {
     }
     rooms.filterRooms(setup);
 
-    $('#SpecialRequest').prop('placeholder', "Enter text here ...");
+    $('#SpecialRequest').prop('placeholder', "e.g. Visual Studio 2010 installed on computers ...");
 
     $('#StartTime').change(function () { checkTime(); });
     $('#Length').change(function () { checkTime(); });

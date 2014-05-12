@@ -58,6 +58,10 @@ form input.text-box.single-line
     display: inline-block;
     height: 100%;
 	color: #fff;
+	
+}
+input:focus::-webkit-input-placeholder {
+    opacity: 0;
 }
 
 .checkbox-label-container
@@ -159,7 +163,7 @@ form input.text-box.single-line
     position:relative;
 }
 
-/*editor-label label and editor-field input is messing up the checkboxes for weeks, perhaps add class to all others, and the css-so e.g. editor-label label.label... whilst checkboxes css is causing it to not display*/
+/*editor-label label and editor-field input is messing up the checkboxes for weeks, perhaps add class to all others, and the css-so e.g.  label.label... whilst checkboxes css is causing it to not display*/
 
 .editor-label 
 {
@@ -186,12 +190,14 @@ form input.text-box.single-line
 {
     float:right;
     padding:1.5em;
+    margin-right:30px;
 }
 
 .editor-field input:not([type='checkbox']) {
 	/*height: 48px;*/
 	background-color: rgba(0,0,0,0.3);
 }
+
 .logInLabel {
 	width: 30%;
 }
