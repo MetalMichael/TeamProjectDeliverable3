@@ -1,7 +1,7 @@
 .tick, .cross, .dash {
 	display: none;
 }
-fieldset h2 div.cross {
+fieldset h2 span.cross {
 	float: right;
 	padding-right: 30px;
 	font-size: 1.5em;
