@@ -4,7 +4,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+html {
+	position: relative;
+	min-height: 100%;
+}
 .tick, .cross {
 	display: none;
 }
@@ -22,6 +25,7 @@ body {
 /*  color: #3e4c68;*/
   background: #dbdbde;
 	height: 100%;
+	margin: 0 0 100px;
 }
 ul {
   list-style: none;
@@ -29,6 +33,8 @@ ul {
 div.container {
 	min-height:100%;
    position:relative;
+   padding-bottom: 800px;
+   margin: 0 0 100px;
 }
 header {
   border-top: solid 4px #dbdbdd;
@@ -126,4 +132,5 @@ footer {
 	height: 50px;
 	border-top: 2px solid #dbdbde;
 	color: #dbdbde;
+	margin-top: 100px;
 }
