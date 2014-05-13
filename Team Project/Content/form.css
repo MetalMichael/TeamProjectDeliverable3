@@ -283,6 +283,9 @@ button#clearWeeks, button#reset, button#clearAll {
 button#submit {
 	background: rgba(0,210,0,0.6);
 }
+button.reqButtons {
+	margin-left: 22%;
+}
 #additional {
 /*	resize: vertical;
 	max-height: 200px;*/
