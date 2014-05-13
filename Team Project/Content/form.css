@@ -190,7 +190,7 @@ input:focus::-webkit-input-placeholder {
 {
     float:right;
     padding:1.5em;
-    margin-right:30px;
+    /*margin-right:30px;    breaks the availability capacity textbox */
 }
 
 .editor-field input:not([type='checkbox']) {
