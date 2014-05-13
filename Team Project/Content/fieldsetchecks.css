@@ -1,3 +1,6 @@
+.tick, .cross, .dash {
+	display: none;
+}
 fieldset h2 div.cross {
 	float: right;
 	padding-right: 30px;
