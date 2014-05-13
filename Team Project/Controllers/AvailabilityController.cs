@@ -84,12 +84,25 @@ namespace TimetableSystem.Controllers
         }
 
         //*************PARK SELECTED METHOD**************
-        public string parkSelected(string parkName)
+        public string parkSelected(string parkName, int roomType)
         {
             //Need to catch error here when changing back to '' on park dropdown
             string buildings = "";
             string rooms = "";
             string returnStr = "";
+            var roomTypes = from r in systemDB.RoomTypes
+                              select r;
+            if (roomType != 0)
+            {
+                roomTypes = from r in roomTypes
+                              where r.RoomTypeID == roomType
+                              select r;
+            }
+            var roomTypeIDs = from r in roomTypes
+                              select r.RoomID;
+            var roomQry = from r in systemDB.Rooms
+                          select r;
+
             if (parkName == "")
             {
                 //resetting buildings when "No Preference selected"
@@ -100,8 +113,12 @@ namespace TimetableSystem.Controllers
                 {
                     buildings += b + ';';
                 }
-                var roomQry = from r in systemDB.Rooms
+                if (roomType != 0)
+                {
+                    roomQry = from r in roomQry
+                              where roomTypeIDs.Contains(r.RoomID)
                               select r;
+                }
                 foreach (Room r in roomQry)
                 {
                     rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
@@ -129,9 +146,18 @@ namespace TimetableSystem.Controllers
                                 select b.BuildingID).Distinct();
                 foreach (int b in buildIDs)
                 {
-                    var roomQry = from r in systemDB.Rooms
-                                  where r.BuildingID == b
+                    if (roomType != 0)
+                    {
+                        roomQry = from r in systemDB.Rooms
+                                  where (r.BuildingID == b) && (roomTypeIDs.Contains(r.RoomID))
                                   select r;
+                    }
+                    else
+                    {
+                        roomQry = from r in systemDB.Rooms
+                                  where (r.BuildingID == b)
+                                  select r;
+                    }
                     foreach (Room r in roomQry)
                     {
                         rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
@@ -147,14 +173,29 @@ namespace TimetableSystem.Controllers
 
 
         //********BUILDING SELECTED METHOD ************
-        public string buildingSelected(string buildingName)
+        public string buildingSelected(string buildingName, int roomType)
         {
             string rooms = "";
 
+            var roomTypes = from r in systemDB.RoomTypes
+                            select r;
+            if (roomType != 0)
+            {
+                roomTypes = from r in roomTypes
+                            where r.RoomTypeID == roomType
+                            select r;
+            }
+            var roomTypeIDs = from r in roomTypes
+                              select r.RoomID;
+            var roomQry = from r in systemDB.Rooms
+                          select r;
+
             if (buildingName == "")
             {
-                var roomQry = from r in systemDB.Rooms
-                              select r;
+                roomQry = from r in roomQry
+                            where roomTypeIDs.Contains(r.RoomID)
+                            select r;
+
                 foreach (Room r in roomQry)
                 {
                     rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
@@ -165,35 +206,93 @@ namespace TimetableSystem.Controllers
                 var buildID = (from b in systemDB.Buildings
                                where b.BuildingName == buildingName
                                select b.BuildingID).First();
-                var roomQry = from r in systemDB.Rooms
+                if (roomType != 0)
+                {
+                    roomQry = from r in roomQry
+                              where (r.BuildingID == buildID) && (roomTypeIDs.Contains(r.RoomID))
+                              select r;
+                }
+                else
+                {
+                    roomQry = from r in roomQry
                               where r.BuildingID == buildID
                               select r;
+                }
                 foreach (Room r in roomQry)
                 {
                     rooms += r.RoomCode + "   (Cap: " + r.Capacity.ToString() + ");";
                 }
             }
-            rooms = rooms.Substring(0, rooms.Length - 1);
+            if (rooms.Length > 0)
+            {
+                rooms = rooms.Substring(0, rooms.Length - 1);
+            }
 
             return rooms;
         }
 
-        /*public string capacitySelected(string capacity)
+        public string typeSelected(string filter, int roomType, string filterType)
         {
             string rooms = "";
 
-            var roomQry = from r in systemDB.Rooms
-                            where r.BuildingID == buildID
-                            select r;
-            foreach (Room r in roomQry)
+            var roomDB = from r in systemDB.Rooms
+                        select r;
+
+            var roomTypes = from r in systemDB.RoomTypes
+                              select r;
+            var roomTypeIDs = from r in systemDB.RoomTypes
+                              select r.RoomID;
+
+            if (roomType != 0)
+            {
+                roomTypeIDs = from r in roomTypes
+                              where (r.RoomTypeID == roomType)
+                              select r.RoomID;
+            }
+            
+            if (filterType == "room")
+            {
+                roomDB = from r in roomDB
+                         where r.RoomCode == filter
+                         select r;
+            }
+            else if (filterType == "building")
+            {
+                var buildingID = (from b in systemDB.Buildings
+                                 where b.BuildingName == filter
+                                 select b.BuildingID).Single();
+                roomDB = from r in roomDB
+                         where r.BuildingID == buildingID
+                         select r;
+            }
+            else if (filterType == "park")
+            {
+                var parkID = (from p in systemDB.Parks
+                              where p.ParkName == filter
+                              select p.ParkID).Single();
+                var buildQry = (from b in systemDB.Buildings
+                                where b.ParkID == parkID
+                                select b.BuildingID).Distinct();
+                roomDB = from r in roomDB
+                         where (buildQry.Contains(r.BuildingID))
+                         select r;
+            }
+
+            roomDB = from r in roomDB
+                     where (roomTypeIDs.Contains(r.RoomID))
+                     select r;
+
+            foreach (Room r in roomDB)
             {
                 rooms += r.RoomCode + "   (Cap: " + r.Capacity.ToString() + ");";
             }
-
-            rooms = rooms.Substring(0, rooms.Length - 1);
+            if (rooms.Length > 0)
+            {
+                rooms = rooms.Substring(0, rooms.Length - 1);
+            }
 
             return rooms;
-        }*/
+        }
 
         //**********GET AVAILABILITY METHOD***********
         public string getAvailability(string parkName, string buildingName, string roomCode, int semester, string week, 

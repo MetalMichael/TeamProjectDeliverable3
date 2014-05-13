@@ -6,7 +6,14 @@
             var queryLink = '@Url.Action("parkSelected")';
             var value = $(this).val();
             if (value.indexOf('<') !== -1) value = "";
-            $.get(queryLink, { parkName: value }, function (data) {
+
+            var roomType = $('#Type').val();
+            if (roomType.indexOf('<') !== -1) value = "";
+            if (roomType == "Lecture") roomType = 1;
+            else if (roomType == "Seminar") roomType = 2;
+            else if (roomType == "Lab") roomType = 3;
+            else roomType = 0;
+            $.get(queryLink, { parkName: value, roomType: roomType }, function (data) {
                 var temp = data.split('!');
                 var buildings = temp[0].split(';');
                 var rooms = temp[1].split(';');
@@ -30,7 +37,14 @@
             var queryLink = '@Url.Action("buildingSelected")';
             var value = $(this).val();
             if (value.indexOf('<') !== -1) value = "";
-            $.get(queryLink, { buildingName: value }, function (data) {
+
+            var roomType = $('#Type').val();
+            if (roomType.indexOf('<') !== -1) value = "";
+            if (roomType == "Lecture") roomType = 1;
+            else if (roomType == "Seminar") roomType = 2;
+            else if (roomType == "Lab") roomType = 3;
+            else roomType = 0;
+            $.get(queryLink, { buildingName: value, roomType: roomType }, function (data) {
                 var rooms = data.split(';');
                 $r = $('#Room');
                 $r.empty();
@@ -51,12 +65,49 @@
             refreshTable();
         });
         $('#Type').change(function () {
-            refreshTable();
+            var filterType, filter;
+            var park = $('#Park option:selected').text();
+            if (park.indexOf('<') !== -1) park = "";
+            var building = $("#Building option:selected").text();
+            if (building.indexOf('<') !== -1) building = "";
+            var room = $('#Room option:selected').text();
+            if (room.indexOf('<') !== -1) room = "";
+            if (room != "") {
+                filterType = "room";
+                filter = room;
+            } else if (building != "") {
+                filterType = "building";
+                filter = building;
+            } else if (park != "") {
+                filterType = "park";
+                filter = park;
+            } else {
+                filterType = "none";
+                filter = "";
+            }
+            var roomType = $(this).val();
+            if (roomType == "Lecture") roomType = 1;
+            else if (roomType == "Seminar") roomType = 2;
+            else if (roomType == "Lab") roomType = 3;
+            else roomType = 0;
+
+            var queryLink = '@Url.Action("typeSelected")';
+
+            $.get(queryLink, { filter: filter, roomType: roomType, filterType: filterType }, function (data) {
+                var rooms = data.split(';');
+                $r = $('#Room');
+                $r.empty();
+                $r.append("<option> < Select a room > </option>");
+                for (var k = 0; k < rooms.length; k++) {
+                    $r.append("<option>" + rooms[k] + "</option>");
+                }
+                refreshTable();
+            });
         });
         $('#slider-range-max').change(function () {
             var queryLink = '@Url.Action("capacitySelected")';
-            var value = $('#CapacityAmount').val();
-            $.get(queryLink, { capacity : value }, function (data) {
+            var value = parseInt($('#CapacityAmount').val());
+            $.get(queryLink, { capacity: value }, function (data) {
                 var rooms = data.split(';');
                 $r = $('#Room');
                 $r.empty();
@@ -75,7 +126,22 @@
                 max: 300,
                 value: 100,
                 step: 5,
-                change: refreshTable,
+                change: function (event, ui) {
+                    var capacity = ui.value;
+                    console.log(ui.value);
+                    var roomCapacity;
+                    var field;
+                    $('#Room option').each(function () {
+                        field = $(this).text();
+                        roomCapacity = field.substr(field.indexOf(':') + 2, field.length - field.indexOf(':') - 3);
+                        if (parseInt(roomCapacity) < parseInt(capacity)) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    });
+                    refreshTable();
+                },
                 slide: function (event, ui) {
                     $("#CapacityAmount").val(ui.value);
                 }
@@ -171,7 +237,7 @@
         } else {
             week = week.substr(0, week.length - 1);
         }
-        var capacity = $('#CapacityAmount').val();
+        var capacity = $('#CapacityAmount').val()
         var roomType = $('#Type').val();
         var subWeek;
         var titleHtml = "<h2 id='tableSubtitle'>Showing availability for ";
