@@ -35,7 +35,7 @@ namespace TimetableSystem.Controllers
             List<string> tempList = new List<string>();
             foreach(Room r in roomQry)
             {
-                tempList.Add(r.RoomCode + " [" + r.Capacity + "]");
+                tempList.Add(r.RoomCode + "   (Cap: " + r.Capacity + ")");
             }
             SelectList roomList = new SelectList(tempList);
             ViewBag.Room = roomList;
@@ -104,7 +104,7 @@ namespace TimetableSystem.Controllers
                               select r;
                 foreach (Room r in roomQry)
                 {
-                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                    rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
                 }
             }
             else
@@ -134,7 +134,7 @@ namespace TimetableSystem.Controllers
                                   select r;
                     foreach (Room r in roomQry)
                     {
-                        rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                        rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
                     }
                 }
             }
@@ -157,7 +157,7 @@ namespace TimetableSystem.Controllers
                               select r;
                 foreach (Room r in roomQry)
                 {
-                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                    rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
                 }
             }
             else
@@ -170,7 +170,7 @@ namespace TimetableSystem.Controllers
                               select r;
                 foreach (Room r in roomQry)
                 {
-                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                    rooms += r.RoomCode + "   (Cap: " + r.Capacity.ToString() + ");";
                 }
             }
             rooms = rooms.Substring(0, rooms.Length - 1);
