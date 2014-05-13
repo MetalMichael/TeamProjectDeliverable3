@@ -5,6 +5,7 @@ $(document).ready(function () {
     $('#no_rooms').change(function () { rooms.changeRoomTotal(); });
     $('#room-features input').change(function () { rooms.filterRooms(); });
     $('#RoomType').change(function () { rooms.filterRooms(); });
+    $(':radio[name="Day"]').change(function () { rooms.applyAvailabilityFilters(); });
 
     if (typeof selectedRooms !== "undefined") {
         var setup = true;
@@ -37,11 +38,13 @@ var rooms = {
     park: null,
     building: null,
     roomTotal: 0,
+    roomType: null,
 
     updateInfo: function () {
         this.students = $('#StudentsTotal').val();
         this.park = $('#Park').val();
         this.building = $('#buildings').val();
+        this.roomType = $('#RoomType').val()
     },
 
     updateBuildings: function () {
@@ -70,12 +73,13 @@ var rooms = {
                 park: this.park,
                 building: this.building,
                 facilities: this.getFacilities().join('|'),
-                roomType: this.getRoomType()
+                roomType: this.roomType
             },
             function (data) {
                 rooms.roomInfo = data;
                 rooms.changeSelects();
                 rooms.changeRoomTotal(setup);
+                rooms.applyAvailabilityFilters();
                 $('.room-select').removeClass('loading');
             }
         );
@@ -120,17 +124,21 @@ var rooms = {
         $('#room-container').append(select);
         $('#room' + id).show();
         $('#room' + id).unbind('change').change(function () {
-            rooms.changeRoom(this);
+            rooms.changeRoom();
         });
     },
 
-    changeRoom: function (select) {
-        var selectID = $(select).prop("id");
-        var selectValue = $(select).find("select").val();
+    changeRoom: function () {
+        var selectedRooms = [];
+        var select;
         for (var x = 1; x <= this.roomTotal; x++) {
-            if (selectID == 'room' + x) continue;
-            if ($('#room' + x + " select").val() == selectValue) $('#room' + x + " select").prop("selectedIndex", -1);
-            $('#room' + x + ' select option[value=' + selectValue + ']').prop('disabled', 'disabled');
+            select = $('#room' + x + ' select');
+            if (select.val() != 0) selectedRooms.push(select.val());
+            if (x == 1) continue;
+            for (var y in selectedRooms) {
+                if (select.val() == selectedRooms[y]) select.prop("selectedIndex", -1);
+                select.find('option[value=' + selectedRooms[y] + ']').prop('disabled', 'disabled');
+            }
         }
     },
 
@@ -160,7 +168,54 @@ var rooms = {
         return facilities;
     },
 
-    getRoomType: function () {
-        return $('#RoomType').val();
+    applyAvailabilityFilters: function () {
+        $('.room-select option[value!="0"]').prop("disabled", "disabled");
+
+        var day = parseInt($(":radio[name='Day']").index($(":radio[name='Day']:checked"))) + 1;
+        if (day == 0) {
+            $('.room-select option').removeAttr("disabled");
+            return;
+        }
+        var start = parseInt($('#StartTime').val()) - 8;
+        var slot = 'slot' + day + start;
+
+        var park = $("#Park option:selected").text();
+        if (park.indexOf('<') !== -1) park = "";
+        var building = $("#Building option:selected").text();
+        if (building.indexOf('<') !== -1) building = "";
+        var roomType = $('#RoomType option:selected').text();
+        if (roomType.indexOf('<') !== -1) roomType = "";
+
+        //$.get('/team09web/Availability/checkslot',
+        $.get('/Availability/checkslot',
+            {
+                parkName: park,
+                buildingName: building,
+                roomCode: "No",
+                semester: $('#Semester').val(),
+                week: this.getWeeks().join(';'),
+                capacity: this.students,
+                roomType: roomType,
+                slot: slot
+            },
+            function (data) {
+                data = data.split(';');
+                for (var x in data) {
+                    var room = data[x].trim();
+                    $('.room-select option:contains("' + room + '")').removeAttr("disabled");
+                }
+                rooms.changeRoom();
+            }
+        );
+    },
+
+    getWeeks: function () {
+        var weeks = [];
+        for (var x = 1; x <= 15; x++) {
+            if ($('#Week' + x).prop("checked")) {
+                weeks.push(x);
+            }
+        }
+        return weeks;
     }
 };

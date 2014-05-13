@@ -320,3 +320,8 @@ button.reqButtons {
 div.checkbox-label-container.greatForm {
 	padding: 8px;
 }
+
+.room-select option:disabled
+{
+    background-color: #FF4444;
+}
