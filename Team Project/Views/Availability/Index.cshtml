@@ -54,7 +54,18 @@
             refreshTable();
         });
         $('#slider-range-max').change(function () {
-            refreshTable();
+            var queryLink = '@Url.Action("capacitySelected")';
+            var value = $('#CapacityAmount').val();
+            $.get(queryLink, { capacity : value }, function (data) {
+                var rooms = data.split(';');
+                $r = $('#Room');
+                $r.empty();
+                $r.append("<option> < Select a room > </option>");
+                for (var k = 0; k < rooms.length; k++) {
+                    $r.append("<option>" + rooms[k] + "</option>");
+                }
+                refreshTable();
+            });
         });
 
         $(function () {
