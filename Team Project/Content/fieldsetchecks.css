@@ -1,6 +1,14 @@
 .tick, .cross, .dash {
 	display: none;
 }
+.show 
+{
+    display: inline-block;
+} 
+/*.hide 
+{
+    display:none;
+}*/
 fieldset h2 span.cross {
 	float: right;
 	padding-right: 30px;
@@ -13,7 +21,8 @@ fieldset h2 span.cross {
 	margin-right: 9px;
 	background-color: #E64545;
 }
-fieldset h2 i.cross {
+
+fieldset h2 span i.cross {
 	position: relative;
 	top: -23px;
 	left: 4px;

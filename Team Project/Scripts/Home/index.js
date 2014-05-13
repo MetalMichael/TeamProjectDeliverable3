@@ -42,12 +42,14 @@ $(document).ready(function () {
     }
     $('#clearAll').click(function () {
         clearAll();
+        $("#Week1").change();
     });
     $('#checkAll').click(function () {
         for (var i = 1; i < 16; i++) {
             var cb = '#Week' + i;
             $(cb).prop('checked', true);
         }
+        $("#Week1").change();
     });
     $('#oneToTwelve').click(function () {
         clearAll();
@@ -55,6 +57,7 @@ $(document).ready(function () {
             var cb = '#Week' + i;
             $(cb).prop('checked', true);
         }
+        $("#Week1").change();
     });
     $('#checkEven').click(function () {
         clearAll();
@@ -64,6 +67,7 @@ $(document).ready(function () {
                 $(cb).prop('checked', true);
             }
         }
+        $("#Week1").change();
     });
     $('#checkOdd').click(function () {
         clearAll();
@@ -73,6 +77,7 @@ $(document).ready(function () {
                 $(cb).prop('checked', true);
             }
         }
+        $("#Week1").change();
     });
 
     /*
