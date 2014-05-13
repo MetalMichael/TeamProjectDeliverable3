@@ -153,7 +153,6 @@ namespace TimetableSystem.Controllers
             ViewBag.ModuleTitle = moduleTitle;
             ViewBag.Department = User.Identity.Name;
 
-            ViewBag.Department = User.Identity.Name;
             return View(module);
         }
 
