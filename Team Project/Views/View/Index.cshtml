@@ -5,17 +5,46 @@
 <h3>Your Requests</h3>
 
 <script src="@Url.Content("~/Scripts/View/index.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/View/filter.js")" type="text/javascript"></script>
 
 @if (ViewBag.Message != null)
 {
     @ViewBag.Message
 }
 
-<p>
-    Select from @Model.Count() requests:</p>
+<div class="view-filters">
+    <label for="Rounds">Rounds</label>
+    <select id="Rounds">
+        <option>&lt; Select a Round &gt;</option>
+        <optgroup label="Semester 1">
+            <option value="11">Round 1</option>
+            <option value="12">Round 2</option>
+            <option value="13">Round 3</option>
+        </optgroup>
+        <optgroup label="Semester 2">
+            <option value="21">Round 1</option>
+            <option value="22">Round 2</option>
+            <option value="23">Round 3</option>
+        </optgroup>
+    </select>
+    <label for="Status">Status</label>
+    <select id="Status">
+        <option>&lt; Select a Status &gt;</option>
+        <option>Pending</option>
+        <option>Accepted</option>
+        <option>Failed</option>
+    </select>
+    <label for="Module">Module</label>
+    @Html.DropDownList("Module", (SelectList)ViewBag.Modules, "< Select a Module >")
+    <label for="ModuleCode">Module Code</label>
+    @Html.DropDownList("ModuleCode", (SelectList)ViewBag.ModuleCodes, "< Select a Module Code >")
+</div>
+
 <table id="requests-table">
     <thead>
         <tr>
+            <td>Semester</td>
+            <td>Round</td>
             <td>Module Code</td>
             <td>Module</td>
             <td>Day</td>
@@ -32,12 +61,14 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.Module.ModuleCode)</td>
-            <td>@Html.DisplayFor(modelItem => item.Module.ModuleTitle)</td>
-            <td>@item.Day</td>
-            <td>@item.StartTime:00</td>
-            <td>@item.Length</td>
-            <td>
+            <td class="semester">@Html.DisplayFor(modelItem => item.Semester)</td>
+            <td class="round">@Html.DisplayFor(modelItem => item.Round)</td>
+            <td class="moduleCode">@Html.DisplayFor(modelItem => item.Module.ModuleCode)</td>
+            <td class="moduleTitle">@Html.DisplayFor(modelItem => item.Module.ModuleTitle)</td>
+            <td class="day">@item.Day</td>
+            <td class="startTime">@item.StartTime:00</td>
+            <td class="length">@item.Length</td>
+            <td class="weeks">
         @{
         bool first = true;
             foreach (TimetableSystem.Models.RequestWeek week in item.RequestWeeks)
