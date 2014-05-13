@@ -4,16 +4,18 @@
         //Set Park field change function
         $('#Park').change(function () {
             var queryLink = '@Url.Action("parkSelected")';
-            $.get(queryLink, { parkName: $(this).val() }, function (data) {
+            var value = $(this).val();
+            if (value.indexOf('<') !== -1) value = "";
+            $.get(queryLink, { parkName: value }, function (data) {
                 var temp = data.split('!');
                 var buildings = temp[0].split(';');
                 var rooms = temp[1].split(';');
                 $b = $('#Building');
                 $b.empty();
-                $b.append("<option>No Preference</option>");
+                $b.append("<option> < Select a building > </option>");
                 $r = $('#Room');
                 $r.empty();
-                $r.append("<option>No Preference</option>");
+                $r.append("<option> < Select a room > </option>");
                 for (var i = 0; i < buildings.length; i++) {
                     $b.append("<option>" + buildings[i] + "</option>");
                 }
@@ -26,11 +28,13 @@
         //Set Building field change function
         $('#Building').change(function () {
             var queryLink = '@Url.Action("buildingSelected")';
-            $.get(queryLink, { buildingName: $(this).val() }, function (data) {
+            var value = $(this).val();
+            if (value.indexOf('<') !== -1) value = "";
+            $.get(queryLink, { buildingName: value }, function (data) {
                 var rooms = data.split(';');
                 $r = $('#Room');
                 $r.empty();
-                $r.append("<option>No Preference</option>");
+                $r.append("<option> < Select a room > </option>");
                 for (var k = 0; k < rooms.length; k++) {
                     $r.append("<option>" + rooms[k] + "</option>");
                 }
@@ -124,9 +128,16 @@
     //Function to print the table based on current form data
     function refreshTable() {
         //Form values
-        var park = $('#Park').val();
-        var building = $('#Building').val();
-        var room = $('#Room').val().split(' ')[0];
+        var park = $('#Park option:selected').text();
+        if (park.indexOf('<') !== -1) park = "";
+        var building = $("#Building option:selected").text();
+        if (building.indexOf('<') !== -1) building = "";
+        var room = $('#Room option:selected').text();
+        if (room.indexOf('<') !== -1) room = "";
+        else {
+            var temp = room.indexOf("(");
+            room = room.substr(0, temp);
+        }
         var semester = $('#Semester').val();
         var week = "";
         for (var i = 1; i < 16; i++) {
@@ -135,6 +146,14 @@
                 week += i + ";";
             }
         }
+        /*
+        var park = $("#Park option:selected").text();
+        if (park.indexOf('<') !== -1) park = "";
+        var building = $("#Building option:selected").text();
+        if (building.indexOf('<') !== -1) building = "";
+        var roomType = $('#RoomType option:selected').text();
+        if (roomType.indexOf('<') !== -1) roomType = "";
+        */
         if (week == "") {
             alert("Cannot search for availability with zero weeks checked.");
             return;
