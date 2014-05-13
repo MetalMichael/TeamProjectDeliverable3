@@ -190,7 +190,7 @@ namespace TimetableSystem.Controllers
             {
                 string y = x.ToString();
                 int t = x + 8;
-                times.Add(new SelectListItem { Text = "Period " + y + " : (" + t + ":00 - " + t + ":50)" , Value = x});
+                times.Add(new SelectListItem { Text = "Period " + y + " : (" + t + ":00 - " + t + ":50)" , Value = y });
             }
             ViewBag.Times = times;
 
