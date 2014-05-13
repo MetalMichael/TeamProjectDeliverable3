@@ -81,17 +81,17 @@
     <fieldset id="s1">
         <h2>Booking</h2>
         <div class="field">
-            <div class="editor-label greatForm" style="padding:0 0 0 10px;">
-                @Html.EditorFor(model => model.Priority)
-                @Html.LabelFor(model => model.Priority)
-                @Html.ValidationMessageFor(model => model.Priority)
-            </div>
-            <div class="editor-field">
-                <div class="editor-field-inner">
-                    
-                    
+            <div class="editor-field" style="padding:0 0 0 10px;">
+                <div class="checkbox-label-container greatForm">
+                    @Html.EditorFor(model => model.Priority)
+                    @Html.LabelFor(model => model.Priority)
+                    @Html.ValidationMessageFor(model => model.Priority)
                 </div>
-
+                <div class="checkbox-label-container greatForm">
+                    @Html.EditorFor(model => model.AdHoc)
+                    @Html.LabelFor(model => model.AdHoc)
+                    @Html.ValidationMessageFor(model => model.AdHoc)
+                </div>
             </div>
         </div>
         <div class="field">
@@ -142,7 +142,7 @@
                 @Html.Label("Filter Module")
             </div>
             <div class="editor-field">
-                <input class="text-box single-line" type="text" id="module-filter" value placeholder="Filter by module..." />
+                <input class="text-box single-line" type="text" id="module-filter" value placeholder="Filter modules..." />
             </div>
         </div>
         <div class="field">
@@ -309,7 +309,7 @@
     <h2></h2>
         <div class="field">
             <button class="reqButtons">Submit</button>
-            <button class="reqButtons" type="button" onclick="location.reload()">Reset</button>
+            <button class="reqButtons" type="button" onclick="if(confirm('Are you sure you wish to reset the form?\nYou will lose all unsaved data.')) { $('Form')[0].reset(); }return false;">Reset</button>
         </div>
 
     </fieldset>

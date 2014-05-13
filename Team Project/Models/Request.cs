@@ -34,6 +34,8 @@ namespace TimetableSystem.Models
         [ScaffoldColumn(false)]
         public int Semester { get; set; }
 
+        public bool AdHoc { get; set; }
+
         [Required(ErrorMessage = "Day is required")]
         public string Day { get; set; }
 

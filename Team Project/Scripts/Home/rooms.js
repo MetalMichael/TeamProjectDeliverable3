@@ -46,7 +46,8 @@ var rooms = {
 
     updateBuildings: function () {
         this.updateInfo();
-        $.get('/team09web/Home/Buildings',
+        //$.get('/team09web/Home/Buildings',
+        $.get('/Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -62,7 +63,8 @@ var rooms = {
     filterRooms: function (setup) {
         this.updateInfo();
         $('.room-select').addClass('loading');
-        $.get('/team09web/Home/Rooms',
+        //$.get('/team09web/Home/Rooms',
+        $.get('/Home/Rooms',
             {
                 students: this.students,
                 park: this.park,
@@ -117,6 +119,19 @@ var rooms = {
         var select = $(this.createSelect()).prop('id', 'room' + id);
         $('#room-container').append(select);
         $('#room' + id).show();
+        $('#room' + id).unbind('change').change(function () {
+            rooms.changeRoom(this);
+        });
+    },
+
+    changeRoom: function (select) {
+        var selectID = $(select).prop("id");
+        var selectValue = $(select).find("select").val();
+        for (var x = 1; x <= this.roomTotal; x++) {
+            if (selectID == 'room' + x) continue;
+            if ($('#room' + x + " select").val() == selectValue) $('#room' + x + " select").prop("selectedIndex", -1);
+            $('#room' + x + ' select option[value=' + selectValue + ']').prop('disabled', 'disabled');
+        }
     },
 
     createSelect: function () {
