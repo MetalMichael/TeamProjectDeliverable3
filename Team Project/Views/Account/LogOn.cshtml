@@ -34,8 +34,10 @@
         </div>
         <div class="field" style="border:0;">
             <div class="editor-label">
-                @Html.LabelFor(m => m.RememberMe)
-                @Html.CheckBoxFor(m => m.RememberMe)
+                <div style="display:none">
+                    @Html.LabelFor(m => m.RememberMe)
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                </div>
             </div>
             <div class="editor-field">
                 <button>Log in</button>          
