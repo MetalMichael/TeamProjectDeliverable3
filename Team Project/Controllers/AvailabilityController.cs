@@ -35,7 +35,7 @@ namespace TimetableSystem.Controllers
             List<string> tempList = new List<string>();
             foreach(Room r in roomQry)
             {
-                tempList.Add(r.RoomCode + " [" + r.Capacity + "]");
+                tempList.Add(r.RoomCode + "   (Cap: " + r.Capacity + ")");
             }
             SelectList roomList = new SelectList(tempList);
             ViewBag.Room = roomList;
@@ -104,7 +104,7 @@ namespace TimetableSystem.Controllers
                               select r;
                 foreach (Room r in roomQry)
                 {
-                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                    rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
                 }
             }
             else
@@ -134,7 +134,7 @@ namespace TimetableSystem.Controllers
                                   select r;
                     foreach (Room r in roomQry)
                     {
-                        rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                        rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
                     }
                 }
             }
@@ -150,14 +150,14 @@ namespace TimetableSystem.Controllers
         public string buildingSelected(string buildingName)
         {
             string rooms = "";
-            
+
             if (buildingName == "")
             {
                 var roomQry = from r in systemDB.Rooms
                               select r;
                 foreach (Room r in roomQry)
                 {
-                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                    rooms += r.RoomCode + "   (Cap: " + r.Capacity + ");";
                 }
             }
             else
@@ -170,13 +170,30 @@ namespace TimetableSystem.Controllers
                               select r;
                 foreach (Room r in roomQry)
                 {
-                    rooms += r.RoomCode + " [" + r.Capacity.ToString() + "];";
+                    rooms += r.RoomCode + "   (Cap: " + r.Capacity.ToString() + ");";
                 }
             }
             rooms = rooms.Substring(0, rooms.Length - 1);
 
             return rooms;
         }
+
+        /*public string capacitySelected(string capacity)
+        {
+            string rooms = "";
+
+            var roomQry = from r in systemDB.Rooms
+                            where r.BuildingID == buildID
+                            select r;
+            foreach (Room r in roomQry)
+            {
+                rooms += r.RoomCode + "   (Cap: " + r.Capacity.ToString() + ");";
+            }
+
+            rooms = rooms.Substring(0, rooms.Length - 1);
+
+            return rooms;
+        }*/
 
         //**********GET AVAILABILITY METHOD***********
         public string getAvailability(string parkName, string buildingName, string roomCode, int semester, string week, 
