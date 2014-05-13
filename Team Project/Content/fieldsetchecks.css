@@ -1,0 +1,37 @@
+.tick, .cross, .dash {
+	display: none;
+}
+fieldset h2 span.cross {
+	float: right;
+	padding-right: 30px;
+	font-size: 1.5em;
+	border: 1px solid #E64545;
+	padding-top: 30px;
+	border-radius: 6px;
+	position: relative;
+	top: -6px;
+	margin-right: 9px;
+	background-color: #E64545;
+}
+fieldset h2 i.cross {
+	position: relative;
+	top: -23px;
+	left: 4px;
+	color: #1F2634;
+}
+fieldset h2 i.tick {
+	position: relative;
+	top: -1px;
+	left: -41px;
+	float: right;
+	color: #4DA269;
+	font-size: 2em;
+}
+fieldset h2 i.dash {
+	position: relative;
+	top: -1px;
+	left: -41px;
+	float: right;
+	color: orange;	/*NEEDS TO CHANGE*/
+	font-size: 2em;	
+}
