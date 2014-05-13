@@ -1,0 +1,54 @@
+	<fieldset id="s1">
+        <h2>Booking<div style="
+    float: right; 
+    padding-right: 30px; 
+    font-size: 1.5em; 
+    border: 1px solid; 
+    padding-top: 30px; 
+    border-radius: 6px; 
+    position: relative; 
+    top: -6px; 
+    margin-right: 9px;
+    color: #E64545;
+"><i class="fa fa-times" style="position: relative;top: -23px;left: 4px;/* color: red; */"></i></div></h2>
+       
+    <fieldset id="s2">
+        <h2>Module<i class="fa fa-minus-square-o" style="position: relative;top: -1px;left: -41px;color: orange;font-size: 2em;float: right;"></i></h2>
+
+    <fieldset id="s3">
+    <h2>Weeks / Semester<div style="
+    float: right; 
+    padding-right: 30px; 
+    font-size: 1.5em; 
+    border: 1px solid; 
+    padding-top: 30px; 
+    border-radius: 6px; 
+    position: relative; 
+    top: -6px; 
+    margin-right: 9px;
+    color: #dbdbde;
+"><i class="fa fa-check" style="position: relative;top: -23px;left: 1px;color: #4DA269;"></i></div></h2>
+        
+    <fieldset id="s5">
+        <h2>Room<i class="fa fa-minus-square" style="position: relative;top: -1px;left: -41px;color: orange;font-size: 2em;float: right;"></i></h2>
+   
+    <fieldset id="s6">
+        <h2>Room Pt. II<i class="fa fa-check-square" style="position: relative;top: -1px;left: -41px;color: #4DA269;font-size: 2em;float: right;"></i></h2>
+<fieldset id="s7">
+    <h2 class=""><div style="
+    color: <div style=&quot;    float: right;     padding-right: 30px;     font-size: 1.5em;     border: 1px solid;     padding-top: 30px;     border-radius: 6px;     position: relative;     top: -6px;     margin-right: 9px;    color: #E64545;&quot;><i class=&quot;fa fa-times&quot; style=&quot;position: relative;top: -23px;left: 4px;/* color: red; */&quot;></i></div>;
+    float: right; 
+    padding-right: 30px; 
+    font-size: 1.5em; 
+    border: 1px solid #E64545; 
+    padding-top: 30px; 
+    border-radius: 6px; 
+    position: relative; 
+    top: -6px; 
+    margin-right: 9px;
+    background-color: #E64545;
+    color: 1F2634;
+"><i class="fa fa-times" style="position: relative;top: -23px;left: 4px;color: #1F2634;"></i></div></h2>
+
+
+/*By Dhruve, not Alex*/
