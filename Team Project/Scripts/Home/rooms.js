@@ -176,7 +176,7 @@ var rooms = {
             $('.room-select option').removeAttr("disabled");
             return;
         }
-        var start = parseInt($('#StartTime').val()) - 8;
+        var start = parseInt($('#StartTime').val());
         var slot = 'slot' + day + start;
 
         var park = $("#Park option:selected").text();

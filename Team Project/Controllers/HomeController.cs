@@ -186,15 +186,11 @@ namespace TimetableSystem.Controllers
             ViewBag.Parks = new SelectList(db.Parks, "ParkID", "ParkName");
 
             var times = new List<SelectListItem>();
-            for (var x = 9; x <= 17; x++)
+            for (var x = 1; x <= 9; x++)
             {
                 string y = x.ToString();
-                int p = x - 8;
-                if (y.Length == 1)
-                {
-                    y = "0" + y;
-                }
-                times.Add(new SelectListItem { Text = "Period " + p + " : (" + y + ":00 - " + y + ":50)" , Value = y });
+                int t = x + 8;
+                times.Add(new SelectListItem { Text = "Period " + y + " : (" + t + ":00 - " + t + ":50)" , Value = p });
             }
             ViewBag.Times = times;
 
