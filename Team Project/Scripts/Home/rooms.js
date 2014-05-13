@@ -49,8 +49,8 @@ var rooms = {
 
     updateBuildings: function () {
         this.updateInfo();
-        //$.get('/team09web/Home/Buildings',
-        $.get('/Home/Buildings',
+        $.get('/team09web/Home/Buildings',
+        //$.get('/Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -66,8 +66,8 @@ var rooms = {
     filterRooms: function (setup) {
         this.updateInfo();
         $('.room-select').addClass('loading');
-        //$.get('/team09web/Home/Rooms',
-        $.get('/Home/Rooms',
+        $.get('/team09web/Home/Rooms',
+        //$.get('/Home/Rooms',
             {
                 students: this.students,
                 park: this.park,
@@ -186,8 +186,8 @@ var rooms = {
         var roomType = $('#RoomType option:selected').text();
         if (roomType.indexOf('<') !== -1) roomType = "";
 
-        //$.get('/team09web/Availability/checkslot',
-        $.get('/Availability/checkslot',
+        $.get('/team09web/Availability/checkslot',
+        //$.get('/Availability/checkslot',
             {
                 parkName: park,
                 buildingName: building,
