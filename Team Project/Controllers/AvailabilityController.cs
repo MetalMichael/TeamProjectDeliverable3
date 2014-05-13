@@ -150,7 +150,7 @@ namespace TimetableSystem.Controllers
         public string buildingSelected(string buildingName)
         {
             string rooms = "";
-            
+
             if (buildingName == "")
             {
                 var roomQry = from r in systemDB.Rooms
@@ -177,6 +177,23 @@ namespace TimetableSystem.Controllers
 
             return rooms;
         }
+
+        /*public string capacitySelected(string capacity)
+        {
+            string rooms = "";
+
+            var roomQry = from r in systemDB.Rooms
+                            where r.BuildingID == buildID
+                            select r;
+            foreach (Room r in roomQry)
+            {
+                rooms += r.RoomCode + "   (Cap: " + r.Capacity.ToString() + ");";
+            }
+
+            rooms = rooms.Substring(0, rooms.Length - 1);
+
+            return rooms;
+        }*/
 
         //**********GET AVAILABILITY METHOD***********
         public string getAvailability(string parkName, string buildingName, string roomCode, int semester, string week, 
