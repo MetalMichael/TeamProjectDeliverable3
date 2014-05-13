@@ -117,6 +117,9 @@
         $('.weekBox').change(function () {
             refreshTable();
         });
+        $(function () {
+            $('select#Semester option:last').attr("selected", "selected");
+        });
     });
     //Function to print the table based on current form data
     function refreshTable() {
@@ -164,7 +167,10 @@
         }, function (data) {
             //alert(data);
             $('#tableDiv').html(data);
+            $('#a3').css("visibility", "visible");
+            $('#loading').css("visibility", "hidden");
         });
+        
     }
 
     //List all available rooms for slot function
@@ -269,14 +275,14 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(false)
-    <fieldset id="s1">
+    <fieldset class="availabilityField" id="a1">
         <h2>Room</h2>
         <div class="field">
             <div class="editor-label">
                 @Html.Label("Type")
             </div>
             <div class="editor-field">
-                    @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "No Preference")
+                    @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewData["Type"], "< Select a room type >")
             </div>
         </div>
         <div class="field">
@@ -297,7 +303,7 @@
                 @Html.Label("Park")
             </div>
             <div class="editor-field">
-                    @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "No Preference")
+                    @Html.DropDownList("Park", (IEnumerable<SelectListItem>)ViewData["Park"], "< Select a park >")
             </div>
         </div>
         <div class="field">
@@ -305,7 +311,7 @@
                 @Html.Label("Building")
             </div>
             <div class="editor-field">
-                    @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "No Preference")
+                    @Html.DropDownList("Building", (IEnumerable<SelectListItem>)ViewData["Building"], "< Select a building >")
             </div>
         </div>
         <div class="field">
@@ -313,11 +319,11 @@
                 @Html.Label("Room")
             </div>
             <div class="editor-field">
-                    @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "No Preference")
+                    @Html.DropDownList("Room", (IEnumerable<SelectListItem>)ViewData["Room"], "< Select a room >")
             </div>
         </div>
     </fieldset>
-    <fieldset id="s2">
+    <fieldset id="a2">
         <h2>Weeks / Semester</h2>
         <div class="field">
             <div class="buttons-wrapper">
@@ -352,7 +358,9 @@
             </div>
         </div>
     </fieldset>
-    <fieldset id="s3">
+    
+    <img id="loading" src="@Url.Content("~/Content/images/ajax-loader.gif")" />
+   <fieldset style="visibility:hidden" id="a3">
         <div id="subtitleDiv">
         </div>
         <div id="tableDiv">
