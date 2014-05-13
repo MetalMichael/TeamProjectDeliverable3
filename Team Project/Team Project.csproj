@@ -182,6 +182,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\modules.css" />
     <Content Include="Content\themes\base\jquery-ui-1.9.2.css" />
+    <Content Include="Content\view.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Home\index.js" />
     <Content Include="Scripts\Home\rooms.js" />
@@ -191,6 +192,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\View\index.js" />
     <Content Include="Scripts\View\jquery.dataTables.min.js" />
+    <Content Include="Scripts\View\filter.js" />
     <Content Include="Views\Availability\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
