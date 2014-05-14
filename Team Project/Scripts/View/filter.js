@@ -5,6 +5,10 @@ $(document).ready(function () {
         filter();
     });
 
+    $('#Semester').change(function () {
+        filter();
+    });
+
     $('#Status').change(function () {
         filter();
     });
@@ -23,6 +27,8 @@ $(document).ready(function () {
 });
 
 function filter() {
+    var sem = $('#Semester').val();
+
     var semester = $('#Rounds').val().substr(0, 1);
     var round = $('#Rounds').val().substr(1, 1);
 
@@ -30,7 +36,16 @@ function filter() {
 
     var moduleCode = $('#ModuleCode').val().trim();
 
+    bool semdiff = false;
+    if (sem.indexOf("<") == -1) {
+        semdiff = true;
+        viewtable.fnFilter(sem, 0);
+    }
+
     if (semester != "<") {
+        if (semdiff && sem != semester) {
+            semester = sem;
+        }
         viewtable.fnFilter(semester, 0);
         viewtable.fnFilter(round, 1);
     } else {
