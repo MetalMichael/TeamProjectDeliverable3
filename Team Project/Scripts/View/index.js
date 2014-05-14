@@ -9,14 +9,14 @@ $(document).ready(function () {
             } else if (status.indexOf("Accepted") > -1) {
                 $(this).find('.controls').hide();
                 if ($(this).find('.rooms').html() !== $(this).find('.acceptedRooms').html()) {
-                    $(this).css('background-color', 'orange');
+                    $(this).css('background-color', '#FFC65D');
                 } else {
-                    $(this).css('background-color', 'green');
+                    $(this).css('background-color', '#4DA269');
                 }
             //Failed
             } else {
                 $(this).find('.edit, .delete').hide();
-                $(this).css('background-color', 'red');
+                $(this).css('background-color', '#E64545');
             }
         }
     });
