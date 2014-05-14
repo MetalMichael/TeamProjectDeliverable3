@@ -3,24 +3,6 @@
 @{
     ViewBag.Title = "View Modules";
 }
-
-@using (Html.BeginForm("Index", "Module", new { name = "hiddenForm" }, FormMethod.Get))
-{
-<input type="hidden" id="moduleCode" name="moduleCode" />
-<input type="hidden" id="moduleTitle" name="moduleTitle" />
-<div class="buttons-wrapper bar">
-    <div>
-        <input type="submit" value="Activate filter" class="button" />
-    </div>
-@*    <div>
-        <input type="submit" value="Reset" class="button" style="padding:5px;" onclick="clear();" />
-    </div>*@
-    <div>
-        <input type="submit" class="button" value="Create new Module" onclick="window.location='@Url.Action("Edit")'; return false;" />
-    </div>
-</div>
-}
-
 <script type="text/javascript">
     function filter() {
         document.getElementById('moduleCode').value = document.getElementById('codeInput').value;
@@ -32,6 +14,14 @@
         filter();
     }
 </script>
+@using (Html.BeginForm("Index", "Module", new { name = "hiddenForm" }, FormMethod.Get))
+{
+<input type="hidden" id="moduleCode" name="moduleCode" />
+<input type="hidden" id="moduleTitle" name="moduleTitle" />
+
+
+
+
 
 @*<h3>Total: @Model.Count()</h3>*@
 @*<h2>Module Page</h2>*@
@@ -41,16 +31,25 @@
     <h2>Module code & title</h2>
     <div class="field" style="background-color:rgba(0,0,0,0.3);">
         <div class="editor-field" style="min-width:24%; max-width:24%; float:left;">
-            <input class="filter" id="codeInput" name="codeInput" type="text" value placeholder="< Filter code >"
+            <input class="filter" id="codeInput" name="codeInput" type="text" value placeholder="< Filter code >" 
                 onchange="filter();"
             />
-         </div>
+        </div>
         <div class="editor-field" style="min-width:75%; max-width:75%; float:right;">
-            <input id="titleInput" name="titleInput" type="text" class="filter" value placeholder="< Filter title >"
-                onchange="filter();" 
-            /> 
+            <div class="editor-field-inner" style="float:left;">
+                <input id="titleInput" name="titleInput" type="text" class="filter" value placeholder="< Filter title >" style="height: 51px; position: relative;
+top: -20px;
+left: -20px;
+min-width: 390px;"
+                  onchange="filter();" 
+                />
+            </div>
+            <div class="editor-field-inner" style="float:right;">
+                <input type="submit" value="Activate filter" class="button" style="position:relative; bottom:12px; right:18px;" />
+            </div> 
         </div>
     </div>
+
     @foreach (var item in Model)
     {
         <div class="field">
@@ -69,3 +68,9 @@
         </div>
     }
 </fieldset>
+    <fieldset>
+        <div>
+        <input type="submit" class="button" value="Create new Module" onclick="window.location='@Url.Action("Edit")'; return false;" />
+    </div>
+    </fieldset>
+}
