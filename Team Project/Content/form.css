@@ -336,7 +336,7 @@ div.checkbox-label-container.greatForm {
 {
     margin-left:auto;
     margin-right:auto;
-    margin-top:10%;
+    margin-top:20px;
     float: none;
 }
 #logInBox 
@@ -344,4 +344,11 @@ div.checkbox-label-container.greatForm {
     height: 100%;
     width: 100%;
     display:table;
+}
+#logInHead 
+{
+    text-align:center;
+    color: #3e4c68;
+    vertical-align:bottom;
+    margin-top: 10%;
 }
