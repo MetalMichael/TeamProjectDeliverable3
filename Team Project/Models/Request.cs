@@ -21,11 +21,12 @@ namespace TimetableSystem.Models
         [ScaffoldColumn(false)]
         public string Department { get; set; }
 
-        [Required(ErrorMessage = "Module is required")]
+        [Required(ErrorMessage = "Module is required.")]
         [DisplayName("Module")]
         public string ModuleCode { get; set; }
         public virtual Module Module { get; set; }
 
+        [DisplayName("Priority Booking")]
         public bool Priority { get; set; }
 
         [ScaffoldColumn(false)]
@@ -36,7 +37,7 @@ namespace TimetableSystem.Models
 
         public bool AdHoc { get; set; }
 
-        [Required(ErrorMessage = "Day is required")]
+        [Required(ErrorMessage = "Day is required.")]
         public string Day { get; set; }
 
         [DisplayName("Time")]

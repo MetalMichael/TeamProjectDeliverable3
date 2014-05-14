@@ -204,6 +204,8 @@
     });
     //Function to print the table based on current form data
     function refreshTable() {
+        $('#a3').css("visibility", "hidden");
+        $('#loading').css("visibility", "visible");
         //Form values
         var park = $('#Park option:selected').text();
         if (park.indexOf('<') !== -1) park = "";
@@ -307,6 +309,7 @@
                 var html;
                 var day = days[(parseInt(slot.substr(4, 1))) - 1];
                 var time = times[(parseInt(slot.substr(5, 1))) - 1];
+                $('#dialog').css("visibility", "visible");
 
                 if (data == "") {
                     html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
@@ -461,7 +464,7 @@
         </div>
     </fieldset>
     
-    <img id="loading" src="@Url.Content("~/Content/images/ajax-loader.gif")" />
+    <div style="width:500px; text-align:center; margin-left:auto; margin-right:auto;"><img id="loading" src="@Url.Content("~/Content/images/ajax-loader.gif")" /></div>
    <fieldset style="visibility:hidden" id="a3">
         <div id="subtitleDiv">
         </div>
@@ -470,6 +473,6 @@
         </div>
     </fieldset>
 }
-<div hidden=true id="dialog" title="Export Data">
+<div style="visibility:hidden; margin-left:auto; margin-right:auto" id="dialog" title="Export Data">
 
 </div>
