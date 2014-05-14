@@ -5,6 +5,13 @@
 }
 <script type="text/javascript">
     function filter() {
+        /*
+                var codeVal = $('codeInput').val();
+        //if (codeVal.length == 0) codeVal = " ";
+        var titleVal = $('titleInput').val();
+        $('#moduleCode').val(codeVal);
+        $('#moduleTitle').val(titleVal);
+        */
         document.getElementById('moduleCode').value = document.getElementById('codeInput').value;
         document.getElementById('moduleTitle').value = document.getElementById('titleInput').value;
     }
@@ -20,9 +27,6 @@
 <input type="hidden" id="moduleTitle" name="moduleTitle" />
 
 
-
-
-
 @*<h3>Total: @Model.Count()</h3>*@
 @*<h2>Module Page</h2>*@
 
@@ -30,7 +34,7 @@
 <fieldset style="position:relative; left:30%; margin-right:100%;">
     <div class="buttons-wrapper" style="padding-top:10px;">
     <div class="editor-field" style="float:left; min-width:40%; max-width:40%;" >
-        <input type="submit" class="button" value="Create new module" onclick="window.location='@Url.Action("Edit")'; return false;" />
+        <input type="button" class="button" value="Create new module" onclick="window.location='@Url.Action("Edit")'; return false;" />
     </div>
     <div class="editor-field" style="float:right; min-width:40%; max-width:40%;">
         <input type="submit" value="Activate filter" class="button" />
@@ -42,14 +46,20 @@
     <h2>Module code & title</h2>
     <div class="field" style="background-color:rgba(0,0,0,0.3);">
         <div class="editor-field" style="min-width:24%; max-width:24%; float:left;">
-            <input class="filter" id="codeInput" name="codeInput" type="text" value placeholder="< Filter code >" 
+            <input class="filter" id="codeInput" name="codeInput" type="text" placeholder="< Filter code >" 
                 onchange="filter();"
+                @if(ViewBag.moduleCode != null) {
+                    @Html.Raw("value='" + ViewBag.moduleCode + "'");
+                }
             />
         </div>
         <div class="editor-field" style="min-width:75%; max-width:75%; float:right;">
 
-                <input id="titleInput" name="titleInput" type="text" class="filter" value placeholder="< Filter title >" 
-                  onchange="filter();" 
+                <input id="titleInput" name="titleInput" type="text" class="filter" placeholder="< Filter title >" 
+                  onchange="filter();"
+                  @if(ViewBag.moduleTitle != null) {
+                      @Html.Raw("value='" + ViewBag.moduleTitle + "'");
+                  } 
                 />
         </div>
     </div>
@@ -66,7 +76,7 @@
                 </div>
                 <div class="editor-field-inner" style="float:right;">
                     <input type="submit" class="button1" value="Edit" onclick="window.location='@Url.Action("Edit", new { code = item.ModuleCode })'; return false;" />
-                    <input type="submit" class="button1" value="Delete" onclick="if(confirm('Are you sure you wish to delete this module?')) { window.location='@Url.Action("Delete", new { code = item.ModuleCode });} return false;" />
+                    <input type="submit" class="button1" value="Delete" onclick="if(confirm('Are you sure you wish to delete this module?')) { window.location='@Url.Action("Delete", new { code = item.ModuleCode })';} return false;" />
                 </div>
             </div>
         </div>

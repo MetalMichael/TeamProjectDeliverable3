@@ -185,12 +185,14 @@ namespace TimetableSystem.Controllers
 
             if (request.AdHoc)
             {
+                request.Round = 0;
                 request.Status = "Accepted";
                 request.AcceptedRoom = (int)rooms[0].RoomID;
                 request.AcceptedRooms = rooms2;
             }
             else
             {
+                request.Round = 2;
                 request.Status = "Pending";
             }
 
@@ -202,26 +204,51 @@ namespace TimetableSystem.Controllers
             string week1 = "", week2 = "", week3 = "";
             string weekNo;
 
-            for (int x = 1; x < 6; x++)
+            if (request.Weeks == null)
             {
-                weekNo = "Week" + x;
-                week1 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
-            }
-            for (int x = 6; x < 11; x++)
-            {
-                weekNo = "Week" + x;
-                week2 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
-            }
-            for (int x = 11; x < 16; x++)
-            {
-                weekNo = "Week" + x;
-                if (x < 13)
+                for (int x = 1; x < 6; x++)
                 {
-                    week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
+                    weekNo = "Week" + x;
+                    week1 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
                 }
-                else
+                for (int x = 6; x < 11; x++)
                 {
-                    week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' /><label for='" + weekNo + "'>" + x + "</label>";
+                    weekNo = "Week" + x;
+                    week2 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
+                }
+                for (int x = 11; x < 16; x++)
+                {
+                    weekNo = "Week" + x;
+                    if (x < 13)
+                    {
+                        week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' checked /><label for='" + weekNo + "'>" + x + "</label>";
+                    }
+                    else
+                    {
+                        week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' /><label for='" + weekNo + "'>" + x + "</label>";
+                    }
+                }
+            }
+            else
+            {
+                string checkd;
+                for (int x = 1; x < 6; x++)
+                {
+                    checkd = (request.Weeks.IndexOf(x) != -1) ? "checked" : "";
+                    weekNo = "Week" + x;
+                    week1 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' " + checkd + " /><label for='" + weekNo + "'>" + x + "</label>";
+                }
+                for (int x = 6; x < 11; x++)
+                {
+                    checkd = (request.Weeks.IndexOf(x) != -1) ? "checked" : "";
+                    weekNo = "Week" + x;
+                    week2 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' " + checkd + " /><label for='" + weekNo + "'>" + x + "</label>";
+                }
+                for (int x = 11; x < 16; x++)
+                {
+                    checkd = (request.Weeks.IndexOf(x) != -1) ? "checked" : "";
+                    weekNo = "Week" + x;
+                    week3 += "<input class='weekBox' id='" + weekNo + "' type='checkbox' name='Weeks' value='" + x + "' " + checkd + " /><label for='" + weekNo + "'>" + x + "</label>";
                 }
             }
             //ViewBag.Projector = projector;

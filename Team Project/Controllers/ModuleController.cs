@@ -46,6 +46,7 @@ namespace TimetableSystem.Controllers
                 {
                     mod = mod.Where(s => s.ModuleTitle.Contains(moduleTitle));
                 }
+                ViewBag.moduleTitle = moduleTitle;
                 return View(mod);
             }
 
@@ -59,6 +60,7 @@ namespace TimetableSystem.Controllers
                 { 
                     mod = mod.Where(s => s.ModuleCode.Contains(moduleCode)); 
                 }
+                ViewBag.moduleCode = moduleCode;
                 return View(mod); 
             }
 
@@ -67,7 +69,7 @@ namespace TimetableSystem.Controllers
             return View(modules);
 
         }
-
+        
         [HttpPost]
         public ActionResult Index(Module module)
         {

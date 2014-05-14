@@ -64,7 +64,16 @@
     {
         <tr>
             <td class="semester">@Html.DisplayFor(modelItem => item.Semester)</td>
-            <td class="round">@Html.DisplayFor(modelItem => item.Round)</td>
+            <td class="round">
+                @if (item.Round == 0)
+                {
+                    <span>(AdHoc)</span>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Round)
+                }
+            </td>
             <td class="moduleCode">@Html.DisplayFor(modelItem => item.Module.ModuleCode)</td>
             <td class="moduleTitle">@Html.DisplayFor(modelItem => item.Module.ModuleTitle)</td>
             <td class="day">@item.Day</td>
@@ -72,19 +81,19 @@
             <td class="length">@item.Length</td>
             <td class="weeks">
         @{
-        bool first = true;
-            foreach (TimetableSystem.Models.RequestWeek week in item.RequestWeeks)
-            {
-                if (!first)
+                bool first = true;
+                foreach (TimetableSystem.Models.RequestWeek week in item.RequestWeeks)
                 {
+                    if (!first)
+                    {
                     @Html.Raw(", ");
-                }
-                else
-                {
-                    first = false;
-                }
+                    }
+                    else
+                    {
+                        first = false;
+                    }
                 @week.Week.ToString();
-            }
+                }
         }
             </td>
             <td class="rooms">
