@@ -179,11 +179,11 @@ namespace TimetableSystem.Controllers
             ViewBag.WeekCheckboxes2 = week2;
             ViewBag.WeekCheckboxes3 = week3;
 
-            ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
-            ViewBag.ModuleCodes = new SelectList(db.Modules, "ModuleCode", "ModuleCode");
-            ViewBag.Buildings = new SelectList(db.Buildings, "BuildingID", "BuildingName");
-            ViewBag.RoomTypes = new SelectList(db.Types, "RoomTypeID", "RoomType");
-            ViewBag.Parks = new SelectList(db.Parks, "ParkID", "ParkName");
+            ViewBag.Modules = new SelectList(db.Modules.OrderBy(m => m.ModuleTitle), "ModuleCode", "ModuleTitle");
+            ViewBag.ModuleCodes = new SelectList(db.Modules.OrderBy(m => m.ModuleCode), "ModuleCode", "ModuleCode");
+            ViewBag.Buildings = new SelectList(db.Buildings.OrderBy(m => m.BuildingName), "BuildingID", "BuildingName");
+            ViewBag.RoomTypes = new SelectList(db.Types.OrderBy(m => m.RoomType), "RoomTypeID", "RoomType");
+            ViewBag.Parks = new SelectList(db.Parks.OrderBy(m => m.ParkName), "ParkID", "ParkName");
 
             var times = new List<SelectListItem>();
             for (var x = 1; x <= 9; x++)

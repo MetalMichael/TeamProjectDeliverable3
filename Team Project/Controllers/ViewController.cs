@@ -24,9 +24,8 @@ namespace TimetableSystem.Controllers
 
             ViewBag.Department = User.Identity.Name;
 
-            ViewBag.Modules = new SelectList(db.Modules, "ModuleCode", "ModuleTitle");
-            ViewBag.ModuleCodes = new SelectList(db.Modules, "ModuleCode", "ModuleCode");
-
+            ViewBag.Modules = new SelectList(db.Modules.OrderBy(m => m.ModuleTitle), "ModuleCode", "ModuleTitle");
+            ViewBag.ModuleCodes = new SelectList(db.Modules.OrderBy(m => m.ModuleCode), "ModuleCode", "ModuleCode");
 
             return View(requests);
         }
