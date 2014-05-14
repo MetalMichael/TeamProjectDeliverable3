@@ -116,6 +116,7 @@
             <td><span class="controls">
                 @Html.ActionLink("Edit", "Edit", "Home", new { id = item.RequestId }, new { target = "_self", @class = "edit" })
                 @Html.ActionLink("Delete", "Delete", "Home", new { id = item.RequestId }, new { target = "_self", @class = "delete" })
+                @Html.ActionLink("ReSubmit", "ReSubmit", "Home", new { id = item.RequestId }, new { target = "_self", @class = "resubmit" })
             </span></td>
         </tr>
     }
