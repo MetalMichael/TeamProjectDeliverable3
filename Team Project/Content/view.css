@@ -1,4 +1,27 @@
-.view-filters {
+/*.view-filters {
     padding: 10px;
     border: 10px solid yellow;
+}*/
+
+#viewFilters 
+{
+    display:table;
+    text-align:center;
+    background: #3e4c68;
+    width: 1200px;
+    height:50px;
+    -webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin: 20px auto 20px auto;
+}
+#filtersCell 
+{
+    display:table-cell; 
+    vertical-align:middle;
+    color: #dbdbde;
+}
+.vFilters 
+{
+    margin: 10px;
 }

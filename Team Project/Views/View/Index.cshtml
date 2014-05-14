@@ -12,32 +12,34 @@
     @ViewBag.Message
 }
 
-<div class="view-filters">
-    <label for="Rounds">Rounds</label>
-    <select id="Rounds">
-        <option>&lt; Select a Round &gt;</option>
-        <optgroup label="Semester 1">
-            <option value="11">Round 1</option>
-            <option value="12">Round 2</option>
-            <option value="13">Round 3</option>
-        </optgroup>
-        <optgroup label="Semester 2">
-            <option value="21">Round 1</option>
-            <option value="22">Round 2</option>
-            <option value="23">Round 3</option>
-        </optgroup>
-    </select>
-    <label for="Status">Status</label>
-    <select id="Status">
-        <option>&lt; Select a Status &gt;</option>
-        <option>Pending</option>
-        <option>Accepted</option>
-        <option>Failed</option>
-    </select>
-    <label for="Module">Module</label>
-    @Html.DropDownList("Module", (SelectList)ViewBag.Modules, "< Select a Module >")
-    <label for="ModuleCode">Module Code</label>
-    @Html.DropDownList("ModuleCode", (SelectList)ViewBag.ModuleCodes, "< Select a Module Code >")
+<div id="viewFilters" class="view-filters">
+    <div id="filtersCell">
+        <label class="vFilters" for="Rounds">Rounds:</label>
+        <select id="Rounds">
+            <option>&lt; Select a Round &gt;</option>
+            <optgroup label="Semester 1">
+                <option value="11">Round 1</option>
+                <option value="12">Round 2</option>
+                <option value="13">Round 3</option>
+            </optgroup>
+            <optgroup label="Semester 2">
+                <option value="21">Round 1</option>
+                <option value="22">Round 2</option>
+                <option value="23">Round 3</option>
+            </optgroup>
+        </select>
+        <label class="vFilters" for="Status">Status:</label>
+        <select id="Status">
+            <option>&lt; Select a Status &gt;</option>
+            <option>Pending</option>
+            <option>Accepted</option>
+            <option>Failed</option>
+        </select>
+        <label class="vFilters" for="Module">Module:</label>
+        @Html.DropDownList("Module", (SelectList)ViewBag.Modules, "< Select a Module >")
+        <label class="vFilters" for="ModuleCode">Module Code:</label>
+        @Html.DropDownList("ModuleCode", (SelectList)ViewBag.ModuleCodes, "< Select a Module Code >")
+     </div>
 </div>
 
 <table id="requests-table">
