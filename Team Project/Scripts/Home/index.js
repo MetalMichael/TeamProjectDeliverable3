@@ -10,10 +10,15 @@ $(document).ready(function () {
         }
         if ($(this).prop("checked")) {
             $($('#Semester').val(1).children()[1]).prop("disabled", "disabled");
+            $($('#Semester').children()[0]).removeAttr("disabled");
+
         } else {
             $($('#Semester').children()[1]).removeAttr("disabled");
+            $($('#Semester').val(2).children()[0]).prop("disabled", "disabled");
         }
     });
+
+    $($('#Semester').val(2).children()[0]).prop("disabled", "disabled");
 
     $('#Priority').change(function () {
         if ($('#AdHoc').prop("checked")) {

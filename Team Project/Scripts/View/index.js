@@ -7,7 +7,7 @@ $(document).ready(function () {
                 $(this).find('.resubmit').hide();
             //Accepted
             } else if (status.indexOf("Accepted") > -1) {
-                $(this).find('.controls').hide();
+                $(this).find('.edit, .resubmit').hide();
                 if ($(this).find('.rooms').html() !== $(this).find('.acceptedRooms').html()) {
                     $(this).css('background-color', '#FFC65D');
                 } else {

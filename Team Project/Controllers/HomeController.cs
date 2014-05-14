@@ -32,6 +32,7 @@ namespace TimetableSystem.Controllers
                 db.Requests.Add(request);
                 db.SaveChanges();
                 ViewBag.Message = "Request Created";
+
                 return CreateForm(new Request());
             }
 
