@@ -99,9 +99,9 @@ namespace TimetableSystem.Controllers
                 }
                 systemDB.Modules.Add(module);
                 systemDB.SaveChanges();
-                return RedirectToAction("Index");  // if successful, return to the list of modules
+                return RedirectToAction("Index", "Module", new { moduleCode = " " });  // if successful, return to the list of modules
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Module", new { moduleCode = " " });
             //return CreateForm(module);  // if unsuccessful, provide the filled out form again
         }
 
@@ -146,7 +146,7 @@ namespace TimetableSystem.Controllers
             }
             catch
             {
-                return RedirectToAction("Index");   
+                return RedirectToAction("Index", "Module", new { moduleCode = " " });  // no delete confirmation yet
             }
         }
 
