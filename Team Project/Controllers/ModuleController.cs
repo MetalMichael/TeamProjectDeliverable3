@@ -133,7 +133,9 @@ namespace TimetableSystem.Controllers
         {
             try
             {
-                Module module = systemDB.Modules.Find(code);
+                var temp = code.Replace(" ", "");
+                Console.Write(temp);
+                Module module = systemDB.Modules.Find(temp);
                 //systemDB.Modules.Remove(module);
                 
                 systemDB.Entry(module).State = System.Data.EntityState.Deleted;
