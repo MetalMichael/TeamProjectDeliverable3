@@ -8,6 +8,11 @@
 /*	width: 30%;*/
 /*	height: 271px;*/
 }
+label.twoline 
+{
+    position: relative;
+    top: -7px;
+}
 .section .checked {
 	float: right;
 	content:"\2714";

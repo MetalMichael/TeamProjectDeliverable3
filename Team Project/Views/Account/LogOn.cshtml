@@ -22,7 +22,7 @@
             <h2>Authentication</h2>
             <div class="field">
                 <div class="editor-label logInLabel">
-                    @Html.Label("User Name")
+                    <label for="User_Name" class="twoline">User Name</label>
                 </div>
                 <div class="editor-field logInField">
                     @Html.DropDownListFor(m => m.UserName, (IEnumerable<SelectListItem>)ViewBag.UserNames, "Select Department")
