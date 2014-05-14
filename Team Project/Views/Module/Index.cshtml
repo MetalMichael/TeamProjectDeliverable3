@@ -10,15 +10,16 @@
 <input type="hidden" id="moduleTitle" name="moduleTitle" />
 <div class="buttons-wrapper bar">
     <div>
-        <input type="submit" value="Activate filter" class="button" />
+        <input type="submit" value="Activate filter" class="button" style="padding:5px;" />
     </div>
 @*    <div>
         <input type="submit" value="Reset" class="button" style="padding:5px;" onclick="clear();" />
     </div>*@
     <div>
-        <input type="submit" class="button" value="Create new Module" onclick="window.location='@Url.Action("Edit")'; return false;" />
+        @Html.ActionLink("Create new module", "Edit", new { }, new { @class = "button" })
     </div>
 </div>
+}
 
 <script type="text/javascript">
     function filter() {
@@ -61,11 +62,10 @@
                     @Html.DisplayFor(modelItem => item.ModuleTitle)
                 </div>
                 <div class="editor-field-inner" style="float:right;">
-                    <input type="submit" class="button1" value="Edit" onclick="window.location='@Url.Action("Edit", new { code = item.ModuleCode })'; return false;" />
-                    <input type="submit" class="button1" value="Delete" onclick="if(confirm('Are you sure you wish to delete this module?')) { window.location='@Url.Action("Delete", new { code = item.ModuleCode });} return false;" />
+                    @Html.ActionLink("Edit", "Edit", new { code = item.ModuleCode }, new { @class = "button" }) 
+                    @Html.ActionLink("Delete", "Delete", new { code = item.ModuleCode }, new { onclick = "return confirm('Are you sure you wish to delete this module?');", @class = "button" })
                 </div>
             </div>
         </div>
     }
 </fieldset>
-}

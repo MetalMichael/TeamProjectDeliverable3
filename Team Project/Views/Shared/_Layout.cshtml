@@ -10,7 +10,6 @@
         <script src="@Url.Content("~/Scripts/View/jquery.dataTables.min.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/global.js")" type="text/javascript"></script>
 		<script src="@Url.Content("~/Scripts/accessibility.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/Home/indicators.js")" type="text/javascript"></script>
 
 		<link href="@Url.Content("~/Content/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/form.css")" rel="stylesheet" type="text/css" />
@@ -24,8 +23,8 @@
         <link href="@Url.Content("~/Content/modules.css")" rel="Stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/new-checkboxes.css")" rel="Stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/component.css")" rel="stylesheet" type="text/css" />
-		<link href="@Url.Content("~/Content/fieldsetchecks.css")" rel="stylesheet" type="text/css" />
 		<link href="@Url.Content("~/Content/login.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/fieldsetchecks.css")" rel="stylesheet" type="text/css" />
 		
 		<script>
 			var currentURL = window.location.pathname.toString();
@@ -69,13 +68,7 @@
 			</ul>	
 		</div>
 		<footer>
-		    <div class="accessibility">
-                    <a href="javascript:increaseFont();"><img src="/team09web/images/zoom_in.png" alt="Increase Font Size"></a>
-                    <a href="javascript:decreaseFont();"><img src="/team09web/images/zoom_out.png" alt="Decrease Font Size"></a>
-                    <a href="javascript:resetFont();"><img src="/team09web/images/zoom.png" alt="Reset Zoom to Default"></a>
-                    <a href="javascript:negativar();"><img src="/team09web/images/contrast.png" alt="Invert Colours"></a>
-                </div>
-				Font Size<a id="decreaseFont" href="#" onclick="return false;">-</a><a id="increaseFont" href="#" onclick="return false">+</a>
+		    Font Size<a id="decreaseFont" href="#" onclick="return false;">-</a><a id="increaseFont" href="#" onclick="return false">+</a>
 		</footer>
         <script type="text/javascript">
             $('input[type="radio"][name="Day"]').bind('keyup change', function () {

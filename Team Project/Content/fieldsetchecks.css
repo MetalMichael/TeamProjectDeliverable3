@@ -5,10 +5,7 @@
 {
     display: inline-block;
 } 
-/*.hide 
-{
-    display:none;
-}*/
+
 fieldset h2 span.cross {
 	float: right;
 	padding-right: 30px;
