@@ -122,11 +122,22 @@ nav ul a.active:before {
 	font-size: 2em;
 }
 .round {
-	margin-top: -20px;
-	float: right;
 	position: relative;
 	left: -4px;
 	color: white;
+	text-align: center;
+}
+.semester 
+{
+    text-align:center;
+}
+.length 
+{
+    text-align:center;
+}
+.startTime 
+{
+    text-align:center;
 }
 footer {
 	position: absolute;

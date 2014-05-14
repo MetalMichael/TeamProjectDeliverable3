@@ -183,6 +183,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\modules.css" />
     <Content Include="Content\themes\base\jquery-ui-1.9.2.css" />
+    <Content Include="Content\view.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Home\index.js" />
     <Content Include="Scripts\Home\rooms.js" />

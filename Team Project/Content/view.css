@@ -33,3 +33,10 @@
 {
     color: Black;
 }
+#viewTitle 
+{
+    text-align:center;
+    color: #3e4c68;
+    font-size:x-large;
+    padding-top: 15px;
+}
