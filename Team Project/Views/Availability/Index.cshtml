@@ -358,7 +358,7 @@
                                         url += "?Weeks=" + weekArray.join('|');
                                         url += "&Room=" + data;
                                         url += "&Day=" + day;
-                                        url += "&StartTime=" + (parseInt(slot.substr(5, 1)) + 8);
+                                        url += "&StartTime=" + slot.substr(5, 1) ;
                                         window.location = url;
                                     });
                                 },

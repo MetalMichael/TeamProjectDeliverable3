@@ -125,6 +125,7 @@
                         @Html.Label((String)day)
                         @Html.Raw("</div>")
                     }
+                    *
                 </div>
             </div>
             <div class="field">
@@ -340,12 +341,5 @@
             <button class="reqButtons">Submit</button>
             <button class="reqButtons" type="button" onclick="if(confirm('Are you sure you wish to reset the form?\nYou will lose all unsaved data.')) { $('Form')[0].reset(); }return false;">Reset</button>
         </div>
-
     </fieldset>
-    <div class="accessibility">
-    <a href="javascript:increaseFont();"><img src="~/Content/images/zoom_in.png" alt="Increase Font Size"></a>
-        <a href="javascript:decreaseFont();"><img src="~/Content/images/zoom_out.png" alt="Decrease Font Size"></a>
-            <a href="javascript:resetFont();"><img src="~/Content/images/zoom.png" alt="Reset Font Size to Default"></a>
-                <a href="javascript:negativar();"><img src="~/Content/images/invert.png" alt="Invert Colours"></a>
-</div>
 }
