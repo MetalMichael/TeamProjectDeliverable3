@@ -309,6 +309,7 @@
                 var html;
                 var day = days[(parseInt(slot.substr(4, 1))) - 1];
                 var time = times[(parseInt(slot.substr(5, 1))) - 1];
+                $('#dialog').css("visibility", "visible");
 
                 if (data == "") {
                     html = "<p>From here you can export the room, week, day and period to the request page...</p></br></br>";
@@ -472,6 +473,6 @@
         </div>
     </fieldset>
 }
-<div hidden=true id="dialog" title="Export Data">
+<div style="visibility:hidden" id="dialog" title="Export Data">
 
 </div>
