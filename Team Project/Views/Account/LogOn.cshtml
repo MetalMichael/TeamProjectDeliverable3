@@ -12,36 +12,38 @@
 
 @using (Html.BeginForm())
 {
-    <fieldset id="logInContainer">
-        <h2>Authentication</h2>
-        <div class="field">
-            <div class="editor-label logInLabel">
-                @Html.Label("User Name")
-            </div>
-            <div class="editor-field logInField">
-                @Html.DropDownListFor(m => m.UserName, (IEnumerable<SelectListItem>)ViewBag.UserNames, "Select Department")
-                @Html.ValidationMessageFor(m => m.UserName)
-            </div>
-        </div>
-        <div class="field">
-            <div class="editor-label logInLabel">
-                @Html.LabelFor(m => m.Password)
-            </div>
-            <div class="editor-field logInField">
-                @Html.EditorFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-        </div>
-        <div class="field" style="border:0;">
-            <div class="editor-label">
-                <div style="display:none">
-                    @Html.LabelFor(m => m.RememberMe)
-                    @Html.CheckBoxFor(m => m.RememberMe)
+    
+        <fieldset id="logInContainer">
+            <h2>Authentication</h2>
+            <div class="field">
+                <div class="editor-label logInLabel">
+                    @Html.Label("User Name")
+                </div>
+                <div class="editor-field logInField">
+                    @Html.DropDownListFor(m => m.UserName, (IEnumerable<SelectListItem>)ViewBag.UserNames, "Select Department")
+                    @Html.ValidationMessageFor(m => m.UserName)
                 </div>
             </div>
-            <div class="editor-field">
-                <button>Log in</button>          
+            <div class="field">
+                <div class="editor-label logInLabel">
+                    @Html.LabelFor(m => m.Password)
+                </div>
+                <div class="editor-field logInField">
+                    @Html.EditorFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
             </div>
-        </div>
-    </fieldset>
+            <div class="field" style="border:0;">
+                <div class="editor-label">
+                    <div style="display:none">
+                        @Html.LabelFor(m => m.RememberMe)
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                    </div>
+                </div>
+                <div class="editor-field">
+                    <button>Log in</button>          
+                </div>
+            </div>
+        </fieldset>
+    
 }
