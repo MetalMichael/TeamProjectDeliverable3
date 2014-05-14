@@ -2,6 +2,7 @@
 $(document).ready(function () {
     $('#room-features input[type="hidden"').remove();
     $($('#Priority').siblings()[0]).remove();
+    $($('#AdHoc').siblings()[0]).remove();
 
     $('#ModuleCode').change(function () {
         $('#ModuleCodes').val($(this).val());

@@ -25,7 +25,7 @@ function checkTime() {
     var start = parseInt($('#StartTime').val());
     var length = parseInt($('#Length').val());
 
-    if (start + length > 18) {
+    if (start + length > 10) {
         console.log((start + length));
         alert("Cannot have a request for a time this long. It exceeds the timetable available");
         $('#Length').val(18 - start);

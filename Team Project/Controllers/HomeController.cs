@@ -66,6 +66,44 @@ namespace TimetableSystem.Controllers
             return CreateForm(request);
         }
 
+        [HttpPost]
+        public ActionResult AutoFill(Request request)
+        {
+            request = this.processRequest(request);
+
+            if (ModelState.IsValid)
+            {
+                db.Requests.Add(request);
+                db.SaveChanges();
+                ViewBag.Message = "Request Created";
+                return CreateForm(new Request());
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ReSubmit(int id)
+        {
+            Request request = db.Requests.Find(id);
+            return CreateForm(request);
+        }
+
+        [HttpPost]
+        public ActionResult ReSubmit(Request request)
+        {
+            request = this.processRequest(request);
+
+            if (ModelState.IsValid)
+            {
+                db.Requests.Add(request);
+                db.SaveChanges();
+                ViewBag.Message = "ReSubmitted Successfully";
+                return RedirectToAction("Index", "View");
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Edit(int id)
         {
             Request request = db.Requests.Find(id);
@@ -96,7 +134,7 @@ namespace TimetableSystem.Controllers
                 return RedirectToAction("Index", "View");
             }
 
-            return CreateForm(request);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
@@ -142,7 +180,16 @@ namespace TimetableSystem.Controllers
             }
             request.RequestRooms = rooms;
 
-            request.Status = "Pending";
+            if (request.AdHoc)
+            {
+                request.Status = "Accepted";
+                request.AcceptedRoom = (int)rooms[0].RoomID;
+            }
+            else
+            {
+                request.Status = "Pending";
+            }
+
             return request;
         }
 
