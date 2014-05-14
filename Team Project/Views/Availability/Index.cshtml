@@ -204,6 +204,8 @@
     });
     //Function to print the table based on current form data
     function refreshTable() {
+        $('#a3').css("visibility", "hidden");
+        $('#loading').css("visibility", "visible");
         //Form values
         var park = $('#Park option:selected').text();
         if (park.indexOf('<') !== -1) park = "";
