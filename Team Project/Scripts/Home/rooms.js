@@ -49,8 +49,8 @@ var rooms = {
 
     updateBuildings: function () {
         this.updateInfo();
-        $.get('/team09web/Home/Buildings',
-        //$.get('/Home/Buildings',
+        //$.get('/team09web/Home/Buildings',
+        $.get('/Home/Buildings',
             { park: this.park },
             function (data) {
                 rooms.changeBuildings(data);
@@ -66,8 +66,8 @@ var rooms = {
     filterRooms: function (setup) {
         this.updateInfo();
         $('.room-select').addClass('loading');
-        $.get('/team09web/Home/Rooms',
-        //$.get('/Home/Rooms',
+        //$.get('/team09web/Home/Rooms',
+        $.get('/Home/Rooms',
             {
                 students: this.students,
                 park: this.park,
@@ -105,6 +105,7 @@ var rooms = {
                 x++;
             }
         }
+        this.changeRoom();
     },
 
     changeSelects: function () {
@@ -124,20 +125,27 @@ var rooms = {
         $('#room-container').append(select);
         $('#room' + id).show();
         $('#room' + id).unbind('change').change(function () {
+            $(this).find('select option[value="' + $(this).find('select').val() + '"]').addClass('selectable');
             rooms.changeRoom();
         });
     },
 
     changeRoom: function () {
-        var selectedRooms = [];
+        $('select option.selectable:not(:selected)').each(function () {
+            $('option[value="' + $(this).attr('value') + '"').removeAttr('disabled');
+            $(this).removeClass('selectable');
+        });
         var select;
+        var select2v;
         for (var x = 1; x <= this.roomTotal; x++) {
             select = $('#room' + x + ' select');
-            if (select.val() != 0) selectedRooms.push(select.val());
-            if (x == 1) continue;
-            for (var y in selectedRooms) {
-                if (select.val() == selectedRooms[y]) select.prop("selectedIndex", -1);
-                select.find('option[value=' + selectedRooms[y] + ']').prop('disabled', 'disabled');
+            for (var y = 1; y <= this.roomTotal; y++) {
+                select2v = $('#room' + y + ' select').val();
+                if (x == y || select2v == "" || select2v == 0 || select2v == null || select2v.indexOf("<") != -1) {
+                    continue;
+                }
+                if (select.val() == select2v) select.prop("selectedIndex", -1);
+                select.find('option[value=' + select2v + ']').prop('disabled', 'disabled');
             }
         }
     },
@@ -186,8 +194,8 @@ var rooms = {
         var roomType = $('#RoomType option:selected').text();
         if (roomType.indexOf('<') !== -1) roomType = "";
 
-        $.get('/team09web/Availability/checkslot',
-        //$.get('/Availability/checkslot',
+        //$.get('/team09web/Availability/checkslot',
+        $.get('/Availability/checkslot',
             {
                 parkName: park,
                 buildingName: building,

@@ -211,6 +211,8 @@
         if (building.indexOf('<') !== -1) building = "";
         var room = $('#Room option:selected').text();
         if (room.indexOf('<') !== -1) room = "";
+        var roomType = $('#Type').val();
+        if (roomType.indexOf('<') !== -1) value = "";
         else {
             var temp = room.indexOf("(");
             room = room.substr(0, temp);
@@ -238,7 +240,7 @@
             week = week.substr(0, week.length - 1);
         }
         var capacity = $('#CapacityAmount').val()
-        var roomType = $('#Type').val();
+        
         var subWeek;
         var titleHtml = "<h2 id='tableSubtitle'>Showing availability for ";
         if (week.length > 1) {
@@ -275,9 +277,14 @@
         var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
         var times = ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
         //Form values
-        var park = $('#Park').val();
-        var building = $('#Building').val();
-        var room = $('#Room').val().split(' ')[0];
+        var park = $('#Park option:selected').text();
+        if (park.indexOf('<') !== -1) park = "";
+        var building = $("#Building option:selected").text();
+        if (building.indexOf('<') !== -1) building = "";
+        var room = $('#Room option:selected').text();
+        if (room.indexOf('<') !== -1) room = "";
+        var roomType = $('#Type').val();
+        if (roomType.indexOf('<') !== -1) value = "";
         var semester = $('#Semester').val();
         var week = "";
         for (var i = 1; i < 16; i++) {
@@ -289,7 +296,6 @@
         week = week.substr(0, week.length - 1);
         var weekArray = week.split(";");
         var capacity = $('#CapacityAmount').val();
-        var roomType = $('#Type').val();
 
         if (week == "") {
             alert("Cannot view available rooms without weeks selected.");
