@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TimetableSystem.Models;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace TimetableSystem.Controllers
 {
@@ -26,14 +28,27 @@ namespace TimetableSystem.Controllers
            
             if (systemDB.Modules != null)   // check modules exist
             {
-                foreach (var item in allModules)    // pass only modules belonging to logged in user
+                foreach (var item in systemDB.Modules.ToList())    // pass only modules belonging to logged in user
                 {
-                    if (item.Department.Replace("_", " ") == User.Identity.Name)
+                    if (item.Department == User.Identity.Name)
                     {
                         modules.Add(item);
                     }
                 }
             }
+
+            if (!String.IsNullOrEmpty(moduleTitle))  // search filter
+            {
+                var mod = from m in systemDB.Modules
+                          select m;
+
+                if (!String.IsNullOrEmpty(moduleTitle))
+                {
+                    mod = mod.Where(s => s.ModuleTitle.Contains(moduleTitle));
+                }
+                return View(mod);
+            }
+
 
             if (!String.IsNullOrEmpty(moduleCode))  // search filter
             {
@@ -64,7 +79,7 @@ namespace TimetableSystem.Controllers
                 //return CreateForm(new Module());    // triggers IEnumerable error
             }
 
-            module.Department = module.Department.Replace(" ", "_");
+            module.Department = module.Department;
             
             if (ModelState.IsValid)
             {

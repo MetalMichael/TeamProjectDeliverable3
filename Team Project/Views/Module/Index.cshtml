@@ -27,7 +27,18 @@
 @*<h2>Module Page</h2>*@
 
 <!-- the new table -->
-<fieldset style="width:800px;">
+<fieldset style="position:relative; left:30%; margin-right:100%;">
+    <div class="buttons-wrapper" style="padding-top:10px;">
+    <div class="editor-field" style="float:left; min-width:40%; max-width:40%;" >
+        <input type="submit" class="button" value="Create new module" onclick="window.location='@Url.Action("Edit")'; return false;" />
+    </div>
+    <div class="editor-field" style="float:right; min-width:40%; max-width:40%;">
+        <input type="submit" value="Activate filter" class="button" />
+    </div>
+    </div>
+</fieldset>
+    
+<fieldset style="position:relative; left:30%;" >
     <h2>Module code & title</h2>
     <div class="field" style="background-color:rgba(0,0,0,0.3);">
         <div class="editor-field" style="min-width:24%; max-width:24%; float:left;">
@@ -36,17 +47,13 @@
             />
         </div>
         <div class="editor-field" style="min-width:75%; max-width:75%; float:right;">
-            <div class="editor-field-inner" style="float:left;">
-                <input id="titleInput" name="titleInput" type="text" class="filter" value placeholder="< Filter title >" style="height: 51px; position: relative;
-top: -20px;
-left: -20px;
-min-width: 390px;"
+
+                <input id="titleInput" name="titleInput" type="text" class="filter" value placeholder="< Filter title >" 
                   onchange="filter();" 
                 />
-            </div>
-            <div class="editor-field-inner" style="float:right;">
-                <input type="submit" value="Activate filter" class="button" style="position:relative; bottom:12px; right:18px;" />
-            </div> 
+ 
+
+
         </div>
     </div>
 
@@ -68,9 +75,5 @@ min-width: 390px;"
         </div>
     }
 </fieldset>
-    <fieldset>
-        <div>
-        <input type="submit" class="button" value="Create new Module" onclick="window.location='@Url.Action("Edit")'; return false;" />
-    </div>
-    </fieldset>
+
 }

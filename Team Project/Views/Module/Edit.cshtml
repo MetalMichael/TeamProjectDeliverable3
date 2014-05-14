@@ -13,22 +13,25 @@
 @using (Html.BeginForm("Index", "Module", FormMethod.Post))
 {
     @Html.ValidationSummary(false)
-        <div class="buttons-wrapper bar">
-            <div>
-                @Html.ActionLink("Back", "Index", new { moduleCode = " ", moduleTitle = "" }, new { @class = "button" })
+
+    <fieldset style="position:relative; left:30%; margin-right:100%;">
+    <div class="buttons-wrapper" style="padding-top:10px;">
+               <div class="editor-field" style="float:left; min-width:32%; max-width:32%;">
+               <input type="submit" class="button" value="Back" onclick="window.location='@Url.Action("Index", new { moduleCode = " " })'; return false;" />
             </div>
-            <div>
-                <input type="submit" value="Save" class="button" /> 
+            <div class="editor-field" style="float:left; min-width:32%; max-width:32%;">
+                <input type="submit" value="Save" class="button"  onclick="window.location='@Url.Action("Index", new { moduleCode = " " })'; " /> 
             </div>
-            <div>
-                <input type="reset" value="Reset" class="button" />
+            <div class="editor-field" style="float:left; min-width:32%; max-width:32%;">
+                <input type="reset" value="Undo" class="button" />
             </div>
-        </div>
+            </div>
+    </fieldset>
     
-    <fieldset>
+    <fieldset style="position:relative; left:30%;" >
         <h2>Module code & title</h2>
         <div class="field">
-            <div class="editor-label">
+            <div class="editor-label" style="min-width:24%; max-width:24%; float:left;">
                 @Html.LabelFor(model => model.ModuleCode)
             </div>
             <div class="editor-field">
@@ -36,7 +39,7 @@
                 @Html.ValidationMessageFor(model => model.ModuleCode)
             </div>
             <div class="field">
-                <div class="editor-label">
+                <div class="editor-label" style="min-width:24%; max-width:24%; float:left;">
                     @Html.LabelFor(model => model.ModuleTitle)
                 </div>
             <div class="editor-field">

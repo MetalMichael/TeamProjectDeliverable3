@@ -8,6 +8,7 @@
 html {
 	position: relative;
 	min-height: 100%;
+	min-width:700px;
 }
 .tick, .cross {
 	display: none;
