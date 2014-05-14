@@ -60,3 +60,11 @@
 			width: 500px;
 			float: none;
 		}
+		#slider-range-max .ui-state-default 
+		{
+		    background-color: #FFFFFF;
+		}
+		#slider-range-max .ui-slider-handle
+		{
+		    background-color: #FFFFFF;
+		}
