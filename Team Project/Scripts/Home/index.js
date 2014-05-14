@@ -4,6 +4,23 @@ $(document).ready(function () {
     $($('#Priority').siblings()[0]).remove();
     $($('#AdHoc').siblings()[0]).remove();
 
+    $('#AdHoc').change(function () {
+        if ($('#Priority').prop("checked")) {
+            $('#Priority').click();
+        }
+        if ($(this).prop("checked")) {
+            $($('#Semester').val(1).children()[1]).prop("disabled", "disabled");
+        } else {
+            $($('#Semester').children()[1]).removeAttr("disabled");
+        }
+    });
+
+    $('#Priority').change(function () {
+        if ($('#AdHoc').prop("checked")) {
+            $('#AdHoc').click();
+        }
+    });
+
     $('#ModuleCode').change(function () {
         $('#ModuleCodes').val($(this).val());
     });
