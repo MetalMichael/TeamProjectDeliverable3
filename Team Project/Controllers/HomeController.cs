@@ -165,12 +165,15 @@ namespace TimetableSystem.Controllers
             request.Department = User.Identity.Name;
 
             List<RequestRoom> rooms = new List<RequestRoom>();
+            List<AcceptedRoom> rooms2 = new List<AcceptedRoom>();
             if (request.Rooms != null && request.Rooms.Count > 0)
             {
                 foreach (string room in request.Rooms)
                 {
                     RequestRoom rr = new RequestRoom(Convert.ToInt16(room));
+                    AcceptedRoom ar = new AcceptedRoom(Convert.ToInt16(room));
                     rooms.Add(rr);
+                    rooms2.Add(ar);
                 }
             }
             else
@@ -184,6 +187,7 @@ namespace TimetableSystem.Controllers
             {
                 request.Status = "Accepted";
                 request.AcceptedRoom = (int)rooms[0].RoomID;
+                request.AcceptedRooms = rooms2;
             }
             else
             {

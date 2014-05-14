@@ -329,7 +329,7 @@ div.checkbox-label-container.greatForm {
 	padding: 8px;
 }
 
-.room-select option:disabled
+.room-select option:disabled, #Semester option:disabled
 {
     background-color: #FF4444;
 }
