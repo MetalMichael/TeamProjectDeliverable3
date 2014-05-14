@@ -27,13 +27,7 @@
 		<link href="@Url.Content("~/Content/login.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/fieldsetchecks.css")" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript">
-			var currentURL = window.location.pathname.toString();
-			if (currentURL == '/team09web/View') 
-            { 
-				$('#requests').addClass('active')
-			}
-		</script>
+
 
 
 
@@ -80,15 +74,25 @@
 			</header>
 			<ul class="list_grid">
 				@RenderBody()
-			</ul>	
+			</ul>
+            
+                    <br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
 		</div>
+
 		<footer>
 		    
-                <div class="accessibility">
-    <a href="javascript:increaseFont();"><img src="Content/images/zoom_in.png" alt="Increase Font Size"></a>
-        <a href="javascript:decreaseFont();"><img src="Content/images/zoom_out.png" alt="Decrease Font Size"></a>
-            <a href="javascript:resetFont();"><img src="Content/images/zoom.png" alt="Reset Font Size to Default"></a>
-                <a href="javascript:negativar();"><img src="Content/images/invert.png" alt="Invert Colours"></a>
+                <div class="accessibility" style="float:right; width:10%;">
+    <a href="javascript:increaseFont();"><img src="Content/images/zoom_in.png" class="footerImg" alt="Increase Font Size" /></a>
+        <a href="javascript:decreaseFont();"><img src="Content/images/zoom_out.png" class="footerImg" alt="Decrease Font Size"/></a>
+            <a href="javascript:resetFont();"><img src="Content/images/zoom.png" class="footerImg" alt="Reset Font Size to Default"/></a>
+                <a href="javascript:negativar();"><img src="Content/images/invert.png" class="footerImg" alt="Invert Colours"/></a>
     </div>
 		</footer>
         <script type="text/javascript">
@@ -154,6 +158,13 @@
                 !empty.length ? tick.show() : tick.hide();
                 !empty.length ? cross.hide() : cross.show();
             });
+
+
+			var currentURL = window.location.pathname.toString();
+			if (currentURL == '/team09web/View') 
+            { 
+				$('#requests').addClass('active')
+			}
 
         </script>
 

@@ -26,6 +26,13 @@ label.twoline
 	
 }
 
+.footerImg
+{
+    text-align:right;
+    height:20%;
+    width:20%;
+}
+
 #activateFilter
 {
     position:relative;
