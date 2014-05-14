@@ -31,6 +31,10 @@ body {
 ul {
   list-style: none;
 }
+li 
+{
+    display:inline;
+}
 div.container {
 	min-height:100%;
    position:relative;

@@ -20,6 +20,12 @@
 	border-left: 2px solid #3e4c68;
 	
 }
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
 h2 
 {
     
@@ -135,6 +141,7 @@ input:focus::-webkit-input-placeholder {
 }
 .buttons-wrapper
 {
+    min-height:100%;
     width:100%;
 /*	text-align:justify; */
 	text-align: center;
@@ -278,7 +285,7 @@ button:hover {
 	color: #1F2634;
 }
 button#clearWeeks, button#reset, button#clearAll {
-	background: rgba(255,0,0,0.6);
+	background: grey;
 }
 button#submit {
 	background: rgba(0,210,0,0.6);

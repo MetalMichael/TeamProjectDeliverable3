@@ -54,6 +54,15 @@
         $(function () {
             $('select#Semester option:last').attr("selected", "selected");
         });
+
+        $('#Monday.input-validation-error').parent().parent().addClass('input-validation-error');
+
+        $('input').keypress(function (e) {
+            if (e.keyCode == '13') {
+                return false;
+                //e.stopPropogation()
+            }
+        });
     });
 </script>
 
@@ -218,7 +227,7 @@
     <fieldset id="s5">
         <h2>
             Room
-            <i id="tick4" class="fa fa-minus-square dash show"></i>
+            <i id="tick4" class="fa fa-check-square tick show"></i>
         </h2>
         <div class="field">
             <div class="editor-label">
@@ -333,4 +342,10 @@
         </div>
 
     </fieldset>
+    <div class="accessibility">
+    <a href="javascript:increaseFont();"><img src="~/Content/images/zoom_in.png" alt="Increase Font Size"></a>
+        <a href="javascript:decreaseFont();"><img src="~/Content/images/zoom_out.png" alt="Decrease Font Size"></a>
+            <a href="javascript:resetFont();"><img src="~/Content/images/zoom.png" alt="Reset Font Size to Default"></a>
+                <a href="javascript:negativar();"><img src="~/Content/images/invert.png" alt="Invert Colours"></a>
+</div>
 }
