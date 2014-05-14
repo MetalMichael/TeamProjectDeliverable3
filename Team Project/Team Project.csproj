@@ -160,7 +160,6 @@
   <ItemGroup>
     <Content Include="Content\availability.css" />
     <Content Include="Content\component.css" />
-    <Content Include="Content\fieldsetchecks.css" />
     <Content Include="Content\images\back_disabled.png" />
     <Content Include="Content\images\back_enabled.png" />
     <Content Include="Content\images\back_enabled_hover.png" />
@@ -183,15 +182,14 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\modules.css" />
     <Content Include="Content\themes\base\jquery-ui-1.9.2.css" />
-    <Content Include="Content\view.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Home\index.js" />
-    <Content Include="Scripts\Home\indicators.js" />
     <Content Include="Scripts\Home\rooms.js" />
     <Content Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\View\filter.js" />
     <Content Include="Scripts\View\index.js" />
     <Content Include="Scripts\View\jquery.dataTables.min.js" />
     <Content Include="Views\Availability\Index.cshtml" />

@@ -2,8 +2,10 @@ $(document).ready(function () {
     $('tr').each(function () {
         var status = $(this).find('.status').html()
         if (typeof status == "string") {
+            //Pending
             if (status.indexOf("Pending") > -1) {
-
+                $(this).find('.resubmit').hide();
+            //Accepted
             } else if (status.indexOf("Accepted") > -1) {
                 $(this).find('.controls').hide();
                 if ($(this).find('.rooms').html() !== $(this).find('.acceptedRooms').html()) {
@@ -11,8 +13,9 @@ $(document).ready(function () {
                 } else {
                     $(this).css('background-color', 'green');
                 }
+            //Failed
             } else {
-                $(this).find('.controls').hide();
+                $(this).find('.edit, .delete').hide();
                 $(this).css('background-color', 'red');
             }
         }
@@ -25,6 +28,5 @@ $(document).ready(function () {
         return false;
     });
 
-    $('#requests-table').dataTable();
 });
 
