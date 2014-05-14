@@ -27,12 +27,16 @@
 		<link href="@Url.Content("~/Content/login.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/fieldsetchecks.css")" rel="stylesheet" type="text/css" />
 		
-		<script>
+		<script type="text/javascript">
 			var currentURL = window.location.pathname.toString();
-			if (currentURL = '/team09web/View/') { 
-				$('a#requests').addClass('active')
+			if (currentURL == '/team09web/View') 
+            { 
+				$('#requests').addClass('active')
 			}
 		</script>
+
+
+
 	</head>
 	<body>
 		<div class="container">
@@ -40,14 +44,21 @@
 				<nav>
 					<ul>
 						<li class="dept">
-							<a id="dept" class="title" href="@Url.Action("Index", "Home")"><span class="fa fa-logo fa-@ViewBag.Department"></span><h3>@ViewBag.Department</h3></a>
+                        @if (ViewBag.Department != null)
+                        {
+                            <a id="dept" class="title" href="@Url.Action("Index", "Home")"><span class="fa fa-logo fa-@ViewBag.Department"></span><h3>@ViewBag.Department</h3></a>
+                        }
+                        else
+                        {
+                            <a id="dept" class="title" href="@Url.Action("Index", "Home")"><span class="fa fa-logo fa-Computer"></span><h3>Computer Science</h3></a>
+                        }
 
 							<p class="menuRound">Semester 2 - Round 2<p>
 
 
 						</li>
 
-                        @if (!(ViewBag.Title == "Log On") && !(ViewBag.Title=="Register"))  
+                        @if (!(ViewBag.Title == "Log On") && !(ViewBag.Title == "Register"))
                         {   @* hide navigation bar while not logged in *@
 						<div class="menu" style="float: right;">
 							@*<li>@Html.ActionLink("Request Form", "Index", "Home", null, new { @class = "menu" })</li>*@
