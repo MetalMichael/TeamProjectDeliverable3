@@ -332,3 +332,16 @@ div.checkbox-label-container.greatForm {
 {
     background-color: #FF4444;
 }
+#logInContainer 
+{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10%;
+    float: none;
+}
+#logInBox 
+{
+    height: 100%;
+    width: 100%;
+    display:table;
+}
